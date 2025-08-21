@@ -1,0 +1,123 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Search, Menu } from "lucide-react";
+import { ModeToggle } from "./ModeToggle";
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 max-w-screen-2xl items-center">
+        <div className="mr-4 flex md:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="pr-0">
+              <Link
+                className="flex items-center space-x-2"
+                href="/"
+                onClick={() => setOpen(false)}
+              >
+                <div className="h-6 w-6 rounded bg-primary" />
+                <span className="font-bold">Trustless Work</span>
+              </Link>
+              <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+                <div className="flex flex-col space-y-3">
+                  <Link
+                    className="transition-colors hover:text-foreground/80 text-foreground/60"
+                    href="/get-started"
+                    onClick={() => setOpen(false)}
+                  >
+                    Get Started
+                  </Link>
+                  <Link
+                    className="transition-colors hover:text-foreground/80 text-foreground/60"
+                    href="/blocks"
+                    onClick={() => setOpen(false)}
+                  >
+                    Blocks
+                  </Link>
+                  <Link
+                    className="transition-colors hover:text-foreground/80 text-foreground/60"
+                    href="/contribute"
+                    onClick={() => setOpen(false)}
+                  >
+                    Contribute
+                  </Link>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="mr-4 hidden md:flex">
+          <Link className="mr-6 flex items-center space-x-2" href="/">
+            <div className="h-6 w-6 rounded bg-primary" />
+            <span className="hidden font-bold sm:inline-block">
+              Trustless Work
+            </span>
+          </Link>
+          <nav className="flex items-center gap-6 text-sm">
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/get-started"
+            >
+              Get Started
+            </Link>
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/blocks"
+            >
+              Blocks
+            </Link>
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/contribute"
+            >
+              Contribute
+            </Link>
+          </nav>
+        </div>
+
+        {/* Mobile logo for when menu is closed */}
+        <div className="flex md:hidden">
+          <Link className="flex items-center space-x-2" href="/">
+            <div className="h-6 w-6 rounded bg-primary" />
+            <span className="font-bold">Trustless Work</span>
+          </Link>
+        </div>
+
+        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="w-full flex-1 md:w-auto md:flex-none">
+            <Button
+              variant="outline"
+              className="relative h-8 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
+            >
+              <Search className="mr-2 h-4 w-4" />
+              <span className="hidden sm:inline-flex">
+                Search documentation...
+              </span>
+              <span className="sm:hidden">Search...</span>
+            </Button>
+          </div>
+          <nav className="flex items-center">
+            <ModeToggle />
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+}
