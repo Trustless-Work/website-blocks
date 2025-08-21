@@ -3,7 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/shared/ThemeProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const Exo2 = localFont({
   src: "./fonts/Exo2.ttf",
@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta
           name="viewport"
