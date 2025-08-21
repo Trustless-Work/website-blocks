@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/shared/ThemeProvider";
 
 const Exo2 = localFont({
   src: "./fonts/Exo2.ttf",
@@ -52,7 +53,7 @@ export default function RootLayout({
       <body
         className={cn(Exo2.variable, "antialiased", spaceGrotesk.className)}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
