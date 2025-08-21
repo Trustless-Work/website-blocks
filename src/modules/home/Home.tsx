@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen container mx-auto px-4">
+    <>
       <SiteHeader />
 
       {/* Hero Section */}
@@ -164,6 +164,6 @@ export const Home = () => {
           </TabsContent>
         </Tabs>
       </section>
-    </div>
+    </>
   );
 };
