@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const sidebarNavItems = [
   {
-    title: "Get Started",
+    title: "",
     items: [
       {
         title: "Introduction",
@@ -59,7 +59,7 @@ export function DocsSidebar() {
   return (
     <div className="w-full">
       {sidebarNavItems.map((item, index) => (
-        <div key={index} className="pb-4">
+        <div key={index} className="pb-4 mt-4">
           <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
             {item.title}
           </h4>

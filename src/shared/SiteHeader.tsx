@@ -13,9 +13,12 @@ import {
 import { Search, Menu } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -40,23 +43,40 @@ export function SiteHeader() {
               <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
                 <div className="flex flex-col space-y-3">
                   <Link
-                    className="transition-colors hover:text-foreground/80 text-foreground/60"
+                    className={cn(
+                      "transition-colors hover:text-foreground/80 text-foreground/60",
+                      pathname.startsWith("/get-started") &&
+                        "text-primary font-bold"
+                    )}
                     href="/get-started"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                    }}
                   >
                     Get Started
                   </Link>
                   <Link
-                    className="transition-colors hover:text-foreground/80 text-foreground/60"
+                    className={cn(
+                      "transition-colors hover:text-foreground/80 text-foreground/60",
+                      pathname.startsWith("/blocks") && "text-primary font-bold"
+                    )}
                     href="/blocks"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                    }}
                   >
                     Blocks
                   </Link>
                   <Link
-                    className="transition-colors hover:text-foreground/80 text-foreground/60"
+                    className={cn(
+                      "transition-colors hover:text-foreground/80 text-foreground/60",
+                      pathname.startsWith("/contribute") &&
+                        "text-primary font-bold"
+                    )}
                     href="/contribute"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                    }}
                   >
                     Contribute
                   </Link>
@@ -77,20 +97,38 @@ export function SiteHeader() {
           </Link>
           <nav className="flex items-center gap-6 text-sm">
             <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className={cn(
+                "transition-colors hover:text-foreground/80 text-foreground/60",
+                pathname.startsWith("/get-started") && "text-primary font-bold"
+              )}
               href="/get-started"
+              onClick={() => {
+                setOpen(false);
+              }}
             >
               Get Started
             </Link>
             <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className={cn(
+                "transition-colors hover:text-foreground/80 text-foreground/60",
+                pathname.startsWith("/blocks") && "text-primary font-bold"
+              )}
               href="/blocks"
+              onClick={() => {
+                setOpen(false);
+              }}
             >
               Blocks
             </Link>
             <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className={cn(
+                "transition-colors hover:text-foreground/80 text-foreground/60",
+                pathname.startsWith("/contribute") && "text-primary font-bold"
+              )}
               href="/contribute"
+              onClick={() => {
+                setOpen(false);
+              }}
             >
               Contribute
             </Link>
