@@ -44,52 +44,8 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="container space-y-6 py-8 md:py-12 lg:py-24">
-        <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
-          <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl">
-            Features
-          </h2>
-          <p className="max-w-[750px] text-lg text-muted-foreground sm:text-xl">
-            Everything you need to build modern web applications
-          </p>
-        </div>
-        <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] lg:grid-cols-3">
-          <Card>
-            <CardHeader>
-              <Code className="h-10 w-10 text-primary" />
-              <CardTitle>Copy & Paste</CardTitle>
-              <CardDescription>
-                Simply copy the code and paste it into your project. No complex
-                setup required.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Palette className="h-10 w-10 text-primary" />
-              <CardTitle>Customizable</CardTitle>
-              <CardDescription>
-                Built with Tailwind CSS. Customize colors, spacing, and more to
-                match your brand.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          <Card className="sm:col-span-2 lg:col-span-1">
-            <CardHeader>
-              <Zap className="h-10 w-10 text-primary" />
-              <CardTitle>Framework Agnostic</CardTitle>
-              <CardDescription>
-                Works with Next.js, Remix, Vite, and any React framework you
-                prefer.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-      </section>
-
       {/* Blocks Preview Section */}
-      <section className="space-y-6 py-8 md:py-12 lg:py-24">
+      <section className="space-y-6 my-12 md:my-24">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
           <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl">
             Browse Blocks
