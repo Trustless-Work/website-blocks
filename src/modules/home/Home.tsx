@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SiteHeader } from "@/shared/SiteHeader";
-import { ArrowRight, Code, Palette, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen container mx-auto">
+    <div className="min-h-screen container mx-auto px-4">
       <SiteHeader />
 
       {/* Hero Section */}
@@ -57,7 +57,7 @@ export const Home = () => {
 
         <Tabs defaultValue="featured" className="w-full">
           <div className="overflow-x-auto">
-            <TabsList className="grid w-full grid-cols-5 min-w-[500px]">
+            <TabsList className="grid w-full grid-cols-5 min-w-[500px] mb-2 sm:b-0">
               <TabsTrigger value="featured">Featured</TabsTrigger>
               <TabsTrigger value="sidebar">Sidebar</TabsTrigger>
               <TabsTrigger value="authentication">Authentication</TabsTrigger>
