@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { ClipboardProvider } from "@/providers/ClipboardProvider";
 
 const Exo2 = localFont({
   src: "./fonts/Exo2.ttf",
@@ -53,7 +54,13 @@ export default function RootLayout({
       <body
         className={cn(Exo2.variable, "antialiased", spaceGrotesk.className)}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ClipboardProvider>
+            <main className="min-h-screen container mx-auto px-4">
+              {children}
+            </main>
+          </ClipboardProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
