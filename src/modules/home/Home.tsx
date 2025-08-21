@@ -8,17 +8,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SiteHeader } from "@/shared/SiteHeader";
 import { ArrowRight, Code, Palette, Zap } from "lucide-react";
 import Link from "next/link";
-import { SiteHeader } from "@/shared/SiteHeader";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen container mx-auto">
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="container space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-2 text-center">
           <Badge variant="outline" className="mb-4">
             New Calendar Component →
@@ -89,7 +89,7 @@ export const Home = () => {
       </section>
 
       {/* Blocks Preview Section */}
-      <section className="container space-y-6 py-8 md:py-12 lg:py-24">
+      <section className="space-y-6 py-8 md:py-12 lg:py-24">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
           <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl">
             Browse Blocks
