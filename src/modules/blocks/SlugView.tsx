@@ -7,7 +7,7 @@ import { BlockPreview } from "@/shared/BlockPreview";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { blocks2 } from "./blocks";
+import blocksData from "@/data/blocks.json";
 
 interface BlockPageProps {
   params: {
@@ -16,7 +16,7 @@ interface BlockPageProps {
 }
 
 export const BlockPage = ({ params }: BlockPageProps) => {
-  const block = blocks2[params.slug as keyof typeof blocks2];
+  const block = blocksData.find((b) => b.id === params.slug);
 
   if (!block) {
     notFound();

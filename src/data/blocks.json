@@ -1,0 +1,64 @@
+[
+  {
+    "id": "dashboard-01",
+    "title": "Dashboard with Sidebar",
+    "description": "A dashboard with sidebar, charts and data table",
+    "category": "featured",
+    "image": "/placeholder.svg?height=200&width=300",
+    "tags": ["Dashboard", "Sidebar", "Charts"],
+    "code": "import { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Dashboard() {\n  return (\n    <div className=\"flex h-screen bg-background\">\n      {/* Sidebar */}\n      <div className=\"w-64 border-r bg-card\">\n        <div className=\"p-6\">\n          <h2 className=\"text-lg font-semibold\">Dashboard</h2>\n        </div>\n        <nav className=\"space-y-2 p-4\">\n          <Button variant=\"ghost\" className=\"w-full justify-start\">\n            Overview\n          </Button>\n          <Button variant=\"ghost\" className=\"w-full justify-start\">\n            Analytics\n          </Button>\n          <Button variant=\"ghost\" className=\"w-full justify-start\">\n            Reports\n          </Button>\n        </nav>\n      </div>\n      \n      {/* Main Content */}\n      <div className=\"flex-1 p-6\">\n        <div className=\"grid gap-4 md:grid-cols-2 lg:grid-cols-4\">\n          <Card>\n            <CardHeader className=\"flex flex-row items-center justify-between space-y-0 pb-2\">\n              <CardTitle className=\"text-sm font-medium\">Total Revenue</CardTitle>\n            </CardHeader>\n            <CardContent>\n              <div className=\"text-2xl font-bold\">$45,231.89</div>\n              <p className=\"text-xs text-muted-foreground\">+20.1% from last month</p>\n            </CardContent>\n          </Card>\n          <Card>\n            <CardHeader className=\"flex flex-row items-center justify-between space-y-0 pb-2\">\n              <CardTitle className=\"text-sm font-medium\">Subscriptions</CardTitle>\n            </CardHeader>\n            <CardContent>\n              <div className=\"text-2xl font-bold\">+2350</div>\n              <p className=\"text-xs text-muted-foreground\">+180.1% from last month</p>\n            </CardContent>\n          </Card>\n        </div>\n      </div>\n    </div>\n  )\n}",
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "auth-01",
+    "title": "Authentication Form",
+    "description": "Complete authentication flow with validation",
+    "category": "authentication",
+    "image": "/placeholder.svg?height=200&width=300",
+    "tags": ["Auth", "Form", "Validation"],
+    "code": "import { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\n\nexport default function AuthForm() {\n  return (\n    <Card className=\"w-[350px]\">\n      <CardHeader>\n        <CardTitle>Sign In</CardTitle>\n        <CardDescription>Enter your email and password to sign in</CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <div className=\"space-y-2\">\n          <Label htmlFor=\"email\">Email</Label>\n          <Input id=\"email\" type=\"email\" placeholder=\"m@example.com\" />\n        </div>\n        <div className=\"space-y-2\">\n          <Label htmlFor=\"password\">Password</Label>\n          <Input id=\"password\" type=\"password\" />\n        </div>\n        <Button className=\"w-full\">Sign In</Button>\n      </CardContent>\n    </Card>\n  )\n}",
+    "steps": [
+      "Install the required UI components",
+      "Copy the authentication form code",
+      "Add form validation logic",
+      "Connect to your authentication provider"
+    ]
+  },
+  {
+    "id": "calendar-01",
+    "title": "Calendar Component",
+    "description": "Interactive calendar with event management",
+    "category": "calendar",
+    "image": "/placeholder.svg?height=200&width=300",
+    "tags": ["Calendar", "Events", "Interactive"]
+  },
+  {
+    "id": "sidebar-01",
+    "title": "Navigation Sidebar",
+    "description": "Collapsible sidebar with navigation items",
+    "category": "sidebar",
+    "image": "/placeholder.svg?height=200&width=300",
+    "tags": ["Navigation", "Sidebar", "Menu"]
+  },
+  {
+    "id": "login-01",
+    "title": "Login Page",
+    "description": "Clean login page with social auth options",
+    "category": "login",
+    "image": "/placeholder.svg?height=200&width=300",
+    "tags": ["Login", "Social Auth", "Form"]
+  },
+  {
+    "id": "dashboard-02",
+    "title": "Analytics Dashboard",
+    "description": "Analytics dashboard with metrics and graphs",
+    "category": "featured",
+    "image": "/placeholder.svg?height=200&width=300",
+    "tags": ["Analytics", "Metrics", "Graphs"]
+  }
+]

@@ -12,7 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { blocks } from "./blocks";
+import blocksData from "@/data/blocks.json";
 
 export const Blocks = () => {
   return (
@@ -57,7 +57,7 @@ export const Blocks = () => {
 
           <TabsContent value="all" className="space-y-4 mt-6">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {blocks.map((block) => (
+              {blocksData.map((block) => (
                 <Card
                   key={block.id}
                   className="group cursor-pointer transition-all hover:shadow-md"
@@ -102,7 +102,7 @@ export const Blocks = () => {
 
           <TabsContent value="featured" className="space-y-4 mt-6">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {blocks
+              {blocksData
                 .filter((block) => block.category === "featured")
                 .map((block) => (
                   <Card
@@ -156,7 +156,7 @@ export const Blocks = () => {
                 className="space-y-4 mt-6"
               >
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {blocks
+                  {blocksData
                     .filter((block) => block.category === category)
                     .map((block) => (
                       <Card
