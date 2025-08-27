@@ -45,6 +45,7 @@ export function BlockPreview({
           <Button
             variant={viewportSize === "desktop" ? "default" : "outline"}
             size="sm"
+            className="cursor-pointer"
             onClick={() => setViewportSize("desktop")}
           >
             <Monitor className="h-4 w-4" />
@@ -52,6 +53,7 @@ export function BlockPreview({
           <Button
             variant={viewportSize === "tablet" ? "default" : "outline"}
             size="sm"
+            className="cursor-pointer"
             onClick={() => setViewportSize("tablet")}
           >
             <Tablet className="h-4 w-4" />
@@ -59,6 +61,7 @@ export function BlockPreview({
           <Button
             variant={viewportSize === "mobile" ? "default" : "outline"}
             size="sm"
+            className="cursor-pointer"
             onClick={() => setViewportSize("mobile")}
           >
             <Smartphone className="h-4 w-4" />
