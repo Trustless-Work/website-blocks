@@ -5,13 +5,34 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Code2, Eye } from "lucide-react";
 import { BlockPreview } from "@/shared/BlockPreview";
 import { CodeBlock } from "@/shared/CodeBlock";
-import { Button } from "@/components/ui/button";
 import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
 import CommingSoon from "./ComingSoon";
 import InitializeEscrowForm from "@/components/tw-blocks/escrows/single-release/initialize-escrow/form/InitializeEscrow";
 import InitializeEscrowDialog from "@/components/tw-blocks/escrows/single-release/initialize-escrow/dialog/InitializeEscrow";
 import componentCodes from "@/data/component-codes.json";
 import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
+import EscrowsByRoleTable from "@/components/tw-blocks/escrows/escrows-by-role/table/EscrowsTable";
+import EscrowsByRoleCards from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
+import EscrowsBySignerTable from "@/components/tw-blocks/escrows/escrows-by-signer/table/EscrowsTable";
+import EscrowsBySignerCards from "@/components/tw-blocks/escrows/escrows-by-signer/cards/EscrowsCards";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
+import ApproveMilestoneForm from "@/components/tw-blocks/escrows/single-release/approve-milestone/form/ApproveMilestone";
+import ApproveMilestoneDialog from "@/components/tw-blocks/escrows/single-release/approve-milestone/dialog/ApproveMilestone";
+import ApproveMilestoneButton from "@/components/tw-blocks/escrows/single-release/approve-milestone/button/ApproveMilestone";
+import FundEscrowForm from "@/components/tw-blocks/escrows/single-release/fund-escrow/form/FundEscrow";
+import FundEscrowDialog from "@/components/tw-blocks/escrows/single-release/fund-escrow/dialog/FundEscrow";
+import FundEscrowButton from "@/components/tw-blocks/escrows/single-release/fund-escrow/button/FundEscrow";
+import ChangeMilestoneStatusForm from "@/components/tw-blocks/escrows/single-release/change-milestone-status/form/ChangeMilestoneStatus";
+import ChangeMilestoneStatusDialog from "@/components/tw-blocks/escrows/single-release/change-milestone-status/dialog/ChangeMilestoneStatus";
+import ChangeMilestoneStatusButton from "@/components/tw-blocks/escrows/single-release/change-milestone-status/button/ChangeMilestoneStatus";
+import ResolveDisputeForm from "@/components/tw-blocks/escrows/single-release/resolve-dispute/form/ResolveDispute";
+import ResolveDisputeDialog from "@/components/tw-blocks/escrows/single-release/resolve-dispute/dialog/ResolveDispute";
+import ResolveDisputeButton from "@/components/tw-blocks/escrows/single-release/resolve-dispute/button/ResolveDispute";
+import UpdateEscrowForm from "@/components/tw-blocks/escrows/single-release/update-escrow/form/UpdateEscrow";
+import UpdateEscrowDialog from "@/components/tw-blocks/escrows/single-release/update-escrow/dialog/UpdateEscrow";
+import ReleaseEscrowButton from "@/components/tw-blocks/escrows/single-release/release-escrow/button/ReleaseEscrow";
+import DisputeEscrowButton from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
 
 type Props = {
   block: Block;
@@ -75,49 +96,139 @@ export function BlockTypeVariantViewer({
       },
       "approve-milestone": {
         "single-release": {
-          form: () => (
-            <h1 className="text-xl font-semibold">Approve • Single • Form</h1>
-          ),
-          dialog: () => (
-            <h1 className="text-xl font-semibold">Approve • Single • Dialog</h1>
-          ),
-          button: () => (
-            <h1 className="text-xl font-semibold">Approve • Single • Button</h1>
-          ),
+          form: () => <ApproveMilestoneForm />,
+          dialog: () => <ApproveMilestoneDialog />,
+          button: () => <ApproveMilestoneButton />,
         },
         "multi-release": {
           form: () => (
-            <h1 className="text-xl font-semibold">Approve • Multi • Form</h1>
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
           ),
           dialog: () => (
-            <h1 className="text-xl font-semibold">Approve • Multi • Dialog</h1>
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
           ),
           button: () => (
-            <h1 className="text-xl font-semibold">Approve • Multi • Button</h1>
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+        },
+      },
+      "change-milestone-status": {
+        "single-release": {
+          form: () => <ChangeMilestoneStatusForm />,
+          dialog: () => <ChangeMilestoneStatusDialog />,
+          button: () => <ChangeMilestoneStatusButton />,
+        },
+        "multi-release": {
+          form: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+          dialog: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+          button: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
           ),
         },
       },
       "fund-escrow": {
         "single-release": {
-          form: () => (
-            <h1 className="text-xl font-semibold">Fund • Single • Form</h1>
-          ),
-          dialog: () => (
-            <h1 className="text-xl font-semibold">Fund • Single • Dialog</h1>
-          ),
-          button: () => (
-            <h1 className="text-xl font-semibold">Fund • Single • Button</h1>
-          ),
+          form: () => <FundEscrowForm />,
+          dialog: () => <FundEscrowDialog />,
+          button: () => <FundEscrowButton />,
         },
         "multi-release": {
           form: () => (
-            <h1 className="text-xl font-semibold">Fund • Multi • Form</h1>
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
           ),
           dialog: () => (
-            <h1 className="text-xl font-semibold">Fund • Multi • Dialog</h1>
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
           ),
           button: () => (
-            <h1 className="text-xl font-semibold">Fund • Multi • Button</h1>
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+        },
+      },
+      "resolve-dispute": {
+        "single-release": {
+          form: () => <ResolveDisputeForm />,
+          dialog: () => <ResolveDisputeDialog />,
+          button: () => <ResolveDisputeButton />,
+        },
+        "multi-release": {
+          form: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+          dialog: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+          button: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+        },
+      },
+      "update-escrow": {
+        "single-release": {
+          form: () => <UpdateEscrowForm />,
+          dialog: () => <UpdateEscrowDialog />,
+        },
+        "multi-release": {
+          form: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+          dialog: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+        },
+      },
+      "release-escrow": {
+        "single-release": {
+          button: () => <ReleaseEscrowButton />,
+        },
+        "multi-release": {
+          button: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
+          ),
+        },
+      },
+      "dispute-escrow": {
+        "single-release": {
+          button: () => <DisputeEscrowButton />,
+        },
+        "multi-release": {
+          button: () => (
+            <div className="flex items-center justify-center h-full">
+              <CommingSoon />
+            </div>
           ),
         },
       },
@@ -132,6 +243,18 @@ export function BlockTypeVariantViewer({
       // Simple blocks without variants (e.g., wallet-kit)
       const SimplePreview: Record<string, React.ComponentType | undefined> = {
         "wallet-kit": () => <WalletButton />,
+        "escrows-by-role-table": () => (
+          <EscrowsByRoleTable syncWithUrl={false} />
+        ),
+        "escrows-by-role-cards": () => (
+          <EscrowsByRoleCards syncWithUrl={false} />
+        ),
+        "escrows-by-signer-table": () => (
+          <EscrowsBySignerTable syncWithUrl={false} />
+        ),
+        "escrows-by-signer-cards": () => (
+          <EscrowsBySignerCards syncWithUrl={false} />
+        ),
       };
 
       const SimpleComponent = SimplePreview[action];
@@ -158,37 +281,14 @@ export function BlockTypeVariantViewer({
       }
     }
 
-    // Build a friendly filename for display in the Code tab
-    const pascalize = (str: string) =>
-      str
-        .split("-")
-        .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
-        .join("");
-
-    const defaultFilename = hasExplicitVariants
-      ? `components/tw-blocks/escrows/${activeType}/${action}/${activeVariant}/${pascalize(
-          action
-        )}.tsx`
-      : `components/tw-blocks/${action}/index.tsx`;
-
-    let filename = defaultFilename;
-    if (action === "initialize-escrow") {
-      if (activeVariant === "form") {
-        filename = `components/tw-blocks/escrows/${activeType}/initialize-escrow/form/InitializeEscrow.tsx`;
-      } else if (activeVariant === "dialog") {
-        filename = `components/tw-blocks/escrows/${activeType}/initialize-escrow/dialog/InitializeEscrow.tsx`;
-      }
-    }
-
     return {
       component,
       code,
-      filename,
     };
   }, [activeType, activeVariant, block]);
 
   return (
-    <Tabs defaultValue="preview" className="w-full">
+    <Tabs defaultValue="preview" className="w-full" suppressHydrationWarning>
       <TabsContent value="preview" className="mt-4">
         <BlockPreview
           title=""
@@ -218,7 +318,6 @@ export function BlockTypeVariantViewer({
           </div>
         </BlockPreview>
       </TabsContent>
-
       <TabsContent value="code" className="mt-4">
         <BlockPreview
           title=""
@@ -236,13 +335,62 @@ export function BlockTypeVariantViewer({
           }
           showViewportControls={false}
         >
-          <CodeBlock
-            code={renderResult.code}
-            language="tsx"
-            filename={renderResult.filename}
-          />
+          <CodeBlock code={renderResult.code} language="tsx" />
         </BlockPreview>
       </TabsContent>
+      <div className="flex flex-col md:flex-row gap-4 mt-4">
+        {block.requiredProviders && (
+          <Card className={`${block.requiredBlocks ? "w-1/2" : "w-full"}`}>
+            <CardHeader>
+              <CardTitle>Required Providers</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-4">
+                {block.requiredProviders?.map((provider) => (
+                  <div key={provider}>{provider}</div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {block.requiredBlocks && (
+          <Card className={`${block.requiredProviders ? "w-1/2" : "w-full"}`}>
+            <CardHeader>
+              <CardTitle>Required Blocks</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-4">
+                {block.requiredBlocks?.map((requiredBlock, index) => {
+                  if (typeof requiredBlock === "string") {
+                    return (
+                      <div key={requiredBlock} className="text-sm">
+                        {requiredBlock}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between"
+                    >
+                      <Link
+                        href={requiredBlock.url ?? ""}
+                        target="_blank"
+                        rel="noopener noreferrer  "
+                        className="text-sm hover:underline text-primary-500"
+                      >
+                        {requiredBlock.name}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </Tabs>
   );
 }
