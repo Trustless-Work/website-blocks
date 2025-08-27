@@ -5,6 +5,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { ClipboardProvider } from "@/providers/ClipboardProvider";
+import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
+import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
+import { Toaster } from "@/components/ui/sonner";
 
 const Exo2 = localFont({
   src: "./fonts/Exo2.ttf",
@@ -19,7 +22,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Trustless Work",
+  title: "Trustless Work | Blocks",
   description: "Trustless Work",
   viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   themeColor: "#006BE4",
@@ -61,6 +64,8 @@ export default function RootLayout({
             </main>
           </ClipboardProvider>
         </ThemeProvider>
+
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

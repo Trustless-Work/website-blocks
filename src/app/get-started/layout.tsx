@@ -24,17 +24,17 @@ export default function GetStartedLayout({
                   <li className="mt-0 pt-2">
                     <a
                       className="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
-                      href="#installation"
+                      href="#create-project"
                     >
-                      Installation
+                      Create project
                     </a>
                   </li>
                   <li className="mt-0 pt-2">
                     <a
                       className="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
-                      href="#create-project"
+                      href="#installation"
                     >
-                      Create project
+                      Installation
                     </a>
                   </li>
                   <li className="mt-0 pt-2">
