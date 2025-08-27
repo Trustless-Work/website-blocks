@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { Block } from "@/types/block";
+import Image from "next/image";
 
 type BlockCardProps = {
   block: Block;
@@ -19,16 +20,18 @@ export const BlockCard = ({ block }: BlockCardProps) => {
   return (
     <Card className="group cursor-pointer transition-all hover:shadow-md flex flex-col h-full pt-0">
       <CardHeader className="p-0">
-        <div className="aspect-video overflow-hidden rounded-t-lg bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-950 dark:to-indigo-900 flex items-center justify-center">
+        <div className="aspect-video overflow-hidden rounded-t-lg bg-gradient-to-br from-primary-50 to-indigo-100 dark:from-primary-950 dark:to-indigo-900 flex items-center justify-center">
           {block.image ? (
-            <img
+            <Image
               src={block.image}
               alt={block.title}
-              className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              className="h-full w-full transition-transform group-hover:scale-105"
+              width={1000}
+              height={1000}
             />
           ) : (
             <div className="text-center p-6">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">
                 {block.category}
               </div>
               <div className="text-xs text-muted-foreground">
@@ -52,12 +55,12 @@ export const BlockCard = ({ block }: BlockCardProps) => {
           <CardDescription>{block.description}</CardDescription>
           <div className="flex flex-wrap gap-1">
             {block.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs">
+              <Badge key={tag} variant="outline" className="text-xs">
                 {tag}
               </Badge>
             ))}
             {block.tags.length > 3 && (
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="outline" className="text-xs">
                 +{block.tags.length - 3}
               </Badge>
             )}
@@ -70,8 +73,8 @@ export const BlockCard = ({ block }: BlockCardProps) => {
 
             if (variants.length > 0) {
               return (
-                <div className="flex flex-wrap gap-1 mt-2">
-                  <span className="text-xs text-muted-foreground mr-1">
+                <div className="flex items-center flex-wrap gap-1 mt-2">
+                  <span className="text-xs text-muted-foreground mr-1 font-bold">
                     Variants:
                   </span>
                   {variants.map((variant) => (
