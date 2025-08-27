@@ -344,59 +344,58 @@ export function BlockTypeVariantViewer({
           <CodeBlock code={renderResult.code} language="tsx" />
         </BlockPreview>
       </TabsContent>
-      <div className="flex flex-col md:flex-row gap-4 mt-4">
-        {block.requiredProviders && (
-          <Card className={`${block.requiredBlocks ? "w-1/2" : "w-full"}`}>
-            <CardHeader>
-              <CardTitle>Required Providers</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col gap-4">
-                {block.requiredProviders?.map((provider) => (
-                  <div key={provider}>{provider}</div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+      <div className="flex flex-col md:flex-row gap-4 mt-4 w-full"></div>
+      {block.requiredProviders && (
+        <Card className={`w-full ${block.requiredBlocks ? "md:w-1/2" : ""}`}>
+          <CardHeader>
+            <CardTitle>Required Providers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col gap-4">
+              {block.requiredProviders?.map((provider) => (
+                <div key={provider}>{provider}</div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
-        {block.requiredBlocks && (
-          <Card className={`${block.requiredProviders ? "w-1/2" : "w-full"}`}>
-            <CardHeader>
-              <CardTitle>Required Blocks</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col gap-4">
-                {block.requiredBlocks?.map((requiredBlock, index) => {
-                  if (typeof requiredBlock === "string") {
-                    return (
-                      <div key={requiredBlock} className="text-sm">
-                        {requiredBlock}
-                      </div>
-                    );
-                  }
-
+      {block.requiredBlocks && (
+        <Card className={`w-full ${block.requiredProviders ? "md:w-1/2" : ""}`}>
+          <CardHeader>
+            <CardTitle>Required Blocks</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col gap-4">
+              {block.requiredBlocks?.map((requiredBlock, index) => {
+                if (typeof requiredBlock === "string") {
                   return (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between"
-                    >
-                      <Link
-                        href={requiredBlock.url ?? ""}
-                        target="_blank"
-                        rel="noopener noreferrer  "
-                        className="text-sm hover:underline text-primary-500"
-                      >
-                        {requiredBlock.name}
-                      </Link>
+                    <div key={requiredBlock} className="text-sm">
+                      {requiredBlock}
                     </div>
                   );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
+                }
+
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between"
+                  >
+                    <Link
+                      href={requiredBlock.url ?? ""}
+                      target="_blank"
+                      rel="noopener noreferrer  "
+                      className="text-sm hover:underline text-primary-500"
+                    >
+                      {requiredBlock.name}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </Tabs>
   );
 }
