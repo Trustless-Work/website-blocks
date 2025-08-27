@@ -170,6 +170,7 @@ export const BlockPage = ({ block }: BlockPageProps) => {
               <Tabs
                 value={activeType}
                 onValueChange={(v) => setActiveType(v as EscrowReleaseType)}
+                suppressHydrationWarning
                 className="w-full"
               >
                 <TabsList className="grid w-full grid-cols-2 h-10">
