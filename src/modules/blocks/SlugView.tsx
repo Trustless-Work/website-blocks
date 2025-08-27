@@ -86,18 +86,6 @@ export const BlockPage = ({ params }: BlockPageProps) => {
               </div>
             </div>
           )}
-
-          {/* Usage section below steps like shadcn */}
-          {block.code && (
-            <div className="space-y-4 mt-10">
-              <h3 className="text-2xl font-semibold">Usage</h3>
-              <CodeBlock
-                code={block.code}
-                language="tsx"
-                filename="components/component.tsx"
-              />
-            </div>
-          )}
         </div>
       </div>
     </div>
