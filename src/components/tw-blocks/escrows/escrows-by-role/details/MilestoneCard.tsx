@@ -117,10 +117,7 @@ const MilestoneCardComponent = ({
       !("flags" in milestone && milestone.flags?.approved)
     ) {
       buttons.push(
-        <ChangeMilestoneStatusDialog
-          key={`change-status-${milestoneIndex}`}
-          milestoneIndex={milestoneIndex}
-        />
+        <ChangeMilestoneStatusDialog key={`change-status-${milestoneIndex}`} />
       );
     }
 
@@ -168,10 +165,7 @@ const MilestoneCardComponent = ({
           !milestone.flags?.resolved))
     ) {
       buttons.push(
-        <ApproveMilestoneButton
-          key={`approve-${milestoneIndex}`}
-          milestoneIndex={milestoneIndex}
-        />
+        <ApproveMilestoneButton key={`approve-${milestoneIndex}`} />
       );
     }
 

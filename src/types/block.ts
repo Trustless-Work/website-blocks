@@ -20,7 +20,7 @@ export type Block = {
   id: string;
   title: string;
   description: string;
-  category: "Escrows" | "Wallet" | "Table" | "Cards";
+  category: "Escrows" | "Wallet" | "Table" | "Cards" | string;
   image: string;
   tags: string[];
   code: string;
