@@ -54,7 +54,7 @@ export const BlockPage = ({ params }: BlockPageProps) => {
               </Badge>
             ))}
             {block.newBlocks && (
-              <Badge variant="default">
+              <Badge variant="outline">
                 <span className="text-xs">NEW</span>
               </Badge>
             )}
@@ -63,29 +63,32 @@ export const BlockPage = ({ params }: BlockPageProps) => {
 
         {/* Main content */}
         <div className="w-full">
-          <BlockTypeVariantViewer block={block as unknown as Block} />
-
-          {/* Steps section going vertically down */}
-          {block.steps && block.steps.length > 0 && (
+          <div className="container mx-auto max-w-4xl my-10">
             <div className="space-y-4 mt-10">
               <h3 className="text-2xl font-semibold">Installation</h3>
-              <p className="text-sm text-muted-foreground">
-                Follow these steps to add this component to your project.
-              </p>
-              <div className="space-y-4">
-                {block.steps.map((step, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-medium">
-                      {index + 1}
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium leading-none">{step}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <CodeBlock
+                code="npx trustless-work add escrows/single-release/initialize-escrow/form"
+                language="bash"
+                filename="InitializeEscrow.tsx"
+              />
             </div>
-          )}
+          </div>
+
+          <BlockTypeVariantViewer block={block as unknown as Block} />
+
+          <div className="container mx-auto max-w-4xl">
+            {/* Usage section below steps like shadcn */}
+            {block.code && (
+              <div className="space-y-4 mt-10">
+                <h3 className="text-2xl font-semibold">Usage</h3>
+                <CodeBlock
+                  code={block.code}
+                  language="tsx"
+                  filename="components/component.tsx"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

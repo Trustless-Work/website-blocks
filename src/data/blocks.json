@@ -7,6 +7,7 @@
     "escrowType": null,
     "image": "/blocks/block-1.png",
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
+    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -23,6 +24,7 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
+    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -39,6 +41,7 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
+    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -55,6 +58,7 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
+    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -71,6 +75,7 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
+    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -89,6 +94,7 @@
     "variants": ["form", "dialog"],
     "image": "",
     "tags": ["Initialize", "Escrows", "Onboarding"],
+    "code": "<p>Hello</p>",
     "codeByTypeAndVariant": {
       "single-release": { "form": "", "dialog": "" },
       "multi-release": { "form": "", "dialog": "" }
@@ -111,6 +117,7 @@
     "variants": ["form", "button", "dialog"],
     "image": "",
     "tags": ["Milestone", "Approve", "Escrows"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
@@ -133,6 +140,7 @@
     "variants": ["form", "button", "dialog"],
     "image": "",
     "tags": ["Milestone", "Status", "Escrows"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
@@ -155,6 +163,7 @@
     "variants": ["form", "button", "dialog"],
     "image": "",
     "tags": ["Funding", "Escrows", "Assets"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
@@ -177,6 +186,7 @@
     "variants": ["form", "button", "dialog"],
     "image": "",
     "tags": ["Dispute", "Resolve", "Escrows"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
@@ -199,6 +209,7 @@
     "variants": ["form", "dialog"],
     "image": "",
     "tags": ["Update", "Escrows", "Admin"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "form": "", "dialog": "" },
       "multi-release": { "form": "", "dialog": "" }
@@ -221,6 +232,7 @@
     "variants": ["button"],
     "image": "",
     "tags": ["Release", "Escrows", "Payout"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "button": "" },
       "multi-release": { "button": "" }
@@ -243,6 +255,7 @@
     "variants": ["button"],
     "image": "",
     "tags": ["Dispute", "Escrows", "Actions"],
+    "code": "",
     "codeByTypeAndVariant": {
       "single-release": { "button": "" },
       "multi-release": { "button": "" }

@@ -18,6 +18,7 @@ export type Block = {
   category: "Escrows" | "Wallet" | "Table" | "Cards";
   image: string;
   tags: string[];
+  code: string;
   newBlocks?: boolean;
   steps: string[];
   escrowType?: EscrowType;

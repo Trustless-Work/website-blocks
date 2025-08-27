@@ -176,8 +176,7 @@ npx trustless-work add escrows/escrows-by-role/table`}
             />
 
             <CodeBlock
-              code={`// app/escrows/page.tsx
-import { EscrowsByRoleCards } from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
+              code={`import { EscrowsByRoleCards } from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
 import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
 
 export default function Page() {

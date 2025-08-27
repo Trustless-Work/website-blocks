@@ -6,7 +6,7 @@ import { Check, Copy } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   oneDark,
-  oneLight,
+  coldarkCold,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useTheme } from "next-themes";
 import { useClipboard } from "@/providers/ClipboardProvider";
@@ -31,23 +31,23 @@ export function CodeBlock({ code, filename, language }: CodeBlockProps) {
   return (
     <div className="relative">
       {filename && (
-        <div className="flex items-center justify-between p-4 rounded-t-lg bg-muted">
+        <div className="flex items-center justify-between p-4 pb-0 rounded-t-lg bg-muted">
           <span className="text-sm font-medium">{filename}</span>
-          <Button
-            size="sm"
-            variant="outline"
-            className="absolute right-2 top-2 h-8 w-8 p-0 bg-transparent cursor-pointer"
-            onClick={copyToClipboard}
-          >
-            {isCopied(copyKey) ? (
-              <Check className="h-3 w-3 text-green-800" />
-            ) : (
-              <Copy className="h-3 w-3 text-muted-foreground" />
-            )}
-          </Button>
         </div>
       )}
       <div className="relative overflow-hidden bg-muted">
+        <Button
+          size="sm"
+          variant="ghost"
+          className="absolute right-2 top-2 h-8 w-8 p-0 bg-transparent cursor-pointer z-10"
+          onClick={copyToClipboard}
+        >
+          {isCopied(copyKey) ? (
+            <Check className="h-3 w-3 text-green-800" />
+          ) : (
+            <Copy className="h-3 w-3 text-muted-foreground" />
+          )}
+        </Button>
         <SyntaxHighlighter
           showLineNumbers
           wrapLongLines
@@ -56,7 +56,7 @@ export function CodeBlock({ code, filename, language }: CodeBlockProps) {
             mounted
               ? resolvedTheme === "dark"
                 ? oneDark
-                : oneLight
+                : coldarkCold
               : undefined
           }
           customStyle={{
