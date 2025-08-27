@@ -1,26 +1,98 @@
+"use client";
+
 import { SiteHeader } from "@/shared/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import blocksData from "@/data/blocks.json";
-import type { Block } from "@/types/block";
+import { useMemo, useState } from "react";
+import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
 import { BlockTypeVariantViewer } from "@/shared/BlockTypeVariantViewer";
 import { CodeBlock } from "@/shared/CodeBlock";
 
 interface BlockPageProps {
-  params: {
-    slug: string;
-  };
+  block: Block;
 }
 
-export const BlockPage = ({ params }: BlockPageProps) => {
-  const block = blocksData.find((b) => b.id === params.slug);
+export const BlockPage = ({ block }: BlockPageProps) => {
+  const availableTypes: EscrowReleaseType[] = useMemo(() => {
+    if (Array.isArray(block.types) && block.types.length > 0)
+      return block.types as EscrowReleaseType[];
+    if (typeof block.escrowType === "string") {
+      const parts = block.escrowType
+        .split(",")
+        .map((p) => p.trim()) as EscrowReleaseType[];
+      return parts.filter(Boolean) as EscrowReleaseType[];
+    }
+    return [] as EscrowReleaseType[];
+  }, [block]);
 
-  if (!block) {
-    notFound();
-  }
+  const showTypeTabs = useMemo(() => {
+    const hasBoth =
+      availableTypes.includes("single-release") &&
+      availableTypes.includes("multi-release");
+    const isEscrowUI =
+      (block as unknown as Block).category !== "Cards" &&
+      (block as unknown as Block).category !== "Table";
+    return hasBoth && isEscrowUI;
+  }, [availableTypes, block]);
+
+  const variants = useMemo((): EscrowVariant[] => {
+    const b = block as unknown as Block;
+    if (Array.isArray(b.variants) && b.variants.length > 0) {
+      return (b.variants as string[]).filter((v): v is EscrowVariant =>
+        ["form", "button", "dialog"].includes(v)
+      );
+    }
+    const inferred: EscrowVariant[] = [];
+    const tagSet = new Set((b.tags || []).map((t) => t.toLowerCase()));
+    if (tagSet.has("form")) inferred.push("form");
+    if (tagSet.has("button")) inferred.push("button");
+    if (tagSet.has("dialog")) inferred.push("dialog");
+    return inferred.length > 0 ? inferred : (["form"] as EscrowVariant[]);
+  }, [block]);
+
+  const hasExplicitVariants = useMemo(() => {
+    const b = block as unknown as Block;
+    return Array.isArray(b.variants) && b.variants.length > 0;
+  }, [block]);
+
+  const [activeType, setActiveType] = useState<EscrowReleaseType>(
+    () =>
+      (availableTypes.includes("single-release")
+        ? "single-release"
+        : availableTypes[0]) || "single-release"
+  );
+  const [activeVariant, setActiveVariant] = useState<EscrowVariant>(
+    () => variants[0] || "form"
+  );
+
+  const action = useMemo(() => block.id.replace("escrows-", ""), [block.id]);
+
+  const installationCommand = useMemo(() => {
+    const b = block as unknown as Block;
+    if (hasExplicitVariants) {
+      const byType = b.installByTypeAndVariant;
+      const cmd = byType?.[activeType]?.[activeVariant];
+      if (cmd) return cmd;
+      // fallback for escrow actions when variants exist
+      return `npx trustless-work add escrows/${activeType}/${action}/${activeVariant}`;
+    }
+    // If no explicit variants, prefer a single install command provided by JSON
+    if (typeof b.install === "string" && b.install.trim().length > 0) {
+      return b.install;
+    }
+    // Otherwise, no install command available
+    return "";
+  }, [block, activeType, activeVariant, action, hasExplicitVariants]);
 
   return (
     <div className="min-h-screen">
@@ -47,48 +119,82 @@ export const BlockPage = ({ params }: BlockPageProps) => {
               <p className="text-muted-foreground">{block.description}</p>
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {block.tags.map((tag) => (
-              <Badge key={tag} variant="outline">
-                {tag}
-              </Badge>
-            ))}
-            {block.newBlocks && (
-              <Badge variant="outline">
-                <span className="text-xs">NEW</span>
-              </Badge>
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex flex-wrap gap-2">
+              {block.tags.map((tag) => (
+                <Badge key={tag} variant="outline">
+                  {tag}
+                </Badge>
+              ))}
+              {block.newBlocks && (
+                <Badge variant="default">
+                  <span className="text-xs">NEW</span>
+                </Badge>
+              )}
+            </div>
+            {hasExplicitVariants && variants.length > 1 && (
+              <div className="flex items-center gap-2">
+                <Select
+                  value={activeVariant}
+                  onValueChange={(v) => setActiveVariant(v as EscrowVariant)}
+                >
+                  <SelectTrigger className="w-[180px] cursor-pointer">
+                    <SelectValue placeholder="Select variant" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {variants.map((v) => (
+                      <SelectItem key={v} value={v} className="cursor-pointer">
+                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             )}
           </div>
         </div>
 
         {/* Main content */}
         <div className="w-full">
-          <div className="container mx-auto max-w-4xl my-10">
-            <div className="space-y-4 mt-10">
-              <h3 className="text-2xl font-semibold">Installation</h3>
-              <CodeBlock
-                code="npx trustless-work add escrows/single-release/initialize-escrow/form"
-                language="bash"
-                filename="InitializeEscrow.tsx"
-              />
-            </div>
-          </div>
-
-          <BlockTypeVariantViewer block={block as unknown as Block} />
-
-          <div className="container mx-auto max-w-4xl">
-            {/* Usage section below steps like shadcn */}
-            {block.code && (
+          {installationCommand && (
+            <div className="container mx-auto max-w-3xl mb-10 sm:mb-30 sm:mt-20">
               <div className="space-y-4 mt-10">
-                <h3 className="text-2xl font-semibold">Usage</h3>
-                <CodeBlock
-                  code={block.code}
-                  language="tsx"
-                  filename="components/component.tsx"
-                />
+                <h3 className="text-2xl font-semibold">Installation</h3>
+                <CodeBlock code={installationCommand} language="bash" />
               </div>
-            )}
-          </div>
+            </div>
+          )}
+
+          {showTypeTabs && (
+            <div className="flex flex-col gap-3 p-2 rounded-lg">
+              <Tabs
+                value={activeType}
+                onValueChange={(v) => setActiveType(v as EscrowReleaseType)}
+                className="w-full"
+              >
+                <TabsList className="grid w-full grid-cols-2 h-10">
+                  <TabsTrigger
+                    value="single-release"
+                    className="text-sm font-medium"
+                  >
+                    Single Release
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="multi-release"
+                    className="text-sm font-medium"
+                  >
+                    Multi Release
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+          )}
+
+          <BlockTypeVariantViewer
+            block={block as unknown as Block}
+            activeType={activeType}
+            activeVariant={activeVariant}
+          />
         </div>
       </div>
     </div>
