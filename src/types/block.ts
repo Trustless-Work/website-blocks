@@ -26,4 +26,6 @@ export type Block = {
   types?: EscrowReleaseType[];
   variants?: EscrowVariant[];
   codeByTypeAndVariant?: CodeByTypeAndVariant;
+  installByTypeAndVariant?: CodeByTypeAndVariant;
+  install?: string;
 };
