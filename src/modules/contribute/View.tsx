@@ -136,7 +136,7 @@ export const Contribute = () => {
                   </p>
                   <Button variant="outline" size="sm" asChild>
                     <a
-                      href="https://github.com/trustlesswork/ui-library"
+                      href="https://github.com/Trustless-Work/react-library-trustless-work-blocks"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2"
@@ -165,9 +165,10 @@ export const Contribute = () => {
                   </p>
                   <div className="bg-muted p-3 rounded-md font-mono text-sm">
                     <div>
-                      git clone https://github.com/YOUR_USERNAME/ui-library.git
+                      git clone
+                      https://github.com/YOUR_USERNAME/Trustless-Work/react-library-trustless-work-blocks
                     </div>
-                    <div>cd ui-library</div>
+                    <div>cd react-library-trustless-work-blocks</div>
                     <div>git checkout -b feature/your-component-name</div>
                     <div>npm install</div>
                   </div>
@@ -353,7 +354,7 @@ export const Contribute = () => {
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
               <Button variant="outline" asChild>
                 <a
-                  href="https://github.com/trustlesswork/ui-library"
+                  href="https://github.com/Trustless-Work/react-library-trustless-work-blocks"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
@@ -364,7 +365,7 @@ export const Contribute = () => {
               </Button>
               <Button variant="outline" asChild>
                 <a
-                  href="https://github.com/trustlesswork/ui-library/discussions"
+                  href="https://github.com/Trustless-Work/react-library-trustless-work-blocks/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -373,7 +374,7 @@ export const Contribute = () => {
               </Button>
               <Button variant="outline" asChild>
                 <a
-                  href="https://github.com/trustlesswork/ui-library/issues"
+                  href="https://github.com/Trustless-Work/react-library-trustless-work-blocks/issues"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
