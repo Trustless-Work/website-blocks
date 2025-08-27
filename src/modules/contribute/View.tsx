@@ -235,52 +235,45 @@ export const Contribute = () => {
                 Contribution Guidelines
               </h2>
               <div className="space-y-4">
-                <div className="flex gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold">Follow Design System</h3>
-                    <p className="text-sm text-muted-foreground">
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">
+                      Follow Design System
+                    </CardTitle>
+                    <CardDescription className="text-sm">
                       Use our color palette, typography, and spacing
                       conventions.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold">Accessibility First</h3>
-                    <p className="text-sm text-muted-foreground">
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">
+                      Accessibility First
+                    </CardTitle>
+                    <CardDescription className="text-sm">
                       Ensure your component meets WCAG 2.1 AA standards.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold">Responsive Design</h3>
-                    <p className="text-sm text-muted-foreground">
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">
+                      Responsive Design
+                    </CardTitle>
+                    <CardDescription className="text-sm">
                       Components should work seamlessly across all device sizes.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold">Clean Code</h3>
-                    <p className="text-sm text-muted-foreground">
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">Clean Code</CardTitle>
+                    <CardDescription className="text-sm">
                       Write readable, well-documented TypeScript/React code.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold">Original Work</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Submit only your own original designs and code.
-                    </p>
-                  </div>
-                </div>
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
               </div>
             </div>
 
@@ -339,7 +332,7 @@ export const Contribute = () => {
         </section>
 
         {/* Community */}
-        <section className="mt-16 text-center">
+        <section className="my-20 text-center">
           <div className="space-y-4">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <Users className="h-8 w-8 text-primary" />
