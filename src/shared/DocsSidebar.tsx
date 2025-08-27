@@ -18,6 +18,16 @@ const sidebarNavItems = [
       },
     ],
   },
+
+  {
+    title: "Required Blocks",
+    items: [
+      {
+        title: "Dependencies",
+        href: "/get-started/dependencies",
+      },
+    ],
+  },
 ];
 
 export function DocsSidebar() {

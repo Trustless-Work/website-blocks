@@ -73,18 +73,6 @@ export function SiteHeader() {
                   <Link
                     className={cn(
                       "transition-colors hover:text-foreground/80 text-foreground/60",
-                      pathname.startsWith("/utils") && "text-primary font-bold"
-                    )}
-                    href="/utils"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    Utils
-                  </Link>
-                  <Link
-                    className={cn(
-                      "transition-colors hover:text-foreground/80 text-foreground/60",
                       pathname.startsWith("/contribute") &&
                         "text-primary font-bold"
                     )}
@@ -134,18 +122,6 @@ export function SiteHeader() {
               }}
             >
               Blocks
-            </Link>
-            <Link
-              className={cn(
-                "transition-colors hover:text-foreground/80 text-foreground/60",
-                pathname.startsWith("/utils") && "text-primary font-bold"
-              )}
-              href="/utils"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              Utils
             </Link>
             <Link
               className={cn(
