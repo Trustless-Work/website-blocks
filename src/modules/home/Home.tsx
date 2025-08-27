@@ -1,18 +1,52 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SiteHeader } from "@/shared/SiteHeader";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import blocksData from "@/data/blocks.json";
+import type { Block } from "@/types/block";
+import { BlockCard } from "@/shared/BlockCard";
+
+// Extract unique categories from blocks data
+const getUniqueCategories = () => {
+  const blocks = blocksData as unknown as Block[];
+  const categories = [...new Set(blocks.map((block) => block.category))];
+  const categoryOrder = ["Escrows", "Wallet", "Table", "Cards"];
+  return categories.sort((a, b) => {
+    const aIndex = categoryOrder.indexOf(a);
+    const bIndex = categoryOrder.indexOf(b);
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex;
+    }
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    return a.localeCompare(b);
+  });
+};
+
+// Get category stats
+const getCategoryStats = () => {
+  const stats: Record<string, number> = {};
+  const blocks = blocksData as unknown as Block[];
+  blocks.forEach((block) => {
+    stats[block.category] = (stats[block.category] || 0) + 1;
+  });
+  return stats;
+};
 
 export const Home = () => {
+  const categories = getUniqueCategories();
+  const categoryStats = getCategoryStats();
+
+  // Show specific categories for home page: Escrows, Single Release, and Wallet
+  const homeCategories = ["Escrows", "Wallet", "Table", "Cards"].filter(
+    (category) => categories.includes(category)
+  );
+
+  // Get the latest new block for the badge
+  const blocks = blocksData as unknown as Block[];
+  const latestNewBlock = blocks.find((block) => block.newBlocks === true);
   return (
     <>
       <SiteHeader />
@@ -21,14 +55,17 @@ export const Home = () => {
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-2 text-center">
           <Badge variant="outline" className="mb-4">
-            New Calendar Component →
+            {latestNewBlock
+              ? `New ${latestNewBlock.title} →`
+              : "New Components →"}
           </Badge>
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
             Building Blocks for the Web
           </h1>
           <p className="max-w-[750px] text-lg text-muted-foreground sm:text-xl">
-            Clean, modern building blocks. Copy and paste into your apps. Works
-            with all React frameworks. Open Source. Free forever.
+            Trustless Work Blocks brings clean, modern escrow components for
+            blockchain — copy and paste into your React apps, fully compatible,
+            open source, and free forever.
           </p>
           <div className="flex flex-col gap-4 mt-6 sm:flex-row">
             <Button asChild size="lg">
@@ -55,113 +92,63 @@ export const Home = () => {
           </p>
         </div>
 
-        <Tabs defaultValue="featured" className="w-full">
+        <Tabs
+          defaultValue={
+            homeCategories[0]?.toLowerCase().replace(/\s+/g, "-") || "all"
+          }
+          className="w-full"
+        >
           <div className="overflow-x-auto">
-            <TabsList className="grid w-full grid-cols-5 min-w-[500px] mb-2 sm:b-0">
-              <TabsTrigger value="featured">Featured</TabsTrigger>
-              <TabsTrigger value="sidebar">Sidebar</TabsTrigger>
-              <TabsTrigger value="authentication">Authentication</TabsTrigger>
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="calendar">Calendar</TabsTrigger>
+            <TabsList className="flex w-full min-w-[400px] gap-1 mb-2 sm:mb-0">
+              {homeCategories.map((category) => (
+                <TabsTrigger
+                  key={category}
+                  value={category.toLowerCase().replace(/\s+/g, "-")}
+                  className="flex-1 whitespace-nowrap"
+                >
+                  <span className="truncate">{category}</span>
+                  <Badge variant="secondary" className="ml-2 text-xs shrink-0">
+                    {categoryStats[category]}
+                  </Badge>
+                </TabsTrigger>
+              ))}
             </TabsList>
           </div>
 
-          <TabsContent value="featured" className="space-y-4">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="group cursor-pointer transition-all hover:shadow-md">
-                <CardHeader>
-                  <div className="aspect-video rounded-md bg-muted" />
-                  <CardTitle className="text-lg">
-                    Dashboard with Sidebar
-                  </CardTitle>
-                  <CardDescription>
-                    A dashboard with sidebar, charts and data table
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/blocks/dashboard-01">
-                      More info <ArrowRight className="ml-2 h-3 w-3" />
+          {/* Dynamic category tabs */}
+          {homeCategories.map((category) => {
+            const categoryBlocks = blocks
+              .filter((block) => block.category === category)
+              .sort((a, b) => {
+                // Prioritize new blocks
+                if (a.newBlocks && !b.newBlocks) return -1;
+                if (!a.newBlocks && b.newBlocks) return 1;
+                return 0;
+              })
+              .slice(0, 3); // Show max 3 blocks per category on home page
+
+            return (
+              <TabsContent
+                key={category}
+                value={category.toLowerCase().replace(/\s+/g, "-")}
+                className="space-y-4"
+              >
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {categoryBlocks.map((block) => (
+                    <BlockCard key={block.id} block={block} />
+                  ))}
+                </div>
+
+                <div className="flex justify-center">
+                  <Button variant="outline" asChild>
+                    <Link href="/blocks">
+                      Browse all blocks <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="group cursor-pointer transition-all hover:shadow-md">
-                <CardHeader>
-                  <div className="aspect-video rounded-md bg-muted" />
-                  <CardTitle className="text-lg">Authentication Form</CardTitle>
-                  <CardDescription>
-                    Complete authentication flow with validation
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/blocks/auth-01">
-                      More info <ArrowRight className="ml-2 h-3 w-3" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="group cursor-pointer transition-all hover:shadow-md sm:col-span-2 lg:col-span-1">
-                <CardHeader>
-                  <div className="aspect-video rounded-md bg-muted" />
-                  <CardTitle className="text-lg">Calendar Component</CardTitle>
-                  <CardDescription>
-                    Interactive calendar with event management
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/blocks/calendar-01">
-                      More info <ArrowRight className="ml-2 h-3 w-3" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="flex justify-center">
-              <Button variant="outline" asChild>
-                <Link href="/blocks">
-                  Browse all blocks <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="sidebar">
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">
-                Sidebar components coming soon...
-              </p>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="authentication">
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">
-                Authentication components coming soon...
-              </p>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="login">
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">
-                Login components coming soon...
-              </p>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="calendar">
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">
-                Calendar components coming soon...
-              </p>
-            </div>
-          </TabsContent>
+                </div>
+              </TabsContent>
+            );
+          })}
         </Tabs>
       </section>
     </>
