@@ -8,13 +8,7 @@
     "image": "/blocks/block-1.png",
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
     "newBlocks": true,
-    "install": "npx trustless-work add wallet-kit",
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
-    ]
+    "install": "npx trustless-work add wallet-kit"
   },
   {
     "id": "escrows-escrows-by-role-table",
@@ -25,11 +19,44 @@
     "image": "",
     "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "install": "npx trustless-work add escrows/escrows-by-role/table",
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />",
+      "<EscrowAmountProvider />",
+      "<EscrowDialogsProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "helpers",
+        "url": "/blocks/helpers"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -41,11 +68,44 @@
     "image": "",
     "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "install": "npx trustless-work add escrows/escrows-by-role/cards",
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />",
+      "<EscrowAmountProvider />",
+      "<EscrowDialogsProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "helpers",
+        "url": "/blocks/helpers"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -57,11 +117,44 @@
     "image": "",
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "install": "npx trustless-work add escrows/escrows-by-signer/table",
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />",
+      "<EscrowAmountProvider />",
+      "<EscrowDialogsProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "helpers",
+        "url": "/blocks/helpers"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -73,11 +166,44 @@
     "image": "",
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "install": "npx trustless-work add escrows/escrows-by-signer/cards",
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />",
+      "<EscrowAmountProvider />",
+      "<EscrowDialogsProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "helpers",
+        "url": "/blocks/helpers"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -101,11 +227,36 @@
     "image": "",
     "tags": ["Initialize", "Escrows", "Onboarding"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -131,11 +282,36 @@
     "image": "",
     "tags": ["Milestone", "Approve", "Escrows"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -161,11 +337,36 @@
     "image": "",
     "tags": ["Milestone", "Status", "Escrows"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -191,11 +392,36 @@
     "image": "",
     "tags": ["Funding", "Escrows", "Assets"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -221,11 +447,36 @@
     "image": "",
     "tags": ["Dispute", "Resolve", "Escrows"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -249,11 +500,36 @@
     "image": "",
     "tags": ["Update", "Escrows", "Admin"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -275,11 +551,36 @@
     "image": "",
     "tags": ["Release", "Escrows", "Payout"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   },
   {
@@ -301,11 +602,36 @@
     "image": "",
     "tags": ["Dispute", "Escrows", "Actions"],
     "newBlocks": true,
-    "steps": [
-      "Install the required dependencies",
-      "Copy and paste the component code",
-      "Update the import paths to match your project",
-      "Customize the styling and content as needed"
+    "requiredProviders": [
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/blocks/wallet-kit"
+      },
+      {
+        "name": "escrow-context",
+        "url": "/blocks/escrow-context"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/blocks/handle-errors"
+      },
+      {
+        "name": "tanstack",
+        "url": "/blocks/tanstack"
+      },
+      {
+        "name": "single-release",
+        "url": "/blocks/single-release"
+      },
+      {
+        "name": "multi-release",
+        "url": "/blocks/multi-release"
+      }
     ]
   }
 ]
