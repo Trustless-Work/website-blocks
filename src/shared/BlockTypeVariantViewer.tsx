@@ -1,89 +1,37 @@
 "use client";
 
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Code2, Eye } from "lucide-react";
 import { BlockPreview } from "@/shared/BlockPreview";
 import { CodeBlock } from "@/shared/CodeBlock";
+import { Button } from "@/components/ui/button";
 import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
 import CommingSoon from "./ComingSoon";
 import InitializeEscrowForm from "@/components/tw-blocks/escrows/single-release/initialize-escrow/form/InitializeEscrow";
 import InitializeEscrowDialog from "@/components/tw-blocks/escrows/single-release/initialize-escrow/dialog/InitializeEscrow";
 import componentCodes from "@/data/component-codes.json";
+import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
 
-type Props = { block: Block };
+type Props = {
+  block: Block;
+  activeType: EscrowReleaseType;
+  activeVariant: EscrowVariant;
+};
 
-export function BlockTypeVariantViewer({ block }: Props) {
-  const availableTypes: EscrowReleaseType[] = useMemo(() => {
-    if (Array.isArray(block.types) && block.types.length > 0)
-      return block.types as EscrowReleaseType[];
-    if (typeof block.escrowType === "string") {
-      const parts = block.escrowType
-        .split(",")
-        .map((p) => p.trim()) as EscrowReleaseType[];
-      return parts.filter(Boolean) as EscrowReleaseType[];
-    }
-    return [];
-  }, [block]);
-
-  const showTypeTabs = useMemo(() => {
-    const hasBoth =
-      availableTypes.includes("single-release") &&
-      availableTypes.includes("multi-release");
-    const isEscrowUI = block.category !== "Cards" && block.category !== "Table";
-    return hasBoth && isEscrowUI;
-  }, [availableTypes, block.category]);
-
-  const variants = useMemo((): EscrowVariant[] => {
-    if (Array.isArray(block.variants) && block.variants.length > 0) {
-      return (block.variants as string[]).filter((v): v is EscrowVariant =>
-        ["form", "button", "dialog"].includes(v)
-      );
-    }
-
-    const inferred: EscrowVariant[] = [];
-    const tagSet = new Set((block.tags || []).map((t) => t.toLowerCase()));
-
-    if (tagSet.has("form")) inferred.push("form");
-    if (tagSet.has("button")) inferred.push("button");
-    if (tagSet.has("dialog")) inferred.push("dialog");
-
-    const result =
-      inferred.length > 0 ? inferred : (["form"] as EscrowVariant[]);
-
-    return result;
-  }, [block]);
-
-  const [activeType, setActiveType] = useState<EscrowReleaseType>(() =>
-    availableTypes.includes("single-release")
-      ? "single-release"
-      : availableTypes[0] || "single-release"
-  );
-  const [activeVariant, setActiveVariant] = useState<EscrowVariant>(
-    () => variants[0] || "form"
-  );
-
-  useEffect(() => {
-    if (variants.length > 0 && !variants.includes(activeVariant)) {
-      setActiveVariant(variants[0]);
-    }
-  }, [variants, activeVariant]);
-
-  useEffect(() => {
-    if (variants.length > 0 && !variants.includes(activeVariant)) {
-      setActiveVariant(variants[0]);
-    }
-  }, [variants, activeVariant]);
+export function BlockTypeVariantViewer({
+  block,
+  activeType,
+  activeVariant,
+}: Props) {
+  // No internal state; controlled by parent
 
   const renderResult = useMemo(() => {
     const action = block.id.replace("escrows-", "");
+
+    const hasExplicitVariants =
+      Array.isArray((block as Block).variants) &&
+      ((block as Block).variants as EscrowVariant[]).length > 0;
 
     // Per-type and per-variant demo components (clean, no inline code)
     const perTypeVariantMap: Partial<
@@ -175,30 +123,38 @@ export function BlockTypeVariantViewer({ block }: Props) {
       },
     };
 
-    const typeMap = perTypeVariantMap[action]?.[activeType];
-    const Component = typeMap?.[activeVariant];
-
-    // Get component
-    const component = Component ? <Component type={activeType} /> : null;
-
-    // Get code from JSON file first, then fallback to block data
+    let component: React.ReactNode = null;
     let code = "";
+
     const jsonCodes = componentCodes as any;
-    const jsonCodesByAction = jsonCodes[action];
-    if (jsonCodesByAction?.[activeType]?.[activeVariant]) {
-      code = jsonCodesByAction[activeType][activeVariant];
+
+    if (!hasExplicitVariants) {
+      // Simple blocks without variants (e.g., wallet-kit)
+      const SimplePreview: Record<string, React.ComponentType | undefined> = {
+        "wallet-kit": () => <WalletButton />,
+      };
+
+      const SimpleComponent = SimplePreview[action];
+      component = SimpleComponent ? (
+        <SimpleComponent />
+      ) : (
+        <div className="flex items-center justify-center h-full">
+          <CommingSoon />
+        </div>
+      );
+
+      if (typeof jsonCodes[action] === "string") {
+        code = jsonCodes[action] as string;
+      }
     } else {
-      // Fallback to block data if not found in JSON
-      const byType = block.codeByTypeAndVariant?.[activeType];
-      if (byType && byType[activeVariant]) {
-        code = byType[activeVariant] as string;
-      } else if (byType) {
-        const anyCode = Object.values(byType).find(Boolean) as
-          | string
-          | undefined;
-        code = anyCode || block.code || "";
-      } else {
-        code = block.code || "";
+      // Variant-based blocks (Escrows)
+      const typeMap = perTypeVariantMap[action]?.[activeType];
+      const Component = typeMap?.[activeVariant];
+      component = Component ? <Component type={activeType} /> : null;
+
+      const jsonCodesByAction = jsonCodes[action];
+      if (jsonCodesByAction?.[activeType]?.[activeVariant]) {
+        code = jsonCodesByAction[activeType][activeVariant];
       }
     }
 
@@ -209,9 +165,11 @@ export function BlockTypeVariantViewer({ block }: Props) {
         .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
         .join("");
 
-    const defaultFilename = `components/tw-blocks/escrows/${activeType}/${action}/${activeVariant}/${pascalize(
-      action
-    )}.tsx`;
+    const defaultFilename = hasExplicitVariants
+      ? `components/tw-blocks/escrows/${activeType}/${action}/${activeVariant}/${pascalize(
+          action
+        )}.tsx`
+      : `components/tw-blocks/${action}/index.tsx`;
 
     let filename = defaultFilename;
     if (action === "initialize-escrow") {
@@ -236,34 +194,6 @@ export function BlockTypeVariantViewer({ block }: Props) {
           title=""
           rightSlot={
             <div className="flex items-center gap-2">
-              {variants.length > 0 && (
-                <div className="flex flex-col gap-2">
-                  <div className="flex justify-end">
-                    <Select
-                      value={activeVariant}
-                      onValueChange={(v) =>
-                        setActiveVariant(v as EscrowVariant)
-                      }
-                    >
-                      <SelectTrigger className="w-[180px] cursor-pointer">
-                        <SelectValue placeholder="Select variant" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {variants.map((v) => (
-                          <SelectItem
-                            key={v}
-                            value={v}
-                            className="cursor-pointer"
-                          >
-                            {v.charAt(0).toUpperCase() + v.slice(1)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              )}
-
               <TabsList className="h-8">
                 <TabsTrigger value="preview" className="h-7 px-2">
                   <Eye className="h-3.5 w-3.5" />
@@ -274,33 +204,9 @@ export function BlockTypeVariantViewer({ block }: Props) {
               </TabsList>
             </div>
           }
+          showViewportControls
         >
           <div className="flex flex-col gap-6">
-            {showTypeTabs && (
-              <div className="flex flex-col gap-3 p-2 rounded-lg">
-                <Tabs
-                  value={activeType}
-                  onValueChange={(v) => setActiveType(v as EscrowReleaseType)}
-                  className="w-full"
-                >
-                  <TabsList className="grid w-full grid-cols-2 h-10">
-                    <TabsTrigger
-                      value="single-release"
-                      className="text-sm font-medium"
-                    >
-                      Single Release
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="multi-release"
-                      className="text-sm font-medium"
-                    >
-                      Multi Release
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
-            )}
-
             <div className="flex">
               <div
                 key={`${activeType}-${activeVariant}`}
@@ -318,29 +224,6 @@ export function BlockTypeVariantViewer({ block }: Props) {
           title=""
           rightSlot={
             <div className="flex items-center gap-2">
-              {variants.length > 0 && (
-                <div className="flex flex-col gap-2">
-                  <div className="flex justify-end">
-                    <Select
-                      value={activeVariant}
-                      onValueChange={(v) =>
-                        setActiveVariant(v as EscrowVariant)
-                      }
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select variant" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {variants.map((v) => (
-                          <SelectItem key={v} value={v}>
-                            {v.charAt(0).toUpperCase() + v.slice(1)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              )}
               <TabsList className="h-8">
                 <TabsTrigger value="preview" className="h-7 px-2">
                   <Eye className="h-3.5 w-3.5" />
@@ -351,6 +234,7 @@ export function BlockTypeVariantViewer({ block }: Props) {
               </TabsList>
             </div>
           }
+          showViewportControls={false}
         >
           <CodeBlock
             code={renderResult.code}

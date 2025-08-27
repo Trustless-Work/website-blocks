@@ -11,6 +11,7 @@ interface BlockPreviewProps {
   children: React.ReactNode;
   title: string;
   rightSlot?: React.ReactNode;
+  showViewportControls?: boolean;
 }
 
 type ViewportSize = "desktop" | "tablet" | "mobile";
@@ -19,6 +20,7 @@ export function BlockPreview({
   children,
   title = "Preview",
   rightSlot,
+  showViewportControls = true,
 }: BlockPreviewProps) {
   const [viewportSize, setViewportSize] = useState<ViewportSize>("desktop");
 
@@ -55,32 +57,34 @@ export function BlockPreview({
           <h3 className="text-lg font-semibold">{title}</h3>
           {rightSlot}
         </div>
-        <div className="flex items-center space-x-1">
-          <Button
-            variant={viewportSize === "desktop" ? "default" : "outline"}
-            size="sm"
-            className="cursor-pointer"
-            onClick={() => setViewportSize("desktop")}
-          >
-            <Monitor className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={viewportSize === "tablet" ? "default" : "outline"}
-            size="sm"
-            className="cursor-pointer"
-            onClick={() => setViewportSize("tablet")}
-          >
-            <Tablet className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={viewportSize === "mobile" ? "default" : "outline"}
-            size="sm"
-            className="cursor-pointer"
-            onClick={() => setViewportSize("mobile")}
-          >
-            <Smartphone className="h-4 w-4" />
-          </Button>
-        </div>
+        {showViewportControls && (
+          <div className="flex items-center space-x-1">
+            <Button
+              variant={viewportSize === "desktop" ? "default" : "outline"}
+              size="sm"
+              className="hidden sm:block cursor-pointer"
+              onClick={() => setViewportSize("desktop")}
+            >
+              <Monitor className="h-4 w-4" />
+            </Button>
+            <Button
+              variant={viewportSize === "tablet" ? "default" : "outline"}
+              size="sm"
+              className="hidden sm:block cursor-pointer"
+              onClick={() => setViewportSize("tablet")}
+            >
+              <Tablet className="h-4 w-4" />
+            </Button>
+            <Button
+              variant={viewportSize === "mobile" ? "default" : "outline"}
+              size="sm"
+              className="hidden sm:block cursor-pointer"
+              onClick={() => setViewportSize("mobile")}
+            >
+              <Smartphone className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="flex justify-center">
