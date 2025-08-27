@@ -25,6 +25,7 @@
     "image": "",
     "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
     "code": "",
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -41,6 +42,7 @@
     "image": "",
     "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
     "code": "",
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -57,6 +59,7 @@
     "image": "",
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
     "code": "",
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -73,6 +76,7 @@
     "image": "",
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
     "code": "",
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -95,6 +99,7 @@
       "single-release": { "form": "", "dialog": "" },
       "multi-release": { "form": "", "dialog": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -117,6 +122,7 @@
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -139,6 +145,7 @@
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -161,6 +168,7 @@
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -183,6 +191,7 @@
       "single-release": { "form": "", "button": "", "dialog": "" },
       "multi-release": { "form": "", "button": "", "dialog": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -205,6 +214,7 @@
       "single-release": { "form": "", "dialog": "" },
       "multi-release": { "form": "", "dialog": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -227,6 +237,7 @@
       "single-release": { "button": "" },
       "multi-release": { "button": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -249,6 +260,7 @@
       "single-release": { "button": "" },
       "multi-release": { "button": "" }
     },
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",

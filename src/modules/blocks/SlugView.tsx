@@ -53,6 +53,11 @@ export const BlockPage = ({ params }: BlockPageProps) => {
                 {tag}
               </Badge>
             ))}
+            {block.newBlocks && (
+              <Badge variant="default">
+                <span className="text-xs">NEW</span>
+              </Badge>
+            )}
           </div>
         </div>
 

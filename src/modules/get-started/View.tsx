@@ -1,4 +1,4 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "@/shared/CodeBlock";
 
@@ -57,12 +57,8 @@ export const GetStarted = () => {
             <CodeBlock code="npx trustless-work init" />
 
             <Alert>
-              <AlertDescription>
-                The{" "}
-                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                  init
-                </code>{" "}
-                command will:
+              <AlertTitle>The init command will:</AlertTitle>
+              <AlertDescription className="w-full">
                 <ul className="list-disc pl-6 mt-2 space-y-1">
                   <li>Install shadcn/ui components (with prompts)</li>
                   <li>Install required dependencies</li>
@@ -85,7 +81,7 @@ export const GetStarted = () => {
 
             <CodeBlock
               code="NEXT_PUBLIC_API_KEY=your_api_key_here"
-              filename=".env.local"
+              filename=".env"
             />
 
             <Alert>
