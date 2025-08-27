@@ -34,6 +34,20 @@ export function BlockPreview({
     }
   };
 
+  const getResponsiveWrapperClasses = () => {
+    switch (viewportSize) {
+      case "mobile":
+        // Force mobile layout by hiding larger breakpoint styles
+        return "responsive-mobile";
+      case "tablet":
+        // Force tablet layout
+        return "responsive-tablet";
+      case "desktop":
+      default:
+        return "responsive-desktop";
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -76,7 +90,15 @@ export function BlockPreview({
             getPreviewClasses()
           )}
         >
-          <div className="h-full w-full">{children}</div>
+          <div
+            className={cn("h-full w-full", getResponsiveWrapperClasses())}
+            style={{
+              // Dynamically inject CSS custom properties to override responsive breakpoints
+              ["--responsive-mode" as any]: viewportSize,
+            }}
+          >
+            {children}
+          </div>
         </div>
       </div>
     </div>

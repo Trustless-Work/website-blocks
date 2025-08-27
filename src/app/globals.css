@@ -140,3 +140,92 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Responsive preview overrides for BlockPreview component */
+.responsive-mobile {
+  container-type: inline-size;
+}
+
+.responsive-mobile .grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.responsive-mobile .lg\:grid-cols-2 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.responsive-mobile .lg\:grid-cols-3 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.responsive-mobile .flex-col {
+  flex-direction: column !important;
+}
+
+.responsive-mobile .sm\:flex-row {
+  flex-direction: column !important;
+}
+
+.responsive-mobile .sm\:space-y-0 {
+  --tw-space-y-reverse: 0 !important;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse))) !important;
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse)) !important;
+}
+
+.responsive-mobile .sm\:space-x-4 {
+  --tw-space-x-reverse: 0 !important;
+  margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse))) !important;
+  margin-right: calc(0px * var(--tw-space-x-reverse)) !important;
+}
+
+.responsive-mobile .md\:w-1\/4 {
+  width: 100% !important;
+}
+
+.responsive-mobile .sm\:flex-1 {
+  flex: none !important;
+}
+
+.responsive-mobile .sm\:self-center {
+  align-self: flex-start !important;
+}
+
+.responsive-tablet {
+  container-type: inline-size;
+}
+
+.responsive-tablet .lg\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.responsive-tablet .lg\:grid-cols-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.responsive-tablet .sm\:flex-row {
+  flex-direction: row !important;
+}
+
+.responsive-tablet .sm\:space-y-0 {
+  --tw-space-y-reverse: 0 !important;
+  margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse))) !important;
+  margin-bottom: calc(0px * var(--tw-space-y-reverse)) !important;
+}
+
+.responsive-tablet .sm\:space-x-4 {
+  --tw-space-x-reverse: 0 !important;
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))) !important;
+  margin-right: calc(1rem * var(--tw-space-x-reverse)) !important;
+}
+
+.responsive-tablet .md\:w-1\/4 {
+  width: 50% !important;
+}
+
+.responsive-tablet .sm\:flex-1 {
+  flex: 1 1 0% !important;
+}
+
+.responsive-tablet .sm\:self-center {
+  align-self: center !important;
+}
