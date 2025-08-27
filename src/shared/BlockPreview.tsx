@@ -10,29 +10,37 @@ import { cn } from "@/lib/utils";
 interface BlockPreviewProps {
   children: React.ReactNode;
   title: string;
+  rightSlot?: React.ReactNode;
 }
 
 type ViewportSize = "desktop" | "tablet" | "mobile";
 
-export function BlockPreview({ children, title }: BlockPreviewProps) {
+export function BlockPreview({
+  children,
+  title = "Preview",
+  rightSlot,
+}: BlockPreviewProps) {
   const [viewportSize, setViewportSize] = useState<ViewportSize>("desktop");
 
   const getPreviewClasses = () => {
     switch (viewportSize) {
       case "mobile":
-        return "w-[375px] h-[667px]";
+        return "w-[375px] h-full";
       case "tablet":
-        return "w-[768px] h-[1024px]";
+        return "w-[768px] h-full";
       case "desktop":
       default:
-        return "w-full h-[600px]";
+        return "w-full h-full";
     }
   };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <div className="flex items-center gap-2">
+          <h3 className="text-lg font-semibold">{title}</h3>
+          {rightSlot}
+        </div>
         <div className="flex items-center space-x-1">
           <Button
             variant={viewportSize === "desktop" ? "default" : "outline"}
@@ -65,7 +73,7 @@ export function BlockPreview({ children, title }: BlockPreviewProps) {
             getPreviewClasses()
           )}
         >
-          <div className="h-full w-full overflow-auto">{children}</div>
+          <div className="h-full w-full">{children}</div>
         </div>
       </div>
     </div>

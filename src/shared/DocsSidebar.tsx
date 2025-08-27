@@ -6,48 +6,15 @@ import { cn } from "@/lib/utils";
 
 const sidebarNavItems = [
   {
-    title: "",
+    title: "Getting Started",
     items: [
       {
         title: "Introduction",
         href: "/get-started",
       },
       {
-        title: "Installation",
+        title: "Installation Guide",
         href: "/get-started/installation",
-      },
-      {
-        title: "components.json",
-        href: "/get-started/components-json",
-      },
-      {
-        title: "Theming",
-        href: "/get-started/theming",
-      },
-      {
-        title: "Dark Mode",
-        href: "/get-started/dark-mode",
-      },
-    ],
-  },
-  {
-    title: "Components",
-    items: [
-      {
-        title: "Accordion",
-        href: "/components/accordion",
-      },
-      {
-        title: "Alert",
-        href: "/components/alert",
-      },
-      {
-        title: "Button",
-        href: "/components/button",
-      },
-      {
-        title: "Card",
-        href: "/components/card",
       },
     ],
   },
@@ -60,7 +27,7 @@ export function DocsSidebar() {
     <div className="w-full">
       {sidebarNavItems.map((item, index) => (
         <div key={index} className="pb-4 mt-4">
-          <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
+          <h4 className="mb-1 rounded-md px-2 py-1 text-base font-black">
             {item.title}
           </h4>
           {item?.items?.length && (
