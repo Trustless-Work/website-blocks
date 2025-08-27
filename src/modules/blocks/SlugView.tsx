@@ -157,7 +157,7 @@ export const BlockPage = ({ block }: BlockPageProps) => {
         {/* Main content */}
         <div className="w-full">
           {installationCommand && (
-            <div className="container mx-auto max-w-3xl mb-10 sm:mb-30 sm:mt-20">
+            <div className="max-w-3xl mb-10 sm:my-20">
               <div className="space-y-4 mt-10">
                 <h3 className="text-2xl font-semibold">Installation</h3>
                 <CodeBlock code={installationCommand} language="bash" />
