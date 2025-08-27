@@ -7,8 +7,8 @@
     "escrowType": null,
     "image": "/blocks/block-1.png",
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
-    "code": "",
     "newBlocks": true,
+    "install": "npx trustless-work add wallet-kit",
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -24,7 +24,6 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
-    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -41,7 +40,6 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
-    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -58,7 +56,6 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
-    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -75,7 +72,6 @@
     "escrowType": "single-release,multi-release",
     "image": "",
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
-    "code": "",
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -92,13 +88,18 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "dialog"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "form": "npx trustless-work add escrows/single-release/initialize-escrow/form",
+        "dialog": "npx trustless-work add escrows/single-release/initialize-escrow/dialog"
+      },
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/initialize-escrow/form",
+        "dialog": "npx trustless-work add escrows/multi-release/initialize-escrow/dialog"
+      }
+    },
     "image": "",
     "tags": ["Initialize", "Escrows", "Onboarding"],
-    "code": "<p>Hello</p>",
-    "codeByTypeAndVariant": {
-      "single-release": { "form": "", "dialog": "" },
-      "multi-release": { "form": "", "dialog": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -115,13 +116,20 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "form": "npx trustless-work add escrows/single-release/approve-milestone/form",
+        "button": "npx trustless-work add escrows/single-release/approve-milestone/button",
+        "dialog": "npx trustless-work add escrows/single-release/approve-milestone/dialog"
+      },
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/approve-milestone/form",
+        "button": "npx trustless-work add escrows/multi-release/approve-milestone/button",
+        "dialog": "npx trustless-work add escrows/multi-release/approve-milestone/dialog"
+      }
+    },
     "image": "",
     "tags": ["Milestone", "Approve", "Escrows"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "form": "", "button": "", "dialog": "" },
-      "multi-release": { "form": "", "button": "", "dialog": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -138,13 +146,20 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "form": "npx trustless-work add escrows/single-release/change-milestone-status/form",
+        "button": "npx trustless-work add escrows/single-release/change-milestone-status/button",
+        "dialog": "npx trustless-work add escrows/single-release/change-milestone-status/dialog"
+      },
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/change-milestone-status/form",
+        "button": "npx trustless-work add escrows/multi-release/change-milestone-status/button",
+        "dialog": "npx trustless-work add escrows/multi-release/change-milestone-status/dialog"
+      }
+    },
     "image": "",
     "tags": ["Milestone", "Status", "Escrows"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "form": "", "button": "", "dialog": "" },
-      "multi-release": { "form": "", "button": "", "dialog": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -161,13 +176,20 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "form": "npx trustless-work add escrows/single-release/fund-escrow/form",
+        "button": "npx trustless-work add escrows/single-release/fund-escrow/button",
+        "dialog": "npx trustless-work add escrows/single-release/fund-escrow/dialog"
+      },
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/fund-escrow/form",
+        "button": "npx trustless-work add escrows/multi-release/fund-escrow/button",
+        "dialog": "npx trustless-work add escrows/multi-release/fund-escrow/dialog"
+      }
+    },
     "image": "",
     "tags": ["Funding", "Escrows", "Assets"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "form": "", "button": "", "dialog": "" },
-      "multi-release": { "form": "", "button": "", "dialog": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -184,13 +206,20 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "form": "npx trustless-work add escrows/single-release/resolve-dispute/form",
+        "button": "npx trustless-work add escrows/single-release/resolve-dispute/button",
+        "dialog": "npx trustless-work add escrows/single-release/resolve-dispute/dialog"
+      },
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/resolve-dispute/form",
+        "button": "npx trustless-work add escrows/multi-release/resolve-dispute/button",
+        "dialog": "npx trustless-work add escrows/multi-release/resolve-dispute/dialog"
+      }
+    },
     "image": "",
     "tags": ["Dispute", "Resolve", "Escrows"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "form": "", "button": "", "dialog": "" },
-      "multi-release": { "form": "", "button": "", "dialog": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -207,13 +236,18 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "dialog"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "form": "npx trustless-work add escrows/single-release/update-escrow/form",
+        "dialog": "npx trustless-work add escrows/single-release/update-escrow/dialog"
+      },
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/update-escrow/form",
+        "dialog": "npx trustless-work add escrows/multi-release/update-escrow/dialog"
+      }
+    },
     "image": "",
     "tags": ["Update", "Escrows", "Admin"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "form": "", "dialog": "" },
-      "multi-release": { "form": "", "dialog": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -230,13 +264,16 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["button"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "button": "npx trustless-work add escrows/single-release/release-escrow/button"
+      },
+      "multi-release": {
+        "button": "npx trustless-work add escrows/multi-release/release-escrow/button"
+      }
+    },
     "image": "",
     "tags": ["Release", "Escrows", "Payout"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "button": "" },
-      "multi-release": { "button": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
@@ -253,13 +290,16 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["button"],
+    "installByTypeAndVariant": {
+      "single-release": {
+        "button": "npx trustless-work add escrows/single-release/dispute-escrow/button"
+      },
+      "multi-release": {
+        "button": "npx trustless-work add escrows/multi-release/dispute-escrow/button"
+      }
+    },
     "image": "",
     "tags": ["Dispute", "Escrows", "Actions"],
-    "code": "",
-    "codeByTypeAndVariant": {
-      "single-release": { "button": "" },
-      "multi-release": { "button": "" }
-    },
     "newBlocks": true,
     "steps": [
       "Install the required dependencies",
