@@ -11,6 +11,11 @@ export type CodeByTypeAndVariant = Partial<
   Record<EscrowReleaseType, Partial<Record<EscrowVariant, string>>>
 >;
 
+export type RequiredBlock = {
+  name: string;
+  url?: string;
+};
+
 export type Block = {
   id: string;
   title: string;
@@ -20,12 +25,12 @@ export type Block = {
   tags: string[];
   code: string;
   newBlocks?: boolean;
-  steps: string[];
   escrowType?: EscrowType;
-  // Normalized, JSON-driven fields for types and variants
   types?: EscrowReleaseType[];
   variants?: EscrowVariant[];
   codeByTypeAndVariant?: CodeByTypeAndVariant;
   installByTypeAndVariant?: CodeByTypeAndVariant;
-  install?: string;
+  install: string;
+  requiredProviders?: string[];
+  requiredBlocks?: (string | RequiredBlock)[];
 };
