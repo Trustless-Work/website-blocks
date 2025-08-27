@@ -1,20 +1,44 @@
-import { ArrowRight, Search } from "lucide-react";
-import Link from "next/link";
+import { Search } from "lucide-react";
 import { SiteHeader } from "@/shared/SiteHeader";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import blocksData from "@/data/blocks.json";
+import type { Block } from "@/types/block";
+import { BlockCard } from "@/shared/BlockCard";
+
+// Extract unique categories from blocks data
+const getUniqueCategories = () => {
+  const blocks = blocksData as unknown as Block[];
+  const categories = [...new Set(blocks.map((block) => block.category))];
+  const categoryOrder = ["Escrows", "Wallet", "Table", "Cards"];
+  return categories.sort((a, b) => {
+    const aIndex = categoryOrder.indexOf(a);
+    const bIndex = categoryOrder.indexOf(b);
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex;
+    }
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    return a.localeCompare(b);
+  });
+};
+
+// Get category stats
+const getCategoryStats = () => {
+  const stats: Record<string, number> = {};
+  const blocks = blocksData as unknown as Block[];
+  blocks.forEach((block) => {
+    stats[block.category] = (stats[block.category] || 0) + 1;
+  });
+  return stats;
+};
 
 export const Blocks = () => {
+  const categories = getUniqueCategories();
+  const categoryStats = getCategoryStats();
+  const blocks = blocksData as unknown as Block[];
+
   return (
     <div className="min-h-screen">
       <SiteHeader />
@@ -45,168 +69,71 @@ export const Blocks = () => {
         {/* Tabs for categories */}
         <Tabs defaultValue="all" className="w-full mt-8">
           <div className="overflow-x-auto">
-            <TabsList className="grid w-full grid-cols-6 min-w-[600px]">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="featured">Featured</TabsTrigger>
-              <TabsTrigger value="sidebar">Sidebar</TabsTrigger>
-              <TabsTrigger value="authentication">Auth</TabsTrigger>
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="calendar">Calendar</TabsTrigger>
+            <TabsList className="flex w-full min-w-[600px] gap-1">
+              <TabsTrigger value="all" className="flex-1">
+                All
+                <Badge variant="secondary" className="ml-2 text-xs">
+                  {blocksData.length}
+                </Badge>
+              </TabsTrigger>
+              {categories.map((category) => (
+                <TabsTrigger
+                  key={category}
+                  value={category.toLowerCase().replace(/\s+/g, "-")}
+                  className="flex-1 whitespace-nowrap"
+                >
+                  <span className="truncate">{category}</span>
+                  <Badge variant="secondary" className="ml-2 text-xs shrink-0">
+                    {categoryStats[category]}
+                  </Badge>
+                </TabsTrigger>
+              ))}
             </TabsList>
           </div>
 
-          <TabsContent value="all" className="space-y-4 mt-6">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {blocksData.map((block) => (
-                <Card
-                  key={block.id}
-                  className="group cursor-pointer transition-all hover:shadow-md"
-                >
-                  <CardHeader className="p-0">
-                    <div className="aspect-video overflow-hidden rounded-t-lg">
-                      <img
-                        src={block.image || "/placeholder.svg"}
-                        alt={block.title}
-                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <div className="space-y-2">
-                      <CardTitle className="text-lg">{block.title}</CardTitle>
-                      <CardDescription>{block.description}</CardDescription>
-                      <div className="flex flex-wrap gap-1">
-                        {block.tags.map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="secondary"
-                            className="text-xs"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={`/blocks/${block.id}`}>
-                          View Details <ArrowRight className="ml-2 h-3 w-3" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="featured" className="space-y-4 mt-6">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {blocksData
-                .filter((block) => block.category === "featured")
-                .map((block) => (
-                  <Card
-                    key={block.id}
-                    className="group cursor-pointer transition-all hover:shadow-md"
-                  >
-                    <CardHeader className="p-0">
-                      <div className="aspect-video overflow-hidden rounded-t-lg">
-                        <img
-                          src={block.image || "/placeholder.svg"}
-                          alt={block.title}
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                      </div>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <div className="space-y-2">
-                        <CardTitle className="text-lg">{block.title}</CardTitle>
-                        <CardDescription>{block.description}</CardDescription>
-                        <div className="flex flex-wrap gap-1">
-                          {block.tags.map((tag) => (
-                            <Badge
-                              key={tag}
-                              variant="secondary"
-                              className="text-xs"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="mt-4">
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href={`/blocks/${block.id}`}>
-                            View Details <ArrowRight className="ml-2 h-3 w-3" />
-                          </Link>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
+          {/* Create a reusable component for rendering blocks */}
+          {(() => {
+            const renderBlocks = (filteredBlocks: Block[]) => (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {filteredBlocks.map((block) => (
+                  <BlockCard key={block.id} block={block} />
                 ))}
-            </div>
-          </TabsContent>
+              </div>
+            );
 
-          {/* Other category tabs */}
-          {["sidebar", "authentication", "login", "calendar"].map(
-            (category) => (
-              <TabsContent
-                key={category}
-                value={category}
-                className="space-y-4 mt-6"
-              >
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {blocksData
-                    .filter((block) => block.category === category)
-                    .map((block) => (
-                      <Card
-                        key={block.id}
-                        className="group cursor-pointer transition-all hover:shadow-md"
-                      >
-                        <CardHeader className="p-0">
-                          <div className="aspect-video overflow-hidden rounded-t-lg">
-                            <img
-                              src={block.image || "/placeholder.svg"}
-                              alt={block.title}
-                              className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                            />
-                          </div>
-                        </CardHeader>
-                        <CardContent className="p-6">
-                          <div className="space-y-2">
-                            <CardTitle className="text-lg">
-                              {block.title}
-                            </CardTitle>
-                            <CardDescription>
-                              {block.description}
-                            </CardDescription>
-                            <div className="flex flex-wrap gap-1">
-                              {block.tags.map((tag) => (
-                                <Badge
-                                  key={tag}
-                                  variant="secondary"
-                                  className="text-xs"
-                                >
-                                  {tag}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="mt-4">
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={`/blocks/${block.id}`}>
-                                View Details{" "}
-                                <ArrowRight className="ml-2 h-3 w-3" />
-                              </Link>
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </TabsContent>
-            )
-          )}
+            return (
+              <>
+                {/* All blocks tab */}
+                <TabsContent value="all" className="space-y-4 mt-6">
+                  {renderBlocks(blocks)}
+                </TabsContent>
+
+                {/* Dynamic category tabs */}
+                {categories.map((category) => (
+                  <TabsContent
+                    key={category}
+                    value={category.toLowerCase().replace(/\s+/g, "-")}
+                    className="space-y-4 mt-6"
+                  >
+                    <div className="mb-4">
+                      <h2 className="text-xl font-semibold">{category}</h2>
+                      <p className="text-muted-foreground">
+                        {
+                          blocksData.filter(
+                            (block) => block.category === category
+                          ).length
+                        }{" "}
+                        components available
+                      </p>
+                    </div>
+                    {renderBlocks(
+                      blocks.filter((block) => block.category === category)
+                    )}
+                  </TabsContent>
+                ))}
+              </>
+            );
+          })()}
         </Tabs>
       </div>
     </div>
