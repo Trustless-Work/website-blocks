@@ -1,12 +1,14 @@
 [
   {
-    "id": "dashboard-01",
-    "title": "Dashboard with Sidebar",
-    "description": "A dashboard with sidebar, charts and data table",
-    "category": "featured",
-    "image": "/placeholder.svg?height=200&width=300",
-    "tags": ["Dashboard", "Sidebar", "Charts"],
-    "code": "import { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Button } from \"@/components/ui/button\"\n\nexport default function Dashboard() {\n  return (\n    <div className=\"flex h-screen bg-background\">\n      {/* Sidebar */}\n      <div className=\"w-64 border-r bg-card\">\n        <div className=\"p-6\">\n          <h2 className=\"text-lg font-semibold\">Dashboard</h2>\n        </div>\n        <nav className=\"space-y-2 p-4\">\n          <Button variant=\"ghost\" className=\"w-full justify-start\">\n            Overview\n          </Button>\n          <Button variant=\"ghost\" className=\"w-full justify-start\">\n            Analytics\n          </Button>\n          <Button variant=\"ghost\" className=\"w-full justify-start\">\n            Reports\n          </Button>\n        </nav>\n      </div>\n      \n      {/* Main Content */}\n      <div className=\"flex-1 p-6\">\n        <div className=\"grid gap-4 md:grid-cols-2 lg:grid-cols-4\">\n          <Card>\n            <CardHeader className=\"flex flex-row items-center justify-between space-y-0 pb-2\">\n              <CardTitle className=\"text-sm font-medium\">Total Revenue</CardTitle>\n            </CardHeader>\n            <CardContent>\n              <div className=\"text-2xl font-bold\">$45,231.89</div>\n              <p className=\"text-xs text-muted-foreground\">+20.1% from last month</p>\n            </CardContent>\n          </Card>\n          <Card>\n            <CardHeader className=\"flex flex-row items-center justify-between space-y-0 pb-2\">\n              <CardTitle className=\"text-sm font-medium\">Subscriptions</CardTitle>\n            </CardHeader>\n            <CardContent>\n              <div className=\"text-2xl font-bold\">+2350</div>\n              <p className=\"text-xs text-muted-foreground\">+180.1% from last month</p>\n            </CardContent>\n          </Card>\n        </div>\n      </div>\n    </div>\n  )\n}",
+    "id": "wallet-kit",
+    "title": "Wallet Kit",
+    "description": "Wallet provider, validators and a connect button powered by Stellar Wallets Kit.",
+    "category": "Wallet",
+    "escrowType": null,
+    "image": "",
+    "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
+    "code": "",
+    "newBlocks": true,
     "steps": [
       "Install the required dependencies",
       "Copy and paste the component code",
@@ -15,50 +17,243 @@
     ]
   },
   {
-    "id": "auth-01",
-    "title": "Authentication Form",
-    "description": "Complete authentication flow with validation",
-    "category": "authentication",
-    "image": "/placeholder.svg?height=200&width=300",
-    "tags": ["Auth", "Form", "Validation"],
-    "code": "import { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\n\nexport default function AuthForm() {\n  return (\n    <Card className=\"w-[350px]\">\n      <CardHeader>\n        <CardTitle>Sign In</CardTitle>\n        <CardDescription>Enter your email and password to sign in</CardDescription>\n      </CardHeader>\n      <CardContent className=\"space-y-4\">\n        <div className=\"space-y-2\">\n          <Label htmlFor=\"email\">Email</Label>\n          <Input id=\"email\" type=\"email\" placeholder=\"m@example.com\" />\n        </div>\n        <div className=\"space-y-2\">\n          <Label htmlFor=\"password\">Password</Label>\n          <Input id=\"password\" type=\"password\" />\n        </div>\n        <Button className=\"w-full\">Sign In</Button>\n      </CardContent>\n    </Card>\n  )\n}",
+    "id": "escrows-escrows-by-role-table",
+    "title": "Escrows Table by Role",
+    "description": "Table layout to explore escrows by role with sorting and filtering.",
+    "category": "Table",
+    "escrowType": "single-release,multi-release",
+    "image": "",
+    "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
+    "code": "",
     "steps": [
-      "Install the required UI components",
-      "Copy the authentication form code",
-      "Add form validation logic",
-      "Connect to your authentication provider"
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
     ]
   },
   {
-    "id": "calendar-01",
-    "title": "Calendar Component",
-    "description": "Interactive calendar with event management",
-    "category": "calendar",
-    "image": "/placeholder.svg?height=200&width=300",
-    "tags": ["Calendar", "Events", "Interactive"]
+    "id": "escrows-escrows-by-role-cards",
+    "title": "Escrows Cards by Role",
+    "description": "Card grid to browse escrows by role with quick stats and actions.",
+    "category": "Cards",
+    "escrowType": "single-release,multi-release",
+    "image": "",
+    "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
+    "code": "",
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
   },
   {
-    "id": "sidebar-01",
-    "title": "Navigation Sidebar",
-    "description": "Collapsible sidebar with navigation items",
-    "category": "sidebar",
-    "image": "/placeholder.svg?height=200&width=300",
-    "tags": ["Navigation", "Sidebar", "Menu"]
+    "id": "escrows-escrows-by-signer-table",
+    "title": "Escrows Table by Signer",
+    "description": "Table layout to explore escrows by signer with sorting and filtering.",
+    "category": "Table",
+    "escrowType": "single-release,multi-release",
+    "image": "",
+    "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
+    "code": "",
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
   },
   {
-    "id": "login-01",
-    "title": "Login Page",
-    "description": "Clean login page with social auth options",
-    "category": "login",
-    "image": "/placeholder.svg?height=200&width=300",
-    "tags": ["Login", "Social Auth", "Form"]
+    "id": "escrows-escrows-by-signer-cards",
+    "title": "Escrows Cards by Signer",
+    "description": "Card grid to browse escrows by signer with quick stats and actions.",
+    "category": "Cards",
+    "escrowType": "single-release,multi-release",
+    "image": "",
+    "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
+    "code": "",
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
   },
   {
-    "id": "dashboard-02",
-    "title": "Analytics Dashboard",
-    "description": "Analytics dashboard with metrics and graphs",
-    "category": "featured",
-    "image": "/placeholder.svg?height=200&width=300",
-    "tags": ["Analytics", "Metrics", "Graphs"]
+    "id": "escrows-initialize-escrow",
+    "title": "Initialize Escrow",
+    "description": "Component to initialize an escrow with different variants and types.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "dialog"],
+    "image": "",
+    "tags": ["Initialize", "Escrows", "Onboarding"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "form": "", "dialog": "" },
+      "multi-release": { "form": "", "dialog": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-approve-milestone",
+    "title": "Approve Milestone",
+    "description": "Component to approve a milestone with form, button and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "button", "dialog"],
+    "image": "",
+    "tags": ["Milestone", "Approve", "Escrows"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "form": "", "button": "", "dialog": "" },
+      "multi-release": { "form": "", "button": "", "dialog": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-change-milestone-status",
+    "title": "Change Milestone Status",
+    "description": "Component to change milestone status with form, button and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "button", "dialog"],
+    "image": "",
+    "tags": ["Milestone", "Status", "Escrows"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "form": "", "button": "", "dialog": "" },
+      "multi-release": { "form": "", "button": "", "dialog": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-fund-escrow",
+    "title": "Fund Escrow",
+    "description": "Component to fund an escrow using form, button and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "button", "dialog"],
+    "image": "",
+    "tags": ["Funding", "Escrows", "Assets"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "form": "", "button": "", "dialog": "" },
+      "multi-release": { "form": "", "button": "", "dialog": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-resolve-dispute",
+    "title": "Resolve Dispute",
+    "description": "Component to resolve disputes with form, button and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "button", "dialog"],
+    "image": "",
+    "tags": ["Dispute", "Resolve", "Escrows"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "form": "", "button": "", "dialog": "" },
+      "multi-release": { "form": "", "button": "", "dialog": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-update-escrow",
+    "title": "Update Escrow",
+    "description": "Component to update escrow configuration with form and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "dialog"],
+    "image": "",
+    "tags": ["Update", "Escrows", "Admin"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "form": "", "dialog": "" },
+      "multi-release": { "form": "", "dialog": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-release-escrow",
+    "title": "Release Escrow",
+    "description": "Action to release escrow funds.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["button"],
+    "image": "",
+    "tags": ["Release", "Escrows", "Payout"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "button": "" },
+      "multi-release": { "button": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
+  },
+  {
+    "id": "escrows-dispute-escrow",
+    "title": "Dispute Escrow",
+    "description": "Action to raise a dispute in the escrow.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["button"],
+    "image": "",
+    "tags": ["Dispute", "Escrows", "Actions"],
+    "code": "",
+    "codeByTypeAndVariant": {
+      "single-release": { "button": "" },
+      "multi-release": { "button": "" }
+    },
+    "steps": [
+      "Install the required dependencies",
+      "Copy and paste the component code",
+      "Update the import paths to match your project",
+      "Customize the styling and content as needed"
+    ]
   }
 ]

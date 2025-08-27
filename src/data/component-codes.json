@@ -1,0 +1,37 @@
+{
+  "initialize-escrow": {
+    "single-release": {
+      "form": "import React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Input } from \"@/components/ui/input\";\n\nexport function InitializeEscrowForm() {\n  return (\n    <form className=\"space-y-4\">\n      <div>\n        <label htmlFor=\"amount\">Amount</label>\n        <Input id=\"amount\" placeholder=\"Enter amount\" />\n      </div>\n      <div>\n        <label htmlFor=\"recipient\">Recipient</label>\n        <Input id=\"recipient\" placeholder=\"Enter recipient address\" />\n      </div>\n      <Button type=\"submit\">Initialize Escrow</Button>\n    </form>\n  );\n}",
+      "dialog": "import React from \"react\";\nimport { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from \"@/components/ui/dialog\";\nimport { Button } from \"@/components/ui/button\";\n\nexport function InitializeEscrowDialog() {\n  return (\n    <Dialog>\n      <DialogTrigger asChild>\n        <Button>Initialize Escrow</Button>\n      </DialogTrigger>\n      <DialogContent>\n        <DialogHeader>\n          <DialogTitle>Initialize New Escrow</DialogTitle>\n        </DialogHeader>\n        <div className=\"space-y-4\">\n          {/* Form content here */}\n        </div>\n      </DialogContent>\n    </Dialog>\n  );\n}"
+    },
+    "multi-release": {
+      "form": "// Coming soon - Multi-release form implementation",
+      "dialog": "// Coming soon - Multi-release dialog implementation",
+      "button": "// Coming soon - Multi-release button implementation"
+    }
+  },
+  "approve-milestone": {
+    "single-release": {
+      "form": "import React from \"react\";\nimport { Button } from \"@/components/ui/button\";\n\nexport function ApproveMilestoneForm() {\n  return (\n    <div className=\"space-y-4\">\n      <h1 className=\"text-xl font-semibold\">Approve Milestone</h1>\n      <Button>Approve</Button>\n    </div>\n  );\n}",
+      "dialog": "import React from \"react\";\nimport { Dialog, DialogContent, DialogHeader, DialogTitle } from \"@/components/ui/dialog\";\n\nexport function ApproveMilestoneDialog() {\n  return (\n    <Dialog>\n      <DialogContent>\n        <DialogHeader>\n          <DialogTitle>Approve Milestone</DialogTitle>\n        </DialogHeader>\n        {/* Dialog content */}\n      </DialogContent>\n    </Dialog>\n  );\n}",
+      "button": "import React from \"react\";\nimport { Button } from \"@/components/ui/button\";\n\nexport function ApproveMilestoneButton() {\n  return <Button>Approve Milestone</Button>;\n}"
+    },
+    "multi-release": {
+      "form": "// Multi-release approve form code",
+      "dialog": "// Multi-release approve dialog code",
+      "button": "// Multi-release approve button code"
+    }
+  },
+  "fund-escrow": {
+    "single-release": {
+      "form": "import React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Input } from \"@/components/ui/input\";\n\nexport function FundEscrowForm() {\n  return (\n    <form className=\"space-y-4\">\n      <div>\n        <label htmlFor=\"amount\">Funding Amount</label>\n        <Input id=\"amount\" placeholder=\"Enter amount to fund\" />\n      </div>\n      <Button type=\"submit\">Fund Escrow</Button>\n    </form>\n  );\n}",
+      "dialog": "// Fund escrow dialog code",
+      "button": "// Fund escrow button code"
+    },
+    "multi-release": {
+      "form": "// Multi-release fund form code",
+      "dialog": "// Multi-release fund dialog code",
+      "button": "// Multi-release fund button code"
+    }
+  }
+}
