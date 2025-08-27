@@ -43,14 +43,7 @@ export const BlockCard = ({ block }: BlockCardProps) => {
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-lg">{block.title}</CardTitle>
             <div className="flex items-center gap-1 shrink-0">
-              {block.newBlocks && (
-                <Badge
-                  variant="default"
-                  className="text-xs bg-green-600 hover:bg-green-700"
-                >
-                  NEW
-                </Badge>
-              )}
+              {block.newBlocks && <Badge variant="default">NEW</Badge>}
               <Badge variant="outline" className="text-xs">
                 {block.category}
               </Badge>
@@ -71,16 +64,22 @@ export const BlockCard = ({ block }: BlockCardProps) => {
           </div>
           {/* Show variants if available */}
           {(() => {
-            const variants = Array.isArray((block as any).variants) 
-              ? (block as any).variants as string[]
+            const variants = Array.isArray((block as any).variants)
+              ? ((block as any).variants as string[])
               : [];
-            
+
             if (variants.length > 0) {
               return (
                 <div className="flex flex-wrap gap-1 mt-2">
-                  <span className="text-xs text-muted-foreground mr-1">Variants:</span>
+                  <span className="text-xs text-muted-foreground mr-1">
+                    Variants:
+                  </span>
                   {variants.map((variant) => (
-                    <Badge key={variant} variant="outline" className="text-xs border-blue-200 text-blue-700 dark:border-blue-800 dark:text-blue-300">
+                    <Badge
+                      key={variant}
+                      variant="outline"
+                      className="text-xs border-blue-200 text-blue-700 dark:border-blue-800 dark:text-blue-300"
+                    >
                       {variant.charAt(0).toUpperCase() + variant.slice(1)}
                     </Badge>
                   ))}
@@ -101,8 +100,8 @@ export const BlockCard = ({ block }: BlockCardProps) => {
             const typesLabel = Array.isArray((block as any).types)
               ? ((block as any).types as string[]).join(" | ")
               : block.escrowType
-              ? block.escrowType.replace(",", " | ")
-              : null;
+                ? block.escrowType.replace(",", " | ")
+                : null;
             return typesLabel ? (
               <Badge variant="outline" className="text-xs">
                 {typesLabel}
