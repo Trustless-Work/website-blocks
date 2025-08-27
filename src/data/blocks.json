@@ -5,7 +5,7 @@
     "description": "Wallet provider, validators and a connect button powered by Stellar Wallets Kit.",
     "category": "Wallet",
     "escrowType": null,
-    "image": "",
+    "image": "/blocks/block-1.png",
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
     "code": "",
     "newBlocks": true,
