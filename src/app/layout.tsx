@@ -3,11 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import { ClipboardProvider } from "@/providers/ClipboardProvider";
-import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
-import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
-import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { GlobalProviders } from "@/providers/GlobalProviders";
 import { Toaster } from "@/components/ui/sonner";
 
 const Exo2 = localFont({
@@ -58,19 +54,11 @@ export default function RootLayout({
       <body
         className={cn(Exo2.variable, "antialiased", spaceGrotesk.className)}
       >
-        <ThemeProvider>
-          <ClipboardProvider>
-            <ReactQueryClientProvider>
-              <TrustlessWorkProvider>
-                <WalletProvider>
-                  <main className="min-h-screen container mx-auto px-4">
-                    {children}
-                  </main>
-                </WalletProvider>
-              </TrustlessWorkProvider>
-            </ReactQueryClientProvider>
-          </ClipboardProvider>
-        </ThemeProvider>
+        <GlobalProviders>
+          <main className="min-h-screen container mx-auto px-4">
+            {children}
+          </main>
+        </GlobalProviders>
 
         <Toaster position="top-right" richColors />
       </body>
