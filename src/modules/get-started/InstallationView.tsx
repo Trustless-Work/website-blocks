@@ -1,7 +1,12 @@
 import { CodeBlock } from "@/shared/CodeBlock";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Link from "next/link";
 
 export const InstallationView = () => {
   return (
@@ -61,9 +66,11 @@ export const InstallationView = () => {
 
             <CodeBlock code="npx trustless-work init" />
 
-            <Alert>
-              <AlertDescription>
-                <strong>What the init command does:</strong>
+            <Card className="my-4 gap-2">
+              <CardHeader>
+                <CardTitle>What the init command does:</CardTitle>
+              </CardHeader>
+              <CardContent>
                 <ul className="list-disc pl-6 mt-2 space-y-1">
                   <li>
                     Installs shadcn/ui components (with interactive prompts)
@@ -87,8 +94,8 @@ export const InstallationView = () => {
                     </code>
                   </li>
                 </ul>
-              </AlertDescription>
-            </Alert>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -139,6 +146,8 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
 import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
 import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
 import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
+import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
 
 export default function RootLayout({
   children,
@@ -152,7 +161,11 @@ export default function RootLayout({
           <TrustlessWorkProvider>
             <WalletProvider>
               <EscrowProvider>
-                {children}
+                <EscrowDialogsProvider>
+                  <EscrowAmountProvider>
+                    {children}
+                  </EscrowAmountProvider>
+                </EscrowDialogsProvider>
               </EscrowProvider>
             </WalletProvider>
           </TrustlessWorkProvider>
@@ -165,18 +178,21 @@ export default function RootLayout({
               filename="app/layout.tsx"
             />
 
-            <Alert>
-              <AlertDescription>
-                <strong>Provider Order Matters:</strong> The providers must be
-                nested in this exact order for proper functionality.
-              </AlertDescription>
-            </Alert>
+            <Card className="my-4 gap-2">
+              <CardHeader>
+                <CardTitle>Provider Order Matters</CardTitle>
+                <CardDescription>
+                  The providers must be nested in this exact order for proper
+                  functionality.
+                </CardDescription>
+              </CardHeader>
+            </Card>
           </div>
         </section>
 
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Configuration Files
+            Configuration Files (Optional)
           </h2>
           <div className="space-y-4 pt-4">
             <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
@@ -269,38 +285,46 @@ export default function EscrowsPage() {
             </h3>
 
             <div className="space-y-4">
-              <Alert>
-                <AlertDescription>
-                  <strong>Provider Order:</strong> Make sure providers are
-                  nested in the correct order: ReactQueryClientProvider →
-                  TrustlessWorkProvider → WalletProvider → EscrowProvider.
-                </AlertDescription>
-              </Alert>
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>Provider Order</CardTitle>
+                  <CardDescription>
+                    Make sure providers are nested in the correct order:
+                    ReactQueryClientProvider → TrustlessWorkProvider →
+                    WalletProvider → EscrowProvider.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
 
-              <Alert>
-                <AlertDescription>
-                  <strong>API Key:</strong> Ensure your{" "}
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    NEXT_PUBLIC_API_KEY
-                  </code>{" "}
-                  is set in your environment variables.
-                </AlertDescription>
-              </Alert>
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>API Key</CardTitle>
+                  <CardDescription>
+                    Ensure your{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      NEXT_PUBLIC_API_KEY
+                    </code>{" "}
+                    is set in your environment variables.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
 
-              <Alert>
-                <AlertDescription>
-                  <strong>Component Imports:</strong> If you have import issues,
-                  check your{" "}
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    .twblocks.json
-                  </code>{" "}
-                  configuration and ensure the{" "}
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    uiBase
-                  </code>{" "}
-                  path is correct.
-                </AlertDescription>
-              </Alert>
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>Component Imports</CardTitle>
+                  <CardDescription>
+                    If you have import issues, check your{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      .twblocks.json
+                    </code>{" "}
+                    configuration and ensure the{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      uiBase
+                    </code>{" "}
+                    path is correct.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
             </div>
 
             <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">

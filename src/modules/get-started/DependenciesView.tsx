@@ -1,0 +1,325 @@
+"use client";
+
+import { CodeBlock } from "@/shared/CodeBlock";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Info, Eye, EyeOff } from "lucide-react";
+import { useState, lazy, Suspense } from "react";
+
+// Lazy load the iframe component for better performance
+const ExcalidrawDiagram = lazy(() =>
+  Promise.resolve({
+    default: () => (
+      <iframe
+        src="https://link.excalidraw.com/readonly/ttyO4GxpTQ7ntlDuvoTv"
+        width="100%"
+        height="1000px"
+        title="Dependencies Diagram"
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin"
+        referrerPolicy="no-referrer"
+        style={{ border: "none" }}
+      />
+    ),
+  })
+);
+
+// Loading skeleton component
+const DiagramSkeleton = () => (
+  <div className="w-full h-[1000px] bg-muted/30 rounded-md animate-pulse flex items-center justify-center">
+    <div className="text-center space-y-2">
+      <div className="h-8 w-48 bg-muted rounded mx-auto"></div>
+      <div className="h-4 w-32 bg-muted rounded mx-auto"></div>
+    </div>
+  </div>
+);
+
+export const DependenciesView = () => {
+  const [showDiagram, setShowDiagram] = useState(false);
+  return (
+    <div className="space-y-6">
+      <div className="space-y-3">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+          Dependent Blocks
+        </h1>
+        <p className="text-xl text-muted-foreground">
+          Some blocks require other blocks to work properly. Make sure to add
+          their dependencies before using them.
+        </p>
+
+        <Card className="my-4 gap-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Info className="h-4 w-4" />
+              Important
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription>
+              <p>
+                If you don't follow the instructions below, you may run into
+                issues with the blocks not working properly.
+              </p>
+            </CardDescription>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="space-y-16">
+        <section id="create-project">
+          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-2">
+            Diagram of Dependencies
+          </h2>
+          <p className="text-lg text-muted-foreground mb-4">
+            Some blocks require other blocks to work properly. Make sure to add
+            their dependencies before using them.
+          </p>
+
+          <div className="w-full flex-col flex justify-center items-center gap-2 mb-4">
+            <Button
+              variant={showDiagram ? "outline" : "default"}
+              size="sm"
+              onClick={() => setShowDiagram(!showDiagram)}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              {showDiagram ? (
+                <>
+                  <EyeOff className="h-4 w-4" />
+                  Hide Diagram
+                </>
+              ) : (
+                <>
+                  <Eye className="h-4 w-4" />
+                  Show Diagram
+                </>
+              )}
+            </Button>
+            {!showDiagram && (
+              <span className="text-sm text-muted-foreground">
+                Click to load the interactive dependencies diagram
+              </span>
+            )}
+          </div>
+
+          {showDiagram && (
+            <div className="space-y-4 pt-4 border border-border rounded-md p-4">
+              <Suspense fallback={<DiagramSkeleton />}>
+                <ExcalidrawDiagram />
+              </Suspense>
+            </div>
+          )}
+        </section>
+
+        <section id="groups">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            Dependencies by Block Group
+          </h2>
+
+          <div className="space-y-8 pt-4">
+            <div className="space-y-3">
+              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                Escrows by signer & Escrows by role
+              </h3>
+              <p className="leading-7 text-muted-foreground">
+                These listing/detail blocks depend on several shared modules and
+                providers:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    wallet-kit
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    escrow-context
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    handle-errors
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    helpers
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    tanstack
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    single-release
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    EscrowDialogsProvider
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    EscrowAmountProvider
+                  </code>
+                </li>
+              </ul>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>Providers to include</CardTitle>
+                  <CardDescription>
+                    Ensure you include both{" "}
+                    <strong>EscrowDialogsProvider</strong> and{" "}
+                    <strong>EscrowAmountProvider</strong> around your escrow UIs
+                    when needed.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <div className="pt-2">
+                <CodeBlock
+                  code={`# Quick install examples
+npx trustless-work add wallet-kit
+npx trustless-work add escrows/escrow-context
+npx trustless-work add escrows/single-release
+npx trustless-work add tanstack
+
+# If you skipped the init command, add these providers
+npx trustless-work add providers
+
+# Optional utility modules
+npx trustless-work add handle-errors
+npx trustless-work add helpers`}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                Single-release components
+              </h3>
+              <p className="leading-7 text-muted-foreground">
+                All single-release actions (initialize, fund, approve milestone,
+                release, dispute, resolve, update, etc.) require:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    wallet-kit
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    escrow-context
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    handle-errors
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    tanstack
+                  </code>
+                </li>
+              </ul>
+
+              <div className="pt-2">
+                <CodeBlock
+                  code={`# Add essentials for single-release flows
+npx trustless-work add wallet-kit
+npx trustless-work add escrows/escrow-context
+npx trustless-work add tanstack
+
+# If you skipped the init command, add these providers
+npx trustless-work add providers
+
+# Optional utility modules
+npx trustless-work add handle-errors
+npx trustless-work add helpers`}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="providers">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            Provider Wrapping (order matters)
+          </h2>
+          <div className="space-y-4 pt-4">
+            <p className="leading-7">
+              Wrap your app with the following providers, in this order. Include
+              <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                EscrowDialogsProvider
+              </code>
+              and{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                EscrowAmountProvider
+              </code>
+              when a page uses dialogs or amount context.
+            </p>
+
+            <CodeBlock
+              code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
+import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
+import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
+import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <ReactQueryClientProvider>
+          <TrustlessWorkProvider>
+            <WalletProvider>
+              <EscrowProvider>
+                <EscrowDialogsProvider>
+                  <EscrowAmountProvider>
+                    {children}
+                  </EscrowAmountProvider>
+                </EscrowDialogsProvider>
+              </EscrowProvider>
+            </WalletProvider>
+          </TrustlessWorkProvider>
+        </ReactQueryClientProvider>
+      </body>
+    </html>
+  );
+}`}
+              language="tsx"
+              filename="app/layout.tsx"
+            />
+
+            <Card className="my-4 gap-2">
+              <CardHeader>
+                <CardTitle>Scaffolded by init</CardTitle>
+                <CardDescription>
+                  If you ran{" "}
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    npx trustless-work init
+                  </code>
+                  , many dependencies and providers are scaffolded
+                  automatically. Verify the order above if you wire them
+                  manually.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};

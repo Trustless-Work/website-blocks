@@ -1,6 +1,13 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "@/shared/CodeBlock";
+import { ArrowRight, Info } from "lucide-react";
 
 export const GetStarted = () => {
   return (
@@ -14,6 +21,27 @@ export const GetStarted = () => {
           Work's escrow and dispute resolution flows.
         </p>
       </div>
+
+      <Card className="my-4 gap-2">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Info className="h-4 w-4" />
+            Important
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription>
+            <p>
+              Would you like to customize the blocks?
+              <br />
+              <strong className="flex items-center gap-2">
+                <ArrowRight className="h-4 w-4" /> You can do that by editing
+                the blocks as you see fit.
+              </strong>
+            </p>
+          </CardDescription>
+        </CardContent>
+      </Card>
 
       <div className="space-y-8">
         <section>
@@ -56,17 +84,23 @@ export const GetStarted = () => {
 
             <CodeBlock code="npx trustless-work init" />
 
-            <Alert>
-              <AlertTitle>The init command will:</AlertTitle>
-              <AlertDescription className="w-full">
-                <ul className="list-disc pl-6 mt-2 space-y-1">
-                  <li>Install shadcn/ui components (with prompts)</li>
-                  <li>Install required dependencies</li>
-                  <li>Create .twblocks.json configuration</li>
-                  <li>Optionally wire providers into Next.js app/layout.tsx</li>
-                </ul>
-              </AlertDescription>
-            </Alert>
+            <Card>
+              <CardHeader>
+                <CardTitle>The init command will:</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="w-full">
+                  <ul className="list-disc pl-6 mt-2 space-y-1">
+                    <li>Install shadcn/ui components (with prompts)</li>
+                    <li>Install required dependencies</li>
+                    <li>Create .twblocks.json configuration</li>
+                    <li>
+                      Optionally wire providers into Next.js app/layout.tsx
+                    </li>
+                  </ul>
+                </CardDescription>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -84,19 +118,22 @@ export const GetStarted = () => {
               filename=".env"
             />
 
-            <Alert>
-              <AlertDescription>
-                The library uses{" "}
-                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                  TrustlessWorkProvider
-                </code>{" "}
-                with{" "}
-                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                  development
-                </code>{" "}
-                base URL by default.
-              </AlertDescription>
-            </Alert>
+            <Card>
+              <CardHeader>
+                <CardTitle>Environment</CardTitle>
+                <CardDescription>
+                  The library uses{" "}
+                  <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+                    TrustlessWorkProvider
+                  </code>{" "}
+                  with{" "}
+                  <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+                    development
+                  </code>{" "}
+                  base URL by default.
+                </CardDescription>
+              </CardHeader>
+            </Card>
           </div>
         </section>
 
