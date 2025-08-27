@@ -13,7 +13,7 @@
   {
     "id": "escrows-escrows-by-role-table",
     "title": "Escrows Table by Role",
-    "description": "Table layout to explore escrows by role with sorting and filtering.",
+    "description": "Table layout to explore escrows by role with sorting and filtering. This component contains a detailed view of the escrow, including the role, status, and actions.",
     "category": "Table",
     "escrowType": "single-release,multi-release",
     "image": "",
@@ -62,7 +62,7 @@
   {
     "id": "escrows-escrows-by-role-cards",
     "title": "Escrows Cards by Role",
-    "description": "Card grid to browse escrows by role with quick stats and actions.",
+    "description": "Card grid to browse escrows by role with quick stats and actions. This component contains a detailed view of the escrow, including the role, status, and actions.",
     "category": "Cards",
     "escrowType": "single-release,multi-release",
     "image": "",
@@ -111,7 +111,7 @@
   {
     "id": "escrows-escrows-by-signer-table",
     "title": "Escrows Table by Signer",
-    "description": "Table layout to explore escrows by signer with sorting and filtering.",
+    "description": "Table layout to explore escrows by signer with sorting and filtering. This component contains a detailed view of the escrow, including the signer, status, and actions.",
     "category": "Table",
     "escrowType": "single-release,multi-release",
     "image": "",
@@ -160,7 +160,7 @@
   {
     "id": "escrows-escrows-by-signer-cards",
     "title": "Escrows Cards by Signer",
-    "description": "Card grid to browse escrows by signer with quick stats and actions.",
+    "description": "Card grid to browse escrows by signer with quick stats and actions. This component contains a detailed view of the escrow, including the signer, status, and actions.",
     "category": "Cards",
     "escrowType": "single-release,multi-release",
     "image": "",
