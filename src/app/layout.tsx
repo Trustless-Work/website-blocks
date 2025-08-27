@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { ClipboardProvider } from "@/providers/ClipboardProvider";
 import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
 import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
+import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 const Exo2 = localFont({
@@ -59,9 +60,15 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ClipboardProvider>
-            <main className="min-h-screen container mx-auto px-4">
-              {children}
-            </main>
+            <ReactQueryClientProvider>
+              <TrustlessWorkProvider>
+                <WalletProvider>
+                  <main className="min-h-screen container mx-auto px-4">
+                    {children}
+                  </main>
+                </WalletProvider>
+              </TrustlessWorkProvider>
+            </ReactQueryClientProvider>
           </ClipboardProvider>
         </ThemeProvider>
 
