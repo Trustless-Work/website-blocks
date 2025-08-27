@@ -245,12 +245,16 @@ export function BlockTypeVariantViewer({ block }: Props) {
                         setActiveVariant(v as EscrowVariant)
                       }
                     >
-                      <SelectTrigger className="w-[180px]">
+                      <SelectTrigger className="w-[180px] cursor-pointer">
                         <SelectValue placeholder="Select variant" />
                       </SelectTrigger>
                       <SelectContent>
                         {variants.map((v) => (
-                          <SelectItem key={v} value={v}>
+                          <SelectItem
+                            key={v}
+                            value={v}
+                            className="cursor-pointer"
+                          >
                             {v.charAt(0).toUpperCase() + v.slice(1)}
                           </SelectItem>
                         ))}

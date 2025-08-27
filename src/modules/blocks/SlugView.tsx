@@ -26,7 +26,7 @@ export const BlockPage = ({ params }: BlockPageProps) => {
     <div className="min-h-screen">
       <SiteHeader />
 
-      <div className="container py-8 max-w-5xl mx-auto">
+      <div className="container py-8 max-w-7xl mx-auto">
         {/* Back button */}
         <div className="mb-6">
           <Button variant="ghost" asChild>
@@ -49,7 +49,7 @@ export const BlockPage = ({ params }: BlockPageProps) => {
           </div>
           <div className="flex flex-wrap gap-2">
             {block.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
+              <Badge key={tag} variant="outline">
                 {tag}
               </Badge>
             ))}
