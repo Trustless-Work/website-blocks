@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { GlobalProviders } from "@/providers/GlobalProviders";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "@/shared/Footer";
 
 const Exo2 = localFont({
   src: "./fonts/Exo2.ttf",
@@ -58,6 +59,7 @@ export default function RootLayout({
           <main className="min-h-screen container mx-auto px-4">
             {children}
           </main>
+          <Footer />
         </GlobalProviders>
 
         <Toaster position="top-right" richColors />
