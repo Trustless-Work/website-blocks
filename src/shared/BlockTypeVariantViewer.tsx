@@ -237,7 +237,10 @@ export function BlockTypeVariantViewer({
     let component: React.ReactNode = null;
     let code = "";
 
-    const jsonCodes = componentCodes as any;
+    const jsonCodes = componentCodes as Record<
+      string,
+      string | Record<string, Record<string, string>>
+    >;
 
     if (!hasExplicitVariants) {
       // Simple blocks without variants (e.g., wallet-kit)
@@ -276,7 +279,10 @@ export function BlockTypeVariantViewer({
       component = Component ? <Component type={activeType} /> : null;
 
       const jsonCodesByAction = jsonCodes[action];
-      if (jsonCodesByAction?.[activeType]?.[activeVariant]) {
+      if (
+        typeof jsonCodesByAction === "object" &&
+        jsonCodesByAction?.[activeType]?.[activeVariant]
+      ) {
         code = jsonCodesByAction[activeType][activeVariant];
       }
     }

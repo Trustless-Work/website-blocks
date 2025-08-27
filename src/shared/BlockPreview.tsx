@@ -97,8 +97,7 @@ export function BlockPreview({
           <div
             className={cn("h-full w-full", getResponsiveWrapperClasses())}
             style={{
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              ["--responsive-mode" as any]: viewportSize,
+              ["--responsive-mode" as string]: viewportSize,
             }}
           >
             {children}

@@ -112,6 +112,7 @@ export const MilestoneDetailDialog = ({
       new URL(url);
       return true;
     } catch (error) {
+      console.error(error);
       return false;
     }
   };

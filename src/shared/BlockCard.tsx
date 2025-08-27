@@ -67,8 +67,8 @@ export const BlockCard = ({ block }: BlockCardProps) => {
           </div>
           {/* Show variants if available */}
           {(() => {
-            const variants = Array.isArray((block as any).variants)
-              ? ((block as any).variants as string[])
+            const variants = Array.isArray(block.variants)
+              ? (block.variants as string[])
               : [];
 
             if (variants.length > 0) {
@@ -100,8 +100,8 @@ export const BlockCard = ({ block }: BlockCardProps) => {
             </Link>
           </Button>
           {(() => {
-            const typesLabel = Array.isArray((block as any).types)
-              ? ((block as any).types as string[]).join(" | ")
+            const typesLabel = Array.isArray(block.types)
+              ? (block.types as string[]).join(" | ")
               : block.escrowType
                 ? block.escrowType.replace(",", " | ")
                 : null;
