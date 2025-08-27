@@ -84,7 +84,7 @@ export const GetStarted = () => {
 
             <CodeBlock code="npx trustless-work init" />
 
-            <Card>
+            <Card className="my-4 gap-2">
               <CardHeader>
                 <CardTitle>The init command will:</CardTitle>
               </CardHeader>
@@ -118,7 +118,7 @@ export const GetStarted = () => {
               filename=".env"
             />
 
-            <Card>
+            <Card className="my-4 gap-2">
               <CardHeader>
                 <CardTitle>Environment</CardTitle>
                 <CardDescription>
