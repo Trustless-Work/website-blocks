@@ -30,7 +30,11 @@ import { useEscrowContext } from "../../escrow-context/EscrowProvider";
 import EscrowDetailDialog from "../../escrows-by-role/details/EscrowDetailDialog";
 import { formatTimestamp } from "../../../helpers/format.helper";
 
-export function EscrowsBySignerTable() {
+export function EscrowsBySignerTable({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) {
   const {
     walletAddress,
     data,
@@ -68,7 +72,7 @@ export function EscrowsBySignerTable() {
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner();
+  } = useEscrowsBySigner({ syncWithUrl });
 
   const dialogStates = useEscrowDialogs();
   const { setSelectedEscrow } = useEscrowContext();
@@ -277,8 +281,8 @@ export function EscrowsBySignerTable() {
                                 {sorted === "asc"
                                   ? "▲"
                                   : sorted === "desc"
-                                  ? "▼"
-                                  : ""}
+                                    ? "▼"
+                                    : ""}
                               </span>
                             )}
                           </div>

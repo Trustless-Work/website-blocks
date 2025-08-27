@@ -21,7 +21,8 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsBySigner() {
+export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
+  const syncWithUrl = options?.syncWithUrl ?? true;
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -60,6 +61,7 @@ export function useEscrowsBySigner() {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
+    if (!syncWithUrl) return;
     if (!searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
@@ -99,7 +101,7 @@ export function useEscrowsBySigner() {
       to: qpEnd ? new Date(qpEnd) : undefined,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [syncWithUrl]);
 
   const debouncedSearchParams = useDebouncedValue(
     {
@@ -123,6 +125,7 @@ export function useEscrowsBySigner() {
   );
 
   React.useEffect(() => {
+    if (!syncWithUrl) return;
     if (!pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));
@@ -148,10 +151,15 @@ export function useEscrowsBySigner() {
     if (debouncedSearchParams.endDate)
       qp.set("endDate", String(debouncedSearchParams.endDate));
 
-    router.replace(`${pathname}?${qp.toString()}`);
+    const nextSearch = qp.toString();
+    const currentSearch = searchParams ? searchParams.toString() : "";
+    if (currentSearch === nextSearch) return;
+    router.replace(`${pathname}?${nextSearch}`);
   }, [
+    syncWithUrl,
     pathname,
     router,
+    searchParams,
     debouncedSearchParams.page,
     debouncedSearchParams.orderBy,
     debouncedSearchParams.orderDirection,

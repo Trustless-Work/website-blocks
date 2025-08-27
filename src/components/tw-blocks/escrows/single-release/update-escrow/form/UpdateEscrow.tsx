@@ -18,7 +18,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useUpdateEscrow } from "./useUpdateEscrow";
+import { useUpdateEscrow } from "../useUpdateEscrow";
 import { Trash2, DollarSign, Percent, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { trustlineOptions } from "@/components/tw-blocks/wallet-kit/trustlines";

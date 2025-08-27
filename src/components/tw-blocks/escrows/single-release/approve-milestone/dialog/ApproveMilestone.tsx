@@ -16,7 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
-import { useApproveMilestone } from "./useApproveMilestone";
+import { useApproveMilestone } from "../useApproveMilestone";
 import { useEscrowContext } from "../../../escrow-context/EscrowProvider";
 import {
   Select,

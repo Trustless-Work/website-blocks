@@ -22,7 +22,8 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsByRole() {
+export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
+  const syncWithUrl = options?.syncWithUrl ?? true;
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -63,6 +64,7 @@ export function useEscrowsByRole() {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
+    if (!syncWithUrl) return;
     if (!searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
@@ -106,7 +108,7 @@ export function useEscrowsByRole() {
       (qpRole as GetEscrowsFromIndexerByRoleParams["role"]) || "approver"
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [syncWithUrl]);
 
   const debouncedSearchParams = useDebouncedValue(
     {
@@ -131,6 +133,7 @@ export function useEscrowsByRole() {
   );
 
   React.useEffect(() => {
+    if (!syncWithUrl) return;
     if (!pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));
@@ -158,10 +161,15 @@ export function useEscrowsByRole() {
     if (debouncedSearchParams.role)
       qp.set("role", String(debouncedSearchParams.role));
 
-    router.replace(`${pathname}?${qp.toString()}`);
+    const nextSearch = qp.toString();
+    const currentSearch = searchParams ? searchParams.toString() : "";
+    if (currentSearch === nextSearch) return;
+    router.replace(`${pathname}?${nextSearch}`);
   }, [
+    syncWithUrl,
     pathname,
     router,
+    searchParams,
     debouncedSearchParams.page,
     debouncedSearchParams.orderBy,
     debouncedSearchParams.orderDirection,

@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useChangeMilestoneStatus } from "./useChangeMilestoneStatus";
+import { useChangeMilestoneStatus } from "../useChangeMilestoneStatus";
 import { Loader2 } from "lucide-react";
 import { useEscrowContext } from "../../../escrow-context/EscrowProvider";
 import {

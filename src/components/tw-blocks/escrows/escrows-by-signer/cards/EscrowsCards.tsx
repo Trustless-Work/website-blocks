@@ -26,7 +26,11 @@ import { useEscrowDialogs } from "../../escrow-context/EscrowDialogsProvider";
 import EscrowDetailDialog from "../../escrows-by-role/details/EscrowDetailDialog";
 import { formatTimestamp } from "../../../helpers/format.helper";
 
-export function EscrowsBySignerCards() {
+export function EscrowsBySignerCards({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) {
   const {
     walletAddress,
     data,
@@ -64,7 +68,7 @@ export function EscrowsBySignerCards() {
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner();
+  } = useEscrowsBySigner({ syncWithUrl });
 
   const { setSelectedEscrow } = useEscrowContext();
 

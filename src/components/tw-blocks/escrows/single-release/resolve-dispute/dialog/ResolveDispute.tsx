@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
-import { useResolveDispute } from "./useResolveDispute";
+import { useResolveDispute } from "../useResolveDispute";
 import { useEscrowContext } from "../../../escrow-context/EscrowProvider";
 
 export default function ResolveDisputeDialog() {

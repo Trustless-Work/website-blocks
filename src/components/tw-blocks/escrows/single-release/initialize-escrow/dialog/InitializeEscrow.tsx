@@ -18,7 +18,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useInitializeEscrow } from "./useInitializeEscrow";
+import { useInitializeEscrow } from "../useInitializeEscrow";
 import { Trash2, DollarSign, Percent, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { trustlineOptions } from "@/components/tw-blocks/helpers/trustlines";
@@ -84,7 +84,7 @@ export function InitializeEscrowDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button type="button" className="cursor-pointer">
+        <Button type="button" className="cursor-pointer w-full">
           Initialize
         </Button>
       </DialogTrigger>

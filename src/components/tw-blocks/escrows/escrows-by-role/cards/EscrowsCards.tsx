@@ -29,7 +29,11 @@ import {
   formatTimestamp,
 } from "../../../helpers/format.helper";
 
-export function EscrowsByRoleCards() {
+export function EscrowsByRoleCards({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) {
   const {
     walletAddress,
     data,
@@ -69,7 +73,7 @@ export function EscrowsByRoleCards() {
     setRole,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsByRole();
+  } = useEscrowsByRole({ syncWithUrl });
 
   const { setSelectedEscrow } = useEscrowContext();
 

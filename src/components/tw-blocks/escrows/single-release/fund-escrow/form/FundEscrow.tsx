@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useFundEscrow } from "./useFundEscrow";
+import { useFundEscrow } from "../useFundEscrow";
 import { Loader2 } from "lucide-react";
 
 export default function FundEscrowForm() {
@@ -17,7 +17,7 @@ export default function FundEscrowForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-6 w-full">
         <FormField
           control={form.control}
           name="amount"

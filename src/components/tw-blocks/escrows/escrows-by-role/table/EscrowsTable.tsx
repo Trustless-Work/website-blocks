@@ -30,7 +30,11 @@ import { useEscrowContext } from "../../escrow-context/EscrowProvider";
 import { useEscrowsByRole } from "../useEscrowsByRole.shared";
 import { formatTimestamp } from "../../../helpers/format.helper";
 
-export function EscrowsByRoleTable() {
+export function EscrowsByRoleTable({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) {
   const {
     walletAddress,
     data,
@@ -70,7 +74,7 @@ export function EscrowsByRoleTable() {
     setRole,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsByRole();
+  } = useEscrowsByRole({ syncWithUrl });
 
   const dialogStates = useEscrowDialogs();
   const { setSelectedEscrow } = useEscrowContext();
@@ -282,8 +286,8 @@ export function EscrowsByRoleTable() {
                                 {sorted === "asc"
                                   ? "▲"
                                   : sorted === "desc"
-                                  ? "▼"
-                                  : ""}
+                                    ? "▼"
+                                    : ""}
                               </span>
                             )}
                           </div>

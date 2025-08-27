@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { useApproveMilestone } from "./useApproveMilestone";
+import { useApproveMilestone } from "../useApproveMilestone";
 import { Loader2 } from "lucide-react";
 import { useEscrowContext } from "../../../escrow-context/EscrowProvider";
 import {

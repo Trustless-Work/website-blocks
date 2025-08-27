@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useResolveDispute } from "./useResolveDispute";
+import { useResolveDispute } from "../useResolveDispute";
 import { Loader2 } from "lucide-react";
 
 export default function ResolveDisputeForm() {
@@ -17,7 +17,7 @@ export default function ResolveDisputeForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <FormField
             control={form.control}
