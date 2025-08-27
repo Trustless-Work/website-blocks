@@ -31,31 +31,31 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "helpers",
-        "url": "/blocks/helpers"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -80,31 +80,31 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "helpers",
-        "url": "/blocks/helpers"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -129,31 +129,31 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "helpers",
-        "url": "/blocks/helpers"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -178,31 +178,31 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "helpers",
-        "url": "/blocks/helpers"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -235,27 +235,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -290,27 +290,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -345,27 +345,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -400,27 +400,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -455,27 +455,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -508,27 +508,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -559,27 +559,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   },
@@ -610,27 +610,27 @@
     "requiredBlocks": [
       {
         "name": "wallet-kit",
-        "url": "/blocks/wallet-kit"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "escrow-context",
-        "url": "/blocks/escrow-context"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "handle-errors",
-        "url": "/blocks/handle-errors"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "tanstack",
-        "url": "/blocks/tanstack"
+        "url": "/get-started/dependencies"
       },
       {
         "name": "single-release",
-        "url": "/blocks/single-release"
+        "url": "/get-started/dependenciese"
       },
       {
         "name": "multi-release",
-        "url": "/blocks/multi-release"
+        "url": "/get-started/dependencies"
       }
     ]
   }
