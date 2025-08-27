@@ -7,178 +7,68 @@ export const GetStarted = () => {
     <div className="space-y-6">
       <div className="space-y-3">
         <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-          Installation
+          Trustless Work React Library
         </h1>
         <p className="text-xl text-muted-foreground">
-          How to install dependencies and structure your app.
+          A production-ready set of React blocks for integrating Trustless
+          Work's escrow and dispute resolution flows.
         </p>
       </div>
 
       <div className="space-y-8">
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-            Create project
+            What you get
           </h2>
           <div className="space-y-4 pt-4">
-            <p className="leading-7">
-              Start by creating a new Next.js project using{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                create-next-app
-              </code>
-              :
-            </p>
-
-            <CodeBlock code="npx create-next-app@latest my-app --typescript --tailwind --eslint" />
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                UI blocks (cards/tables/dialogs/forms) to list and manage
+                escrows
+              </li>
+              <li>
+                Providers for API config, wallet context, dialogs and amounts
+              </li>
+              <li>TanStack Query hooks for fetching and mutating escrows</li>
+              <li>Wallet-kit helpers and error handling utilities</li>
+            </ul>
           </div>
         </section>
 
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Run the CLI
+            Installation
           </h2>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
-              Run the{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                trustless-work
-              </code>{" "}
-              init command to setup your project:
+              Install the library package using your preferred package manager:
             </p>
 
-            <CodeBlock code="npx trustless-work@latest init" />
-
-            <p className="leading-7">
-              You will be asked a few questions to configure{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                components.json
-              </code>
-              :
-            </p>
-
-            <CodeBlock
-              code={`Which style would you like to use? › Default
-Which color would you like to use as base color? › Slate
-Do you want to use CSS variables for colors? › no / yes`}
-            />
-          </div>
-        </section>
-
-        <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Fonts
-          </h2>
-          <div className="space-y-4 pt-4">
-            <p className="leading-7">
-              I use{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                DM Sans
-              </code>{" "}
-              as the default font. DM Sans is not required. You can replace it
-              with any other font.
-            </p>
-
-            <p className="leading-7">
-              Here's how I configure DM Sans in Next.js:
-            </p>
-
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-              Install the font
-            </h3>
-
-            <Tabs defaultValue="pnpm" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="pnpm">pnpm</TabsTrigger>
+            <Tabs defaultValue="npm" className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="npm">npm</TabsTrigger>
-                <TabsTrigger value="yarn">yarn</TabsTrigger>
-                <TabsTrigger value="bun">bun</TabsTrigger>
               </TabsList>
-              <TabsContent value="pnpm">
-                <CodeBlock code="pnpm add next/font" />
-              </TabsContent>
-              <TabsContent value="npm">
-                <CodeBlock code="npm install next/font" />
-              </TabsContent>
-              <TabsContent value="yarn">
-                <CodeBlock code="yarn add next/font" />
-              </TabsContent>
-              <TabsContent value="bun">
-                <CodeBlock code="bun add next/font" />
-              </TabsContent>
             </Tabs>
 
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-              Configure the font
-            </h3>
-
-            <CodeBlock
-              code={`import { DM_Sans } from 'next/font/google'
-
-const dmSans = DM_Sans({
-subsets: ["latin"],
-display: "swap",
-variable: "--font-dm-sans",
-})
-
-export default function RootLayout({
-children,
-}: {
-children: React.ReactNode
-}) {
-return (
-  <html lang="en" className={dmSans.variable}>
-    <body className="font-sans">{children}</body>
-  </html>
-)
-}`}
-              language="tsx"
-              filename="app/layout.tsx"
-            />
-          </div>
-        </section>
-
-        <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            App structure
-          </h2>
-          <div className="space-y-4 pt-4">
-            <p className="leading-7">
-              Here's how I structure my Next.js apps. You can use this as a
-              reference:
+            <p className="leading-7 pt-4">
+              Then run the CLI to scaffold UI and providers:
             </p>
 
-            <CodeBlock
-              code={`.
-├── app
-│   ├── layout.tsx
-│   └── page.tsx
-├── components
-│   ├── ui
-│   │   ├── alert-dialog.tsx
-│   │   ├── button.tsx
-│   │   ├── dropdown-menu.tsx
-│   │   └── ...
-│   ├── main-nav.tsx
-│   ├── page-header.tsx
-│   └── ...
-├── lib
-│   └── utils.ts
-├── styles
-│   └── globals.css
-├── next.config.js
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-└── tsconfig.json`}
-              language="text"
-            />
+            <CodeBlock code="npx trustless-work init" />
 
             <Alert>
               <AlertDescription>
-                I place the UI components in the{" "}
+                The{" "}
                 <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                  components/ui
+                  init
                 </code>{" "}
-                folder.
+                command will:
+                <ul className="list-disc pl-6 mt-2 space-y-1">
+                  <li>Install shadcn/ui components (with prompts)</li>
+                  <li>Install required dependencies</li>
+                  <li>Create .twblocks.json configuration</li>
+                  <li>Optionally wire providers into Next.js app/layout.tsx</li>
+                </ul>
               </AlertDescription>
             </Alert>
           </div>
@@ -186,36 +76,157 @@ return (
 
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            That's it
+            Environment Setup
           </h2>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
-              You can now start adding components to your project.
-            </p>
-
-            <CodeBlock code="npx trustless-work@latest add button" />
-
-            <p className="leading-7">
-              The command above will add the{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                Button
-              </code>{" "}
-              component to your project. You can then import it like this:
+              Create an environment variable for your API key:
             </p>
 
             <CodeBlock
-              code={`import { Button } from "@/components/ui/button"
+              code="NEXT_PUBLIC_API_KEY=your_api_key_here"
+              filename=".env.local"
+            />
 
-export default function Home() {
-return (
-  <div>
-    <Button>Click me</Button>
-  </div>
-)
+            <Alert>
+              <AlertDescription>
+                The library uses{" "}
+                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+                  TrustlessWorkProvider
+                </code>{" "}
+                with{" "}
+                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+                  development
+                </code>{" "}
+                base URL by default.
+              </AlertDescription>
+            </Alert>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            Quick Start
+          </h2>
+          <div className="space-y-4 pt-4">
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              1. Add providers (if you skipped wiring during init)
+            </h3>
+
+            <CodeBlock code="npx trustless-work add providers" />
+
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              2. Wrap your Next.js layout
+            </h3>
+
+            <CodeBlock
+              code={`// app/layout.tsx
+import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
+import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
+import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <ReactQueryClientProvider>
+          <TrustlessWorkProvider>
+            <WalletProvider>
+              <EscrowProvider>
+                {children}
+              </EscrowProvider>
+            </WalletProvider>
+          </TrustlessWorkProvider>
+        </ReactQueryClientProvider>
+      </body>
+    </html>
+  );
 }`}
               language="tsx"
-              filename="app/page.tsx"
+              filename="app/layout.tsx"
             />
+
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              3. Add a wallet button
+            </h3>
+
+            <CodeBlock code="npx trustless-work add wallet-kit" />
+
+            <CodeBlock
+              code={`// Example usage
+import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
+
+export function Header() {
+  return (
+    <div className="flex justify-end p-4">
+      <WalletButton />
+    </div>
+  );
+}`}
+              language="tsx"
+            />
+
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              4. List escrows quickly
+            </h3>
+
+            <CodeBlock
+              code={`# By role (cards view)
+npx trustless-work add escrows/escrows-by-role/cards
+
+# Or table view
+npx trustless-work add escrows/escrows-by-role/table`}
+            />
+
+            <CodeBlock
+              code={`// app/escrows/page.tsx
+import { EscrowsByRoleCards } from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
+
+export default function Page() {
+  return (
+    <EscrowDialogsProvider>
+      <EscrowsByRoleCards />
+    </EscrowDialogsProvider>
+  );
+}`}
+              language="tsx"
+              filename="app/escrows/page.tsx"
+            />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            Next Steps
+          </h2>
+          <div className="space-y-4 pt-4">
+            <p className="leading-7">Ready to explore more? Check out:</p>
+
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                <strong>Installation Guide:</strong> Detailed setup instructions
+                and configuration options
+              </li>
+              <li>
+                <strong>Available Blocks:</strong> Browse all available UI
+                components and hooks
+              </li>
+              <li>
+                <strong>State Management:</strong> Learn about TanStack Query
+                integration and mutations
+              </li>
+              <li>
+                <strong>Best Practices:</strong> Guidelines for providers, error
+                handling, and wallet integration
+              </li>
+            </ul>
+
+            <div className="pt-4">
+              <p className="leading-7">List all available blocks:</p>
+              <CodeBlock code="npx trustless-work list" />
+            </div>
           </div>
         </section>
       </div>
