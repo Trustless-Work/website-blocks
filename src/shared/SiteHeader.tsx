@@ -22,7 +22,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-10"
+      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-60"
       suppressHydrationWarning
     >
       <div className="flex justify-between h-14 w-full items-center">

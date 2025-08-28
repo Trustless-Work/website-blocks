@@ -42,12 +42,15 @@ const getCategoryStats = () => {
 export const Home = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+
   React.useEffect(() => setMounted(true), []);
+
   const decorativeOpacityClass = !mounted
     ? "opacity-10"
     : theme === "dark"
       ? "opacity-10"
       : "opacity-30";
+
   const categories = getUniqueCategories();
   const categoryStats = getCategoryStats();
 
