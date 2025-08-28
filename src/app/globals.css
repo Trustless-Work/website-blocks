@@ -205,6 +205,17 @@
   gap: 0.5rem !important; /* gap-2 */
 }
 
+/* Make two-column controls left-aligned like Selects (Created/Descending) */
+.responsive-mobile .grid.grid-cols-2 > div {
+  width: 100% !important;
+  justify-content: flex-start !important;
+}
+
+/* Hide checkbox text labels (Active / OnChain) in mobile preview */
+.responsive-mobile .grid.grid-cols-2 .flex.items-center > span {
+  display: none !important;
+}
+
 .responsive-mobile .md\:w-1\/4 {
   width: 100% !important;
 }
@@ -272,4 +283,14 @@
 /* Keep consistent spacing for two-column controls in tablet preview */
 .responsive-tablet .grid.grid-cols-2 {
   gap: 0.5rem !important; /* gap-2 */
+}
+
+.responsive-tablet .grid.grid-cols-2 > div {
+  width: 100% !important;
+  justify-content: flex-start !important;
+}
+
+/* Hide checkbox text labels (Active / OnChain) in tablet preview */
+.responsive-tablet .grid.grid-cols-2 .flex.items-center > span {
+  display: none !important;
 }
