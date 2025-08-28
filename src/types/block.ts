@@ -21,7 +21,7 @@ export type Block = {
   title: string;
   description: string;
   category: "Escrows" | "Wallet" | "Table" | "Cards" | string;
-  image: string;
+  image: string | string[];
   tags: string[];
   code: string;
   newBlocks?: boolean;
