@@ -5,9 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "@/shared/CodeBlock";
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight, Info, InfoIcon } from "lucide-react";
 
 export const GetStarted = () => {
   return (
@@ -60,6 +60,32 @@ export const GetStarted = () => {
               <li>TanStack Query hooks for fetching and mutating escrows</li>
               <li>Wallet-kit helpers and error handling utilities</li>
             </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            List all available blocks
+          </h2>
+          <div className="space-y-4 pt-4">
+            <p className="leading-7">
+              With the CLI you can list all available blocks:
+            </p>
+
+            <CodeBlock code="npx trustless-work list" />
+
+            <Card className="my-4 gap-2">
+              <CardHeader>
+                <CardTitle>The init command will:</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="w-full">
+                  <ul className="list-disc pl-6 mt-2 space-y-1">
+                    <li>Show all available blocks.</li>
+                  </ul>
+                </CardDescription>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -134,6 +160,26 @@ export const GetStarted = () => {
                 </CardDescription>
               </CardHeader>
             </Card>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="flex items-center gap-2 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            <InfoIcon className="h-6 w-6" /> Installation based on folder path
+          </h2>
+          <div className="space-y-4 pt-4">
+            <p className="leading-7">
+              If you need all the child blocks, you can install them by pointing
+              to their parent directory, so you won't have to install them one
+              by one.
+            </p>
+
+            <CodeBlock code="npx trustless-work escrows // or other parent's blocks directory" />
+
+            <p className="leading-7">
+              This will install all the escrows blocks, including the
+              escrow-context, single-release, etc.
+            </p>
           </div>
         </section>
 
@@ -254,11 +300,6 @@ export default function Page() {
                 handling, and wallet integration
               </li>
             </ul>
-
-            <div className="pt-4">
-              <p className="leading-7">List all available blocks:</p>
-              <CodeBlock code="npx trustless-work list" />
-            </div>
           </div>
         </section>
       </div>
