@@ -17,18 +17,46 @@ type BlockCardProps = {
 };
 
 export const BlockCard = ({ block }: BlockCardProps) => {
+  // Normalize image(s) to an array for consistent rendering without relying on theme at SSR
+  const images = Array.isArray(block.image)
+    ? block.image
+    : typeof block.image === "string" && block.image.length > 0
+      ? [block.image]
+      : [];
+
   return (
     <Card className="group cursor-pointer transition-all hover:shadow-md flex flex-col h-full pt-0">
       <CardHeader className="p-0">
         <div className="aspect-video overflow-hidden rounded-t-lg bg-gradient-to-br from-primary-50 to-indigo-100 dark:from-primary-950 dark:to-indigo-900 flex items-center justify-center">
-          {block.image ? (
-            <Image
-              src={block.image}
-              alt={block.title}
-              className="h-full w-full transition-transform group-hover:scale-105"
-              width={1000}
-              height={1000}
-            />
+          {images.length > 0 ? (
+            images.length >= 2 ? (
+              <>
+                {/* Light image */}
+                <Image
+                  src={images[0]}
+                  alt={block.title}
+                  className="h-full w-full transition-transform group-hover:scale-105 block dark:hidden"
+                  width={1000}
+                  height={1000}
+                />
+                {/* Dark image */}
+                <Image
+                  src={images[1]}
+                  alt={block.title}
+                  className="h-full w-full transition-transform group-hover:scale-105 hidden dark:block"
+                  width={1000}
+                  height={1000}
+                />
+              </>
+            ) : (
+              <Image
+                src={images[0]}
+                alt={block.title}
+                className="h-full w-full transition-transform group-hover:scale-105"
+                width={1000}
+                height={1000}
+              />
+            )
           ) : (
             <div className="text-center p-6">
               <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">
