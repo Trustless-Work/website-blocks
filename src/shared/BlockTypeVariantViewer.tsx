@@ -353,7 +353,7 @@ export function BlockTypeVariantViewer({
             <div className="flex">
               <div
                 key={`${activeType}-${activeVariant}`}
-                className="flex items-center justify-center w-full p-10"
+                className="flex items-center justify-center w-full p-4 sm:p-10"
               >
                 {renderResult.component}
               </div>
