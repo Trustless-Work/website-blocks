@@ -5,10 +5,13 @@
     "description": "Wallet provider, validators and a connect button powered by Stellar Wallets Kit.",
     "category": "Wallet",
     "escrowType": null,
-    "image": "/blocks/block-1.png",
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
     "newBlocks": true,
-    "install": "npx trustless-work add wallet-kit"
+    "install": "npx trustless-work add wallet-kit",
+    "image": [
+      "https://drive.google.com/file/d/1o31kZsuI4kPGVoCWcCymDOVJN93R5cL7/view?usp=sharing",
+      "https://drive.google.com/file/d/1ya3ZHG0dCgnlBonElqaxqWifQ7k744cc/view?usp=sharing"
+    ]
   },
   {
     "id": "escrows-escrows-by-role-table",
@@ -16,7 +19,10 @@
     "description": "Table layout to explore escrows by role with sorting and filtering. This component contains a detailed view of the escrow, including the role, status, and actions.",
     "category": "Table",
     "escrowType": "single-release,multi-release",
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1nKkclw42iCjgCaOQJskXRhfZ3io2Av0Z/view?usp=sharing",
+      "https://drive.google.com/file/d/1p6617SvMI28h-vo4R6VPiCPDeK81GycB/view?usp=sharing"
+    ],
     "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
     "install": "npx trustless-work add escrows/escrows-by-role/table",
@@ -65,7 +71,10 @@
     "description": "Card grid to browse escrows by role with quick stats and actions. This component contains a detailed view of the escrow, including the role, status, and actions.",
     "category": "Cards",
     "escrowType": "single-release,multi-release",
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1ChSaD6RN1m90Xl3QAgSaGqFJ9GM9DdBy/view?usp=sharing",
+      "https://drive.google.com/file/d/18FnIshZgdDJgkoQST6QU-C3f3nI8Jf_l/view?usp=sharing"
+    ],
     "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
     "newBlocks": true,
     "install": "npx trustless-work add escrows/escrows-by-role/cards",
@@ -114,7 +123,10 @@
     "description": "Table layout to explore escrows by signer with sorting and filtering. This component contains a detailed view of the escrow, including the signer, status, and actions.",
     "category": "Table",
     "escrowType": "single-release,multi-release",
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1CmZT405bkDQvKtSOPX7okDK8CWmdZMuX/view?usp=sharing",
+      "https://drive.google.com/file/d/1OIbTiRBPTqvU-JvHA-K0sfnkglXKCx2S/view?usp=sharing"
+    ],
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
     "install": "npx trustless-work add escrows/escrows-by-signer/table",
@@ -163,7 +175,10 @@
     "description": "Card grid to browse escrows by signer with quick stats and actions. This component contains a detailed view of the escrow, including the signer, status, and actions.",
     "category": "Cards",
     "escrowType": "single-release,multi-release",
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/14bClWE-NVN6H2b0gXAYFdwuOPPDucDc3/view?usp=sharing",
+      "https://drive.google.com/file/d/1E66rkAULA7q4Zp70C9KqbklrqT4MUKUF/view?usp=sharing"
+    ],
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
     "newBlocks": true,
     "install": "npx trustless-work add escrows/escrows-by-signer/cards",
@@ -224,7 +239,10 @@
         "dialog": "npx trustless-work add escrows/multi-release/initialize-escrow/dialog"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1Ve1z9M0I5OrOv3uxxVh4Cs9x2QQJMmQ0/view?usp=sharing",
+      "https://drive.google.com/file/d/1nXxSc3BOQQlHNYOIORcEMq3JPFttT38L/view?usp=sharing"
+    ],
     "tags": ["Initialize", "Escrows", "Onboarding"],
     "newBlocks": true,
     "requiredProviders": [
@@ -279,7 +297,10 @@
         "dialog": "npx trustless-work add escrows/multi-release/approve-milestone/dialog"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1X4CEDgTKH76Tao7gMDKBmx0ouXFCfqEq/view?usp=sharing",
+      "https://drive.google.com/file/d/1v1SYe35ugVW9vI8ilQnTePPqSiV2r7Mz/view?usp=sharing"
+    ],
     "tags": ["Milestone", "Approve", "Escrows"],
     "newBlocks": true,
     "requiredProviders": [
@@ -334,7 +355,10 @@
         "dialog": "npx trustless-work add escrows/multi-release/change-milestone-status/dialog"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1EV-VaWpysHKxfCM47iJ7jUmg4T_aScRg/view?usp=sharing",
+      "https://drive.google.com/file/d/1PuzOtYZn5XFz0dZnXetTlWTSZHawOqQS/view?usp=sharing"
+    ],
     "tags": ["Milestone", "Status", "Escrows"],
     "newBlocks": true,
     "requiredProviders": [
@@ -389,7 +413,10 @@
         "dialog": "npx trustless-work add escrows/multi-release/fund-escrow/dialog"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1UeKPZgadgsyiUv6Fv-PEmUUhAEWKr74n/view?usp=sharing",
+      "https://drive.google.com/file/d/14Ni0ViIkcYdPM8YdAcJM1B7EirKBGoF1/view?usp=sharing"
+    ],
     "tags": ["Funding", "Escrows", "Assets"],
     "newBlocks": true,
     "requiredProviders": [
@@ -444,7 +471,10 @@
         "dialog": "npx trustless-work add escrows/multi-release/resolve-dispute/dialog"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1ZBDwPNn62ui657Nh0GyIlNj0hKCUjzti/view?usp=sharing",
+      "https://drive.google.com/file/d/1vxACZvEaBO_I8KNqAlkZWbAH1XV78rxB/view?usp=sharing"
+    ],
     "tags": ["Dispute", "Resolve", "Escrows"],
     "newBlocks": true,
     "requiredProviders": [
@@ -497,7 +527,10 @@
         "dialog": "npx trustless-work add escrows/multi-release/update-escrow/dialog"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1jnrF3My4tK5fMcojvuS0t4didc3-RX75/view?usp=sharing",
+      "https://drive.google.com/file/d/1d5lrFdIX30weJLlNFudVrA5eFMho9TKS/view?usp=sharing"
+    ],
     "tags": ["Update", "Escrows", "Admin"],
     "newBlocks": true,
     "requiredProviders": [
@@ -548,7 +581,10 @@
         "button": "npx trustless-work add escrows/multi-release/release-escrow/button"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1JAACX8z9FEc1YEWE5Kla9_H08oPhJCmB/view?usp=sharing",
+      "https://drive.google.com/file/d/1kegWlnTAaMFDBh5JcCQWxl3CK38QSYcl/view?usp=sharing"
+    ],
     "tags": ["Release", "Escrows", "Payout"],
     "newBlocks": true,
     "requiredProviders": [
@@ -599,7 +635,10 @@
         "button": "npx trustless-work add escrows/multi-release/dispute-escrow/button"
       }
     },
-    "image": "",
+    "image": [
+      "https://drive.google.com/file/d/1MqqMwUry91GKc9n_yi3TslV6Ld-ZbJCI/view?usp=sharing",
+      "https://drive.google.com/file/d/196CvqVSEMSZlwKO1d_lPDtQL5vAwY6j3/view?usp=sharing"
+    ],
     "tags": ["Dispute", "Escrows", "Actions"],
     "newBlocks": true,
     "requiredProviders": [
