@@ -8,6 +8,7 @@
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
     "newBlocks": true,
     "install": "npx trustless-work add wallet-kit",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/stellar-wallet-kit-quick-integration",
     "image": [
       "https://drive.google.com/file/d/1o31kZsuI4kPGVoCWcCymDOVJN93R5cL7/view?usp=sharing",
       "https://drive.google.com/file/d/1ya3ZHG0dCgnlBonElqaxqWifQ7k744cc/view?usp=sharing"
@@ -229,6 +230,8 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "exampleUrl": "",
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/initialize-escrow/form",
@@ -284,6 +287,7 @@
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "variants": ["form", "button", "dialog"],
     "installByTypeAndVariant": {
       "single-release": {
@@ -343,6 +347,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/change-milestone-status/form",
@@ -401,6 +406,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/fund-escrow/form",
@@ -459,6 +465,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/resolve-dispute/form",
@@ -517,6 +524,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/update-escrow/form",
@@ -573,6 +581,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["button"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "installByTypeAndVariant": {
       "single-release": {
         "button": "npx trustless-work add escrows/single-release/release-escrow/button"
@@ -627,6 +636,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["button"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
     "installByTypeAndVariant": {
       "single-release": {
         "button": "npx trustless-work add escrows/single-release/dispute-escrow/button"
