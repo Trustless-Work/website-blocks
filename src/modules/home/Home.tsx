@@ -10,6 +10,7 @@ import type { Block } from "@/types/block";
 import { BlockCard } from "@/shared/BlockCard";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import * as React from "react";
 
 // Extract unique categories from blocks data
 const getUniqueCategories = () => {
@@ -40,6 +41,13 @@ const getCategoryStats = () => {
 
 export const Home = () => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+  const decorativeOpacityClass = !mounted
+    ? "opacity-10"
+    : theme === "dark"
+      ? "opacity-10"
+      : "opacity-30";
   const categories = getUniqueCategories();
   const categoryStats = getCategoryStats();
 
@@ -58,9 +66,7 @@ export const Home = () => {
         alt="Home"
         width={1000}
         height={1000}
-        className={`w-1/2 h-auto fixed -right-30 -top-12 z-[-1] ${
-          theme === "dark" ? "opacity-10" : "opacity-30"
-        }`}
+        className={`w-1/2 h-auto fixed -right-30 -top-12 z-[-1] ${decorativeOpacityClass}`}
         quality={100}
       />
 
@@ -69,9 +75,7 @@ export const Home = () => {
         alt="Home"
         width={1000}
         height={1000}
-        className={`w-1/3 h-auto fixed -left-10 z-[-100] ${
-          theme === "dark" ? "opacity-10" : "opacity-30"
-        }`}
+        className={`w-1/3 h-auto fixed -left-10 z-[-100] ${decorativeOpacityClass}`}
         quality={100}
       />
 
