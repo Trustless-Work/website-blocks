@@ -18,11 +18,24 @@ type BlockCardProps = {
 
 export const BlockCard = ({ block }: BlockCardProps) => {
   // Normalize image(s) to an array for consistent rendering without relying on theme at SSR
-  const images = Array.isArray(block.image)
+  const toDirectDriveUrl = (url: string) => {
+    // Supports: https://drive.google.com/file/d/<id>/view?... -> https://drive.google.com/uc?export=view&id=<id>
+    const viewMatch = url.match(
+      /https?:\/\/drive\.google\.com\/file\/d\/([^/]+)\//
+    );
+    if (viewMatch && viewMatch[1]) {
+      return `https://drive.google.com/uc?export=view&id=${viewMatch[1]}`;
+    }
+    return url;
+  };
+
+  const rawImages = Array.isArray(block.image)
     ? block.image
     : typeof block.image === "string" && block.image.length > 0
       ? [block.image]
       : [];
+
+  const images = rawImages.map((u) => toDirectDriveUrl(u));
 
   return (
     <Card className="group cursor-pointer transition-all hover:shadow-md flex flex-col h-full pt-0">
