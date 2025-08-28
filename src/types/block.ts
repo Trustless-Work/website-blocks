@@ -24,6 +24,8 @@ export type Block = {
   image: string | string[];
   tags: string[];
   code: string;
+  docTypeUrl?: string;
+  exampleUrl?: string;
   newBlocks?: boolean;
   escrowType?: EscrowType;
   types?: EscrowReleaseType[];
