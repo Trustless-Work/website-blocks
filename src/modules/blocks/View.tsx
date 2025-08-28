@@ -1,3 +1,6 @@
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { SiteHeader } from "@/shared/SiteHeader";
 import { Badge } from "@/components/ui/badge";
@@ -24,20 +27,50 @@ const getUniqueCategories = () => {
   });
 };
 
-// Get category stats
-const getCategoryStats = () => {
-  const stats: Record<string, number> = {};
-  const blocks = blocksData as unknown as Block[];
-  blocks.forEach((block) => {
-    stats[block.category] = (stats[block.category] || 0) + 1;
-  });
-  return stats;
-};
-
 export const Blocks = () => {
   const categories = getUniqueCategories();
-  const categoryStats = getCategoryStats();
   const blocks = blocksData as unknown as Block[];
+
+  // URL-synced search state (?q=)
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [query, setQuery] = useState<string>(searchParams.get("q") ?? "");
+
+  // Keep local state in sync if the URL changes externally
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
+
+  // Debounce URL updates for better UX
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const value = query.trim();
+      const params = new URLSearchParams(Array.from(searchParams.entries()));
+      if (value) {
+        params.set("q", value);
+      } else {
+        params.delete("q");
+      }
+      const newUrl = `${pathname}${params.toString() ? `?${params.toString()}` : ""}`;
+      router.replace(newUrl);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [query, pathname, router, searchParams]);
+
+  // Filter by title, description or tags
+  const filteredBlocks = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return blocks;
+    return blocks.filter((block) => {
+      const inTitle = block.title.toLowerCase().includes(q);
+      const inDescription = (block.description || "").toLowerCase().includes(q);
+      const inTags = (block.tags || []).some((t) =>
+        t.toLowerCase().includes(q)
+      );
+      return inTitle || inDescription || inTags;
+    });
+  }, [blocks, query]);
 
   return (
     <div className="min-h-screen">
@@ -56,11 +89,14 @@ export const Blocks = () => {
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="relative">
+            <div className="relative w-full">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search blocks..."
-                className="pl-8 w-full sm:w-[300px]"
+                placeholder="Search by title, description or tags..."
+                className="pl-8 w-full sm:w-[400px]"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                aria-label="Search blocks"
               />
             </div>
           </div>
@@ -69,11 +105,11 @@ export const Blocks = () => {
         {/* Tabs for categories */}
         <Tabs defaultValue="all" className="w-full mt-8">
           <div className="overflow-x-auto">
-            <TabsList className="flex w-full min-w-[600px] gap-1">
+            <TabsList className="flex w-full min-w-[600px] gap-1 pb-3 sm:pb-0">
               <TabsTrigger value="all" className="flex-1">
                 All
                 <Badge variant="secondary" className="ml-2 text-xs">
-                  {blocksData.length}
+                  {filteredBlocks.length}
                 </Badge>
               </TabsTrigger>
               {categories.map((category) => (
@@ -84,7 +120,10 @@ export const Blocks = () => {
                 >
                   <span className="truncate">{category}</span>
                   <Badge variant="secondary" className="ml-2 text-xs shrink-0">
-                    {categoryStats[category]}
+                    {
+                      filteredBlocks.filter((b) => b.category === category)
+                        .length
+                    }
                   </Badge>
                 </TabsTrigger>
               ))}
@@ -105,7 +144,7 @@ export const Blocks = () => {
               <>
                 {/* All blocks tab */}
                 <TabsContent value="all" className="space-y-4 mt-6">
-                  {renderBlocks(blocks)}
+                  {renderBlocks(filteredBlocks)}
                 </TabsContent>
 
                 {/* Dynamic category tabs */}
@@ -119,7 +158,7 @@ export const Blocks = () => {
                       <h2 className="text-xl font-semibold">{category}</h2>
                       <p className="text-muted-foreground">
                         {
-                          blocksData.filter(
+                          filteredBlocks.filter(
                             (block) => block.category === category
                           ).length
                         }{" "}
@@ -127,7 +166,9 @@ export const Blocks = () => {
                       </p>
                     </div>
                     {renderBlocks(
-                      blocks.filter((block) => block.category === category)
+                      filteredBlocks.filter(
+                        (block) => block.category === category
+                      )
                     )}
                   </TabsContent>
                 ))}
