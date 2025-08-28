@@ -1,12 +1,15 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SiteHeader } from "@/shared/SiteHeader";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import blocksData from "@/data/blocks.json";
 import type { Block } from "@/types/block";
 import { BlockCard } from "@/shared/BlockCard";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 // Extract unique categories from blocks data
 const getUniqueCategories = () => {
@@ -36,6 +39,7 @@ const getCategoryStats = () => {
 };
 
 export const Home = () => {
+  const { theme } = useTheme();
   const categories = getUniqueCategories();
   const categoryStats = getCategoryStats();
 
@@ -49,7 +53,27 @@ export const Home = () => {
   const latestNewBlock = blocks.find((block) => block.newBlocks === true);
   return (
     <>
-      <SiteHeader />
+      <Image
+        src="/design/triangle-one-color.svg"
+        alt="Home"
+        width={1000}
+        height={1000}
+        className={`w-1/2 h-auto fixed -right-30 -top-12 z-[-1] ${
+          theme === "dark" ? "opacity-10" : "opacity-30"
+        }`}
+        quality={100}
+      />
+
+      <Image
+        src="/design/wall-color.svg"
+        alt="Home"
+        width={1000}
+        height={1000}
+        className={`w-1/3 h-auto fixed -left-10 z-[-100] ${
+          theme === "dark" ? "opacity-10" : "opacity-30"
+        }`}
+        quality={100}
+      />
 
       {/* Hero Section */}
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">

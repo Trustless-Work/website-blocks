@@ -74,8 +74,6 @@ export const Blocks = () => {
 
   return (
     <div className="min-h-screen">
-      <SiteHeader />
-
       <div className="container py-8">
         {/* Header */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

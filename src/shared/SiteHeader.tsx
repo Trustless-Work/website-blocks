@@ -22,10 +22,10 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-10"
       suppressHydrationWarning
     >
-      <div className="flex justify-between h-14 max-w-screen-2xl items-center">
+      <div className="flex justify-between h-14 w-full items-center">
         <div className="mr-4 flex md:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>

@@ -96,8 +96,6 @@ export const BlockPage = ({ block }: BlockPageProps) => {
 
   return (
     <div className="min-h-screen">
-      <SiteHeader />
-
       <div className="container py-8 max-w-7xl mx-auto">
         {/* Back button */}
         <div className="mb-6">

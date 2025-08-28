@@ -20,8 +20,6 @@ import {
 export const Contribute = () => {
   return (
     <div className="min-h-screen">
-      <SiteHeader />
-
       <div className="container py-8">
         {/* Hero Section */}
         <div className="space-y-6 text-center mb-12">
