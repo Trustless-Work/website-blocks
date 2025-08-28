@@ -17,6 +17,8 @@ import EscrowsBySignerTable from "@/components/tw-blocks/escrows/escrows-by-sign
 import EscrowsBySignerCards from "@/components/tw-blocks/escrows/escrows-by-signer/cards/EscrowsCards";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import blocksData from "@/data/blocks.json";
 import ApproveMilestoneForm from "@/components/tw-blocks/escrows/single-release/approve-milestone/form/ApproveMilestone";
 import ApproveMilestoneDialog from "@/components/tw-blocks/escrows/single-release/approve-milestone/dialog/ApproveMilestone";
 import ApproveMilestoneButton from "@/components/tw-blocks/escrows/single-release/approve-milestone/button/ApproveMilestone";
@@ -40,6 +42,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RelatedBlockCard } from "./RelatedBlocks";
 
 type Props = {
   block: Block;
@@ -58,7 +61,54 @@ export function BlockTypeVariantViewer({
   variants,
   setActiveVariant,
 }: Props) {
-  // No internal state; controlled by parent
+  // Get related blocks based on category and tags
+  const getRelatedBlocks = useMemo(() => {
+    const allBlocks = blocksData as Block[];
+
+    // Score blocks based on similarity
+    const scoredBlocks = allBlocks
+      .filter((b) => b.id !== block.id) // Exclude current block
+      .map((b) => {
+        let score = 0;
+
+        // Category match gets high priority
+        if (b.category === block.category) {
+          score += 10;
+        }
+
+        // Tag matches get points
+        const currentTags = block.tags || [];
+        const candidateTags = b.tags || [];
+
+        const matchingTags = currentTags.filter((tag) =>
+          candidateTags.some(
+            (candidateTag) => candidateTag.toLowerCase() === tag.toLowerCase()
+          )
+        );
+
+        score += matchingTags.length * 3;
+        if (block.escrowType && b.escrowType) {
+          if (block.escrowType === b.escrowType) {
+            score += 5;
+          } else if (
+            (block.escrowType.includes("single-release") &&
+              b.escrowType.includes("single-release")) ||
+            (block.escrowType.includes("multi-release") &&
+              b.escrowType.includes("multi-release"))
+          ) {
+            score += 2;
+          }
+        }
+
+        return { block: b, score };
+      })
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 4)
+      .map(({ block }) => block);
+
+    return scoredBlocks;
+  }, [block.category, block.id, block.tags, block.escrowType]);
 
   const renderResult = useMemo(() => {
     const action = block.id.replace("escrows-", "");
@@ -434,6 +484,27 @@ export function BlockTypeVariantViewer({
               </div>
             </CardContent>
           </Card>
+        )}
+      </div>
+
+      {/* Related Blocks Section */}
+      <div className="mt-4 sm:mt-20">
+        <h1 className="text-lg font-medium mb-4">Related Blocks</h1>
+        {getRelatedBlocks.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {getRelatedBlocks.map((relatedBlock) => (
+              <RelatedBlockCard key={relatedBlock.id} block={relatedBlock} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <div className="text-muted-foreground text-sm mb-2">
+              There are no related blocks for this block.
+            </div>
+            <div className="text-xs text-muted-foreground">
+              Try exploring other blocks with similar categories or tags
+            </div>
+          </div>
         )}
       </div>
     </Tabs>
