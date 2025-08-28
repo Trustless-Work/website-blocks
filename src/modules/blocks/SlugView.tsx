@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen, Eye } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
@@ -98,13 +98,33 @@ export const BlockPage = ({ block }: BlockPageProps) => {
     <div className="min-h-screen">
       <div className="container py-8 max-w-7xl mx-auto">
         {/* Back button */}
-        <div className="mb-6">
+        <div className="flex flex-col justify-between md:flex-row gap-2 mb-6">
           <Button variant="ghost" asChild>
             <Link href="/blocks">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to blocks
             </Link>
           </Button>
+
+          <div className="flex flex-col gap-2 md:flex-row">
+            {block.docTypeUrl && (
+              <Button variant="outline" asChild>
+                <Link href={block.docTypeUrl} target="_blank">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  View documentation
+                </Link>
+              </Button>
+            )}
+
+            {block.exampleUrl && (
+              <Button variant="outline" asChild>
+                <Link href={block.exampleUrl} target="_blank">
+                  <Eye className="mr-2 h-4 w-4" />
+                  View example
+                </Link>
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Header */}
