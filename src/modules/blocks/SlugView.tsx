@@ -132,25 +132,6 @@ export const BlockPage = ({ block }: BlockPageProps) => {
                 </Badge>
               )}
             </div>
-            {hasExplicitVariants && variants.length > 1 && (
-              <div className="flex items-center gap-2">
-                <Select
-                  value={activeVariant}
-                  onValueChange={(v) => setActiveVariant(v as EscrowVariant)}
-                >
-                  <SelectTrigger className="w-[180px] cursor-pointer">
-                    <SelectValue placeholder="Select variant" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {variants.map((v) => (
-                      <SelectItem key={v} value={v} className="cursor-pointer">
-                        {v.charAt(0).toUpperCase() + v.slice(1)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
           </div>
         </div>
 
@@ -195,6 +176,9 @@ export const BlockPage = ({ block }: BlockPageProps) => {
             block={block as unknown as Block}
             activeType={activeType}
             activeVariant={activeVariant}
+            hasExplicitVariants={hasExplicitVariants}
+            variants={variants}
+            setActiveVariant={setActiveVariant}
           />
         </div>
       </div>

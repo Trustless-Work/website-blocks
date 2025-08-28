@@ -146,7 +146,25 @@
   container-type: inline-size;
 }
 
+.responsive-mobile .p-10 {
+  /* Ensure roomy sections shrink on mobile preview */
+  padding: 0.75rem !important; /* p-3 */
+}
+
+.responsive-mobile .sm\:block {
+  /* Simulate small screens: elements meant for >=sm stay hidden */
+  display: none !important;
+}
+
 .responsive-mobile .grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.responsive-mobile .sm\:grid-cols-2 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.responsive-mobile .md\:grid-cols-3 {
   grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
 }
 
@@ -155,6 +173,10 @@
 }
 
 .responsive-mobile .lg\:grid-cols-3 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.responsive-mobile .lg\:grid-cols-4 {
   grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
 }
 
@@ -178,6 +200,11 @@
   margin-right: calc(0px * var(--tw-space-x-reverse)) !important;
 }
 
+/* Ensure internal two-column controls (e.g., Active / OnChain) keep spacing */
+.responsive-mobile .grid.grid-cols-2 {
+  gap: 0.5rem !important; /* gap-2 */
+}
+
 .responsive-mobile .md\:w-1\/4 {
   width: 100% !important;
 }
@@ -194,11 +221,23 @@
   container-type: inline-size;
 }
 
+.responsive-tablet .sm\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.responsive-tablet .md\:grid-cols-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
 .responsive-tablet .lg\:grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
 
 .responsive-tablet .lg\:grid-cols-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.responsive-tablet .lg\:grid-cols-4 {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
 
@@ -228,4 +267,9 @@
 
 .responsive-tablet .sm\:self-center {
   align-self: center !important;
+}
+
+/* Keep consistent spacing for two-column controls in tablet preview */
+.responsive-tablet .grid.grid-cols-2 {
+  gap: 0.5rem !important; /* gap-2 */
 }

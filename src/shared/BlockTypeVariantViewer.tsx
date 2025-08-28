@@ -33,17 +33,30 @@ import UpdateEscrowForm from "@/components/tw-blocks/escrows/single-release/upda
 import UpdateEscrowDialog from "@/components/tw-blocks/escrows/single-release/update-escrow/dialog/UpdateEscrow";
 import ReleaseEscrowButton from "@/components/tw-blocks/escrows/single-release/release-escrow/button/ReleaseEscrow";
 import DisputeEscrowButton from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
   block: Block;
   activeType: EscrowReleaseType;
   activeVariant: EscrowVariant;
+  hasExplicitVariants: boolean;
+  variants: EscrowVariant[];
+  setActiveVariant: (variant: EscrowVariant) => void;
 };
 
 export function BlockTypeVariantViewer({
   block,
   activeType,
   activeVariant,
+  hasExplicitVariants,
+  variants,
+  setActiveVariant,
 }: Props) {
   // No internal state; controlled by parent
 
@@ -300,6 +313,30 @@ export function BlockTypeVariantViewer({
           title=""
           rightSlot={
             <div className="flex items-center gap-2">
+              {hasExplicitVariants && variants.length > 1 && (
+                <div className="flex items-center gap-2">
+                  <Select
+                    value={activeVariant}
+                    onValueChange={(v) => setActiveVariant(v as EscrowVariant)}
+                  >
+                    <SelectTrigger className="w-[180px] cursor-pointer">
+                      <SelectValue placeholder="Select variant" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {variants.map((v) => (
+                        <SelectItem
+                          key={v}
+                          value={v}
+                          className="cursor-pointer"
+                        >
+                          {v.charAt(0).toUpperCase() + v.slice(1)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
               <TabsList className="h-8">
                 <TabsTrigger value="preview" className="h-7 px-2">
                   <Eye className="h-3.5 w-3.5" />
