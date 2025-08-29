@@ -274,34 +274,6 @@ export default function Page() {
             />
           </div>
         </section>
-
-        <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Next Steps
-          </h2>
-          <div className="space-y-4 pt-4">
-            <p className="leading-7">Ready to explore more? Check out:</p>
-
-            <ul className="list-disc pl-6 space-y-2">
-              <li>
-                <strong>Installation Guide:</strong> Detailed setup instructions
-                and configuration options
-              </li>
-              <li>
-                <strong>Available Blocks:</strong> Browse all available UI
-                components and hooks
-              </li>
-              <li>
-                <strong>State Management:</strong> Learn about TanStack Query
-                integration and mutations
-              </li>
-              <li>
-                <strong>Best Practices:</strong> Guidelines for providers, error
-                handling, and wallet integration
-              </li>
-            </ul>
-          </div>
-        </section>
       </div>
     </div>
   );

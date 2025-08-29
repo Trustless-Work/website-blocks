@@ -321,6 +321,19 @@ export default function EscrowsPage() {
                   </CardDescription>
                 </CardHeader>
               </Card>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>Missing Dependencies</CardTitle>
+                  <CardDescription>
+                    If you are using some blocks, you'll need to check the
+                    dependencies section of the block you are using. For
+                    example, if you are trying to use the escrows-by-role/table
+                    block, you'll need to add the escrow-context, wallet-kit,
+                    escrows, handle-errors and helpers block to your project.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
             </div>
           </div>
         </section>
