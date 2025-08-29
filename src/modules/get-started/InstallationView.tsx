@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from "next/link";
+import { ExternalLink, InfoIcon } from "lucide-react";
 
 export const InstallationView = () => {
   return (
@@ -100,9 +102,17 @@ export const InstallationView = () => {
         </section>
 
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Environment Configuration
-          </h2>
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+              Environment Configuration
+            </h2>
+            <Link
+              href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
+              target="_blank"
+            >
+              <ExternalLink className="h-6 w-6" />
+            </Link>
+          </div>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
               Create a{" "}
@@ -298,7 +308,15 @@ export default function EscrowsPage() {
 
               <Card className="my-4 gap-2">
                 <CardHeader>
-                  <CardTitle>API Key</CardTitle>
+                  <div className="flex items-center justify-between gap-2">
+                    <CardTitle>API Key</CardTitle>
+                    <Link
+                      href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
+                      target="_blank"
+                    >
+                      <ExternalLink className="h-6 w-6" />
+                    </Link>
+                  </div>
                   <CardDescription>
                     Ensure your{" "}
                     <code className="bg-muted px-1 py-0.5 rounded text-sm">
@@ -326,16 +344,6 @@ export default function EscrowsPage() {
                 </CardHeader>
               </Card>
             </div>
-
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-              List Available Blocks
-            </h3>
-
-            <p className="leading-7">
-              To see all available components and their paths:
-            </p>
-
-            <CodeBlock code="npx trustless-work list" />
           </div>
         </section>
       </div>
