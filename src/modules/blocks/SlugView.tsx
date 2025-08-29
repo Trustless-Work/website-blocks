@@ -159,6 +159,18 @@ export const BlockPage = ({ block }: BlockPageProps) => {
             <div className="max-w-3xl mb-10 sm:my-20">
               <div className="space-y-4 mt-10">
                 <h3 className="text-2xl font-semibold">Installation</h3>
+                <p className="text-sm text-muted-foreground">
+                  Before installing the block, make sure you have the required
+                  providers and blocks. You can read more in the{" "}
+                  <Link
+                    href="/get-started/dependencies"
+                    className="text-primary-500 font-bold"
+                    target="_blank"
+                  >
+                    dependencies section
+                  </Link>{" "}
+                  based on the block you are using.
+                </p>
                 <CodeBlock code={installationCommand} language="bash" />
               </div>
             </div>
