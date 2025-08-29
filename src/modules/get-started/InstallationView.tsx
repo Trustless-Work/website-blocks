@@ -24,24 +24,6 @@ export const InstallationView = () => {
       </div>
 
       <div className="space-y-8">
-        <section id="create-project">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-            Create a Next.js Project
-          </h2>
-          <div className="space-y-4 pt-4">
-            <p className="leading-7">
-              Start by creating a new Next.js project with TypeScript and
-              Tailwind CSS:
-            </p>
-
-            <CodeBlock code="npx create-next-app@latest" />
-
-            <p className="leading-7">Navigate to your project directory:</p>
-
-            <CodeBlock code="cd my-trustless-app" />
-          </div>
-        </section>
-
         <section id="installation">
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
             Install Trustless Work Blocks
@@ -287,13 +269,9 @@ export default function EscrowsPage() {
 
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Troubleshooting
+            Common Issues
           </h2>
           <div className="space-y-4 pt-4">
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-              Common Issues
-            </h3>
-
             <div className="space-y-4">
               <Card className="my-4 gap-2">
                 <CardHeader>
