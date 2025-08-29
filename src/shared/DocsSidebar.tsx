@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 const sidebarNavItems = [
   {
@@ -57,6 +58,11 @@ export function DocsSidebar() {
                       : "text-muted-foreground"
                   )}
                 >
+                  {pathname === item.href ? (
+                    <ArrowRight className="h-4 w-4 mr-2" />
+                  ) : (
+                    ""
+                  )}
                   {item.title}
                 </Link>
               ))}
