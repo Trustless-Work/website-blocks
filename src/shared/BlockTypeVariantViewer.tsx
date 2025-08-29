@@ -431,6 +431,26 @@ export function BlockTypeVariantViewer({
           <CodeBlock code={renderResult.code} language="tsx" />
         </BlockPreview>
       </TabsContent>
+
+      {/* Notes Section */}
+      {block.notes && block.notes.length > 0 && block.notes[0] !== "" && (
+        <Card className="mt-4 sm:mt-20 w-full">
+          <CardHeader>
+            <CardTitle>Important Notes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-start">
+              <ul className="text-muted-foreground text-sm mb-2 list-disc list-inside">
+                {block.notes.map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Required Providers and Blocks Section */}
       <div className="flex flex-col md:flex-row gap-4 mt-4 w-full">
         {block.requiredProviders && (
           <Card className={`w-full ${block.requiredBlocks ? "md:w-1/2" : ""}`}>
