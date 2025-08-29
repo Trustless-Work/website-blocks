@@ -1,0 +1,477 @@
+"use client";
+
+import { CodeBlock } from "@/shared/CodeBlock";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ExternalLink, Info } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from "next/link";
+import Image from "next/image";
+
+export const StartFromScratchView = () => {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-3">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+          Escrow's Single Release Lifecycle
+        </h1>
+        <p className="text-xl text-muted-foreground">
+          Step by Step Guide to implement Escrow's Single Release Lifecycle
+        </p>
+
+        <Card className="my-4 gap-2">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Info className="h-4 w-4" />
+              Important
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription>
+              <p>
+                It does not work for a real use case, only for testing purposes.
+                But if you want to implement it, you can use the code below as a
+                reference and customize it to your needs.
+              </p>
+            </CardDescription>
+          </CardContent>
+        </Card>
+      </div>
+
+      <section id="create-project">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Create a Next.js Project
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            Start by creating a new Next.js project with TypeScript and Tailwind
+            CSS:
+          </p>
+
+          <CodeBlock code="npx create-next-app@latest" />
+
+          <p className="leading-7">Navigate to your project directory:</p>
+
+          <CodeBlock code="cd my-trustless-app" />
+        </div>
+      </section>
+
+      <section id="installation">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Install Trustless Work Blocks
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Install the main library package:</p>
+
+          <Tabs defaultValue="npm" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="npm">npm</TabsTrigger>
+            </TabsList>
+            <TabsContent value="npm">
+              <CodeBlock code="npm install @trustless-work/blocks" />
+            </TabsContent>
+          </Tabs>
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Run the CLI Setup
+          </h3>
+
+          <p className="leading-7">
+            Initialize your project with the Trustless Work CLI:
+          </p>
+
+          <CodeBlock code="npx trustless-work init" />
+
+          <Card className="my-4 gap-2">
+            <CardHeader>
+              <CardTitle>What the init command does:</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="list-disc pl-6 mt-2 space-y-1">
+                <li>
+                  Installs shadcn/ui components (with interactive prompts)
+                </li>
+                <li>
+                  Installs required dependencies: @tanstack/react-query,
+                  @trustless-work/escrow, axios, zod, react-hook-form,
+                  @creit.tech/stellar-wallets-kit, react-day-picker, etc.
+                </li>
+                <li>
+                  Creates{" "}
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    .twblocks.json
+                  </code>{" "}
+                  configuration file
+                </li>
+                <li>
+                  Optionally wires providers into your Next.js{" "}
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    app/layout.tsx
+                  </code>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section>
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            Environment Configuration
+          </h2>
+          <Link
+            href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
+            target="_blank"
+          >
+            <ExternalLink className="h-6 w-6" />
+          </Link>
+        </div>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            Create a{" "}
+            <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+              .env
+            </code>{" "}
+            file in your project root:
+          </p>
+
+          <CodeBlock
+            code={`# Required: Your Trustless Work API key 
+NEXT_PUBLIC_API_KEY=your_api_key_here`}
+            filename=".env"
+          />
+        </div>
+      </section>
+
+      <section id="add-components">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Manual Provider Setup
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            Wrap your app with the required providers in this specific order:
+          </p>
+
+          <CodeBlock
+            code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
+import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
+import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
+import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
+import { Toaster } from "@/components/ui/sonner";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <ReactQueryClientProvider>
+          <TrustlessWorkProvider>
+            <WalletProvider>
+              <EscrowProvider>
+                <EscrowDialogsProvider>
+                  <EscrowAmountProvider>
+
+                    {children}
+                    <Toaster />
+
+                  </EscrowAmountProvider>
+                </EscrowDialogsProvider>
+              </EscrowProvider>
+            </WalletProvider>
+          </TrustlessWorkProvider>
+        </ReactQueryClientProvider>
+      </body>
+    </html>
+  );
+}`}
+            language="tsx"
+            filename="app/layout.tsx"
+          />
+
+          <Card className="my-4 gap-2">
+            <CardHeader>
+              <CardTitle>Provider Order Matters</CardTitle>
+              <CardDescription>
+                The providers must be nested in this exact order for proper
+                functionality.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </section>
+
+      <section id="add-wallet-connectivity">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Wallet Connectivity
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add wallet connectivity to your app:</p>
+
+          <CodeBlock code="npx trustless-work add wallet-kit" />
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Example usage in a page:
+          </h3>
+
+          <p className="leading-7">Add wallet connectivity to your app:</p>
+
+          <CodeBlock
+            code={`"use client";
+
+import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
+
+export default function Home() {
+  return (
+    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <header className="flex justify-between items-center w-full">
+        <h2 className="text-2xl font-bold">Trustless Work</h2>
+
+        {/* Wallet Button */}
+        <WalletButton />
+      </header>
+    </div>
+  );
+}
+`}
+            language="tsx"
+            filename="app/layout.tsx"
+          />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Helpers
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add helpers to your app:</p>
+
+          <CodeBlock code="npx trustless-work add helpers" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Tanstack Query
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add Tanstack Query to your app:</p>
+
+          <CodeBlock code="npx trustless-work add tanstack" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Handle Errors
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add Handle Errors to your app:</p>
+
+          <CodeBlock code="npx trustless-work add handle-errors" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Providers
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add Providers to your app:</p>
+
+          <CodeBlock code="npx trustless-work add providers" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Escrow Context
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add Escrow Context to your app:</p>
+
+          <CodeBlock code="npx trustless-work add escrows/escrow-context" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Escrows by Role Cards
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add Escrows by Role Cards to your app:</p>
+
+          <CodeBlock code="npx trustless-work add escrows/escrows-by-role/cards" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Single Release Escrows
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">Add Single Release Escrows to your app:</p>
+
+          <CodeBlock code="npx trustless-work add escrows/single-release" />
+
+          <p className="leading-7"></p>
+
+          <Card className="my-4 gap-2">
+            <CardHeader>
+              <CardTitle>All the blocks were added, now use them!</CardTitle>
+              <CardDescription>
+                You already have all the required blocks to start using the
+                single-release escrow lifecycle.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Example usage in a page:
+          </h3>
+
+          <p className="leading-7">Add wallet connectivity to your app:</p>
+
+          <CodeBlock
+            code={`"use client";
+
+import EscrowsByRoleCards from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
+import InitializeEscrowDialog from "@/components/tw-blocks/escrows/single-release/initialize-escrow/dialog/InitializeEscrow";
+import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
+
+export default function Home() {
+  return (
+    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <header className="flex justify-between items-center w-full">
+        <h2 className="text-2xl font-bold">Trustless Work</h2>
+        <WalletButton />
+      </header>
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <div className="container">
+          <div className="flex w-full mb-4 justify-end">
+            <div className="flex w-1/6">
+              <InitializeEscrowDialog />
+            </div>
+          </div>
+
+          <EscrowsByRoleCards />
+        </div>
+      </main>
+    </div>
+  );
+}
+
+`}
+            language="tsx"
+            filename="app/layout.tsx"
+          />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Final UI
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            By using these components, you'll be able to completed the entire
+            escrow lifecycle.
+          </p>
+
+          <Card className="my-4 gap-2">
+            <CardHeader>
+              <CardTitle>Important Usage Advice</CardTitle>
+              <CardDescription>
+                - This cards components works <strong>by role</strong>. In the
+                filters section, you can select the role you want to see the
+                escrows for. Based on that, the actions buttons will be
+                rendered. <br /> - Before you start using the UI, you must add
+                the <strong>USDC</strong> asset to your wallet. If not, you wont
+                be able to interact with Trustless Work.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Wallet Connection Dialog
+          </h3>
+
+          <p className="leading-7">Show the wallet connection dialog:</p>
+
+          <div className="flex items-center justify-center w-full">
+            <Image
+              className="border-2 rounded-lg"
+              src="/start-from-scratch/wallet-kit.png"
+              alt="Escrow Lifecycle"
+              width={500}
+              height={500}
+            />
+          </div>
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Cards by Role
+          </h3>
+
+          <p className="leading-7">Show the cards by role:</p>
+
+          <div className="flex items-center justify-center w-full">
+            <Image
+              className="border-2 rounded-lg"
+              src="/start-from-scratch/cards-by-role.png"
+              alt="Escrow Lifecycle"
+              width={1000}
+              height={500}
+            />
+          </div>
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Initialize Escrow Dialog
+          </h3>
+
+          <p className="leading-7">Show the initialize escrow dialog:</p>
+
+          <div className="flex items-center justify-center w-full">
+            <Image
+              className="border-2 rounded-lg"
+              src="/start-from-scratch/initialize-escrow.png"
+              alt="Escrow Lifecycle"
+              width={1000}
+              height={500}
+            />
+          </div>
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Escrow Details Dialog
+          </h3>
+
+          <p className="leading-7">Show the escrow details dialog:</p>
+
+          <div className="flex items-center justify-center w-full">
+            <Image
+              className="border-2 rounded-lg"
+              src="/start-from-scratch/details.png"
+              alt="Escrow Lifecycle"
+              width={1000}
+              height={450}
+            />
+          </div>
+
+          <p className="text-end italic mt-10">
+            The easiest way to implement escrows in blockchain."
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+};
