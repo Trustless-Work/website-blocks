@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto flex flex-col bg-background text-gray-800 dark:text-gray-300 py-10 px-7 md:px-4 border-t border-gray-300 dark:border-gray-700">
+    <footer className="mt-auto sm:mt-30 flex flex-col bg-background text-gray-800 dark:text-gray-300 py-10 px-7 md:px-4 border-t border-gray-300 dark:border-gray-700">
       <div className="container mx-auto flex flex-wrap justify-between items-start gap-8">
         <div className="flex items-center">
           <Image src="/favicon.ico" alt="trustless" width={100} height={100} />
@@ -76,6 +76,17 @@ const Footer: React.FC = () => {
               className="text-primary hover:underline"
             >
               viewer.trustlesswork.com
+            </Link>
+          </p>
+          <p>
+            BackOffice:{" "}
+            <Link
+              href="https://dapp.trustlesswork.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              dapp.trustlesswork.com
             </Link>
           </p>
         </div>
