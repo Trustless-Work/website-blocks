@@ -16,6 +16,10 @@ const sidebarNavItems = [
         title: "Installation Guide",
         href: "/get-started/installation",
       },
+      {
+        title: "Start from Scratch",
+        href: "/get-started/start-from-scratch",
+      },
     ],
   },
 
