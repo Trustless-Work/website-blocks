@@ -9,6 +9,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ExternalLink, InfoIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const InstallationView = () => {
   return (
@@ -92,7 +93,13 @@ export const InstallationView = () => {
               href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
               target="_blank"
             >
-              <ExternalLink className="h-6 w-6" />
+              <Button
+                variant="outline"
+                size="icon"
+                className="w-full px-3 cursor-pointer"
+              >
+                <ExternalLink className="h-6 w-6" /> Documentation
+              </Button>
             </Link>
           </div>
           <div className="space-y-4 pt-4">
@@ -112,79 +119,10 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
           </div>
         </section>
 
-        <section id="add-components">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Add Required Providers
-          </h2>
-          <div className="space-y-4 pt-4">
-            <p className="leading-7">
-              If you skipped the automatic provider setup during init, add them
-              manually:
-            </p>
-
-            <CodeBlock code="npx trustless-work add providers" />
-
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-              Manual Provider Setup
-            </h3>
-
-            <p className="leading-7">
-              If you prefer manual setup, wrap your app with the required
-              providers in this specific order:
-            </p>
-
-            <CodeBlock
-              code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
-import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
-import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
-import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
-import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
-import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <ReactQueryClientProvider>
-          <TrustlessWorkProvider>
-            <WalletProvider>
-              <EscrowProvider>
-                <EscrowDialogsProvider>
-                  <EscrowAmountProvider>
-                    {children}
-                  </EscrowAmountProvider>
-                </EscrowDialogsProvider>
-              </EscrowProvider>
-            </WalletProvider>
-          </TrustlessWorkProvider>
-        </ReactQueryClientProvider>
-      </body>
-    </html>
-  );
-}`}
-              language="tsx"
-              filename="app/layout.tsx"
-            />
-
-            <Card className="my-4 gap-2">
-              <CardHeader>
-                <CardTitle>Provider Order Matters</CardTitle>
-                <CardDescription>
-                  The providers must be nested in this exact order for proper
-                  functionality.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-        </section>
-
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Configuration Files (Optional)
+            Configuration Files{" "}
+            <span className="font-extrabold">(Optional)</span>
           </h2>
           <div className="space-y-4 pt-4">
             <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
@@ -220,50 +158,60 @@ export default function RootLayout({
 
         <section>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Add Your First Components
+            Wrap your App with Providers
+          </h2>
+          <div className="space-y-4 pt-4">
+            <p className="leading-7">
+              If you want to use some blocks, you should wrap your app with
+              their providers. See more in:{" "}
+              <Link
+                target="_blank"
+                href="/get-started/dependencies"
+                className="text-primary-500 font-bold"
+              >
+                Dependencies
+              </Link>
+            </p>
+            <p className="leading-7">
+              <span className="font-bold text-destructive mr-2">
+                Absolutely must be used:
+              </span>{" "}
+              ReactQueryClientProvider | TrustlessWorkProvider | WalletProvider.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            Add Your First Component
           </h2>
           <div className="space-y-4 pt-4">
             <p className="leading-7">Add wallet connectivity to your app:</p>
 
             <CodeBlock code="npx trustless-work add wallet-kit" />
 
-            <p className="leading-7">Add escrow management components:</p>
-
-            <CodeBlock
-              code={`# Cards view for escrows by role
-npx trustless-work add escrows/escrows-by-role/cards
-
-# Table view for escrows by role  
-npx trustless-work add escrows/escrows-by-role/table
-
-# Escrow context providers
-npx trustless-work add escrows/escrow-context`}
-            />
-
             <p className="leading-7">Example usage in a page:</p>
 
             <CodeBlock
-              code={`import { EscrowsByRoleCards } from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
-import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
-import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
+              code={`import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
 
-export default function EscrowsPage() {
+export default function HomePage() {
   return (
     <div className="container mx-auto py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">My Escrows</h1>
         <WalletButton />
       </div>
-      
-      <EscrowDialogsProvider>
-        <EscrowsByRoleCards />
-      </EscrowDialogsProvider>
     </div>
   );
 }`}
               language="tsx"
-              filename="app/escrows/page.tsx"
+              filename="app/home/page.tsx"
             />
+
+            <p className="leading-7">
+              Now, you are able to interact with the wallet.
+            </p>
           </div>
         </section>
 
@@ -275,24 +223,19 @@ export default function EscrowsPage() {
             <div className="space-y-4">
               <Card className="my-4 gap-2">
                 <CardHeader>
-                  <CardTitle>Provider Order</CardTitle>
-                  <CardDescription>
-                    Make sure providers are nested in the correct order:
-                    ReactQueryClientProvider → TrustlessWorkProvider →
-                    WalletProvider → EscrowProvider.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-
-              <Card className="my-4 gap-2">
-                <CardHeader>
                   <div className="flex items-center justify-between gap-2">
                     <CardTitle>API Key</CardTitle>
                     <Link
                       href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
                       target="_blank"
                     >
-                      <ExternalLink className="h-6 w-6" />
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="w-full px-3 cursor-pointer"
+                      >
+                        <ExternalLink className="h-6 w-6" /> Documentation
+                      </Button>
                     </Link>
                   </div>
                   <CardDescription>
@@ -301,6 +244,17 @@ export default function EscrowsPage() {
                       NEXT_PUBLIC_API_KEY
                     </code>{" "}
                     is set in your environment variables.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>Provider Order</CardTitle>
+                  <CardDescription>
+                    Make sure providers are nested in the correct order:
+                    ReactQueryClientProvider → TrustlessWorkProvider →
+                    WalletProvider → EscrowProvider.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -334,6 +288,56 @@ export default function EscrowsPage() {
                   </CardDescription>
                 </CardHeader>
               </Card>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>Server Side Error</CardTitle>
+                  <CardDescription>
+                    When you are using some blocks, you might get a server side
+                    error, so you should write "use client" on the top of your
+                    component. (Most usually happens with form blocks)
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>@trustless-work/blocks not installed</CardTitle>
+                  <CardDescription>
+                    Before you add a block, you should install the
+                    @trustless-work/blocks package with{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      npm install @trustless-work/blocks
+                    </code>
+                    .
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <CardTitle>@trustless-work/blocks not initialized</CardTitle>
+                  <CardDescription>
+                    Before you add a block, you should initialize the
+                    @trustless-work/blocks package with{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      npx trustless-work init
+                    </code>
+                    .
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <p className="flex gap-2 justify-end my-10">
+                Still have issues?{" "}
+                <Link
+                  href="https://t.me/+kmr8tGegxLU0NTA5"
+                  target="_blank"
+                  className="flex items-center gap-2 text-primary-500 font-bold"
+                >
+                  Contact support <ExternalLink className="h-4 w-4" />
+                </Link>
+              </p>
             </div>
           </div>
         </section>
