@@ -12,6 +12,7 @@ import { ArrowLeft, ArrowRight, ExternalLink, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export const StartFromScratchView = () => {
   return (
@@ -129,7 +130,13 @@ export const StartFromScratchView = () => {
             href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
             target="_blank"
           >
-            <ExternalLink className="h-6 w-6" />
+            <Button
+              variant="outline"
+              size="icon"
+              className="w-full px-3 cursor-pointer"
+            >
+              <ExternalLink className="h-6 w-6" /> Documentation
+            </Button>
           </Link>
         </div>
         <div className="space-y-4 pt-4">
@@ -146,68 +153,6 @@ export const StartFromScratchView = () => {
 NEXT_PUBLIC_API_KEY=your_api_key_here`}
             filename=".env"
           />
-        </div>
-      </section>
-
-      <section id="add-components">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-          Manual Provider Setup
-        </h2>
-        <div className="space-y-4 pt-4">
-          <p className="leading-7">
-            Wrap your app with the required providers in this specific order:
-          </p>
-
-          <CodeBlock
-            code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
-import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
-import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
-import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
-import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
-import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
-import { Toaster } from "@/components/ui/sonner";
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <ReactQueryClientProvider>
-          <TrustlessWorkProvider>
-            <WalletProvider>
-              <EscrowProvider>
-                <EscrowDialogsProvider>
-                  <EscrowAmountProvider>
-
-                    {children}
-                    <Toaster />
-
-                  </EscrowAmountProvider>
-                </EscrowDialogsProvider>
-              </EscrowProvider>
-            </WalletProvider>
-          </TrustlessWorkProvider>
-        </ReactQueryClientProvider>
-      </body>
-    </html>
-  );
-}`}
-            language="tsx"
-            filename="app/layout.tsx"
-          />
-
-          <Card className="my-4 gap-2">
-            <CardHeader>
-              <CardTitle>Provider Order Matters</CardTitle>
-              <CardDescription>
-                The providers must be nested in this exact order for proper
-                functionality.
-              </CardDescription>
-            </CardHeader>
-          </Card>
         </div>
       </section>
 
@@ -285,7 +230,7 @@ export default function Home() {
 
       <section>
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-          Add Providers
+          Add Providers (If you skipped the init command)
         </h2>
         <div className="space-y-4 pt-4">
           <p className="leading-7">Add Providers to your app:</p>
@@ -324,24 +269,79 @@ export default function Home() {
           <p className="leading-7">Add Single Release Escrows to your app:</p>
 
           <CodeBlock code="npx trustless-work add escrows/single-release" />
+        </div>
+      </section>
 
-          <p className="leading-7"></p>
+      <section id="add-components">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Manual Provider Setup
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            Wrap your app with the required providers in this specific order:
+          </p>
+
+          <CodeBlock
+            code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
+import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
+import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
+import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
+import { Toaster } from "@/components/ui/sonner";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <ReactQueryClientProvider>
+          <TrustlessWorkProvider>
+            <WalletProvider>
+              <EscrowProvider>
+                <EscrowDialogsProvider>
+                  <EscrowAmountProvider>
+
+                    {children}
+                    <Toaster />
+
+                  </EscrowAmountProvider>
+                </EscrowDialogsProvider>
+              </EscrowProvider>
+            </WalletProvider>
+          </TrustlessWorkProvider>
+        </ReactQueryClientProvider>
+      </body>
+    </html>
+  );
+}`}
+            language="tsx"
+            filename="app/layout.tsx"
+          />
 
           <Card className="my-4 gap-2">
             <CardHeader>
-              <CardTitle>All the blocks were added, now use them!</CardTitle>
+              <CardTitle>Provider Order Matters</CardTitle>
               <CardDescription>
-                You already have all the required blocks to start using the
-                single-release escrow lifecycle.
+                The providers must be nested in this exact order for proper
+                functionality.
               </CardDescription>
             </CardHeader>
           </Card>
+        </div>
+      </section>
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            Example usage in a page:
-          </h3>
-
-          <p className="leading-7">Add wallet connectivity to your app:</p>
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Example usage in a page:
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            Now, you are able to interact with the entire escrow lifecycle.
+          </p>
 
           <CodeBlock
             code={`"use client";
@@ -378,6 +378,16 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <Card className="my-4 gap-2">
+        <CardHeader>
+          <CardTitle>All the blocks were added, now use them!</CardTitle>
+          <CardDescription>
+            You already have all the required blocks to start using the
+            single-release escrow lifecycle.
+          </CardDescription>
+        </CardHeader>
+      </Card>
 
       <section>
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
