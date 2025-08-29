@@ -6,6 +6,10 @@
     "category": "Wallet",
     "escrowType": null,
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
+    "notes": [
+      "This block is required for all escrow blocks. It is used to provide the wallet provider, validators and a connect button powered by Stellar Wallets Kit. @Credit-Tech",
+      "When you already added the block to your project, you should add the USDC asset to your Wallet. Otherwise, the escrow interaction will not work."
+    ],
     "newBlocks": true,
     "install": "npx trustless-work add wallet-kit",
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/stellar-wallet-kit-quick-integration",
@@ -20,6 +24,9 @@
     "description": "Table layout to explore escrows by role with sorting and filtering. This component contains a detailed view of the escrow, including the role, status, and actions.",
     "category": "Table",
     "escrowType": "single-release,multi-release",
+    "notes": [
+      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/table/EscrowsTable.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case."
+    ],
     "image": [
       "https://drive.google.com/file/d/1nKkclw42iCjgCaOQJskXRhfZ3io2Av0Z/view?usp=sharing",
       "https://drive.google.com/file/d/1p6617SvMI28h-vo4R6VPiCPDeK81GycB/view?usp=sharing"
@@ -27,6 +34,7 @@
     "tags": ["Escrows", "Table", "Role", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
     "install": "npx trustless-work add escrows/escrows-by-role/table",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usegetescrowsfromindexerbyrole",
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
@@ -72,6 +80,9 @@
     "description": "Card grid to browse escrows by role with quick stats and actions. This component contains a detailed view of the escrow, including the role, status, and actions.",
     "category": "Cards",
     "escrowType": "single-release,multi-release",
+    "notes": [
+      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/cards/EscrowsCards.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case."
+    ],
     "image": [
       "https://drive.google.com/file/d/1ChSaD6RN1m90Xl3QAgSaGqFJ9GM9DdBy/view?usp=sharing",
       "https://drive.google.com/file/d/18FnIshZgdDJgkoQST6QU-C3f3nI8Jf_l/view?usp=sharing"
@@ -79,6 +90,7 @@
     "tags": ["Escrows", "Cards", "Role", "Grid", "Overview"],
     "newBlocks": true,
     "install": "npx trustless-work add escrows/escrows-by-role/cards",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usegetescrowsfromindexerbyrole",
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
@@ -130,7 +142,11 @@
     ],
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
+    "notes": [
+      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/table/EscrowsTable.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes."
+    ],
     "install": "npx trustless-work add escrows/escrows-by-signer/table",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usegetescrowsfromindexerbysigner",
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
@@ -182,7 +198,11 @@
     ],
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
     "newBlocks": true,
+    "notes": [
+      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/cards/EscrowsCards.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes."
+    ],
     "install": "npx trustless-work add escrows/escrows-by-signer/cards",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usegetescrowsfromindexerbysigner",
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
@@ -230,7 +250,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "dialog"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/useinitializeescrow",
     "exampleUrl": "",
     "installByTypeAndVariant": {
       "single-release": {
@@ -242,6 +262,9 @@
         "dialog": "npx trustless-work add escrows/multi-release/initialize-escrow/dialog"
       }
     },
+    "notes": [
+      "This form includes all the fields required by the initialize escrow payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always use the same platform address or only work with the USDC asset, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action"
+    ],
     "image": [
       "https://drive.google.com/file/d/1Ve1z9M0I5OrOv3uxxVh4Cs9x2QQJMmQ0/view?usp=sharing",
       "https://drive.google.com/file/d/1nXxSc3BOQQlHNYOIORcEMq3JPFttT38L/view?usp=sharing"
@@ -287,7 +310,11 @@
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/useapprovemilestone",
+    "notes": [
+      "You can modify the form as you prefer.",
+      "The <ApproveMilestoneButton milestoneIndex={0} /> requests the milestone index. You can change it to the milestone index you want to approve based on the escrow you are working on."
+    ],
     "variants": ["form", "button", "dialog"],
     "installByTypeAndVariant": {
       "single-release": {
@@ -347,7 +374,7 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usechangemilestonestatus",
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/change-milestone-status/form",
