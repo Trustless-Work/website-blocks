@@ -8,7 +8,8 @@
     "tags": ["Wallet", "Stellar", "Provider", "Connect Button"],
     "notes": [
       "This block is required for all escrow blocks. It is used to provide the wallet provider, validators and a connect button powered by Stellar Wallets Kit. @Credit-Tech",
-      "When you already added the block to your project, you should add the USDC asset to your Wallet. Otherwise, the escrow interaction will not work."
+      "When you already added the block to your project, you should add the USDC trustline to your Wallet. Otherwise, the escrow interaction will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method."
     ],
     "newBlocks": true,
     "install": "npx trustless-work add wallet-kit",
@@ -25,7 +26,8 @@
     "category": "Table",
     "escrowType": "single-release,multi-release",
     "notes": [
-      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/table/EscrowsTable.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case."
+      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/table/EscrowsTable.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method."
     ],
     "image": [
       "https://drive.google.com/file/d/1nKkclw42iCjgCaOQJskXRhfZ3io2Av0Z/view?usp=sharing",
@@ -81,7 +83,8 @@
     "category": "Cards",
     "escrowType": "single-release,multi-release",
     "notes": [
-      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/cards/EscrowsCards.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case."
+      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/cards/EscrowsCards.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method."
     ],
     "image": [
       "https://drive.google.com/file/d/1ChSaD6RN1m90Xl3QAgSaGqFJ9GM9DdBy/view?usp=sharing",
@@ -143,7 +146,8 @@
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
     "notes": [
-      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/table/EscrowsTable.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes."
+      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/table/EscrowsTable.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method."
     ],
     "install": "npx trustless-work add escrows/escrows-by-signer/table",
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usegetescrowsfromindexerbysigner",
@@ -199,7 +203,8 @@
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
     "newBlocks": true,
     "notes": [
-      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/cards/EscrowsCards.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes."
+      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/cards/EscrowsCards.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method."
     ],
     "install": "npx trustless-work add escrows/escrows-by-signer/cards",
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usegetescrowsfromindexerbysigner",
@@ -313,7 +318,9 @@
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/useapprovemilestone",
     "notes": [
       "You can modify the form as you prefer.",
-      "The <ApproveMilestoneButton milestoneIndex={0} /> requests the milestone index. You can change it to the milestone index you want to approve based on the escrow you are working on."
+      "The <ApproveMilestoneButton milestoneIndex={0} /> requests the milestone index. You can change it to the milestone index you want to approve based on the escrow you are working on.",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
     ],
     "variants": ["form", "button", "dialog"],
     "installByTypeAndVariant": {
@@ -375,6 +382,12 @@
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usechangemilestonestatus",
+    "notes": [
+      "This form includes all the fields required by the change milestone status payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always will use the same status, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action",
+      "The <ChangeMilestoneStatusButton milestoneIndex={0} status='COMPLETED' evidence='opcional evidence /> requests the milestone index, status and evidence (optional).",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/change-milestone-status/form",
@@ -433,7 +446,13 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usefundescrow",
+    "notes": [
+      "This form includes all the fields required by the fund escrow payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always will use the same status, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action",
+      "The <FundEscrowButton amount={100} /> requests the amount.",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/fund-escrow/form",
@@ -492,7 +511,13 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "button", "dialog"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/useresolvedispute",
+    "notes": [
+      "This form includes all the fields required by the resolve dispute payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always will use the same approverAmount, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action",
+      "The <ResolveDisputeButton approverFunds={100} receiverFunds={100} /> requests the approverFunds and receiverFunds.",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/resolve-dispute/form",
@@ -551,7 +576,12 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["form", "dialog"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/useupdateescrow",
+    "notes": [
+      "This form includes all the fields required by the update escrow payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always use the same platform address or only work with the USDC asset, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
     "installByTypeAndVariant": {
       "single-release": {
         "form": "npx trustless-work add escrows/single-release/update-escrow/form",
@@ -608,7 +638,12 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["button"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usereleasefunds",
+    "notes": [
+      "The <ReleaseEscrowButton /> does not require any parameters.",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
     "installByTypeAndVariant": {
       "single-release": {
         "button": "npx trustless-work add escrows/single-release/release-escrow/button"
@@ -663,7 +698,12 @@
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
     "variants": ["button"],
-    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/developer-resources/types",
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usestartdispute",
+    "notes": [
+      "The <DisputeEscrowButton /> does not require any parameters.",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
     "installByTypeAndVariant": {
       "single-release": {
         "button": "npx trustless-work add escrows/single-release/dispute-escrow/button"
