@@ -34,5 +34,6 @@ export type Block = {
   installByTypeAndVariant?: CodeByTypeAndVariant;
   install: string;
   requiredProviders?: string[];
+  notes?: string[];
   requiredBlocks?: (string | RequiredBlock)[];
 };
