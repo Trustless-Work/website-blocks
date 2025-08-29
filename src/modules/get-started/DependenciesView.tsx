@@ -9,8 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Info, Eye, EyeOff } from "lucide-react";
+import { Info, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useState, lazy, Suspense } from "react";
+import Link from "next/link";
 
 // Lazy load the iframe component for better performance
 const ExcalidrawDiagram = lazy(() =>
@@ -319,6 +320,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Card>
           </div>
         </section>
+
+        <div className="flex flex-col sm:flex-row w-full justify-start gap-4">
+          <Link href="/get-started/start-from-scratch">
+            <Card className="gap-2 w-full cursor-pointer py-4">
+              <CardContent className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                <p>Start from Scratch</p>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
       </div>
     </div>
   );

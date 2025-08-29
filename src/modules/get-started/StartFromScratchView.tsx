@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ExternalLink, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
@@ -472,6 +472,26 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <div className="flex flex-col sm:flex-row w-full justify-between gap-2 sm:gap-4">
+        <Link href="/get-started/installation">
+          <Card className="gap-2 w-full cursor-pointer py-4">
+            <CardContent className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              <p>Installation Guide</p>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/get-started/dependencies">
+          <Card className="gap-2 w-full cursor-pointer py-4">
+            <CardContent className="flex items-center gap-2">
+              <p>Dependencies</p>
+              <ArrowRight className="h-4 w-4" />
+            </CardContent>
+          </Card>
+        </Link>
+      </div>
     </div>
   );
 };

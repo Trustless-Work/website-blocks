@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -5,9 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "@/shared/CodeBlock";
 import { ArrowRight, Info, InfoIcon } from "lucide-react";
+import Link from "next/link";
 
 export const GetStarted = () => {
   return (
@@ -108,6 +109,17 @@ export const GetStarted = () => {
             </p>
           </div>
         </section>
+
+        <div className="flex flex-col sm:flex-row w-full justify-end gap-4">
+          <Link href="/get-started/installation">
+            <Card className="gap-2 w-full cursor-pointer py-4">
+              <CardContent className="flex items-center gap-2">
+                <p>Installation Guide</p>
+                <ArrowRight className="h-4 w-4" />
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
       </div>
     </div>
   );

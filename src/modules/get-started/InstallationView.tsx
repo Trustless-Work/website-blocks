@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
-import { ExternalLink, InfoIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, InfoIcon } from "lucide-react";
 
 export const InstallationView = () => {
   return (
@@ -337,6 +337,26 @@ export default function EscrowsPage() {
             </div>
           </div>
         </section>
+
+        <div className="flex flex-col sm:flex-row w-full justify-between gap-4">
+          <Link href="/get-started">
+            <Card className="gap-2 w-full cursor-pointer py-4">
+              <CardContent className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                <p>Introduction</p>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link href="/get-started/start-from-scratch">
+            <Card className="gap-2 w-full cursor-pointer py-4">
+              <CardContent className="flex items-center gap-2">
+                <p>Start from Scratch</p>
+                <ArrowRight className="h-4 w-4" />
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
       </div>
     </div>
   );
