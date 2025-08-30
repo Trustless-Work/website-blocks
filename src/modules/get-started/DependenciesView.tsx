@@ -125,7 +125,39 @@ export const DependenciesView = () => {
           <div className="space-y-8 pt-4">
             <div className="space-y-3">
               <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                Escrows by signer & Escrows by role
+                Escrows by Signer (
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-escrows-by-signer-table"
+                >
+                  Table
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-escrows-by-signer-cards"
+                >
+                  Cards
+                </Link>
+                ) & Escrows by Role (
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-escrows-by-role-table"
+                >
+                  Table
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-escrows-by-role-cards"
+                >
+                  Cards
+                </Link>
+                )
               </h3>
               <p className="leading-7 text-muted-foreground">
                 These listing/detail blocks depend on several shared modules and
@@ -160,16 +192,6 @@ export const DependenciesView = () => {
                 <li>
                   <code className="bg-muted px-1 py-0.5 rounded text-sm">
                     single-release
-                  </code>
-                </li>
-                <li>
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    EscrowDialogsProvider
-                  </code>
-                </li>
-                <li>
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    EscrowAmountProvider
                   </code>
                 </li>
               </ul>
@@ -209,8 +231,71 @@ npx trustless-work add helpers`}
                 Single-release components
               </h3>
               <p className="leading-7 text-muted-foreground">
-                All single-release actions (initialize, fund, approve milestone,
-                release, dispute, resolve, update, etc.) require:
+                All single-release actions (
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-initialize-escrow"
+                >
+                  Initialize Escrow
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-fund-escrow"
+                >
+                  Fund Escrow
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-change-milestone-status"
+                >
+                  Change Milestone Status
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-approve-milestone"
+                >
+                  Approve Milestone
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-release-escrow"
+                >
+                  Release
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-dispute-escrow"
+                >
+                  Dispute
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-resolve-dispute"
+                >
+                  Resolve
+                </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-update-escrow"
+                >
+                  Update Escrow
+                </Link>
+                ) require:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>
@@ -303,21 +388,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               language="tsx"
               filename="app/layout.tsx"
             />
-
-            <Card className="my-4 gap-2">
-              <CardHeader>
-                <CardTitle>Scaffolded by init</CardTitle>
-                <CardDescription>
-                  If you ran{" "}
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    npx trustless-work init
-                  </code>
-                  , many dependencies and providers are scaffolded
-                  automatically. Verify the order above if you wire them
-                  manually.
-                </CardDescription>
-              </CardHeader>
-            </Card>
           </div>
         </section>
 
