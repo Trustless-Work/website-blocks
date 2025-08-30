@@ -632,7 +632,7 @@
   },
   {
     "id": "escrows-release-escrow",
-    "title": "Release Escrow",
+    "title": "Release",
     "description": "Action to release escrow funds.",
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
@@ -692,7 +692,7 @@
   },
   {
     "id": "escrows-dispute-escrow",
-    "title": "Dispute Escrow",
+    "title": "Dispute",
     "description": "Action to raise a dispute in the escrow.",
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
