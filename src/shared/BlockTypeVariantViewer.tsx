@@ -7,34 +7,24 @@ import { BlockPreview } from "@/shared/BlockPreview";
 import { CodeBlock } from "@/shared/CodeBlock";
 import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
 import CommingSoon from "./ComingSoon";
-import InitializeEscrowForm from "@/components/tw-blocks/escrows/single-release/initialize-escrow/form/InitializeEscrow";
-import InitializeEscrowDialog from "@/components/tw-blocks/escrows/single-release/initialize-escrow/dialog/InitializeEscrow";
+import { InitializeEscrowForm } from "@/components/tw-blocks/escrows/single-release/initialize-escrow/form/InitializeEscrow";
+import { InitializeEscrowDialog } from "@/components/tw-blocks/escrows/single-release/initialize-escrow/dialog/InitializeEscrow";
 import componentCodes from "@/data/component-codes.json";
 import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
-import EscrowsByRoleTable from "@/components/tw-blocks/escrows/escrows-by-role/table/EscrowsTable";
-import EscrowsByRoleCards from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
-import EscrowsBySignerTable from "@/components/tw-blocks/escrows/escrows-by-signer/table/EscrowsTable";
-import EscrowsBySignerCards from "@/components/tw-blocks/escrows/escrows-by-signer/cards/EscrowsCards";
+import { EscrowsByRoleTable } from "@/components/tw-blocks/escrows/escrows-by-role/table/EscrowsTable";
+import { EscrowsByRoleCards } from "@/components/tw-blocks/escrows/escrows-by-role/cards/EscrowsCards";
+import { EscrowsBySignerTable } from "@/components/tw-blocks/escrows/escrows-by-signer/table/EscrowsTable";
+import { EscrowsBySignerCards } from "@/components/tw-blocks/escrows/escrows-by-signer/cards/EscrowsCards";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import blocksData from "@/data/blocks.json";
-import ApproveMilestoneForm from "@/components/tw-blocks/escrows/single-release/approve-milestone/form/ApproveMilestone";
-import ApproveMilestoneDialog from "@/components/tw-blocks/escrows/single-release/approve-milestone/dialog/ApproveMilestone";
-import ApproveMilestoneButton from "@/components/tw-blocks/escrows/single-release/approve-milestone/button/ApproveMilestone";
-import FundEscrowForm from "@/components/tw-blocks/escrows/single-release/fund-escrow/form/FundEscrow";
-import FundEscrowDialog from "@/components/tw-blocks/escrows/single-release/fund-escrow/dialog/FundEscrow";
-import FundEscrowButton from "@/components/tw-blocks/escrows/single-release/fund-escrow/button/FundEscrow";
-import ChangeMilestoneStatusForm from "@/components/tw-blocks/escrows/single-release/change-milestone-status/form/ChangeMilestoneStatus";
-import ChangeMilestoneStatusDialog from "@/components/tw-blocks/escrows/single-release/change-milestone-status/dialog/ChangeMilestoneStatus";
-import ChangeMilestoneStatusButton from "@/components/tw-blocks/escrows/single-release/change-milestone-status/button/ChangeMilestoneStatus";
-import ResolveDisputeForm from "@/components/tw-blocks/escrows/single-release/resolve-dispute/form/ResolveDispute";
-import ResolveDisputeDialog from "@/components/tw-blocks/escrows/single-release/resolve-dispute/dialog/ResolveDispute";
-import ResolveDisputeButton from "@/components/tw-blocks/escrows/single-release/resolve-dispute/button/ResolveDispute";
-import UpdateEscrowForm from "@/components/tw-blocks/escrows/single-release/update-escrow/form/UpdateEscrow";
-import UpdateEscrowDialog from "@/components/tw-blocks/escrows/single-release/update-escrow/dialog/UpdateEscrow";
-import ReleaseEscrowButton from "@/components/tw-blocks/escrows/single-release/release-escrow/button/ReleaseEscrow";
-import DisputeEscrowButton from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
+import { ResolveDisputeForm } from "@/components/tw-blocks/escrows/single-release/resolve-dispute/form/ResolveDispute";
+import { ResolveDisputeDialog } from "@/components/tw-blocks/escrows/single-release/resolve-dispute/dialog/ResolveDispute";
+import { ResolveDisputeButton } from "@/components/tw-blocks/escrows/single-release/resolve-dispute/button/ResolveDispute";
+import { UpdateEscrowForm } from "@/components/tw-blocks/escrows/single-release/update-escrow/form/UpdateEscrow";
+import { UpdateEscrowDialog } from "@/components/tw-blocks/escrows/single-release/update-escrow/dialog/UpdateEscrow";
+import { ReleaseEscrowButton } from "@/components/tw-blocks/escrows/single-release/release-escrow/button/ReleaseEscrow";
+import { DisputeEscrowButton } from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
 import {
   Select,
   SelectContent,
@@ -43,6 +33,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RelatedBlockCard } from "./RelatedBlocks";
+import { ApproveMilestoneForm } from "@/components/tw-blocks/escrows/single-multi-release/approve-milestone/form/ApproveMilestone";
+import { ApproveMilestoneDialog } from "@/components/tw-blocks/escrows/single-multi-release/approve-milestone/dialog/ApproveMilestone";
+import { ApproveMilestoneButton } from "@/components/tw-blocks/escrows/single-multi-release/approve-milestone/button/ApproveMilestone";
+import { ChangeMilestoneStatusForm } from "@/components/tw-blocks/escrows/single-multi-release/change-milestone-status/form/ChangeMilestoneStatus";
+import { ChangeMilestoneStatusDialog } from "@/components/tw-blocks/escrows/single-multi-release/change-milestone-status/dialog/ChangeMilestoneStatus";
+import { ChangeMilestoneStatusButton } from "@/components/tw-blocks/escrows/single-multi-release/change-milestone-status/button/ChangeMilestoneStatus";
+import { FundEscrowForm } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/form/FundEscrow";
+import { FundEscrowDialog } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/dialog/FundEscrow";
+import { FundEscrowButton } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/button/FundEscrow";
 
 type Props = {
   block: Block;
