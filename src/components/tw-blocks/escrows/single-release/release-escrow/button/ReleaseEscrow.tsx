@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
-export default function ReleaseEscrowButton() {
+export const ReleaseEscrowButton = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   async function handleClick() {
@@ -33,4 +33,4 @@ export default function ReleaseEscrowButton() {
       )}
     </Button>
   );
-}
+};
