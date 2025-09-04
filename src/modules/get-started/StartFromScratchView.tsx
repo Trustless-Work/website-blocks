@@ -173,6 +173,23 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
           <CodeBlock code="npx trustless-work add wallet-kit" />
 
           <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            Wrap your app with the WalletProvider:
+          </h3>
+
+          <p className="leading-7">
+            Wrap your app with the WalletProvider in your layout.tsx:
+          </p>
+
+          <CodeBlock
+            code={`return (
+    <WalletProvider>{children}</WalletProvider> 
+);
+`}
+            language="tsx"
+            filename="app/layout.tsx"
+          />
+
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Example usage in a page:
           </h3>
 
@@ -197,7 +214,7 @@ export default function Home() {
 }
 `}
             language="tsx"
-            filename="app/layout.tsx"
+            filename="app/page.tsx"
           />
         </div>
       </section>
