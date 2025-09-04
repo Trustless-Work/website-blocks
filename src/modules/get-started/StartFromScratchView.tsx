@@ -8,7 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight, ExternalLink, Info } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  ImportIcon,
+  Info,
+} from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
@@ -241,12 +247,25 @@ export default function Home() {
 
       <section>
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-          Add Escrow Context
+          Add Single Release Escrows Components
         </h2>
         <div className="space-y-4 pt-4">
-          <p className="leading-7">Add Escrow Context to your app:</p>
+          <p className="leading-7">Add Single Release Escrows to your app:</p>
 
-          <CodeBlock code="npx trustless-work add escrows/escrow-context" />
+          <CodeBlock code="npx trustless-work add escrows/single-release" />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Add Single-Multi Release Escrows Components
+        </h2>
+        <div className="space-y-4 pt-4">
+          <p className="leading-7">
+            Add Single-Multi Release Escrows to your app:
+          </p>
+
+          <CodeBlock code="npx trustless-work add escrows/single-multi-release" />
         </div>
       </section>
 
@@ -258,17 +277,91 @@ export default function Home() {
           <p className="leading-7">Add Escrows by Role Cards to your app:</p>
 
           <CodeBlock code="npx trustless-work add escrows/escrows-by-role/cards" />
+
+          <h3 className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
+            <ImportIcon className="h-4 w-4" /> Import Actions
+          </h3>
+
+          <p className="leading-7">
+            In the code, there are some actions commented out. You can uncomment
+            them and import them from the single-release block.{" "}
+            <span className="font-bold">
+              See the notes in the escrows by role or by signer components.
+            </span>
+          </p>
+
+          <h3 className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
+            Commented Out Code
+          </h3>
+
+          <CodeBlock
+            code={`return (
+    <div className="flex items-start justify-start flex-col gap-2 w-full">
+      {/* You can add the buttons here, using the buttons from the blocks. These actions are conditional based on the escrow flags and the user roles. */}
+      {hasConditionalButtons && (
+        <div className="flex flex-col gap-2 w-full">
+                                       {/* UpdateEscrowDialog component should be rendered based on the escrow type. It means that if the selectedEscrow.type is "single-release", then the UpdateEscrowDialog (from the single-release block) component should be rendered. If the selectedEscrow.type is "multi-release", then the UpdateEscrowDialog (from the multi-release block) component should be rendered. */}
+          {/* {shouldShowEditButton && <UpdateEscrowDialog />} */}
+
+          {/* Works only with single-release escrows */}
+          {/* Only appears if the escrow has balance */}
+          {/* {shouldShowDisputeButton && <DisputeEscrowButton />} */}
+
+          {/* Works only with single-release escrows */}
+          {/* Only appears if the escrow is disputed */}
+          {/* {shouldShowResolveButton && <ResolveDisputeDialog />} */}
+
+          {/* Works only with single-release escrows */}
+          {/* Only appears if all the milestones are approved */}
+          {/* {shouldShowReleaseFundsButton && <ReleaseEscrowButton />} */}
         </div>
-      </section>
+      )}
 
-      <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-          Add Single Release Escrows
-        </h2>
-        <div className="space-y-4 pt-4">
-          <p className="leading-7">Add Single Release Escrows to your app:</p>
+      <FundEscrowDialog />
+    </div>
+  );`}
+            language="json"
+            filename="escrows/escrows-by-role/details/Actions.tsx"
+          />
 
-          <CodeBlock code="npx trustless-work add escrows/single-release" />
+          <h3 className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
+            Actions Imported
+          </h3>
+
+          <CodeBlock
+            code={`// If you need both types, you should import both versions to update escrow
+import { UpdateEscrowDialog } from "../../single-release/update-escrow/dialog/UpdateEscrow";
+/* import { UpdateEscrowDialog as UpdateEscrowDialogMultiRelease } from "../../multi-release/update-escrow/dialog/UpdateEscrow"; */
+import { FundEscrowDialog } from "../../single-multi-release/fund-escrow/dialog/FundEscrow";
+import { DisputeEscrowButton } from "../../single-release/dispute-escrow/button/DisputeEscrow";
+import { ResolveDisputeDialog } from "../../single-release/resolve-dispute/dialog/ResolveDispute";
+import { ReleaseEscrowButton } from "../../single-release/release-escrow/button/ReleaseEscrow";
+
+return (
+    <div className="flex items-start justify-start flex-col gap-2 w-full">
+      {/* You can add the buttons here, using the buttons from the blocks. These actions are conditional based on the escrow flags and the user roles. */}
+      {hasConditionalButtons && (
+        <div className="flex flex-col gap-2 w-full">
+                                       {/* UpdateEscrowDialog component should be rendered based on the escrow type. It means that if the selectedEscrow.type is "single-release", then the UpdateEscrowDialog (from the single-release block) component should be rendered. If the selectedEscrow.type is "multi-release", then the UpdateEscrowDialog (from the multi-release block) component should be rendered. */}
+          {shouldShowEditButton && <UpdateEscrowDialog />}
+
+          {/* Works only with single-release escrows */}
+          {shouldShowDisputeButton && <DisputeEscrowButton />}
+
+          {/* Works only with single-release escrows */}
+          {shouldShowResolveButton && <ResolveDisputeDialog />}
+
+          {/* Works only with single-release escrows */}
+          {shouldShowReleaseFundsButton && <ReleaseEscrowButton />}
+        </div>
+      )}
+
+      <FundEscrowDialog />
+    </div>
+  );`}
+            language="json"
+            filename="escrows/escrows-by-role/details/Actions.tsx"
+          />
         </div>
       </section>
 
@@ -285,9 +378,9 @@ export default function Home() {
             code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
 import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
 import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
-import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
-import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
-import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
+import { EscrowProvider } from "@/components/tw-blocks/providers/EscrowProvider";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
+import { EscrowAmountProvider } from "@/components/tw-blocks/providers/EscrowAmountProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
