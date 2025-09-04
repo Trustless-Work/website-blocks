@@ -20,8 +20,8 @@ import { Badge } from "@/components/ui/badge";
 import { ChangeMilestoneStatusDialog } from "../../single-multi-release/change-milestone-status/dialog/ChangeMilestoneStatus";
 import { ApproveMilestoneButton } from "../../single-multi-release/approve-milestone/button/ApproveMilestone";
 import { formatCurrency } from "@/components/tw-blocks/helpers/format.helper";
-import { ReleaseEscrowButton } from "../../multi-release/release-milestone/button/ReleaseEscrow";
-import { DisputeEscrowButton } from "../../multi-release/dispute-milestone/button/DisputeEscrow";
+import { ReleaseMilestoneButton } from "../../multi-release/release-milestone/button/ReleaseMilestone";
+import { DisputeMilestoneButton } from "../../multi-release/dispute-milestone/button/DisputeEscrow";
 import { ResolveDisputeDialog } from "../../multi-release/resolve-dispute/dialog/ResolveDispute";
 
 interface MilestoneCardProps {
@@ -135,7 +135,9 @@ const MilestoneCardComponent = ({
       milestone.flags?.approved &&
       !milestone.flags?.released
     ) {
-      buttons.push(<ReleaseEscrowButton key={`release-${milestoneIndex}`} />);
+      buttons.push(
+        <ReleaseMilestoneButton key={`release-${milestoneIndex}`} />
+      );
     }
 
     if (
@@ -146,7 +148,9 @@ const MilestoneCardComponent = ({
       !milestone.flags?.released &&
       !milestone.flags?.resolved
     ) {
-      buttons.push(<DisputeEscrowButton key={`dispute-${milestoneIndex}`} />);
+      buttons.push(
+        <DisputeMilestoneButton key={`dispute-${milestoneIndex}`} />
+      );
     }
 
     if (
