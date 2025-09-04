@@ -217,15 +217,9 @@ export const Contribute = () => {
                   </CardTitle>
                   <CardDescription className="space-y-2">
                     <p>
-                      Add your component to the appropriate directory structure:
+                      Following the existing code guidelines, create your
+                      component.
                     </p>
-                    <div className="bg-muted p-3 rounded-md font-mono text-sm space-y-1">
-                      <div>src/components/your-component/</div>
-                      <div>├── index.tsx # Main component</div>
-                      <div>├── README.md # Documentation</div>
-                      <div>├── example.tsx # Usage example</div>
-                      <div>└── styles.css # Component styles</div>
-                    </div>
                   </CardDescription>
                 </CardHeader>
               </Card>
