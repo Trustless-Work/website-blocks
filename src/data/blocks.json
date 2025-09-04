@@ -294,6 +294,7 @@
     "tags": ["Initialize", "Escrows", "Onboarding"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -352,6 +353,7 @@
     "tags": ["Milestone", "Approve", "Escrows"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -410,6 +412,7 @@
     "tags": ["Milestone", "Status", "Escrows"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -468,6 +471,7 @@
     "tags": ["Funding", "Escrows", "Assets"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -533,6 +537,7 @@
     "tags": ["Dispute", "Resolve", "Escrows"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -595,6 +600,7 @@
     "tags": ["Update", "Escrows", "Admin"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -655,6 +661,7 @@
     "tags": ["Release", "Escrows", "Payout"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
@@ -715,6 +722,7 @@
     "tags": ["Dispute", "Escrows", "Actions"],
     "newBlocks": true,
     "requiredProviders": [
+      "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
       "<WalletProvider />",
       "<EscrowProvider />"
