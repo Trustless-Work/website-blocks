@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
-export default function ResolveDisputeButton() {
+export const ResolveDisputeButton = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   async function handleClick() {
     try {
       setIsSubmitting(true);
+
       toast.success("Dispute resolved successfully");
     } finally {
       setIsSubmitting(false);
@@ -32,4 +33,4 @@ export default function ResolveDisputeButton() {
       )}
     </Button>
   );
-}
+};
