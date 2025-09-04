@@ -33,6 +33,16 @@ const sidebarNavItems = [
       },
     ],
   },
+
+  {
+    title: "Support",
+    items: [
+      {
+        title: "Common Issues",
+        href: "/get-started/common-issues",
+      },
+    ],
+  },
 ];
 
 export function DocsSidebar() {

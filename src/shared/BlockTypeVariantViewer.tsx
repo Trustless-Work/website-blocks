@@ -8,7 +8,9 @@ import { CodeBlock } from "@/shared/CodeBlock";
 import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
 import CommingSoon from "./ComingSoon";
 import { InitializeEscrowForm } from "@/components/tw-blocks/escrows/single-release/initialize-escrow/form/InitializeEscrow";
+import { InitializeEscrowForm as InitializeEscrowFormMultiRelease } from "@/components/tw-blocks/escrows/multi-release/initialize-escrow/form/InitializeEscrow";
 import { InitializeEscrowDialog } from "@/components/tw-blocks/escrows/single-release/initialize-escrow/dialog/InitializeEscrow";
+import { InitializeEscrowDialog as InitializeEscrowDialogMultiRelease } from "@/components/tw-blocks/escrows/multi-release/initialize-escrow/dialog/InitializeEscrow";
 import componentCodes from "@/data/component-codes.json";
 import { WalletButton } from "@/components/tw-blocks/wallet-kit/WalletButtons";
 import { EscrowsByRoleTable } from "@/components/tw-blocks/escrows/escrows-by-role/table/EscrowsTable";
@@ -19,12 +21,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import blocksData from "@/data/blocks.json";
 import { ResolveDisputeForm } from "@/components/tw-blocks/escrows/single-release/resolve-dispute/form/ResolveDispute";
+import { ResolveDisputeForm as ResolveDisputeFormMultiRelease } from "@/components/tw-blocks/escrows/multi-release/resolve-dispute/form/ResolveDispute";
 import { ResolveDisputeDialog } from "@/components/tw-blocks/escrows/single-release/resolve-dispute/dialog/ResolveDispute";
+import { ResolveDisputeDialog as ResolveDisputeDialogMultiRelease } from "@/components/tw-blocks/escrows/multi-release/resolve-dispute/dialog/ResolveDispute";
 import { ResolveDisputeButton } from "@/components/tw-blocks/escrows/single-release/resolve-dispute/button/ResolveDispute";
+import { ResolveDisputeButton as ResolveDisputeButtonMultiRelease } from "@/components/tw-blocks/escrows/multi-release/resolve-dispute/button/ResolveDispute";
 import { UpdateEscrowForm } from "@/components/tw-blocks/escrows/single-release/update-escrow/form/UpdateEscrow";
+import { UpdateEscrowForm as UpdateEscrowFormMultiRelease } from "@/components/tw-blocks/escrows/multi-release/update-escrow/form/UpdateEscrow";
 import { UpdateEscrowDialog } from "@/components/tw-blocks/escrows/single-release/update-escrow/dialog/UpdateEscrow";
+import { UpdateEscrowDialog as UpdateEscrowDialogMultiRelease } from "@/components/tw-blocks/escrows/multi-release/update-escrow/dialog/UpdateEscrow";
 import { ReleaseEscrowButton } from "@/components/tw-blocks/escrows/single-release/release-escrow/button/ReleaseEscrow";
-import { DisputeEscrowButton } from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
+import { ReleaseMilestoneButton } from "@/components/tw-blocks/escrows/multi-release/release-milestone/button/ReleaseMilestone";
 import {
   Select,
   SelectContent,
@@ -42,6 +49,8 @@ import { ChangeMilestoneStatusButton } from "@/components/tw-blocks/escrows/sing
 import { FundEscrowForm } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/form/FundEscrow";
 import { FundEscrowDialog } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/dialog/FundEscrow";
 import { FundEscrowButton } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/button/FundEscrow";
+import { DisputeEscrowButton } from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
+import { DisputeMilestoneButton } from "@/components/tw-blocks/escrows/multi-release/dispute-milestone/button/DisputeEscrow";
 
 type Props = {
   block: Block;
@@ -139,21 +148,8 @@ export function BlockTypeVariantViewer({
           dialog: () => <InitializeEscrowDialog />,
         },
         "multi-release": {
-          form: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          dialog: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          form: () => <InitializeEscrowFormMultiRelease />,
+          dialog: () => <InitializeEscrowDialogMultiRelease />,
         },
       },
       "approve-milestone": {
@@ -199,21 +195,9 @@ export function BlockTypeVariantViewer({
           button: () => <ResolveDisputeButton />,
         },
         "multi-release": {
-          form: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          dialog: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          form: () => <ResolveDisputeFormMultiRelease />,
+          dialog: () => <ResolveDisputeDialogMultiRelease />,
+          button: () => <ResolveDisputeButtonMultiRelease />,
         },
       },
       "update-escrow": {
@@ -222,16 +206,8 @@ export function BlockTypeVariantViewer({
           dialog: () => <UpdateEscrowDialog />,
         },
         "multi-release": {
-          form: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          dialog: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          form: () => <UpdateEscrowFormMultiRelease />,
+          dialog: () => <UpdateEscrowDialogMultiRelease />,
         },
       },
       "release-escrow": {
@@ -239,11 +215,7 @@ export function BlockTypeVariantViewer({
           button: () => <ReleaseEscrowButton />,
         },
         "multi-release": {
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          button: () => <ReleaseMilestoneButton />,
         },
       },
       "dispute-escrow": {
@@ -251,11 +223,7 @@ export function BlockTypeVariantViewer({
           button: () => <DisputeEscrowButton />,
         },
         "multi-release": {
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          button: () => <DisputeMilestoneButton />,
         },
       },
     };
