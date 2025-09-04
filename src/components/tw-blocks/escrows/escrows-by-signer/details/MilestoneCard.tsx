@@ -20,6 +20,9 @@ import { Badge } from "@/components/ui/badge";
 import { ChangeMilestoneStatusDialog } from "../../single-multi-release/change-milestone-status/dialog/ChangeMilestoneStatus";
 import { ApproveMilestoneButton } from "../../single-multi-release/approve-milestone/button/ApproveMilestone";
 import { formatCurrency } from "@/components/tw-blocks/helpers/format.helper";
+import { ReleaseEscrowButton } from "../../multi-release/release-milestone/button/ReleaseEscrow";
+import { DisputeEscrowButton } from "../../multi-release/dispute-milestone/button/DisputeEscrow";
+import { ResolveDisputeDialog } from "../../multi-release/resolve-dispute/dialog/ResolveDispute";
 
 interface MilestoneCardProps {
   milestone: SingleReleaseMilestone | MultiReleaseMilestone;
@@ -107,10 +110,7 @@ const MilestoneCardComponent = ({
       !("flags" in milestone && milestone.flags?.approved)
     ) {
       buttons.push(
-        <ChangeMilestoneStatusDialog
-          key={`change-status-${milestoneIndex}`}
-          milestoneIndex={milestoneIndex}
-        />
+        <ChangeMilestoneStatusDialog key={`change-status-${milestoneIndex}`} />
       );
     }
 
@@ -124,10 +124,7 @@ const MilestoneCardComponent = ({
           !milestone.flags?.resolved))
     ) {
       buttons.push(
-        <ApproveMilestoneButton
-          key={`approve-${milestoneIndex}`}
-          milestoneIndex={milestoneIndex}
-        />
+        <ApproveMilestoneButton key={`approve-${milestoneIndex}`} />
       );
     }
 
@@ -138,14 +135,7 @@ const MilestoneCardComponent = ({
       milestone.flags?.approved &&
       !milestone.flags?.released
     ) {
-      buttons
-        .push
-        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
-        // <ReleaseEscrowButton
-        //   key={`release-${milestoneIndex}`}
-        //   milestoneIndex={milestoneIndex}
-        // />
-        ();
+      buttons.push(<ReleaseEscrowButton key={`release-${milestoneIndex}`} />);
     }
 
     if (
@@ -156,14 +146,7 @@ const MilestoneCardComponent = ({
       !milestone.flags?.released &&
       !milestone.flags?.resolved
     ) {
-      buttons
-        .push
-        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
-        // <DisputeEscrowButton
-        //   key={`dispute-${milestoneIndex}`}
-        //   milestoneIndex={milestoneIndex}
-        // />
-        ();
+      buttons.push(<DisputeEscrowButton key={`dispute-${milestoneIndex}`} />);
     }
 
     if (
@@ -171,14 +154,7 @@ const MilestoneCardComponent = ({
       "flags" in milestone &&
       milestone.flags?.disputed
     ) {
-      buttons
-        .push
-        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
-        // <ResolveDisputeDialog
-        //   key={`resolve-${milestoneIndex}`}
-        //   milestoneIndex={milestoneIndex}
-        // />
-        ();
+      buttons.push(<ResolveDisputeDialog key={`resolve-${milestoneIndex}`} />);
     }
 
     return buttons;

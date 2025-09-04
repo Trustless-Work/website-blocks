@@ -15,6 +15,11 @@ import {
   Role,
 } from "@trustless-work/escrow/types";
 import { FundEscrowDialog } from "../../single-multi-release/fund-escrow/dialog/FundEscrow";
+import { UpdateEscrowDialog } from "../../single-release/update-escrow/dialog/UpdateEscrow";
+import { UpdateEscrowDialog as UpdateEscrowDialogMultiRelease } from "../../multi-release/update-escrow/dialog/UpdateEscrow";
+import { DisputeEscrowButton } from "../../single-release/dispute-escrow/button/DisputeEscrow";
+import { ResolveDisputeDialog } from "../../single-release/resolve-dispute/dialog/ResolveDispute";
+import { ReleaseEscrowButton } from "../../single-release/release-escrow/button/ReleaseEscrow";
 
 interface ActionsProps {
   selectedEscrow: Escrow;
@@ -125,16 +130,21 @@ export const Actions = ({
       {hasConditionalButtons && (
         <div className="flex flex-col gap-2 w-full">
           {/* UpdateEscrowDialog component should be rendered based on the escrow type. It means that if the selectedEscrow.type is "single-release", then the UpdateEscrowDialog (from the single-release block) component should be rendered. If the selectedEscrow.type is "multi-release", then the UpdateEscrowDialog (from the multi-release block) component should be rendered. */}
-          {/* {shouldShowEditButton && <UpdateEscrowDialog />} */}
+          {shouldShowEditButton && selectedEscrow.type === "single-release" && (
+            <UpdateEscrowDialog />
+          )}
+          {shouldShowEditButton && selectedEscrow.type === "multi-release" && (
+            <UpdateEscrowDialogMultiRelease />
+          )}
 
           {/* Works only with single-release escrows */}
-          {/* {shouldShowDisputeButton && <DisputeEscrowButton />} */}
+          {shouldShowDisputeButton && <DisputeEscrowButton />}
 
           {/* Works only with single-release escrows */}
-          {/* {shouldShowResolveButton && <ResolveDisputeDialog />} */}
+          {shouldShowResolveButton && <ResolveDisputeDialog />}
 
           {/* Works only with single-release escrows */}
-          {/* {shouldShowReleaseFundsButton && <ReleaseEscrowButton />} */}
+          {shouldShowReleaseFundsButton && <ReleaseEscrowButton />}
         </div>
       )}
 
