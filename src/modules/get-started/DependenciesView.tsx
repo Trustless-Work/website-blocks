@@ -171,7 +171,7 @@ export const DependenciesView = () => {
                 </li>
                 <li>
                   <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    escrow-context
+                    providers
                   </code>
                 </li>
                 <li>
@@ -190,9 +190,18 @@ export const DependenciesView = () => {
                   </code>
                 </li>
                 <li>
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  <code className="bg-muted mr-2 px-1 py-0.5 rounded text-sm">
                     single-release
                   </code>
+                  or
+                  <code className="bg-muted mx-2 px-1 py-0.5 rounded text-sm">
+                    multi-release
+                  </code>
+                  or
+                  <code className="bg-muted mx-2 px-1 py-0.5 rounded text-sm">
+                    single-multi-release
+                  </code>
+                  // Depending on your needs
                 </li>
               </ul>
 
@@ -200,10 +209,10 @@ export const DependenciesView = () => {
                 <CardHeader>
                   <CardTitle>Providers to include</CardTitle>
                   <CardDescription>
-                    Ensure you include both{" "}
-                    <strong>EscrowDialogsProvider</strong> and{" "}
-                    <strong>EscrowAmountProvider</strong> around your escrow UIs
-                    when needed.
+                    Ensure you include{" "}
+                    <strong>
+                      all the providers. These blocks need all of them
+                    </strong>
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -212,12 +221,13 @@ export const DependenciesView = () => {
                 <CodeBlock
                   code={`# Quick install examples
 npx trustless-work add wallet-kit
-npx trustless-work add escrows/escrow-context
-npx trustless-work add escrows/single-release
+npx trustless-work add escrows/single-release # If you need single-release escrows
+npx trustless-work add escrows/multi-release # If you need multi-release escrows
+npx trustless-work add escrows/single-multi-release # If you need fund, approve or change status
 npx trustless-work add tanstack
 
 # If you skipped the init command, add these providers
-npx trustless-work add providers
+npx trustless-work add providers # All of them are required to these blocks
 
 # Optional utility modules
 npx trustless-work add handle-errors
@@ -228,10 +238,10 @@ npx trustless-work add helpers`}
 
             <div className="space-y-3">
               <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                Single-release components
+                Single Release & Multi Release components
               </h3>
               <p className="leading-7 text-muted-foreground">
-                All single-release actions (
+                All single-release and multi-release actions (
                 <Link
                   className="text-primary-500 font-bold cursor-pointer mx-1"
                   target="_blank"
@@ -305,7 +315,7 @@ npx trustless-work add helpers`}
                 </li>
                 <li>
                   <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    escrow-context
+                    providers
                   </code>
                 </li>
                 <li>
@@ -324,11 +334,10 @@ npx trustless-work add helpers`}
                 <CodeBlock
                   code={`# Add essentials for single-release flows
 npx trustless-work add wallet-kit
-npx trustless-work add escrows/escrow-context
 npx trustless-work add tanstack
 
 # If you skipped the init command, add these providers
-npx trustless-work add providers
+npx trustless-work add providers # Only need Wallet, TrustlessWork, Escrow and ReactQueryClient
 
 # Optional utility modules
 npx trustless-work add handle-errors
@@ -360,9 +369,9 @@ npx trustless-work add helpers`}
               code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
 import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
 import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
-import { EscrowProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowProvider";
-import { EscrowDialogsProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowDialogsProvider";
-import { EscrowAmountProvider } from "@/components/tw-blocks/escrows/escrow-context/EscrowAmountProvider";
+import { EscrowProvider } from "@/components/tw-blocks/providers/EscrowProvider";
+import { EscrowDialogsProvider } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
+import { EscrowAmountProvider } from "@/components/tw-blocks/providers/EscrowAmountProvider";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
