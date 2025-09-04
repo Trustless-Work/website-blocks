@@ -57,7 +57,8 @@ export const StartFromScratchView = () => {
         <div className="space-y-4 pt-4">
           <p className="leading-7">
             Start by creating a new Next.js project with TypeScript and Tailwind
-            CSS:
+            CSS. In order to make easier the setup, please use the path alias
+            with "@/":
           </p>
 
           <CodeBlock code="npx create-next-app@latest" />
