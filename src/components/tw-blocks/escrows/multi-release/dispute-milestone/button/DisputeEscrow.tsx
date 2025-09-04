@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
 import { Loader2 } from "lucide-react";
 
-export const DisputeEscrowButton = () => {
+export const DisputeMilestoneButton = () => {
   const { selectedEscrow } = useEscrowContext();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -12,7 +12,7 @@ export const DisputeEscrowButton = () => {
     try {
       setIsSubmitting(true);
 
-      toast.success("Escrow disputed successfully");
+      toast.success("Milestone disputed successfully");
     } finally {
       setIsSubmitting(false);
     }
