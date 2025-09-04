@@ -26,7 +26,6 @@
     "category": "Table",
     "escrowType": "single-release,multi-release",
     "notes": [
-      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/table/EscrowsTable.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case.",
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method.",
       "In /details/Actions.tsx, you will find the <ReleaseEscrowButton />, <ResolveDisputeDialog />, and <DisputeEscrowButton /> components. They are currently commented out. If you are working with single-release escrows, uncomment them and import them from the single-release blocks.",
       "In /details/Actions.tsx, you will also find the <UpdateEscrowDialog /> component, which is commented out. For single-release escrows, uncomment it and import it from the single-release blocks. For multi-release escrows, import it from the multi-release blocks. If you need to support both types, import both versions, assign one of them a different name, and render the appropriate component based on selectedEscrow?.type.",
@@ -87,7 +86,6 @@
     "category": "Cards",
     "escrowType": "single-release,multi-release",
     "notes": [
-      "The trustless work hook used in this block requires a specific role. In [escrows-by-role/cards/EscrowsCards.tsx = const activeRole], the role is mocked with a filter for testing purposes. You should replace it with the role that best fits your use case.",
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method.",
       "In /details/Actions.tsx, you will find the <ReleaseEscrowButton />, <ResolveDisputeDialog />, and <DisputeEscrowButton /> components. They are currently commented out. If you are working with single-release escrows, uncomment them and import them from the single-release blocks.",
       "In /details/Actions.tsx, you will also find the <UpdateEscrowDialog /> component, which is commented out. For single-release escrows, uncomment it and import it from the single-release blocks. For multi-release escrows, import it from the multi-release blocks. If you need to support both types, import both versions, assign one of them a different name, and render the appropriate component based on selectedEscrow?.type.",
@@ -154,7 +152,6 @@
     "tags": ["Escrows", "Table", "Signer", "Filters", "Sorting", "Pagination"],
     "newBlocks": true,
     "notes": [
-      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/table/EscrowsTable.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes.",
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method.",
       "In /details/Actions.tsx, you will find the <ReleaseEscrowButton />, <ResolveDisputeDialog />, and <DisputeEscrowButton /> components. They are currently commented out. If you are working with single-release escrows, uncomment them and import them from the single-release blocks.",
       "In /details/Actions.tsx, you will also find the <UpdateEscrowDialog /> component, which is commented out. For single-release escrows, uncomment it and import it from the single-release blocks. For multi-release escrows, import it from the multi-release blocks. If you need to support both types, import both versions, assign one of them a different name, and render the appropriate component based on selectedEscrow?.type.",
@@ -215,7 +212,6 @@
     "tags": ["Escrows", "Cards", "Signer", "Grid", "Overview"],
     "newBlocks": true,
     "notes": [
-      "To enable escrow button actions, you need to provide an array of roles assigned to the user. In [escrows-by-signer/cards/EscrowsCards.tsx], the activeRole constant contains this array. Depending on the role, different actions will appear in the detail modal. Adjust the roles as needed to best fit your use case. The role is mocked for testing purposes.",
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method.",
       "In /details/Actions.tsx, you will find the <ReleaseEscrowButton />, <ResolveDisputeDialog />, and <DisputeEscrowButton /> components. They are currently commented out. If you are working with single-release escrows, uncomment them and import them from the single-release blocks.",
       "In /details/Actions.tsx, you will also find the <UpdateEscrowDialog /> component, which is commented out. For single-release escrows, uncomment it and import it from the single-release blocks. For multi-release escrows, import it from the multi-release blocks. If you need to support both types, import both versions, assign one of them a different name, and render the appropriate component based on selectedEscrow?.type.",
