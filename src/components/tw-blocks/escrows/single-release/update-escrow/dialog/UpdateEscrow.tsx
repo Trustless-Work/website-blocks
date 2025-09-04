@@ -30,7 +30,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export default function UpdateEscrowDialog() {
+export const UpdateEscrowDialog = () => {
   const {
     form,
     isSubmitting,
@@ -482,4 +482,4 @@ export default function UpdateEscrowDialog() {
       </DialogContent>
     </Dialog>
   );
-}
+};

@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateEscrowSchema } from "./schema";
 import { z } from "zod";
+import { SingleReleaseMilestone } from "@trustless-work/escrow/types";
 import { toast } from "sonner";
-import { useEscrowContext } from "../../escrow-context/EscrowProvider";
+import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
 
 export function useUpdateEscrow() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -17,75 +18,74 @@ export function useUpdateEscrow() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      engagementId: "ENG-001-2024",
-      title: "Website Development Project",
-      description:
-        "Complete redesign and development of corporate website with modern UI/UX",
-      platformFee: "2.5",
-      amount: "1500",
-      receiverMemo:
-        "Payment for milestone completion - Website development phase 1",
+      engagementId: selectedEscrow?.engagementId || "",
+      title: selectedEscrow?.title || "",
+      description: selectedEscrow?.description || "",
+      platformFee: selectedEscrow?.platformFee as unknown as
+        | number
+        | string
+        | undefined,
+      amount: selectedEscrow?.amount as unknown as number | string | undefined,
+      receiverMemo: selectedEscrow?.receiverMemo
+        ? String(selectedEscrow.receiverMemo)
+        : "",
       trustline: {
-        address: "CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWFEIE3USCIHMXQDAMA",
+        address: selectedEscrow?.trustline?.address || "",
         decimals: 10000000,
       },
       roles: {
-        approver: "GCEXAMPLE1APPROVERADDRESSFORDEMOPURPOSESONLY1234567890",
-        serviceProvider:
-          "GCEXAMPLE2SERVICEPROVIDERADDRESSFORDEMOPURPOSESONLY12345",
-        platformAddress:
-          "GCEXAMPLE3PLATFORMADDRESSFORDEMOPURPOSESONLY1234567890",
-        receiver: "GCEXAMPLE4RECEIVERADDRESSFORDEMOPURPOSESONLY1234567890",
-        releaseSigner:
-          "GCEXAMPLE5RELEASESIGNERADDRESSFORDEMOPURPOSESONLY123456",
-        disputeResolver:
-          "GCEXAMPLE6DISPUTERESOLVERADDRESSFORDEMOPURPOSESONLY1234",
+        approver: selectedEscrow?.roles?.approver || "",
+        serviceProvider: selectedEscrow?.roles?.serviceProvider || "",
+        platformAddress: selectedEscrow?.roles?.platformAddress || "",
+        receiver: selectedEscrow?.roles?.receiver || "",
+        releaseSigner: selectedEscrow?.roles?.releaseSigner || "",
+        disputeResolver: selectedEscrow?.roles?.disputeResolver || "",
       },
-      milestones: [
-        { description: "Initial design mockups and wireframes" },
-        { description: "Frontend development and responsive design" },
-        { description: "Backend integration and testing" },
-        { description: "Final deployment and documentation" },
-      ],
+      milestones: (selectedEscrow?.milestones || []).map(
+        (m: SingleReleaseMilestone) => ({
+          description: m?.description || "",
+        })
+      ),
     },
     mode: "onChange",
   });
 
   React.useEffect(() => {
-    // Using hardcoded data instead of selectedEscrow values
+    if (!selectedEscrow) return;
     form.reset({
-      engagementId: "ENG-001-2024",
-      title: "Website Development Project",
-      description:
-        "Complete redesign and development of corporate website with modern UI/UX",
-      platformFee: "2.5",
-      amount: "1500",
-      receiverMemo:
-        "Payment for milestone completion - Website development phase 1",
+      engagementId: selectedEscrow?.engagementId || "",
+      title: selectedEscrow?.title || "",
+      description: selectedEscrow?.description || "",
+      platformFee:
+        (selectedEscrow?.platformFee as unknown as
+          | number
+          | string
+          | undefined) || "",
+      amount:
+        (selectedEscrow?.amount as unknown as number | string | undefined) ||
+        "",
+      receiverMemo: selectedEscrow?.receiverMemo
+        ? String(selectedEscrow.receiverMemo)
+        : "",
       trustline: {
-        address: "CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWFEIE3USCIHMXQDAMA",
+        address: selectedEscrow?.trustline?.address || "",
         decimals: 10000000,
       },
       roles: {
-        approver: "GCEXAMPLE1APPROVERADDRESSFORDEMOPURPOSESONLY1234567890",
-        serviceProvider:
-          "GCEXAMPLE2SERVICEPROVIDERADDRESSFORDEMOPURPOSESONLY12345",
-        platformAddress:
-          "GCEXAMPLE3PLATFORMADDRESSFORDEMOPURPOSESONLY1234567890",
-        receiver: "GCEXAMPLE4RECEIVERADDRESSFORDEMOPURPOSESONLY1234567890",
-        releaseSigner:
-          "GCEXAMPLE5RELEASESIGNERADDRESSFORDEMOPURPOSESONLY123456",
-        disputeResolver:
-          "GCEXAMPLE6DISPUTERESOLVERADDRESSFORDEMOPURPOSESONLY1234",
+        approver: selectedEscrow?.roles?.approver || "",
+        serviceProvider: selectedEscrow?.roles?.serviceProvider || "",
+        platformAddress: selectedEscrow?.roles?.platformAddress || "",
+        receiver: selectedEscrow?.roles?.receiver || "",
+        releaseSigner: selectedEscrow?.roles?.releaseSigner || "",
+        disputeResolver: selectedEscrow?.roles?.disputeResolver || "",
       },
-      milestones: [
-        { description: "Initial design mockups and wireframes" },
-        { description: "Frontend development and responsive design" },
-        { description: "Backend integration and testing" },
-        { description: "Final deployment and documentation" },
-      ],
+      milestones: (selectedEscrow?.milestones || []).map(
+        (m: SingleReleaseMilestone) => ({
+          description: m?.description || "",
+        })
+      ),
     });
-  }, [form]);
+  }, [selectedEscrow, form]);
 
   const milestones = form.watch("milestones");
   const isAnyMilestoneEmpty = milestones.some((m) => m.description === "");
@@ -131,8 +131,6 @@ export function useUpdateEscrow() {
   const handleSubmit = form.handleSubmit(async (payload) => {
     try {
       setIsSubmitting(true);
-
-      if (!selectedEscrow) return;
 
       toast.success("Escrow updated successfully");
     } finally {
