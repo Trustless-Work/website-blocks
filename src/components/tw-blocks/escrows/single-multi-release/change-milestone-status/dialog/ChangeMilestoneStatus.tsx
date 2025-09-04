@@ -30,23 +30,11 @@ import {
 
 export const ChangeMilestoneStatusDialog = ({
   showSelectMilestone = false,
-  milestoneIndex,
 }: {
   showSelectMilestone?: boolean;
-  milestoneIndex?: number | string;
 }) => {
   const { form, handleSubmit, isSubmitting } = useChangeMilestoneStatus();
   const { selectedEscrow } = useEscrowContext();
-
-  React.useEffect(() => {
-    if (
-      !showSelectMilestone &&
-      milestoneIndex !== undefined &&
-      milestoneIndex !== null
-    ) {
-      form.setValue("milestoneIndex", String(milestoneIndex));
-    }
-  }, [showSelectMilestone, milestoneIndex, form]);
 
   return (
     <Dialog>
