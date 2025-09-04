@@ -323,17 +323,10 @@
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
     ],
     "variants": ["form", "button", "dialog"],
-    "installByTypeAndVariant": {
-      "single-release": {
-        "form": "npx trustless-work add escrows/single-release/approve-milestone/form",
-        "button": "npx trustless-work add escrows/single-release/approve-milestone/button",
-        "dialog": "npx trustless-work add escrows/single-release/approve-milestone/dialog"
-      },
-      "multi-release": {
-        "form": "npx trustless-work add escrows/multi-release/approve-milestone/form",
-        "button": "npx trustless-work add escrows/multi-release/approve-milestone/button",
-        "dialog": "npx trustless-work add escrows/multi-release/approve-milestone/dialog"
-      }
+    "installByVariant": {
+      "form": "npx trustless-work add escrows/single-multi-release/approve-milestone/form",
+      "button": "npx trustless-work add escrows/single-multi-release/approve-milestone/button",
+      "dialog": "npx trustless-work add escrows/single-multi-release/approve-milestone/dialog"
     },
     "image": [
       "https://drive.google.com/file/d/1X4CEDgTKH76Tao7gMDKBmx0ouXFCfqEq/view?usp=sharing",
@@ -388,17 +381,10 @@
       "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
     ],
-    "installByTypeAndVariant": {
-      "single-release": {
-        "form": "npx trustless-work add escrows/single-release/change-milestone-status/form",
-        "button": "npx trustless-work add escrows/single-release/change-milestone-status/button",
-        "dialog": "npx trustless-work add escrows/single-release/change-milestone-status/dialog"
-      },
-      "multi-release": {
-        "form": "npx trustless-work add escrows/multi-release/change-milestone-status/form",
-        "button": "npx trustless-work add escrows/multi-release/change-milestone-status/button",
-        "dialog": "npx trustless-work add escrows/multi-release/change-milestone-status/dialog"
-      }
+    "installByVariant": {
+      "form": "npx trustless-work add escrows/single-multi-release/change-milestone-status/form",
+      "button": "npx trustless-work add escrows/single-multi-release/change-milestone-status/button",
+      "dialog": "npx trustless-work add escrows/single-multi-release/change-milestone-status/dialog"
     },
     "image": [
       "https://drive.google.com/file/d/1EV-VaWpysHKxfCM47iJ7jUmg4T_aScRg/view?usp=sharing",
@@ -453,17 +439,10 @@
       "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
       "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
     ],
-    "installByTypeAndVariant": {
-      "single-release": {
-        "form": "npx trustless-work add escrows/single-release/fund-escrow/form",
-        "button": "npx trustless-work add escrows/single-release/fund-escrow/button",
-        "dialog": "npx trustless-work add escrows/single-release/fund-escrow/dialog"
-      },
-      "multi-release": {
-        "form": "npx trustless-work add escrows/multi-release/fund-escrow/form",
-        "button": "npx trustless-work add escrows/multi-release/fund-escrow/button",
-        "dialog": "npx trustless-work add escrows/multi-release/fund-escrow/dialog"
-      }
+    "installByVariant": {
+      "form": "npx trustless-work add escrows/single-multi-release/fund-escrow/form",
+      "button": "npx trustless-work add escrows/single-multi-release/fund-escrow/button",
+      "dialog": "npx trustless-work add escrows/single-multi-release/fund-escrow/dialog"
     },
     "image": [
       "https://drive.google.com/file/d/1UeKPZgadgsyiUv6Fv-PEmUUhAEWKr74n/view?usp=sharing",
@@ -649,7 +628,7 @@
         "button": "npx trustless-work add escrows/single-release/release-escrow/button"
       },
       "multi-release": {
-        "button": "npx trustless-work add escrows/multi-release/release-escrow/button"
+        "button": "npx trustless-work add escrows/multi-release/release-milestone/button"
       }
     },
     "image": [
@@ -693,7 +672,7 @@
   {
     "id": "escrows-dispute-escrow",
     "title": "Dispute",
-    "description": "Action to raise a dispute in the escrow.",
+    "description": "Action to raise a dispute in the escrow or milestone.",
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
@@ -709,7 +688,7 @@
         "button": "npx trustless-work add escrows/single-release/dispute-escrow/button"
       },
       "multi-release": {
-        "button": "npx trustless-work add escrows/multi-release/dispute-escrow/button"
+        "button": "npx trustless-work add escrows/multi-release/dispute-milestone/button"
       }
     },
     "image": [

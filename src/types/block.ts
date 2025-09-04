@@ -11,6 +11,8 @@ export type CodeByTypeAndVariant = Partial<
   Record<EscrowReleaseType, Partial<Record<EscrowVariant, string>>>
 >;
 
+export type CodeByVariant = Partial<Record<EscrowVariant, string>>;
+
 export type RequiredBlock = {
   name: string;
   url?: string;
@@ -32,7 +34,8 @@ export type Block = {
   variants?: EscrowVariant[];
   codeByTypeAndVariant?: CodeByTypeAndVariant;
   installByTypeAndVariant?: CodeByTypeAndVariant;
-  install: string;
+  installByVariant?: CodeByVariant;
+  install?: string;
   requiredProviders?: string[];
   notes?: string[];
   requiredBlocks?: (string | RequiredBlock)[];

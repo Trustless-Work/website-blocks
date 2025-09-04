@@ -163,21 +163,9 @@ export function BlockTypeVariantViewer({
           button: () => <ApproveMilestoneButton />,
         },
         "multi-release": {
-          form: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          dialog: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          form: () => <ApproveMilestoneForm />,
+          dialog: () => <ApproveMilestoneDialog />,
+          button: () => <ApproveMilestoneButton />,
         },
       },
       "change-milestone-status": {
@@ -187,21 +175,9 @@ export function BlockTypeVariantViewer({
           button: () => <ChangeMilestoneStatusButton />,
         },
         "multi-release": {
-          form: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          dialog: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          form: () => <ChangeMilestoneStatusForm />,
+          dialog: () => <ChangeMilestoneStatusDialog />,
+          button: () => <ChangeMilestoneStatusButton />,
         },
       },
       "fund-escrow": {
@@ -211,21 +187,9 @@ export function BlockTypeVariantViewer({
           button: () => <FundEscrowButton />,
         },
         "multi-release": {
-          form: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          dialog: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
-          button: () => (
-            <div className="flex items-center justify-center h-full">
-              <CommingSoon />
-            </div>
-          ),
+          form: () => <FundEscrowForm />,
+          dialog: () => <FundEscrowDialog />,
+          button: () => <FundEscrowButton />,
         },
       },
       "resolve-dispute": {

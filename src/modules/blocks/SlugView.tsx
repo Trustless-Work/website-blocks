@@ -77,12 +77,29 @@ export const BlockPage = ({ block }: BlockPageProps) => {
 
   const action = useMemo(() => block.id.replace("escrows-", ""), [block.id]);
 
+  const isUnifiedBoth = useMemo(
+    () =>
+      ["fund-escrow", "approve-milestone", "change-milestone-status"].includes(
+        action
+      ),
+    [action]
+  );
+
   const installationCommand = useMemo(() => {
     const b = block as unknown as Block;
     if (hasExplicitVariants) {
+      const byVariant = (b as any).installByVariant as
+        | Partial<Record<EscrowVariant, string>>
+        | undefined;
+      if (byVariant?.[activeVariant]) return byVariant[activeVariant] as string;
+
       const byType = b.installByTypeAndVariant;
       const cmd = byType?.[activeType]?.[activeVariant];
       if (cmd) return cmd;
+
+      if (isUnifiedBoth) {
+        return `npx trustless-work add escrows/single-multi-release/${action}/${activeVariant}`;
+      }
       // fallback for escrow actions when variants exist
       return `npx trustless-work add escrows/${activeType}/${action}/${activeVariant}`;
     }
@@ -176,7 +193,7 @@ export const BlockPage = ({ block }: BlockPageProps) => {
             </div>
           )}
 
-          {showTypeTabs && (
+          {isUnifiedBoth ? (
             <div className="flex flex-col gap-3 p-2 rounded-lg">
               <Tabs
                 value={activeType}
@@ -184,22 +201,42 @@ export const BlockPage = ({ block }: BlockPageProps) => {
                 suppressHydrationWarning
                 className="w-full"
               >
-                <TabsList className="grid w-full grid-cols-2 h-10">
+                <TabsList className="grid w-full grid-cols-1 h-10">
                   <TabsTrigger
-                    value="single-release"
+                    value={activeType}
                     className="text-sm font-medium"
                   >
-                    Single Release
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="multi-release"
-                    className="text-sm font-medium"
-                  >
-                    Multi Release
+                    Single & Multi Release
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
+          ) : (
+            showTypeTabs && (
+              <div className="flex flex-col gap-3 p-2 rounded-lg">
+                <Tabs
+                  value={activeType}
+                  onValueChange={(v) => setActiveType(v as EscrowReleaseType)}
+                  suppressHydrationWarning
+                  className="w-full"
+                >
+                  <TabsList className="grid w-full grid-cols-2 h-10">
+                    <TabsTrigger
+                      value="single-release"
+                      className="text-sm font-medium"
+                    >
+                      Single Release
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="multi-release"
+                      className="text-sm font-medium"
+                    >
+                      Multi Release
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
+            )
           )}
 
           <BlockTypeVariantViewer
