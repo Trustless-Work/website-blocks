@@ -1,19 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  GetEscrowsFromIndexerBySignerParams,
-  useGetEscrowsFromIndexerBySigner,
+  GetEscrowsFromIndexerByRoleParams,
+  useGetEscrowsFromIndexerByRole,
 } from "@trustless-work/escrow";
 import { GetEscrowsFromIndexerResponse as Escrow } from "@trustless-work/escrow/types";
 
-interface UseEscrowsBySignerQueryParams
-  extends GetEscrowsFromIndexerBySignerParams {
+type UseEscrowsByRoleQueryParams = Omit<
+  GetEscrowsFromIndexerByRoleParams,
+  "role"
+> & {
+  role?: GetEscrowsFromIndexerByRoleParams["role"];
   enabled?: boolean;
   validateOnChain?: boolean;
-}
+};
 
-export const useEscrowsBySignerQuery = ({
-  signer,
-  isActive,
+/**
+ * Use the query to get the escrows by role
+ *
+ * @param params - The parameters for the query
+ * @returns The query result
+ */
+export const useEscrowsByRoleQuery = ({
+  role,
+  roleAddress,
+  isActive = true,
   page,
   orderDirection,
   orderBy,
@@ -27,13 +37,15 @@ export const useEscrowsBySignerQuery = ({
   type,
   enabled = true,
   validateOnChain = true,
-}: UseEscrowsBySignerQueryParams) => {
-  const { getEscrowsBySigner } = useGetEscrowsFromIndexerBySigner();
+}: UseEscrowsByRoleQueryParams) => {
+  // Get the escrows by role
+  const { getEscrowsByRole } = useGetEscrowsFromIndexerByRole();
 
   return useQuery({
     queryKey: [
       "escrows",
-      signer,
+      roleAddress,
+      role,
       isActive,
       page,
       orderDirection,
@@ -49,8 +61,19 @@ export const useEscrowsBySignerQuery = ({
       validateOnChain,
     ],
     queryFn: async (): Promise<Escrow[]> => {
-      const escrows = await getEscrowsBySigner({
-        signer,
+      if (!role) {
+        throw new Error("Role is required to fetch escrows by role");
+      }
+
+      /**
+       * Call the query to get the escrows from the Trustless Work Indexer
+       *
+       * @param params - The parameters for the query
+       * @returns The query result
+       */
+      const escrows = await getEscrowsByRole({
+        role,
+        roleAddress,
         isActive,
         page,
         orderDirection,
@@ -72,7 +95,7 @@ export const useEscrowsBySignerQuery = ({
 
       return escrows;
     },
-    enabled: enabled && !!signer,
-    staleTime: 1000 * 60 * 5, // 5 min
+    enabled: enabled && !!roleAddress && !!role,
+    staleTime: 1000 * 60 * 5,
   });
 };
