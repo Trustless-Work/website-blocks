@@ -12,7 +12,11 @@ import { useEscrowsBySigner } from "../useEscrowsBySigner.shared";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Goal,
   Wallet,
@@ -29,7 +33,9 @@ import {
   formatTimestamp,
 } from "../../../helpers/format.helper";
 
-export const EscrowsBySignerCards = () => {
+type Props = { syncWithUrl?: boolean };
+
+export const EscrowsBySignerCards = ({ syncWithUrl = true }: Props) => {
   const {
     walletAddress,
     data,
@@ -67,7 +73,7 @@ export const EscrowsBySignerCards = () => {
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner();
+  } = useEscrowsBySigner({ syncWithUrl });
 
   const { setSelectedEscrow } = useEscrowContext();
 

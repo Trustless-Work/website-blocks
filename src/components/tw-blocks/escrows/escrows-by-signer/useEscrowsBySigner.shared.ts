@@ -21,7 +21,8 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsBySigner() {
+export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
+  const syncWithUrl = options?.syncWithUrl ?? true;
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -60,7 +61,7 @@ export function useEscrowsBySigner() {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
-    if (!searchParams) return;
+    if (!syncWithUrl || !searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
     const qpOrderBy = (qp.get("orderBy") as EscrowOrderBy) || "createdAt";
@@ -99,7 +100,7 @@ export function useEscrowsBySigner() {
       to: qpEnd ? new Date(qpEnd) : undefined,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [syncWithUrl]);
 
   const stableSearchParams = React.useMemo(
     () => ({
@@ -141,7 +142,7 @@ export function useEscrowsBySigner() {
   const lastQueryStringRef = React.useRef("");
 
   React.useEffect(() => {
-    if (!pathname) return;
+    if (!syncWithUrl || !pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));
     qp.set("orderBy", String(debouncedSearchParams.orderBy ?? "createdAt"));
@@ -172,7 +173,7 @@ export function useEscrowsBySigner() {
       lastQueryStringRef.current = newQs;
       router.replace(`${pathname}?${newQs}`);
     }
-  }, [pathname, router, debouncedSearchParams]);
+  }, [pathname, router, debouncedSearchParams, syncWithUrl]);
 
   const formattedRangeLabel = React.useMemo(() => {
     if (!dateRange?.from && !dateRange?.to) return "Date range";

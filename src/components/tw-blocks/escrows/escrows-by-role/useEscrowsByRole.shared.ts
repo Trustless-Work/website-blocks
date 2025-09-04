@@ -22,7 +22,8 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsByRole() {
+export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
+  const syncWithUrl = options?.syncWithUrl ?? true;
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -63,7 +64,7 @@ export function useEscrowsByRole() {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
-    if (!searchParams) return;
+    if (!syncWithUrl || !searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
     const qpOrderBy = (qp.get("orderBy") as EscrowOrderBy) || "createdAt";
@@ -106,7 +107,7 @@ export function useEscrowsByRole() {
       (qpRole as GetEscrowsFromIndexerByRoleParams["role"]) || "approver"
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [syncWithUrl]);
 
   const stableSearchParams = React.useMemo(
     () => ({
@@ -150,7 +151,7 @@ export function useEscrowsByRole() {
   const lastQueryStringRef = React.useRef("");
 
   React.useEffect(() => {
-    if (!pathname) return;
+    if (!syncWithUrl || !pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));
     qp.set("orderBy", String(debouncedSearchParams.orderBy ?? "createdAt"));
@@ -184,7 +185,7 @@ export function useEscrowsByRole() {
       lastQueryStringRef.current = newQs;
       router.replace(`${pathname}?${newQs}`);
     }
-  }, [pathname, router, debouncedSearchParams]);
+  }, [pathname, router, debouncedSearchParams, syncWithUrl]);
 
   const formattedRangeLabel = React.useMemo(() => {
     if (!dateRange?.from && !dateRange?.to) return "Date range";

@@ -11,7 +11,11 @@ import type {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Goal,
   Wallet,
@@ -30,7 +34,9 @@ import {
 } from "../../../helpers/format.helper";
 import { EscrowDetailDialog } from "../details/EscrowDetailDialog";
 
-export const EscrowsByRoleCards = () => {
+type Props = { syncWithUrl?: boolean };
+
+export const EscrowsByRoleCards = ({ syncWithUrl = true }: Props) => {
   const {
     walletAddress,
     data,
@@ -70,7 +76,7 @@ export const EscrowsByRoleCards = () => {
     setRole,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsByRole();
+  } = useEscrowsByRole({ syncWithUrl });
 
   const { setSelectedEscrow } = useEscrowContext();
 
