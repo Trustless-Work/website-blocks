@@ -12,30 +12,32 @@ import useEscrowDetailDialog from "./useDetailsEscrow";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Info, Users, ListChecks } from "lucide-react";
-import { useEscrowDialogs } from "../../escrow-context/EscrowDialogsProvider";
-import type {
-  GetEscrowsFromIndexerResponse as Escrow,
-  Role,
-} from "@trustless-work/escrow/types";
+import { useEscrowDialogs } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
+import type { GetEscrowsFromIndexerResponse as Escrow } from "@trustless-work/escrow/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Milestones } from "./Milestones";
 import { Entities } from "./Entities";
 import { GeneralInformation } from "./GeneralInformation";
-import { useEscrowContext } from "../../escrow-context/EscrowProvider";
-import SuccessReleaseDialog from "./SuccessReleaseDialog";
+import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
+import { SuccessReleaseDialog } from "./SuccessReleaseDialog";
+
+/**
+ * Based on the provided roles -> https://docs.trustlesswork.com/trustless-work/technology-overview/roles-in-trustless-work
+ *
+ * The roles that the user assigns in the escrow initialization are in the userRolesInEscrow state. Based on these roles, you'll have different actions buttons.
+ *
+ */
 
 interface EscrowDetailDialogProps {
   isDialogOpen: boolean;
-  activeRole: Role[];
   setIsDialogOpen: (value: boolean) => void;
   setSelectedEscrow: (selectedEscrow?: Escrow) => void;
 }
 
-const EscrowDetailDialog = ({
+export const EscrowDetailDialog = ({
   isDialogOpen,
   setIsDialogOpen,
   setSelectedEscrow,
-  activeRole,
 }: EscrowDetailDialogProps) => {
   const { selectedEscrow } = useEscrowContext();
   const dialogStates = useEscrowDialogs();
@@ -59,7 +61,7 @@ const EscrowDetailDialog = ({
   return (
     <>
       <Dialog open={isDialogOpen} onOpenChange={handleClose}>
-        <DialogContent className="!w-full sm:!max-w-4xl max-h-[95vh] overflow-y-auto">
+        <DialogContent className="w-11/12 sm:w-3/4 h-[95vh] overflow-y-auto flex flex-col !max-w-none">
           <DialogHeader className="flex-shrink-0">
             <div className="w-full">
               <div className="flex flex-col gap-2">
@@ -115,7 +117,6 @@ const EscrowDetailDialog = ({
             <div className="flex-1 min-h-0">
               <TabsContent value="general" className="mt-4 h-full">
                 <GeneralInformation
-                  activeRole={activeRole}
                   selectedEscrow={selectedEscrow}
                   userRolesInEscrow={userRolesInEscrow}
                   dialogStates={dialogStates}
@@ -130,7 +131,6 @@ const EscrowDetailDialog = ({
               <TabsContent value="milestones" className="mt-4 h-full">
                 <Card className="p-4 h-full">
                   <Milestones
-                    activeRole={activeRole}
                     selectedEscrow={selectedEscrow}
                     userRolesInEscrow={userRolesInEscrow}
                     setEvidenceVisibleMap={setEvidenceVisibleMap}
@@ -143,12 +143,12 @@ const EscrowDetailDialog = ({
         </DialogContent>
       </Dialog>
 
-      <SuccessReleaseDialog
-        isOpen={dialogStates.successRelease.isOpen}
-        onOpenChange={dialogStates.successRelease.setIsOpen}
-      />
+      {dialogStates.successRelease.isOpen && (
+        <SuccessReleaseDialog
+          isOpen={dialogStates.successRelease.isOpen}
+          onOpenChange={dialogStates.successRelease.setIsOpen}
+        />
+      )}
     </>
   );
 };
-
-export default EscrowDetailDialog;
