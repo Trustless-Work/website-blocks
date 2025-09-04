@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CodeBlock } from "@/shared/CodeBlock";
+import { TreeVisualization } from "@/shared/TreeVisualization";
 import { ArrowRight, Info, InfoIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -103,10 +104,225 @@ export const GetStarted = () => {
 
             <CodeBlock code="npx trustless-work escrows // or other parent's blocks directory" />
 
-            <p className="leading-7">
-              This will install all the escrows blocks, including the
-              escrow-context, single-release, etc.
-            </p>
+            <div className="space-y-4">
+              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
+                Understanding the Block Structure
+              </h3>
+              <p className="leading-7 text-muted-foreground">
+                When you specify a parent folder like{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  escrows
+                </code>
+                , the CLI will install all blocks within that directory tree.
+                Here's how the blocks are organized:
+              </p>
+
+              <TreeVisualization
+                title="Trustless Work Blocks Structure"
+                data={[
+                  {
+                    name: "escrows",
+                    type: "folder",
+                    path: "escrows",
+                    description: "← Install all escrow-related blocks",
+                    children: [
+                      {
+                        name: "escrows-by-role",
+                        type: "folder",
+                        path: "escrows/escrows-by-role",
+                        description: "View escrows by user role",
+                        children: [
+                          {
+                            name: "cards",
+                            type: "folder",
+                            path: "escrows/escrows-by-role/cards",
+                            description: "Card layout components",
+                          },
+                          {
+                            name: "table",
+                            type: "folder",
+                            path: "escrows/escrows-by-role/table",
+                            description: "Table layout components",
+                          },
+                          {
+                            name: "details",
+                            type: "folder",
+                            path: "escrows/escrows-by-role/details",
+                            description: "Detail dialog components",
+                          },
+                        ],
+                      },
+                      {
+                        name: "escrows-by-signer",
+                        type: "folder",
+                        path: "escrows/escrows-by-signer",
+                        description: "View escrows by signer",
+                        children: [
+                          {
+                            name: "cards",
+                            type: "folder",
+                            path: "escrows/escrows-by-signer/cards",
+                            description: "Card layout components",
+                          },
+                          {
+                            name: "table",
+                            type: "folder",
+                            path: "escrows/escrows-by-signer/table",
+                            description: "Table layout components",
+                          },
+                          {
+                            name: "details",
+                            type: "folder",
+                            path: "escrows/escrows-by-role/details",
+                            description: "Detail dialog components",
+                          },
+                        ],
+                      },
+                      {
+                        name: "single-release",
+                        type: "folder",
+                        path: "escrows/single-release",
+                        description: "Single payment escrows",
+                        children: [
+                          {
+                            name: "initialize-escrow",
+                            type: "folder",
+                            path: "escrows/single-release/initialize-escrow",
+                            description: "Create new escrows",
+                          },
+                          {
+                            name: "release-escrow",
+                            type: "folder",
+                            path: "escrows/single-release/release-escrow",
+                            description: "Release payment",
+                          },
+                          {
+                            name: "dispute-escrow",
+                            type: "folder",
+                            path: "escrows/single-release/dispute-escrow",
+                            description: "Raise disputes",
+                          },
+                          {
+                            name: "resolve-dispute",
+                            type: "folder",
+                            path: "escrows/single-release/resolve-dispute",
+                            description: "Resolve disputes",
+                          },
+                          {
+                            name: "update-escrow",
+                            type: "folder",
+                            path: "escrows/single-release/update-escrow",
+                            description: "Update escrow settings",
+                          },
+                        ],
+                      },
+                      {
+                        name: "multi-release",
+                        type: "folder",
+                        path: "escrows/multi-release",
+                        description: "Milestone-based escrows",
+                        children: [
+                          {
+                            name: "initialize-escrow",
+                            type: "folder",
+                            path: "escrows/multi-release/initialize-escrow",
+                            description: "Create escrows",
+                          },
+                          {
+                            name: "release-milestone",
+                            type: "folder",
+                            path: "escrows/multi-release/release-milestone",
+                            description: "Release milestone payments",
+                          },
+                          {
+                            name: "dispute-milestone",
+                            type: "folder",
+                            path: "escrows/multi-release/dispute-milestone",
+                            description: "Dispute milestones",
+                          },
+                          {
+                            name: "resolve-dispute",
+                            type: "folder",
+                            path: "escrows/multi-release/resolve-dispute",
+                            description: "Resolve milestone disputes",
+                          },
+                          {
+                            name: "update-escrow",
+                            type: "folder",
+                            path: "escrows/multi-release/update-escrow",
+                            description: "Update escrows",
+                          },
+                        ],
+                      },
+                      {
+                        name: "single-multi-release",
+                        type: "folder",
+                        path: "escrows/single-multi-release",
+                        description: "Shared components",
+                        children: [
+                          {
+                            name: "approve-milestone",
+                            type: "folder",
+                            path: "escrows/single-multi-release/approve-milestone",
+                            description: "Approve milestones",
+                          },
+                          {
+                            name: "change-milestone-status",
+                            type: "folder",
+                            path: "escrows/single-multi-release/change-milestone-status",
+                            description: "Update milestone status",
+                          },
+                          {
+                            name: "fund-escrow",
+                            type: "folder",
+                            path: "escrows/single-multi-release/fund-escrow",
+                            description: "Add funds to escrows",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ]}
+              />
+
+              <div className="grid gap-4 md:grid-cols-1">
+                <Card className="p-4">
+                  <h3 className="font-medium mb-2">Install Parent Directory</h3>
+                  <CodeBlock
+                    code="npx trustless-work add escrows"
+                    language="bash"
+                  />
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Installs ALL escrow blocks
+                  </p>
+                </Card>
+
+                <Card className="p-4">
+                  <h4 className="font-medium mb-2">
+                    Install Specific Subfolder
+                  </h4>
+                  <CodeBlock
+                    code="npx trustless-work add escrows/single-release"
+                    language="bash"
+                  />
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Installs only single-release escrow blocks
+                  </p>
+                </Card>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+                  💡 Pro Tip: Hierarchical Installation
+                </h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  The deeper you go in the folder structure, the more specific
+                  the blocks become. Start with parent directories for
+                  comprehensive functionality, then drill down to specific
+                  components as needed.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

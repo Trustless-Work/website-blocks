@@ -506,7 +506,7 @@ export default function Home() {
 
 `}
             language="tsx"
-            filename="app/layout.tsx"
+            filename="app/page.tsx"
           />
         </div>
       </section>
