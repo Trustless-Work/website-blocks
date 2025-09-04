@@ -6,7 +6,7 @@ import type { DateRange as DayPickerDateRange } from "react-day-picker";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { SortingState } from "@tanstack/react-table";
 import { useWalletContext } from "../../wallet-kit/WalletProvider";
-import { useEscrowsBySignerQuery } from "../../tanstak/useEscrowsBySignerQuery";
+import { useEscrowsBySignerQuery } from "../../tanstack/useEscrowsBySignerQuery";
 import { GetEscrowsFromIndexerResponse as Escrow } from "@trustless-work/escrow/types";
 
 export type EscrowOrderBy = "createdAt" | "updatedAt" | "amount";
@@ -21,8 +21,7 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
-  const syncWithUrl = options?.syncWithUrl ?? true;
+export function useEscrowsBySigner() {
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -61,7 +60,6 @@ export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
-    if (!syncWithUrl) return;
     if (!searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
@@ -101,10 +99,10 @@ export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
       to: qpEnd ? new Date(qpEnd) : undefined,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [syncWithUrl]);
+  }, []);
 
-  const debouncedSearchParams = useDebouncedValue(
-    {
+  const stableSearchParams = React.useMemo(
+    () => ({
       page,
       orderBy,
       orderDirection,
@@ -120,12 +118,29 @@ export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
         ? startOfDay(dateRange.from).toISOString()
         : undefined,
       endDate: dateRange.to ? endOfDay(dateRange.to).toISOString() : undefined,
-    },
-    200
+    }),
+    [
+      page,
+      orderBy,
+      orderDirection,
+      debouncedTitle,
+      debouncedEngagementId,
+      isActive,
+      validateOnChain,
+      type,
+      status,
+      debouncedMinAmount,
+      debouncedMaxAmount,
+      dateRange.from,
+      dateRange.to,
+    ]
   );
 
+  const debouncedSearchParams = useDebouncedValue(stableSearchParams, 200);
+
+  const lastQueryStringRef = React.useRef("");
+
   React.useEffect(() => {
-    if (!syncWithUrl) return;
     if (!pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));
@@ -140,8 +155,10 @@ export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
       qp.set("engagementId", debouncedSearchParams.engagementId);
     qp.set("isActive", String(debouncedSearchParams.isActive));
     qp.set("validateOnChain", String(debouncedSearchParams.validateOnChain));
-    if (type && type !== "all") qp.set("type", type);
-    if (status && status !== "all") qp.set("status", status);
+    if (debouncedSearchParams.type && debouncedSearchParams.type !== "all")
+      qp.set("type", debouncedSearchParams.type);
+    if (debouncedSearchParams.status && debouncedSearchParams.status !== "all")
+      qp.set("status", debouncedSearchParams.status);
     if (debouncedSearchParams.minAmount)
       qp.set("minAmount", String(debouncedSearchParams.minAmount));
     if (debouncedSearchParams.maxAmount)
@@ -150,30 +167,12 @@ export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
       qp.set("startDate", String(debouncedSearchParams.startDate));
     if (debouncedSearchParams.endDate)
       qp.set("endDate", String(debouncedSearchParams.endDate));
-
-    const nextSearch = qp.toString();
-    const currentSearch = searchParams ? searchParams.toString() : "";
-    if (currentSearch === nextSearch) return;
-    router.replace(`${pathname}?${nextSearch}`);
-  }, [
-    syncWithUrl,
-    pathname,
-    router,
-    searchParams,
-    debouncedSearchParams.page,
-    debouncedSearchParams.orderBy,
-    debouncedSearchParams.orderDirection,
-    debouncedSearchParams.title,
-    debouncedSearchParams.engagementId,
-    debouncedSearchParams.isActive,
-    debouncedSearchParams.validateOnChain,
-    type,
-    status,
-    debouncedSearchParams.minAmount,
-    debouncedSearchParams.maxAmount,
-    debouncedSearchParams.startDate,
-    debouncedSearchParams.endDate,
-  ]);
+    const newQs = qp.toString();
+    if (lastQueryStringRef.current !== newQs) {
+      lastQueryStringRef.current = newQs;
+      router.replace(`${pathname}?${newQs}`);
+    }
+  }, [pathname, router, debouncedSearchParams]);
 
   const formattedRangeLabel = React.useMemo(() => {
     if (!dateRange?.from && !dateRange?.to) return "Date range";
@@ -229,6 +228,12 @@ export function useEscrowsBySigner(options?: { syncWithUrl?: boolean }) {
     dateRange,
   ]);
 
+  /**
+   * Call the query to get the escrows from the Trustless Work Indexer
+   *
+   * @param params - The parameters for the query
+   * @returns The query result
+   */
   const query = useEscrowsBySignerQuery(params);
   const nextPageQuery = useEscrowsBySignerQuery({ ...params, page: page + 1 });
 

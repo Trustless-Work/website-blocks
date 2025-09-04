@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import type {
   GetEscrowsFromIndexerResponse as Escrow,
   MultiReleaseMilestone,
-  Role,
 } from "@trustless-work/escrow/types";
 import {
   ColumnDef,
@@ -23,18 +22,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { FileX, Loader2, Wallet, RefreshCw, AlertTriangle } from "lucide-react";
-import Filters from "./Filters";
+import { Filters } from "./Filters";
 import { useEscrowsBySigner } from "../useEscrowsBySigner.shared";
-import { useEscrowDialogs } from "../../escrow-context/EscrowDialogsProvider";
-import { useEscrowContext } from "../../escrow-context/EscrowProvider";
-import EscrowDetailDialog from "../../escrows-by-role/details/EscrowDetailDialog";
+import { useEscrowDialogs } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
+import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
+import { EscrowDetailDialog } from "../details/EscrowDetailDialog";
 import { formatTimestamp } from "../../../helpers/format.helper";
 
-export function EscrowsBySignerTable({
-  syncWithUrl = true,
-}: {
-  syncWithUrl?: boolean;
-}) {
+export const EscrowsBySignerTable = () => {
   const {
     walletAddress,
     data,
@@ -72,10 +67,14 @@ export function EscrowsBySignerTable({
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner({ syncWithUrl });
+  } = useEscrowsBySigner();
 
   const dialogStates = useEscrowDialogs();
   const { setSelectedEscrow } = useEscrowContext();
+
+  const handleRefresh = React.useCallback(() => {
+    void refetch();
+  }, [refetch]);
 
   const columns = React.useMemo<ColumnDef<Escrow>[]>(
     () => [
@@ -188,7 +187,7 @@ export function EscrowsBySignerTable({
         ),
       },
     ],
-    []
+    [dialogStates.second.setIsOpen, setSelectedEscrow]
   );
 
   const table = useReactTable({
@@ -203,7 +202,6 @@ export function EscrowsBySignerTable({
     enableSortingRemoval: true,
   });
 
-  const activeRole: Role[] = ["approver"];
   const escrows = data ?? [];
 
   return (
@@ -224,21 +222,21 @@ export function EscrowsBySignerTable({
           setEngagementId={setEngagementId}
           setIsActive={setIsActive}
           setValidateOnChain={setValidateOnChain}
-          setType={(v) => setType(v as typeof type)}
-          setStatus={(v) => setStatus(v as typeof status)}
+          setType={setType}
+          setStatus={setStatus}
           setMinAmount={setMinAmount}
           setMaxAmount={setMaxAmount}
           setDateRange={setDateRange}
           onClearFilters={onClearFilters}
-          onRefresh={() => refetch()}
+          onRefresh={handleRefresh}
           isRefreshing={isFetching}
           orderBy={orderBy}
           orderDirection={orderDirection}
-          setOrderBy={(v) => setOrderBy(v)}
-          setOrderDirection={(v) => setOrderDirection(v)}
+          setOrderBy={setOrderBy}
+          setOrderDirection={setOrderDirection}
         />
 
-        <Card className="w-full p-2 sm:p-4">
+        <Card className="w-full py-2 sm:py-4">
           <div className="mt-2 sm:mt-4 overflow-x-auto">
             <Table>
               <TableHeader>
@@ -281,8 +279,8 @@ export function EscrowsBySignerTable({
                                 {sorted === "asc"
                                   ? "▲"
                                   : sorted === "desc"
-                                    ? "▼"
-                                    : ""}
+                                  ? "▼"
+                                  : ""}
                               </span>
                             )}
                           </div>
@@ -334,7 +332,7 @@ export function EscrowsBySignerTable({
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => refetch()}
+                          onClick={handleRefresh}
                         >
                           <RefreshCw className="h-4 w-4 mr-2" />
                           Retry
@@ -413,14 +411,13 @@ export function EscrowsBySignerTable({
       </div>
 
       {/* Dialog */}
-      <EscrowDetailDialog
-        activeRole={activeRole}
-        isDialogOpen={dialogStates.second.isOpen}
-        setIsDialogOpen={dialogStates.second.setIsOpen}
-        setSelectedEscrow={setSelectedEscrow}
-      />
+      {dialogStates.second.isOpen ? (
+        <EscrowDetailDialog
+          isDialogOpen={dialogStates.second.isOpen}
+          setIsDialogOpen={dialogStates.second.setIsOpen}
+          setSelectedEscrow={setSelectedEscrow}
+        />
+      ) : null}
     </>
   );
-}
-
-export default EscrowsBySignerTable;
+};

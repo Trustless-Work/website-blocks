@@ -11,20 +11,14 @@ import {
   CheckCheck,
   Layers,
 } from "lucide-react";
-import {
-  GetEscrowsFromIndexerResponse as Escrow,
-  Role,
-} from "@trustless-work/escrow/types";
+import { GetEscrowsFromIndexerResponse as Escrow } from "@trustless-work/escrow/types";
 import {
   MultiReleaseMilestone,
   SingleReleaseMilestone,
 } from "@trustless-work/escrow";
 import { Badge } from "@/components/ui/badge";
-import ApproveMilestoneButton from "../../single-release/approve-milestone/button/ApproveMilestone";
-import ResolveDisputeDialog from "../../single-release/resolve-dispute/dialog/ResolveDispute";
-import DisputeEscrowButton from "../../single-release/dispute-escrow/button/DisputeEscrow";
-import ReleaseEscrowButton from "../../single-release/release-escrow/button/ReleaseEscrow";
-import ChangeMilestoneStatusDialog from "../../single-release/change-milestone-status/dialog/ChangeMilestoneStatus";
+import { ChangeMilestoneStatusDialog } from "../../single-multi-release/change-milestone-status/dialog/ChangeMilestoneStatus";
+import { ApproveMilestoneButton } from "../../single-multi-release/approve-milestone/button/ApproveMilestone";
 import { formatCurrency } from "@/components/tw-blocks/helpers/format.helper";
 
 interface MilestoneCardProps {
@@ -32,7 +26,6 @@ interface MilestoneCardProps {
   milestoneIndex: number;
   selectedEscrow: Escrow;
   userRolesInEscrow: string[];
-  activeRole: Role[];
   onViewDetails: (
     milestone: SingleReleaseMilestone | MultiReleaseMilestone,
     index: number
@@ -44,7 +37,6 @@ const MilestoneCardComponent = ({
   milestoneIndex,
   selectedEscrow,
   userRolesInEscrow,
-  activeRole,
   onViewDetails,
 }: MilestoneCardProps) => {
   const getMilestoneStatusBadge = (
@@ -106,57 +98,24 @@ const MilestoneCardComponent = ({
   const getActionButtons = (
     milestone: SingleReleaseMilestone | MultiReleaseMilestone,
     milestoneIndex: number,
-    userRolesInEscrow: string[],
-    activeRole: Role[]
+    userRolesInEscrow: string[]
   ) => {
     const buttons = [] as React.ReactNode[];
     if (
       userRolesInEscrow.includes("serviceProvider") &&
-      activeRole.includes("serviceProvider") &&
       milestone.status !== "completed" &&
       !("flags" in milestone && milestone.flags?.approved)
     ) {
       buttons.push(
-        <ChangeMilestoneStatusDialog key={`change-status-${milestoneIndex}`} />
+        <ChangeMilestoneStatusDialog
+          key={`change-status-${milestoneIndex}`}
+          milestoneIndex={milestoneIndex}
+        />
       );
     }
 
     if (
-      userRolesInEscrow.includes("releaseSigner") &&
-      activeRole.includes("releaseSigner") &&
-      "flags" in milestone &&
-      !milestone.flags?.disputed &&
-      milestone.flags?.approved &&
-      !milestone.flags?.released
-    ) {
-      buttons.push(<ReleaseEscrowButton key={`release-${milestoneIndex}`} />);
-    }
-
-    if (
-      (userRolesInEscrow.includes("serviceProvider") ||
-        userRolesInEscrow.includes("approver")) &&
-      (activeRole.includes("serviceProvider") ||
-        activeRole.includes("approver")) &&
-      "flags" in milestone &&
-      !milestone.flags?.disputed &&
-      !milestone.flags?.released &&
-      !milestone.flags?.resolved
-    ) {
-      buttons.push(<DisputeEscrowButton key={`dispute-${milestoneIndex}`} />);
-    }
-
-    if (
-      userRolesInEscrow.includes("disputeResolver") &&
-      activeRole.includes("disputeResolver") &&
-      "flags" in milestone &&
-      milestone.flags?.disputed
-    ) {
-      buttons.push(<ResolveDisputeDialog key={`resolve-${milestoneIndex}`} />);
-    }
-
-    if (
       userRolesInEscrow.includes("approver") &&
-      activeRole.includes("approver") &&
       (("approved" in milestone && !milestone.approved) ||
         ("flags" in milestone &&
           !milestone.flags?.approved &&
@@ -165,8 +124,61 @@ const MilestoneCardComponent = ({
           !milestone.flags?.resolved))
     ) {
       buttons.push(
-        <ApproveMilestoneButton key={`approve-${milestoneIndex}`} />
+        <ApproveMilestoneButton
+          key={`approve-${milestoneIndex}`}
+          milestoneIndex={milestoneIndex}
+        />
       );
+    }
+
+    if (
+      userRolesInEscrow.includes("releaseSigner") &&
+      "flags" in milestone &&
+      !milestone.flags?.disputed &&
+      milestone.flags?.approved &&
+      !milestone.flags?.released
+    ) {
+      buttons
+        .push
+        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
+        // <ReleaseEscrowButton
+        //   key={`release-${milestoneIndex}`}
+        //   milestoneIndex={milestoneIndex}
+        // />
+        ();
+    }
+
+    if (
+      (userRolesInEscrow.includes("serviceProvider") ||
+        userRolesInEscrow.includes("approver")) &&
+      "flags" in milestone &&
+      !milestone.flags?.disputed &&
+      !milestone.flags?.released &&
+      !milestone.flags?.resolved
+    ) {
+      buttons
+        .push
+        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
+        // <DisputeEscrowButton
+        //   key={`dispute-${milestoneIndex}`}
+        //   milestoneIndex={milestoneIndex}
+        // />
+        ();
+    }
+
+    if (
+      userRolesInEscrow.includes("disputeResolver") &&
+      "flags" in milestone &&
+      milestone.flags?.disputed
+    ) {
+      buttons
+        .push
+        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
+        // <ResolveDisputeDialog
+        //   key={`resolve-${milestoneIndex}`}
+        //   milestoneIndex={milestoneIndex}
+        // />
+        ();
     }
 
     return buttons;
@@ -204,12 +216,7 @@ const MilestoneCardComponent = ({
           </div>
         )}
 
-        {getActionButtons(
-          milestone,
-          milestoneIndex,
-          userRolesInEscrow,
-          activeRole
-        )}
+        {getActionButtons(milestone, milestoneIndex, userRolesInEscrow)}
 
         <Button
           size="sm"
@@ -236,9 +243,7 @@ export const MilestoneCard = React.memo(
       prev.milestoneIndex === next.milestoneIndex &&
       prev.selectedEscrow?.contractId === next.selectedEscrow?.contractId &&
       prev.onViewDetails === next.onViewDetails &&
-      prev.activeRole.length === next.activeRole.length &&
       prev.userRolesInEscrow.length === next.userRolesInEscrow.length &&
-      prev.activeRole.every((r, i) => r === next.activeRole[i]) &&
       prev.userRolesInEscrow.every((r, i) => r === next.userRolesInEscrow[i])
     ) {
       return true;

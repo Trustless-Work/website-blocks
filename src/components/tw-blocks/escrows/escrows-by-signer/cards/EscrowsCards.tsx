@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import type {
   GetEscrowsFromIndexerResponse as Escrow,
   MultiReleaseMilestone,
-  Role,
   SingleReleaseMilestone,
 } from "@trustless-work/escrow/types";
-import Filters from "./Filters";
+import { Filters } from "./Filters";
 import { useEscrowsBySigner } from "../useEscrowsBySigner.shared";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Goal,
   Wallet,
@@ -21,16 +21,15 @@ import {
   RefreshCw,
   FileX,
 } from "lucide-react";
-import { useEscrowContext } from "../../escrow-context/EscrowProvider";
-import { useEscrowDialogs } from "../../escrow-context/EscrowDialogsProvider";
-import EscrowDetailDialog from "../../escrows-by-role/details/EscrowDetailDialog";
-import { formatTimestamp } from "../../../helpers/format.helper";
+import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
+import { useEscrowDialogs } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
+import { EscrowDetailDialog } from "../details/EscrowDetailDialog";
+import {
+  formatCurrency,
+  formatTimestamp,
+} from "../../../helpers/format.helper";
 
-export function EscrowsBySignerCards({
-  syncWithUrl = true,
-}: {
-  syncWithUrl?: boolean;
-}) {
+export const EscrowsBySignerCards = () => {
   const {
     walletAddress,
     data,
@@ -68,15 +67,15 @@ export function EscrowsBySignerCards({
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner({ syncWithUrl });
+  } = useEscrowsBySigner();
 
   const { setSelectedEscrow } = useEscrowContext();
 
   const dialogStates = useEscrowDialogs();
 
-  const formatCurrency = (value: number, currency: string) => {
-    return `${currency} ${value.toFixed(2)}`;
-  };
+  const handleRefresh = React.useCallback(() => {
+    void refetch();
+  }, [refetch]);
 
   function allMilestonesReleasedOrResolved(
     milestones: MultiReleaseMilestone[]
@@ -120,7 +119,6 @@ export function EscrowsBySignerCards({
     dialogStates.second.setIsOpen(true);
   };
 
-  const activeRole: Role[] = ["approver"];
   const escrows: Escrow[] = data ?? [];
 
   return (
@@ -141,21 +139,21 @@ export function EscrowsBySignerCards({
           setEngagementId={setEngagementId}
           setIsActive={setIsActive}
           setValidateOnChain={setValidateOnChain}
-          setType={(v) => setType(v as typeof type)}
-          setStatus={(v) => setStatus(v as typeof status)}
+          setType={setType}
+          setStatus={setStatus}
           setMinAmount={setMinAmount}
           setMaxAmount={setMaxAmount}
           setDateRange={setDateRange}
           onClearFilters={onClearFilters}
-          onRefresh={() => refetch()}
+          onRefresh={handleRefresh}
           isRefreshing={isFetching}
           orderBy={orderBy}
           orderDirection={orderDirection}
-          setOrderBy={(v) => setOrderBy(v)}
-          setOrderDirection={(v) => setOrderDirection(v)}
+          setOrderBy={setOrderBy}
+          setOrderDirection={setOrderDirection}
         />
 
-        <div className="w-full p-2 sm:p-4">
+        <div className="w-full py-2 sm:py-4">
           <div className="mb-2 sm:mb-3 flex items-center justify-end gap-2">
             <span className="hidden sm:block text-xs text-muted-foreground">
               Sort
@@ -228,7 +226,7 @@ export function EscrowsBySignerCards({
                     An error occurred while loading the information. Please try
                     again.
                   </p>
-                  <Button variant="outline" size="sm" onClick={() => refetch()}>
+                  <Button variant="outline" size="sm" onClick={handleRefresh}>
                     <RefreshCw className="h-4 w-4 mr-2" />
                     Retry
                   </Button>
@@ -251,7 +249,7 @@ export function EscrowsBySignerCards({
                 {escrows.map((escrow) => (
                   <React.Fragment key={escrow.contractId}>
                     <Card
-                      className="w-full max-w-md mx-auto hover:shadow-lg transition-shadow duration-200"
+                      className="w-full max-w-md mx-auto hover:shadow-lg transition-shadow duration-200 cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         onCardClick(escrow);
@@ -336,9 +334,9 @@ export function EscrowsBySignerCards({
                             <ul className="list-disc list-inside flex flex-col gap-1">
                               {escrow.milestones
                                 .slice(0, 3)
-                                .map((milestone) => (
+                                .map((milestone, index) => (
                                   <li
-                                    key={milestone.description.slice(0, 5)}
+                                    key={`milestone-${milestone.description}-${milestone.status}-${index}`}
                                     className="text-xs flex justify-between"
                                   >
                                     {milestone.description}
@@ -354,33 +352,83 @@ export function EscrowsBySignerCards({
                                               )}
                                             </span>
 
-                                            <span
-                                              className={`bg-red-800 rounded-full h-2 w-2 ml-1 ${
-                                                milestone.flags?.disputed
-                                                  ? "block"
-                                                  : "hidden"
-                                              }`}
-                                            />
+                                            {milestone.flags?.disputed && (
+                                              <Tooltip>
+                                                <TooltipTrigger>
+                                                  <span
+                                                    className={`bg-red-800 rounded-full h-2 w-2 ml-1 ${
+                                                      milestone.flags?.disputed
+                                                        ? "block"
+                                                        : "hidden"
+                                                    }`}
+                                                  />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                  Disputed
+                                                </TooltipContent>
+                                              </Tooltip>
+                                            )}
 
-                                            <span
-                                              className={`bg-green-800 rounded-full h-2 w-2 ml-1 ${
-                                                milestone.flags?.resolved ||
-                                                milestone.flags?.released
-                                                  ? "block"
-                                                  : "hidden"
-                                              }`}
-                                            />
+                                            {milestone.flags?.resolved && (
+                                              <Tooltip>
+                                                <TooltipTrigger>
+                                                  <span
+                                                    className={`bg-green-800 rounded-full h-2 w-2 ml-1 ${
+                                                      milestone.flags?.resolved
+                                                        ? "block"
+                                                        : "hidden"
+                                                    }`}
+                                                  />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                  Resolved
+                                                </TooltipContent>
+                                              </Tooltip>
+                                            )}
 
-                                            <span
-                                              className={`bg-yellow-800 rounded-full h-2 w-2 ml-1 ${
-                                                milestone.flags?.approved &&
-                                                !milestone.flags?.disputed &&
-                                                !milestone.flags?.resolved &&
-                                                !milestone.flags?.released
-                                                  ? "block"
-                                                  : "hidden"
-                                              }`}
-                                            />
+                                            {milestone.flags?.released && (
+                                              <Tooltip>
+                                                <TooltipTrigger>
+                                                  <span
+                                                    className={`bg-green-800 rounded-full h-2 w-2 ml-1 ${
+                                                      milestone.flags?.released
+                                                        ? "block"
+                                                        : "hidden"
+                                                    }`}
+                                                  />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                  Released
+                                                </TooltipContent>
+                                              </Tooltip>
+                                            )}
+
+                                            {milestone.flags?.approved &&
+                                              !milestone.flags?.disputed &&
+                                              !milestone.flags?.resolved &&
+                                              !milestone.flags?.released && (
+                                                <Tooltip>
+                                                  <TooltipTrigger>
+                                                    <span
+                                                      className={`bg-yellow-600 rounded-full h-2 w-2 ml-1 ${
+                                                        milestone.flags
+                                                          ?.approved &&
+                                                        !milestone.flags
+                                                          ?.disputed &&
+                                                        !milestone.flags
+                                                          ?.resolved &&
+                                                        !milestone.flags
+                                                          ?.released
+                                                          ? "block"
+                                                          : "hidden"
+                                                      }`}
+                                                    />
+                                                  </TooltipTrigger>
+                                                  <TooltipContent>
+                                                    Pending Release
+                                                  </TooltipContent>
+                                                </Tooltip>
+                                              )}
                                           </div>
                                         </>
                                       )}
@@ -495,14 +543,13 @@ export function EscrowsBySignerCards({
       </div>
 
       {/* Dialog */}
-      <EscrowDetailDialog
-        activeRole={activeRole}
-        isDialogOpen={dialogStates.second.isOpen}
-        setIsDialogOpen={dialogStates.second.setIsOpen}
-        setSelectedEscrow={setSelectedEscrow}
-      />
+      {dialogStates.second.isOpen ? (
+        <EscrowDetailDialog
+          isDialogOpen={dialogStates.second.isOpen}
+          setIsDialogOpen={dialogStates.second.setIsOpen}
+          setSelectedEscrow={setSelectedEscrow}
+        />
+      ) : null}
     </>
   );
-}
-
-export default EscrowsBySignerCards;
+};
