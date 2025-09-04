@@ -50,7 +50,6 @@ export function CodeBlock({ code, filename, language }: CodeBlockProps) {
         </Button>
         <SyntaxHighlighter
           showLineNumbers
-          wrapLongLines
           language={language ?? "bash"}
           style={
             mounted
