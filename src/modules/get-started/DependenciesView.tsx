@@ -328,6 +328,11 @@ npx trustless-work add helpers`}
                     tanstack
                   </code>
                 </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    helpers
+                  </code>
+                </li>
               </ul>
 
               <div className="pt-2">
