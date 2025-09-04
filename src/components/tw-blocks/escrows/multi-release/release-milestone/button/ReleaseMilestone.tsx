@@ -3,14 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
-export const ReleaseEscrowButton = () => {
+export const ReleaseMilestoneButton = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   async function handleClick() {
     try {
       setIsSubmitting(true);
 
-      toast.success("Escrow released successfully");
+      toast.success("Milestone released successfully");
     } finally {
       setIsSubmitting(false);
     }
