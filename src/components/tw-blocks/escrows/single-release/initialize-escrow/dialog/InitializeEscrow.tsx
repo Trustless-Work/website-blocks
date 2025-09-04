@@ -21,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useInitializeEscrow } from "../useInitializeEscrow";
 import { Trash2, DollarSign, Percent, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { trustlineOptions } from "@/components/tw-blocks/helpers/trustlines";
+import { trustlineOptions } from "@/components/tw-blocks/wallet-kit/trustlines";
 import {
   Dialog,
   DialogContent,
@@ -30,7 +30,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export function InitializeEscrowDialog() {
+export const InitializeEscrowDialog = () => {
   const {
     form,
     isSubmitting,
@@ -39,6 +39,7 @@ export function InitializeEscrowDialog() {
     handleSubmit,
     handleAddMilestone,
     handleRemoveMilestone,
+    fillTemplateForm,
   } = useInitializeEscrow();
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,10 +108,19 @@ export function InitializeEscrowDialog() {
                   </h2>
                 </div>
                 <p className="text-muted-foreground mt-1">
-                  A single payment will be released upon completion of all
-                  milestones
+                  Fill out the form to initialize a single release escrow
                 </p>
               </Link>
+              {process.env.NODE_ENV !== "production" && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={fillTemplateForm}
+                  className="cursor-pointer"
+                >
+                  Autofill
+                </Button>
+              )}
             </Card>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <FormField
@@ -521,6 +531,4 @@ export function InitializeEscrowDialog() {
       </DialogContent>
     </Dialog>
   );
-}
-
-export default InitializeEscrowDialog;
+};
