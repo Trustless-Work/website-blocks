@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useEscrowContext } from "../../../escrow-context/EscrowProvider";
+import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
 import { Loader2 } from "lucide-react";
 
-export default function DisputeEscrowButton() {
+export const DisputeEscrowButton = () => {
   const { selectedEscrow } = useEscrowContext();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -35,4 +35,4 @@ export default function DisputeEscrowButton() {
       )}
     </Button>
   );
-}
+};
