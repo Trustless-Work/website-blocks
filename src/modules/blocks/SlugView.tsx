@@ -88,7 +88,7 @@ export const BlockPage = ({ block }: BlockPageProps) => {
   const installationCommand = useMemo(() => {
     const b = block as unknown as Block;
     if (hasExplicitVariants) {
-      const byVariant = (b as any).installByVariant as
+      const byVariant = b.installByVariant as
         | Partial<Record<EscrowVariant, string>>
         | undefined;
       if (byVariant?.[activeVariant]) return byVariant[activeVariant] as string;
