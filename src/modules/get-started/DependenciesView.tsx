@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Info, Eye, EyeOff, ArrowLeft, ArrowRight } from "lucide-react";
 import { useState, lazy, Suspense } from "react";
 import Link from "next/link";
+import { ClickableTitle } from "@/components/ui/ClickableTitle";
 
 // Lazy load the iframe component for better performance
 const ExcalidrawDiagram = lazy(() =>
@@ -46,9 +47,13 @@ export const DependenciesView = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <ClickableTitle 
+          id="dependent-blocks" 
+          as="h1" 
+          className="scroll-m-20 text-4xl font-bold tracking-tight"
+        >
           Dependent Blocks
-        </h1>
+        </ClickableTitle>
         <p className="text-xl text-muted-foreground">
           Some blocks require other blocks to work properly. Make sure to add
           their dependencies before using them.
@@ -74,9 +79,13 @@ export const DependenciesView = () => {
 
       <div className="space-y-16">
         <section id="create-project">
-          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-2">
+          <ClickableTitle 
+            id="diagram-of-dependencies" 
+            as="h2" 
+            className="scroll-m-20 text-3xl font-semibold tracking-tight mb-2"
+          >
             Diagram of Dependencies
-          </h2>
+          </ClickableTitle>
           <p className="text-lg text-muted-foreground mb-4">
             Some blocks require other blocks to work properly. Make sure to add
             their dependencies before using them.
@@ -118,13 +127,21 @@ export const DependenciesView = () => {
         </section>
 
         <section id="groups">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle 
+            id="dependencies-by-block-group" 
+            as="h2" 
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Dependencies by Block Group
-          </h2>
+          </ClickableTitle>
 
           <div className="space-y-8 pt-4">
             <div className="space-y-3">
-              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              <ClickableTitle 
+                id="escrows-by-signer-and-role" 
+                as="h3" 
+                className="scroll-m-20 text-2xl font-semibold tracking-tight"
+              >
                 Escrows by Signer (
                 <Link
                   className="text-primary-500 font-bold cursor-pointer mx-1"
@@ -158,7 +175,7 @@ export const DependenciesView = () => {
                   Cards
                 </Link>
                 )
-              </h3>
+              </ClickableTitle>
               <p className="leading-7 text-muted-foreground">
                 These listing/detail blocks depend on several shared modules and
                 providers:
@@ -237,9 +254,13 @@ npx trustless-work add helpers`}
             </div>
 
             <div className="space-y-3">
-              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              <ClickableTitle 
+                id="single-release-multi-release-components" 
+                as="h3" 
+                className="scroll-m-20 text-2xl font-semibold tracking-tight"
+              >
                 Single Release & Multi Release components
-              </h3>
+              </ClickableTitle>
               <p className="leading-7 text-muted-foreground">
                 All single-release and multi-release actions (
                 <Link
@@ -354,9 +375,13 @@ npx trustless-work add helpers`}
         </section>
 
         <section id="providers">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle 
+            id="provider-wrapping" 
+            as="h2" 
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Provider Wrapping (order matters)
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
               Wrap your app with the following providers, in this order. Include

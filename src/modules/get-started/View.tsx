@@ -10,14 +10,19 @@ import { CodeBlock } from "@/shared/CodeBlock";
 import { TreeVisualization } from "@/shared/TreeVisualization";
 import { ArrowRight, Info, InfoIcon } from "lucide-react";
 import Link from "next/link";
+import { ClickableTitle } from "@/components/ui/ClickableTitle";
 
 export const GetStarted = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <ClickableTitle 
+          id="trustless-work-react-library" 
+          as="h1" 
+          className="scroll-m-20 text-4xl font-bold tracking-tight"
+        >
           Trustless Work React Library
-        </h1>
+        </ClickableTitle>
         <p className="text-xl text-muted-foreground">
           A production-ready set of React blocks for integrating Trustless
           Work's escrow and dispute resolution flows.
@@ -47,9 +52,13 @@ export const GetStarted = () => {
 
       <div className="space-y-8">
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          <ClickableTitle 
+            id="what-you-get" 
+            as="h2" 
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0"
+          >
             What you get
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <ul className="list-disc pl-6 space-y-2">
               <li>
@@ -66,9 +75,13 @@ export const GetStarted = () => {
         </section>
 
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle 
+            id="list-all-available-blocks" 
+            as="h2" 
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             List all available blocks
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
               With the CLI you can list all available blocks:
@@ -92,9 +105,231 @@ export const GetStarted = () => {
         </section>
 
         <section>
-          <h2 className="flex items-center gap-2 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle 
+            id="context-api" 
+            as="h2" 
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
+            Context API
+          </ClickableTitle>
+          <div className="space-y-4 pt-4">
+            <p className="leading-7">
+              The context API is a global storage of escrows. It is used to
+              store the escrows that are fetched from the API. It is also used
+              to store the selected escrow.
+            </p>
+
+            <Card className="my-4 gap-2">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Info className="h-4 w-4" />
+                  Important
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  <p>
+                    If you don't want to use our approach for retrieving the
+                    escrow data, you are completely free to change it. You can
+                    use Redux, Zustand, or any other solution instead. However,
+                    it is important that you ensure the desired escrow is passed
+                    to the endpoint.
+                  </p>
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <div className="space-y-4">
+              <ClickableTitle 
+                id="understanding-context-escrows-endpoints" 
+                as="h3" 
+                className="scroll-m-20 text-xl font-semibold tracking-tight"
+              >
+                Understanding how the context works in escrows endpoints.
+              </ClickableTitle>
+              <p className="leading-7 text-muted-foreground">
+                When implementing the endpoints, we need to pass the data of a
+                specific escrow to each endpoint. But how do we do that? Our
+                library provides a context called{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  EscrowContext
+                </code>
+                , which includes some very important utilities. Among them are
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  selectedEscrow
+                </code>
+                and{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  setSelectedEscrow
+                </code>
+                , which allow us to do the following:
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <ClickableTitle 
+                id="use-of-selectedescrow" 
+                as="h3" 
+                className="scroll-m-20 text-xl font-semibold tracking-tight"
+              >
+                Use of selectedEscrow
+              </ClickableTitle>
+              <p className="leading-7 text-muted-foreground">
+                Currently,{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  selectedEscrow
+                </code>{" "}
+                holds a specific escrow that we are pointing to. With this, all
+                the endpoint hooks interact with that state in order to extract
+                data from it, such as contractId, roles, etc. For example, in
+                the change status select, the{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  milestoneIndex
+                </code>{" "}
+                values are loaded based on the currently selected escrow.
+                Therefore, if
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  setSelectedEscrow
+                </code>{" "}
+                is undefined, they won't load.
+              </p>
+
+              <CodeBlock
+                code={`const { selectedEscrow } = useEscrowContext();
+
+const handleSubmit = form.handleSubmit(async (payload) => {             
+  /**
+   * Create the final payload for the change milestone status mutation
+   *
+   * @param payload - The payload from the form
+   * @returns The final payload for the change milestone status mutation
+  */
+  const finalPayload: ChangeMilestoneStatusPayload = {
+    contractId: selectedEscrow?.contractId || '', // contractId from the selectedEscrow
+    milestoneIndex: payload.milestoneIndex,
+    newStatus: payload.status,
+    newEvidence: payload.evidence || undefined,
+    serviceProvider: walletAddress || '',
+  };
+
+  /**
+   * Call the change milestone status mutation
+   *
+   * @param payload - The final payload for the change milestone statusmutation
+   * @param type - The type of the escrow
+   * @param address - The address of the escrow
+  */
+  await changeMilestoneStatus.mutateAsync({
+    payload: finalPayload,
+    type: selectedEscrow?.type || 'multi-release',
+    address: walletAddress || '',
+  });
+}`}
+                language="tsx"
+                filename="/useChangeMilestoneStatus.ts"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <ClickableTitle 
+                id="use-of-setselectedescrow" 
+                as="h3" 
+                className="scroll-m-20 text-xl font-semibold tracking-tight"
+              >
+                Use of setSelectedEscrow
+              </ClickableTitle>
+              <p className="leading-7 text-muted-foreground">
+                The function{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  setSelectedEscrow
+                </code>{" "}
+                save the selected escrow in the context, so that all the
+                endpoint hooks interact with that state in order to extract data
+                from it, such as contractId, roles, etc. For example, in escrows
+                cards by signer we save the selected escrow in the context, so
+                that we can use it in details dialog.
+              </p>
+
+              <CodeBlock
+                code={`const { setSelectedEscrow } = useEscrowContext();
+
+const onCardClick = (escrow: Escrow) => {
+  setSelectedEscrow(escrow);
+  dialogStates.second.setIsOpen(true);
+};`}
+                language="tsx"
+                filename="/EscrowsCards.tsx"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <ClickableTitle 
+                id="use-of-updateescrow" 
+                as="h3" 
+                className="scroll-m-20 text-xl font-semibold tracking-tight"
+              >
+                Use of updateEscrow
+              </ClickableTitle>
+              <p className="leading-7 text-muted-foreground">
+                Our{" "}
+                <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                  updateEscrow
+                </code>{" "}
+                function update the existing selectedEscrow in the context. It
+                is useful to update a flag or others fields. For example, we use
+                it to update the escrow status after a change milestone status
+                mutation.
+              </p>
+
+              <CodeBlock
+                code={`const { selectedEscrow, updateEscrow } = useEscrowContext();
+
+const handleSubmit = form.handleSubmit(async (payload) => { 
+  /**
+    * Call the change milestone status mutation
+    *
+    * @param payload - The final payload for the change milestone status mutation
+    * @param type - The type of the escrow
+    * @param address - The address of the escrow
+  */
+  await changeMilestoneStatus.mutateAsync({
+    payload: finalPayload,
+    type: selectedEscrow?.type || "multi-release", // type from the selectedEscrow
+    address: walletAddress || "",
+  });
+
+  toast.success("Milestone status updated successfully");
+
+  // Update the selected escrow in the context with the new status and evidence
+  updateEscrow({
+    ...selectedEscrow,
+    milestones: selectedEscrow?.milestones.map((milestone, index) => {
+      if (index === Number(payload.milestoneIndex)) {
+        return {
+          ...milestone,
+          status: payload.status,
+          evidence: payload.evidence || undefined,
+        };
+      }
+      return milestone;
+    }),
+  });
+}`}
+                language="tsx"
+                filename="/useChangeMilestoneStatus.ts"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <ClickableTitle 
+            id="installation-based-on-folder-path" 
+            as="h2" 
+            className="flex items-center gap-2 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             <InfoIcon className="h-6 w-6" /> Installation based on folder path
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
               If you need all the child blocks, you can install them by pointing
@@ -105,9 +340,13 @@ export const GetStarted = () => {
             <CodeBlock code="npx trustless-work escrows // or other parent's blocks directory" />
 
             <div className="space-y-4">
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
+              <ClickableTitle 
+                id="understanding-block-structure" 
+                as="h3" 
+                className="scroll-m-20 text-xl font-semibold tracking-tight"
+              >
                 Understanding the Block Structure
-              </h3>
+              </ClickableTitle>
               <p className="leading-7 text-muted-foreground">
                 When you specify a parent folder like{" "}
                 <code className="bg-muted px-1 py-0.5 rounded text-sm">

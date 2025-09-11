@@ -8,14 +8,19 @@ import {
 } from "@/components/ui/card";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { ClickableTitle } from "@/components/ui/ClickableTitle";
 
 export const CommonIssuesView = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <ClickableTitle
+          id="common-issues"
+          as="h1"
+          className="scroll-m-20 text-4xl font-bold tracking-tight"
+        >
           Common Issues
-        </h1>
+        </ClickableTitle>
         <p className="text-xl text-muted-foreground">
           Common issues and solutions for Trustless Work React blocks.
         </p>
@@ -23,9 +28,13 @@ export const CommonIssuesView = () => {
 
       <div className="space-y-8">
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle
+            id="answers-to-common-questions"
+            as="h2"
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Answers to Common Questions
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
               Answers to common questions about Trustless Work React blocks.
@@ -95,6 +104,40 @@ export const CommonIssuesView = () => {
                     example, if you are trying to use the escrows-by-role/table
                     block, you'll need to add the escrow-context, wallet-kit,
                     escrows, handle-errors and helpers block to your project.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="my-4 gap-2">
+                <CardHeader>
+                  <div className="flex items-center justify-between gap-2">
+                    <CardTitle>
+                      {" "}
+                      Were you unable to use the component due to a lack of
+                      data?
+                    </CardTitle>
+                    <Link href="/get-started#context-api" target="_blank">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="w-full px-3 cursor-pointer"
+                      >
+                        <ExternalLink className="h-6 w-6" /> Help
+                      </Button>
+                    </Link>
+                  </div>
+                  <CardDescription>
+                    If you are using blocks such as change milestone status,
+                    start dispute, etc. Maybe you should check if you are using
+                    correctly the{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      selectedEscrow
+                    </code>{" "}
+                    and{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      setSelectedEscrow
+                    </code>
+                    in order to pass the required data to the endpoints.
                   </CardDescription>
                 </CardHeader>
               </Card>

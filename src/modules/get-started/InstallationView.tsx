@@ -1,23 +1,22 @@
 import { CodeBlock } from "@/shared/CodeBlock";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ExternalLink, InfoIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ClickableTitle } from "@/components/ui/ClickableTitle";
 
 export const InstallationView = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <ClickableTitle
+          id="installation-guide"
+          as="h1"
+          className="scroll-m-20 text-4xl font-bold tracking-tight"
+        >
           Installation Guide
-        </h1>
+        </ClickableTitle>
         <p className="text-xl text-muted-foreground">
           Complete setup guide for Trustless Work React blocks with detailed
           configuration and best practices.
@@ -26,9 +25,13 @@ export const InstallationView = () => {
 
       <div className="space-y-8">
         <section id="installation">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle
+            id="install-trustless-work-blocks"
+            as="h2"
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Install Trustless Work Blocks
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">Install the main library package:</p>
 
@@ -41,9 +44,13 @@ export const InstallationView = () => {
               </TabsContent>
             </Tabs>
 
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <ClickableTitle
+              id="run-cli-setup"
+              as="h3"
+              className="scroll-m-20 text-2xl font-semibold tracking-tight"
+            >
               Run the CLI Setup
-            </h3>
+            </ClickableTitle>
 
             <p className="leading-7">
               Configure Trustless Work Blocks to your project:
@@ -86,9 +93,13 @@ export const InstallationView = () => {
 
         <section>
           <div className="flex items-center justify-between gap-2">
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+            <ClickableTitle
+              id="environment-configuration"
+              as="h2"
+              className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+            >
               Environment Configuration
-            </h2>
+            </ClickableTitle>
             <Link
               href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
               target="_blank"
@@ -120,14 +131,22 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
         </section>
 
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle
+            id="configuration-files"
+            as="h2"
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Configuration Files{" "}
             <span className="font-extrabold">(Optional)</span>
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <ClickableTitle
+              id="twblocks-json"
+              as="h3"
+              className="scroll-m-20 text-2xl font-semibold tracking-tight"
+            >
               .twblocks.json
-            </h3>
+            </ClickableTitle>
 
             <p className="leading-7">
               The CLI creates a configuration file to manage UI component paths:
@@ -141,9 +160,13 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
               filename=".twblocks.json"
             />
 
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <ClickableTitle
+              id="custom-ui-base-path"
+              as="h3"
+              className="scroll-m-20 text-2xl font-semibold tracking-tight"
+            >
               Custom UI Base Path
-            </h3>
+            </ClickableTitle>
 
             <p className="leading-7">
               If your UI components are in a different location, specify the
@@ -157,9 +180,13 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
         </section>
 
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle
+            id="wrap-app-with-providers"
+            as="h2"
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Wrap your App with Providers
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">
               If you want to use some blocks, you should wrap your app with
@@ -182,9 +209,13 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
         </section>
 
         <section>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          <ClickableTitle
+            id="add-your-first-component"
+            as="h2"
+            className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+          >
             Add Your First Component
-          </h2>
+          </ClickableTitle>
           <div className="space-y-4 pt-4">
             <p className="leading-7">Add wallet connectivity to your app:</p>
 

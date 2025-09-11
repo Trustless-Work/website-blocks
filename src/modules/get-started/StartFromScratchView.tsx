@@ -19,14 +19,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { ClickableTitle } from "@/components/ui/ClickableTitle";
 
 export const StartFromScratchView = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <ClickableTitle 
+          id="escrows-single-release-lifecycle" 
+          as="h1" 
+          className="scroll-m-20 text-4xl font-bold tracking-tight"
+        >
           Escrow's Single Release Lifecycle
-        </h1>
+        </ClickableTitle>
         <p className="text-xl text-muted-foreground">
           Step by Step Guide to implement Escrow's Single Release Lifecycle
         </p>
@@ -51,9 +56,13 @@ export const StartFromScratchView = () => {
       </div>
 
       <section id="create-project">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        <ClickableTitle 
+          id="create-nextjs-project" 
+          as="h2" 
+          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0"
+        >
           Create a Next.js Project
-        </h2>
+        </ClickableTitle>
         <div className="space-y-4 pt-4">
           <p className="leading-7">
             Start by creating a new Next.js project with TypeScript and Tailwind
@@ -70,9 +79,13 @@ export const StartFromScratchView = () => {
       </section>
 
       <section id="installation">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <ClickableTitle 
+          id="install-trustless-work-blocks" 
+          as="h2" 
+          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
+        >
           Install Trustless Work Blocks
-        </h2>
+        </ClickableTitle>
         <div className="space-y-4 pt-4">
           <p className="leading-7">Install the main library package:</p>
 
@@ -85,7 +98,7 @@ export const StartFromScratchView = () => {
             </TabsContent>
           </Tabs>
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="run-cli-setup" className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Run the CLI Setup
           </h3>
 
@@ -130,9 +143,9 @@ export const StartFromScratchView = () => {
 
       <section>
         <div className="flex items-center justify-between gap-2">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
-            Environment Configuration
-          </h2>
+          <h2 id="environment-configuration" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+              Environment Configuration
+            </h2>
           <Link
             href="https://docs.trustlesswork.com/trustless-work/developer-resources/authentication/request-api-key"
             target="_blank"
@@ -164,7 +177,7 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
       </section>
 
       <section id="add-wallet-connectivity">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-wallet-connectivity" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Wallet Connectivity
         </h2>
         <div className="space-y-4 pt-4">
@@ -172,9 +185,9 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
 
           <CodeBlock code="npx trustless-work add wallet-kit" />
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            Wrap your app with the WalletProvider:
-          </h3>
+          <h3 id="wrap-app-wallet-provider" className="scroll-m-20 text-2xl font-semibold tracking-tight">
+             Wrap your app with the WalletProvider:
+           </h3>
 
           <p className="leading-7">
             Wrap your app with the WalletProvider in your layout.tsx:
@@ -189,9 +202,9 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
             filename="app/layout.tsx"
           />
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            Example usage in a page:
-          </h3>
+          <h3 id="example-usage-wallet-page" className="scroll-m-20 text-2xl font-semibold tracking-tight">
+             Example usage in a page:
+           </h3>
 
           <p className="leading-7">Add wallet connectivity to your app:</p>
 
@@ -220,7 +233,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-helpers" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Helpers
         </h2>
         <div className="space-y-4 pt-4">
@@ -231,7 +244,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-tanstack-query" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Tanstack Query
         </h2>
         <div className="space-y-4 pt-4">
@@ -242,7 +255,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-handle-errors" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Handle Errors
         </h2>
         <div className="space-y-4 pt-4">
@@ -253,7 +266,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-providers" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Providers (If you skipped the init command)
         </h2>
         <div className="space-y-4 pt-4">
@@ -264,7 +277,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-single-release-escrows" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Single Release Escrows Components
         </h2>
         <div className="space-y-4 pt-4">
@@ -275,7 +288,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-single-multi-release-escrows" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Single-Multi Release Escrows Components
         </h2>
         <div className="space-y-4 pt-4">
@@ -288,7 +301,7 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="add-escrows-by-role-cards" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Add Escrows by Role Cards
         </h2>
         <div className="space-y-4 pt-4">
@@ -296,7 +309,7 @@ export default function Home() {
 
           <CodeBlock code="npx trustless-work add escrows/escrows-by-role/cards" />
 
-          <h3 className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="import-actions" className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
             <ImportIcon className="h-4 w-4" /> Import Actions
           </h3>
 
@@ -308,7 +321,7 @@ export default function Home() {
             </span>
           </p>
 
-          <h3 className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="commented-out-code" className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
             Commented Out Code
           </h3>
 
@@ -342,7 +355,7 @@ export default function Home() {
             filename="escrows/escrows-by-role/details/Actions.tsx"
           />
 
-          <h3 className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="actions-imported" className="flex items-center gap-2 scroll-m-20 text-2xl font-semibold tracking-tight">
             Actions Imported
           </h3>
 
@@ -384,7 +397,7 @@ return (
       </section>
 
       <section id="add-components">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="manual-provider-setup" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Manual Provider Setup
         </h2>
         <div className="space-y-4 pt-4">
@@ -467,7 +480,7 @@ export default function RootLayout({
       </section>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="example-usage-complete-page" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Example usage in a page:
         </h2>
         <div className="space-y-4 pt-4">
@@ -522,7 +535,7 @@ export default function Home() {
       </Card>
 
       <section>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 id="final-ui" className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Final UI
         </h2>
         <div className="space-y-4 pt-4">
@@ -545,7 +558,7 @@ export default function Home() {
             </CardHeader>
           </Card>
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="wallet-connection-dialog" className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Wallet Connection Dialog
           </h3>
 
@@ -561,7 +574,7 @@ export default function Home() {
             />
           </div>
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="cards-by-role" className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Cards by Role
           </h3>
 
@@ -577,7 +590,7 @@ export default function Home() {
             />
           </div>
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="initialize-escrow-dialog" className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Initialize Escrow Dialog
           </h3>
 
@@ -593,7 +606,7 @@ export default function Home() {
             />
           </div>
 
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          <h3 id="escrow-details-dialog" className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Escrow Details Dialog
           </h3>
 
