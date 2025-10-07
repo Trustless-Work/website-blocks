@@ -47,9 +47,9 @@ export const DependenciesView = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <ClickableTitle 
-          id="dependent-blocks" 
-          as="h1" 
+        <ClickableTitle
+          id="dependent-blocks"
+          as="h1"
           className="scroll-m-20 text-4xl font-bold tracking-tight"
         >
           Dependent Blocks
@@ -79,9 +79,9 @@ export const DependenciesView = () => {
 
       <div className="space-y-16">
         <section id="create-project">
-          <ClickableTitle 
-            id="diagram-of-dependencies" 
-            as="h2" 
+          <ClickableTitle
+            id="diagram-of-dependencies"
+            as="h2"
             className="scroll-m-20 text-3xl font-semibold tracking-tight mb-2"
           >
             Diagram of Dependencies
@@ -127,9 +127,9 @@ export const DependenciesView = () => {
         </section>
 
         <section id="groups">
-          <ClickableTitle 
-            id="dependencies-by-block-group" 
-            as="h2" 
+          <ClickableTitle
+            id="dependencies-by-block-group"
+            as="h2"
             className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
           >
             Dependencies by Block Group
@@ -137,9 +137,9 @@ export const DependenciesView = () => {
 
           <div className="space-y-8 pt-4">
             <div className="space-y-3">
-              <ClickableTitle 
-                id="escrows-by-signer-and-role" 
-                as="h3" 
+              <ClickableTitle
+                id="escrows-by-signer-and-role"
+                as="h3"
                 className="scroll-m-20 text-2xl font-semibold tracking-tight"
               >
                 Escrows by Signer (
@@ -254,9 +254,9 @@ npx trustless-work add helpers`}
             </div>
 
             <div className="space-y-3">
-              <ClickableTitle 
-                id="single-release-multi-release-components" 
-                as="h3" 
+              <ClickableTitle
+                id="single-release-multi-release-components"
+                as="h3"
                 className="scroll-m-20 text-2xl font-semibold tracking-tight"
               >
                 Single Release & Multi Release components
@@ -318,6 +318,13 @@ npx trustless-work add helpers`}
                 >
                   Resolve
                 </Link>
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-withdraw-remaining-funds"
+                >
+                  Withdraw Remaining Funds
+                </Link>
                 ,{" "}
                 <Link
                   className="text-primary-500 font-bold cursor-pointer mx-1"
@@ -375,9 +382,9 @@ npx trustless-work add helpers`}
         </section>
 
         <section id="providers">
-          <ClickableTitle 
-            id="provider-wrapping" 
-            as="h2" 
+          <ClickableTitle
+            id="provider-wrapping"
+            as="h2"
             className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
           >
             Provider Wrapping (order matters)

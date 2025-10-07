@@ -387,6 +387,9 @@ export default function Home() {
           {/* Works only with single-release escrows */}
           {/* Only appears if all the milestones are approved */}
           {/* {shouldShowReleaseFundsButton && <ReleaseEscrowButton />} */}
+
+          {/* Multi-release: Withdraw Remaining Funds */}
+          {/* {shouldShowWithdrawRemaining && <WithdrawRemainingFundsDialog />} */}
         </div>
       )}
 
@@ -412,6 +415,7 @@ import { FundEscrowDialog } from "../../single-multi-release/fund-escrow/dialog/
 import { DisputeEscrowButton } from "../../single-release/dispute-escrow/button/DisputeEscrow";
 import { ResolveDisputeDialog } from "../../single-release/resolve-dispute/dialog/ResolveDispute";
 import { ReleaseEscrowButton } from "../../single-release/release-escrow/button/ReleaseEscrow";
+import { WithdrawRemainingFundsDialog } from "../../multi-release/withdraw-remaining-funds/dialog/WithdrawRemainingFunds";
 
 return (
     <div className="flex items-start justify-start flex-col gap-2 w-full">
@@ -429,6 +433,9 @@ return (
 
           {/* Works only with single-release escrows */}
           {shouldShowReleaseFundsButton && <ReleaseEscrowButton />}
+
+          {/* Multi-release: Withdraw Remaining Funds */}
+          {shouldShowWithdrawRemaining && <WithdrawRemainingFundsDialog />}
         </div>
       )}
 
