@@ -51,6 +51,9 @@ import { FundEscrowDialog } from "@/components/tw-blocks/escrows/single-multi-re
 import { FundEscrowButton } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/button/FundEscrow";
 import { DisputeEscrowButton } from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
 import { DisputeMilestoneButton } from "@/components/tw-blocks/escrows/multi-release/dispute-milestone/button/DisputeEscrow";
+import { WithdrawRemainingFundsForm } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/form/WithdrawRemainingFunds";
+import { WithdrawRemainingFundsDialog } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/dialog/WithdrawRemainingFunds";
+import { WithdrawRemainingFundsButton } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/button/WithdrawRemainingFunds";
 
 type Props = {
   block: Block;
@@ -198,6 +201,13 @@ export function BlockTypeVariantViewer({
           form: () => <ResolveDisputeFormMultiRelease />,
           dialog: () => <ResolveDisputeDialogMultiRelease />,
           button: () => <ResolveDisputeButtonMultiRelease />,
+        },
+      },
+      "withdraw-remaining-funds": {
+        "multi-release": {
+          form: () => <WithdrawRemainingFundsForm />,
+          dialog: () => <WithdrawRemainingFundsDialog />,
+          button: () => <WithdrawRemainingFundsButton />,
         },
       },
       "update-escrow": {

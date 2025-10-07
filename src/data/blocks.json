@@ -566,6 +566,64 @@
     ]
   },
   {
+    "id": "escrows-withdraw-remaining-funds",
+    "title": "Withdraw Remaining Funds",
+    "description": "Component to withdraw remaining funds with form, button and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "multi-release",
+    "types": ["multi-release"],
+    "variants": ["form", "button", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usewithdrawremainingfunds",
+    "notes": [
+      "The <WithdrawRemainingFundsButton distributions=[{ address: 'GAG...JDS'; amount: 2 }] /> requests the distributions.",
+      "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
+      "This component is not supported for single-release escrows.",
+      "The distributions are an array of objects with address and amount.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+    ],
+    "installByTypeAndVariant": {
+      "multi-release": {
+        "form": "npx trustless-work add escrows/multi-release/withdraw-remaining-funds/form",
+        "button": "npx trustless-work add escrows/multi-release/withdraw-remaining-funds/button",
+        "dialog": "npx trustless-work add escrows/multi-release/withdraw-remaining-funds/dialog"
+      }
+    },
+    "image": [
+      "https://drive.google.com/file/d/1JDb5kaWSMEPuYja4xqKFh-GAt2gnx7qL/view?usp=sharing",
+      "https://drive.google.com/file/d/1cmV5xqKBB52kSZlnEporNw3EQCoVW4KY/view?usp=sharing"
+    ],
+    "tags": ["Withdraw", "Remaining", "Funds", "Escrows"],
+    "newBlocks": true,
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "providers",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "tanstack",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "multi-release",
+        "url": "/get-started/dependencies"
+      }
+    ]
+  },
+  {
     "id": "escrows-update-escrow",
     "title": "Update Escrow",
     "description": "Component to update escrow configuration with form and dialog variants.",

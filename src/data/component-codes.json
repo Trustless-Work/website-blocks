@@ -62,6 +62,13 @@
       "button": "import { ResolveDisputeButton } from '@/components/tw-blocks/escrows/multi-release/resolve-dispute/button/ResolveDispute';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <ResolveDisputeButton approverFunds={10} receiverFunds={10} />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
     }
   },
+  "withdraw-remaining-funds": {
+    "multi-release": {
+      "form": "import { WithdrawRemainingFundsForm } from '@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/form/WithdrawRemainingFunds';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <WithdrawRemainingFundsForm />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "dialog": "import { WithdrawRemainingFundsDialog } from '@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/dialog/WithdrawRemainingFunds';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <WithdrawRemainingFundsDialog />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "button": "import { WithdrawRemainingFundsButton } from '@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/button/WithdrawRemainingFunds';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <WithdrawRemainingFundsButton distributions={[{ address: 'GAG...JDS', amount: 10 }]} />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
+    }
+  },
   "update-escrow": {
     "single-release": {
       "form": "import { UpdateEscrowForm } from '@/components/tw-blocks/escrows/single-release/update-escrow/form/UpdateEscrow';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <UpdateEscrowForm />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
