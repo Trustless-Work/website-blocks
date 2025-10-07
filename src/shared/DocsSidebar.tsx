@@ -21,6 +21,10 @@ const sidebarNavItems = [
         title: "Start from Scratch",
         href: "/get-started/start-from-scratch",
       },
+      {
+        title: "Components",
+        href: "/get-started/components",
+      },
     ],
   },
 
