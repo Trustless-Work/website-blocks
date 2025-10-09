@@ -843,5 +843,42 @@
         "url": "/get-started/dependencies"
       }
     ]
+  },
+  {
+    "id": "dashboard-dashboard-01",
+    "title": "Basic Dashboard",
+    "description": "Component to show the basic dashboard of the escrows by signer.",
+    "category": "Dashboard",
+    "escrowType": null,
+    "notes": [
+      "This dashboard is designed to work with escrows where the connected wallet is the signer. It fetches and displays escrows associated with the signer, providing an overview of their status and details.",
+      "The colors used for the charts are defined in the globals.css file with the --color- prefix."
+    ],
+    "image": [
+      "https://drive.google.com/file/d/1nKkclw42iCjgCaOQJskXRhfZ3io2Av0Z/view?usp=sharing",
+      "https://drive.google.com/file/d/1p6617SvMI28h-vo4R6VPiCPDeK81GycB/view?usp=sharing"
+    ],
+    "tags": ["Dashboard", "Escrows", "Signer"],
+    "newBlocks": true,
+    "install": "npx trustless-work add escrows/dashboard/dashboard-01",
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "providers",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "tanstack",
+        "url": "/get-started/dependencies"
+      }
+    ]
   }
 ]

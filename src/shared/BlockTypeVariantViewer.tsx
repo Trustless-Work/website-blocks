@@ -56,6 +56,7 @@ import { WithdrawRemainingFundsDialog } from "@/components/tw-blocks/escrows/mul
 import { WithdrawRemainingFundsButton } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/button/WithdrawRemainingFunds";
 import { BalanceProgressBar } from "@/components/tw-blocks/escrows/indicators/balance-progress/bar/BalanceProgress";
 import { BalanceProgressDonut } from "@/components/tw-blocks/escrows/indicators/balance-progress/donut/BalanceProgress";
+import { Dashboard01 } from "@/components/tw-blocks/dashboard/dashboard-01/Dashboard";
 
 type Props = {
   block: Block;
@@ -274,6 +275,7 @@ export function BlockTypeVariantViewer({
         "escrows-by-signer-cards": () => (
           <EscrowsBySignerCards syncWithUrl={false} />
         ),
+        "dashboard-dashboard-01": () => <Dashboard01 />,
       };
 
       const SimpleComponent = SimplePreview[action];

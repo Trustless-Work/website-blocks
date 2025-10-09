@@ -429,6 +429,57 @@ npx trustless-work add helpers`}
                 />
               </div>
             </div>
+
+            <div className="space-y-3">
+              <ClickableTitle
+                id="indicators-balance-progress"
+                as="h3"
+                className="scroll-m-20 text-2xl font-semibold tracking-tight"
+              >
+                Dashboard
+              </ClickableTitle>
+              <p className="leading-7 text-muted-foreground">
+                All dashboard (
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/dashboard-dashboard-01"
+                >
+                  Basic Dashboard
+                </Link>
+                ) require:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    providers
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    tanstack
+                  </code>
+                </li>
+                <li>
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    wallet-kit
+                  </code>
+                </li>
+              </ul>
+
+              <div className="pt-2">
+                <CodeBlock
+                  code={`# Add essentials for dashboard
+npx trustless-work add tanstack
+
+# If you skipped the init command, add these providers
+npx trustless-work add providers # Only need ReactQueryClient, TrustlessWork and WalletProvider
+
+# Optional utility modules
+npx trustless-work add wallet-kit`}
+                />
+              </div>
+            </div>
           </div>
         </section>
 

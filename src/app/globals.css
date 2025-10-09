@@ -180,6 +180,10 @@
   grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
 }
 
+.responsive-mobile .lg\:col-span-2 {
+  grid-column: span 1 / span 1 !important;
+}
+
 .responsive-mobile .flex-col {
   flex-direction: column !important;
 }
