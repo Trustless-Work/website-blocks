@@ -48,9 +48,8 @@ export const BlockPage = ({ block }: BlockPageProps) => {
   const variants = useMemo((): EscrowVariant[] => {
     const b = block as unknown as Block;
     if (Array.isArray(b.variants) && b.variants.length > 0) {
-      return (b.variants as string[]).filter((v): v is EscrowVariant =>
-        ["form", "button", "dialog"].includes(v)
-      );
+      // Trust the variants provided by the block JSON (supports indicators like bar/donut)
+      return b.variants as unknown as EscrowVariant[];
     }
     const inferred: EscrowVariant[] = [];
     const tagSet = new Set((b.tags || []).map((t) => t.toLowerCase()));
@@ -75,13 +74,19 @@ export const BlockPage = ({ block }: BlockPageProps) => {
     () => variants[0] || "form"
   );
 
-  const action = useMemo(() => block.id.replace("escrows-", ""), [block.id]);
+  const action = useMemo(() => {
+    // Normalize id to action key by removing known prefixes
+    return block.id.replace(/^(escrows|indicators)-/, "");
+  }, [block.id]);
 
   const isUnifiedBoth = useMemo(
     () =>
-      ["fund-escrow", "approve-milestone", "change-milestone-status"].includes(
-        action
-      ),
+      [
+        "fund-escrow",
+        "approve-milestone",
+        "change-milestone-status",
+        "balance-progress",
+      ].includes(action),
     [action]
   );
 

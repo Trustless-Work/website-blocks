@@ -94,5 +94,15 @@
     "multi-release": {
       "button": "import { DisputeEscrowButton } from '@/components/tw-blocks/escrows/multi-release/dispute-escrow/button/DisputeEscrow';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <DisputeEscrowButton />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
     }
+  },
+  "balance-progress": {
+    "single-release": {
+      "bar": "import { BalanceProgressBar } from '@/components/tw-blocks/escrows/indicators/balance-progress/bar/BalanceProgress';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <ReactQueryClientProvider>\n        <EscrowProvider> // Optional\n\n          <BalanceProgressBar \n            contractId=\"CBPR6...\" // ex: selectedEscrow.contractId\n            target={200} // ex: selectedEscrow.amount\n            currency=\"USDC\" // ex: selectedEscrow.trustline.name \n          />\n\n        </EscrowProvider>\n      </ReactQueryClientProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "donut": "import { BalanceProgressDonut } from '@/components/tw-blocks/escrows/indicators/balance-progress/donut/BalanceProgress';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <ReactQueryClientProvider>\n        <EscrowProvider> // Optional\n\n          <BalanceProgressDonut \n            contractId=\"CBPR6...\" // ex: selectedEscrow.contractId\n            target={200} // ex: selectedEscrow.amount\n            currency=\"USDC\" // ex: selectedEscrow.trustline.name \n          />\n\n        </EscrowProvider>\n      </ReactQueryClientProvider>\n    </TrustlessWorkProvider>\n  );\n}"
+    },
+    "multi-release": {
+      "bar": "import { BalanceProgressBar } from '@/components/tw-blocks/escrows/indicators/balance-progress/bar/BalanceProgress';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <ReactQueryClientProvider>\n        <EscrowProvider> // Optional\n\n          <BalanceProgressBar \n            contractId=\"CBPR6...\" // ex: selectedEscrow.contractId\n            target={200} // ex: selectedEscrow.amount\n            currency=\"USDC\" // ex: selectedEscrow.trustline.name \n          />\n\n        </EscrowProvider>\n      </ReactQueryClientProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "donut": "import { BalanceProgressDonut } from '@/components/tw-blocks/escrows/indicators/balance-progress/donut/BalanceProgress';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <ReactQueryClientProvider>\n        <EscrowProvider> // Optional\n\n          <BalanceProgressDonut \n            contractId=\"CBPR6...\" // ex: selectedEscrow.contractId\n            target={200} // ex: selectedEscrow.amount\n            currency=\"USDC\" // ex: selectedEscrow.trustline.name \n          />\n\n        </EscrowProvider>\n      </ReactQueryClientProvider>\n    </TrustlessWorkProvider>\n  );\n}"
+    }
   }
 }

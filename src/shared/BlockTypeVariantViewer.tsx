@@ -54,6 +54,8 @@ import { DisputeMilestoneButton } from "@/components/tw-blocks/escrows/multi-rel
 import { WithdrawRemainingFundsForm } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/form/WithdrawRemainingFunds";
 import { WithdrawRemainingFundsDialog } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/dialog/WithdrawRemainingFunds";
 import { WithdrawRemainingFundsButton } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/button/WithdrawRemainingFunds";
+import { BalanceProgressBar } from "@/components/tw-blocks/escrows/indicators/balance-progress/bar/BalanceProgress";
+import { BalanceProgressDonut } from "@/components/tw-blocks/escrows/indicators/balance-progress/donut/BalanceProgress";
 
 type Props = {
   block: Block;
@@ -122,7 +124,7 @@ export function BlockTypeVariantViewer({
   }, [block.category, block.id, block.tags, block.escrowType]);
 
   const renderResult = useMemo(() => {
-    const action = block.id.replace("escrows-", "");
+    const action = block.id.replace(/^(escrows|indicators)-/, "");
 
     const hasExplicitVariants =
       Array.isArray((block as Block).variants) &&
@@ -234,6 +236,16 @@ export function BlockTypeVariantViewer({
         },
         "multi-release": {
           button: () => <DisputeMilestoneButton />,
+        },
+      },
+      "balance-progress": {
+        "single-release": {
+          bar: () => <BalanceProgressBar />,
+          donut: () => <BalanceProgressDonut />,
+        },
+        "multi-release": {
+          bar: () => <BalanceProgressBar />,
+          donut: () => <BalanceProgressDonut />,
         },
       },
     };

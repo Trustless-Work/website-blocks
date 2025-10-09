@@ -5,7 +5,7 @@ export type EscrowType =
   | null;
 
 export type EscrowReleaseType = "single-release" | "multi-release";
-export type EscrowVariant = "form" | "button" | "dialog";
+export type EscrowVariant = "form" | "button" | "dialog" | "bar" | "donut";
 
 export type CodeByTypeAndVariant = Partial<
   Record<EscrowReleaseType, Partial<Record<EscrowVariant, string>>>

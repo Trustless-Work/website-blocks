@@ -807,5 +807,41 @@
         "url": "/get-started/dependencies"
       }
     ]
+  },
+  {
+    "id": "indicators-balance-progress",
+    "title": "Balance Progress",
+    "description": "Component to show the balance progress of the escrow based on the target.",
+    "category": "Indicators",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["bar", "donut"],
+    "docTypeUrl": "",
+    "notes": [""],
+    "installByVariant": {
+      "bar": "npx trustless-work add escrows/indicators/balance-progress/bar",
+      "donut": "npx trustless-work add escrows/indicators/balance-progress/donut"
+    },
+    "image": [
+      "https://drive.google.com/file/d/1UeKPZgadgsyiUv6Fv-PEmUUhAEWKr74n/view?usp=sharing",
+      "https://drive.google.com/file/d/14Ni0ViIkcYdPM8YdAcJM1B7EirKBGoF1/view?usp=sharing"
+    ],
+    "tags": ["Balance", "Progress", "Escrows"],
+    "newBlocks": true,
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<EscrowProvider /> // Optional: Use if you need selectedEscrow's amount, balance, or contractId."
+    ],
+    "requiredBlocks": [
+      {
+        "name": "providers",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "tanstack",
+        "url": "/get-started/dependencies"
+      }
+    ]
   }
 ]
