@@ -823,8 +823,8 @@
       "donut": "npx trustless-work add escrows/indicators/balance-progress/donut"
     },
     "image": [
-      "https://drive.google.com/file/d/1UeKPZgadgsyiUv6Fv-PEmUUhAEWKr74n/view?usp=sharing",
-      "https://drive.google.com/file/d/14Ni0ViIkcYdPM8YdAcJM1B7EirKBGoF1/view?usp=sharing"
+      "https://drive.google.com/file/d/1WH8MTO9pPEZD65sVr56_FPB07N4DFOUM/view?usp=sharing",
+      "https://drive.google.com/file/d/1Qa3LbQ90Z7ct_40Kq5B64jauhwbJipEy/view?usp=sharing"
     ],
     "tags": ["Balance", "Progress", "Escrows"],
     "newBlocks": true,
@@ -855,8 +855,8 @@
       "The colors used for the charts are defined in the globals.css file with the --color- prefix."
     ],
     "image": [
-      "https://drive.google.com/file/d/1nKkclw42iCjgCaOQJskXRhfZ3io2Av0Z/view?usp=sharing",
-      "https://drive.google.com/file/d/1p6617SvMI28h-vo4R6VPiCPDeK81GycB/view?usp=sharing"
+      "https://drive.google.com/file/d/1rX6cu8dCF7fqqFLVBfpIT2SMDE7wF8mC/view?usp=sharing",
+      "https://drive.google.com/file/d/1yyL75eKO4O0iYwO_p7Xd7JcjVaGyaQco/view?usp=sharing"
     ],
     "tags": ["Dashboard", "Escrows", "Signer"],
     "newBlocks": true,
