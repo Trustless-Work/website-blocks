@@ -6,9 +6,9 @@ import type { DateRange as DayPickerDateRange } from "react-day-picker";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { SortingState } from "@tanstack/react-table";
 import { useWalletContext } from "../../wallet-kit/WalletProvider";
+import { useEscrowsByRoleQuery } from "../../tanstack/useEscrowsByRoleQuery";
 import type { GetEscrowsFromIndexerByRoleParams } from "@trustless-work/escrow";
 import { GetEscrowsFromIndexerResponse as Escrow } from "@trustless-work/escrow/types";
-import { useEscrowsByRoleQuery } from "../../tanstack/useEscrowsByRoleQuery";
 
 export type EscrowOrderBy = "createdAt" | "updatedAt" | "amount";
 export type EscrowOrderDirection = "asc" | "desc";
@@ -22,8 +22,7 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
-  const syncWithUrl = options?.syncWithUrl ?? true;
+export function useEscrowsByRole() {
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -64,7 +63,7 @@ export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
-    if (!syncWithUrl || !searchParams) return;
+    if (!searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
     const qpOrderBy = (qp.get("orderBy") as EscrowOrderBy) || "createdAt";
@@ -107,7 +106,7 @@ export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
       (qpRole as GetEscrowsFromIndexerByRoleParams["role"]) || "approver"
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [syncWithUrl]);
+  }, []);
 
   const stableSearchParams = React.useMemo(
     () => ({
@@ -151,7 +150,7 @@ export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
   const lastQueryStringRef = React.useRef("");
 
   React.useEffect(() => {
-    if (!syncWithUrl || !pathname) return;
+    if (!pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));
     qp.set("orderBy", String(debouncedSearchParams.orderBy ?? "createdAt"));
@@ -185,7 +184,7 @@ export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
       lastQueryStringRef.current = newQs;
       router.replace(`${pathname}?${newQs}`);
     }
-  }, [pathname, router, debouncedSearchParams, syncWithUrl]);
+  }, [pathname, router, debouncedSearchParams]);
 
   const formattedRangeLabel = React.useMemo(() => {
     if (!dateRange?.from && !dateRange?.to) return "Date range";

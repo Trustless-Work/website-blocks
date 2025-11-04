@@ -19,7 +19,6 @@ import { Milestones } from "./Milestones";
 import { Entities } from "./Entities";
 import { GeneralInformation } from "./GeneralInformation";
 import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
-import { SuccessReleaseDialog } from "./SuccessReleaseDialog";
 
 /**
  * Based on the provided roles -> https://docs.trustlesswork.com/trustless-work/technology-overview/roles-in-trustless-work
@@ -142,13 +141,6 @@ export const EscrowDetailDialog = ({
           </Tabs>
         </DialogContent>
       </Dialog>
-
-      {dialogStates.successRelease.isOpen && (
-        <SuccessReleaseDialog
-          isOpen={dialogStates.successRelease.isOpen}
-          onOpenChange={dialogStates.successRelease.setIsOpen}
-        />
-      )}
     </>
   );
 };

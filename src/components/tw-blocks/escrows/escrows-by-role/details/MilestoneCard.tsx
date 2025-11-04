@@ -136,6 +136,8 @@ const MilestoneCardComponent = ({
       !milestone.flags?.released
     ) {
       buttons.push(
+        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
+
         <ReleaseMilestoneButton key={`release-${milestoneIndex}`} />
       );
     }
@@ -149,6 +151,8 @@ const MilestoneCardComponent = ({
       !milestone.flags?.resolved
     ) {
       buttons.push(
+        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
+
         <DisputeMilestoneButton key={`dispute-${milestoneIndex}`} />
       );
     }
@@ -158,7 +162,10 @@ const MilestoneCardComponent = ({
       "flags" in milestone &&
       milestone.flags?.disputed
     ) {
-      buttons.push(<ResolveDisputeDialog key={`resolve-${milestoneIndex}`} />);
+      buttons.push(
+        // You can add the button here, using the button from the blocks. This button is conditional based on the milestone status and the user roles. Works only with multi-release escrows.
+        <ResolveDisputeDialog key={`resolve-${milestoneIndex}`} />
+      );
     }
 
     return buttons;
@@ -201,7 +208,7 @@ const MilestoneCardComponent = ({
         <Button
           size="sm"
           variant="outline"
-          className="w-full border-border text-muted-foreground"
+          className="w-full border-border text-muted-foreground cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             onViewDetails(milestone, milestoneIndex);

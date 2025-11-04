@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { GetEscrowsFromIndexerResponse as Escrow } from "@trustless-work/escrow/types";
+import {
+  GetEscrowsFromIndexerResponse as Escrow,
+  MultiReleaseMilestone,
+} from "@trustless-work/escrow/types";
 import { useWalletContext } from "@/components/tw-blocks/wallet-kit/WalletProvider";
 import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
 import { useEscrowAmountContext } from "@/components/tw-blocks/providers/EscrowAmountProvider";
@@ -60,7 +63,17 @@ const useEscrowDetailDialog = ({
         name: "disputeResolver",
         address: selectedEscrow.roles.disputeResolver,
       },
-      { name: "receiver", address: selectedEscrow.roles.receiver },
+      {
+        name: "receiver",
+        address:
+          selectedEscrow.type === "single-release"
+            ? (selectedEscrow.roles as { receiver?: string })?.receiver
+            : (
+                selectedEscrow.milestones?.[0] as
+                  | MultiReleaseMilestone
+                  | undefined
+              )?.receiver,
+      },
     ];
 
     const userRoles = roleMappings

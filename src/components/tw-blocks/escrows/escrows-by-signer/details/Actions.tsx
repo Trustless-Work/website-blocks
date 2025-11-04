@@ -97,8 +97,7 @@ export const Actions = ({
     userRolesInEscrow.includes("platformAddress") &&
     !selectedEscrow?.flags?.disputed &&
     !selectedEscrow?.flags?.resolved &&
-    !selectedEscrow?.flags?.released &&
-    selectedEscrow?.balance === 0;
+    !selectedEscrow?.flags?.released;
 
   const shouldShowDisputeButton =
     selectedEscrow.type === "single-release" &&
@@ -156,16 +155,22 @@ export const Actions = ({
           )}
 
           {/* Works only with single-release escrows */}
+          {/* Only appears if the escrow has balance */}
           {shouldShowDisputeButton && <DisputeEscrowButton />}
 
           {/* Works only with single-release escrows */}
+          {/* Only appears if the escrow is disputed */}
           {shouldShowResolveButton && <ResolveDisputeDialog />}
 
           {/* Works only with single-release escrows */}
+          {/* Only appears if all the milestones are approved */}
           {shouldShowReleaseFundsButton && <ReleaseEscrowButton />}
 
           {/* Multi-release: Withdraw Remaining Funds */}
-          {shouldShowWithdrawRemaining && <WithdrawRemainingFundsDialog />}
+          {shouldShowWithdrawRemaining &&
+            selectedEscrow.type === "multi-release" && (
+              <WithdrawRemainingFundsDialog />
+            )}
         </div>
       )}
 

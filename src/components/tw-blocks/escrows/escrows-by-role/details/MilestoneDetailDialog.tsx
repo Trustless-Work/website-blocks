@@ -10,7 +10,6 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  DollarSign,
   FileCheck2,
   User,
   Calendar,
@@ -28,6 +27,9 @@ import {
   SingleReleaseMilestone,
 } from "@trustless-work/escrow";
 import Link from "next/link";
+import { formatCurrency } from "@/components/tw-blocks/helpers/format.helper";
+import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
+import { EntityCard } from "./EntityCard";
 
 interface MilestoneDetailDialogProps {
   isOpen: boolean;
@@ -49,6 +51,8 @@ export const MilestoneDetailDialog = ({
   onClose,
   selectedMilestone,
 }: MilestoneDetailDialogProps) => {
+  const { selectedEscrow } = useEscrowContext();
+
   const getMilestoneStatusBadge = (
     milestone: SingleReleaseMilestone | MultiReleaseMilestone
   ) => {
@@ -115,11 +119,15 @@ export const MilestoneDetailDialog = ({
     }
   };
 
+  const currentReceiver =
+    selectedEscrow?.type === "multi-release" &&
+    ((selectedMilestone?.milestone as MultiReleaseMilestone)?.receiver ?? "");
+
   if (!selectedMilestone) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader className="pb-4 border-b border-border">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-10 h-10 bg-primary/10 rounded-full">
@@ -154,6 +162,28 @@ export const MilestoneDetailDialog = ({
             {getMilestoneStatusBadge(selectedMilestone.milestone)}
           </div>
 
+          {"amount" in selectedMilestone.milestone && (
+            <div className="flex items-center justify-between p-4  rounded-lg border border-border">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-8 h-8 bg-background rounded-full shadow-sm border border-border">
+                  <Calendar className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Amount</p>
+                  <p className="text-xs text-muted-foreground">
+                    The amount of the milestone
+                  </p>
+                </div>
+              </div>
+              <span className="font-bold text-foreground">
+                {formatCurrency(
+                  selectedMilestone.milestone.amount,
+                  selectedEscrow?.trustline?.name ?? "USDC"
+                )}
+              </span>
+            </div>
+          )}
+
           <Card className="border border-border shadow-sm">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
@@ -171,21 +201,6 @@ export const MilestoneDetailDialog = ({
                   {selectedMilestone.milestone.description}
                 </p>
               </div>
-
-              {"amount" in selectedMilestone.milestone && (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-green-600 dark:text-green-400" />
-                    Amount
-                  </label>
-                  <div className="flex items-center gap-2 bg-green-500/10 dark:bg-green-400/10 p-3 rounded-md border-l-4 border-green-500/20 dark:border-green-400/20">
-                    <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
-                    <span className="text-lg font-bold text-green-700 dark:text-green-300">
-                      {selectedMilestone.milestone.amount}
-                    </span>
-                  </div>
-                </div>
-              )}
             </CardContent>
           </Card>
 
@@ -193,7 +208,7 @@ export const MilestoneDetailDialog = ({
             <Card className="border border-border shadow-sm">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <div className="w-1 h-6 bg-green-600 dark:bg-green-400 rounded-full"></div>
+                  <div className="w-1 h-6  rounded-full"></div>
                   Evidence
                 </CardTitle>
               </CardHeader>
@@ -203,7 +218,7 @@ export const MilestoneDetailDialog = ({
                     <FileCheck2 className="w-4 h-4 text-green-600 dark:text-green-400" />
                     Evidence URL
                   </label>
-                  <div className="bg-muted/50 p-3 rounded-md border-l-4 border-green-500/20 dark:border-green-400/20">
+                  <div className="bg-muted/50 p-3 rounded-md border-l-4">
                     {(() => {
                       const result = isValidUrl(
                         selectedMilestone.milestone.evidence
@@ -269,6 +284,10 @@ export const MilestoneDetailDialog = ({
             </Card>
           )}
         </div>
+
+        {currentReceiver && (
+          <EntityCard type="receiver" entity={currentReceiver} />
+        )}
       </DialogContent>
     </Dialog>
   );

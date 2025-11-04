@@ -11,11 +11,7 @@ import type {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Goal,
   Wallet,
@@ -34,9 +30,7 @@ import {
 } from "../../../helpers/format.helper";
 import { EscrowDetailDialog } from "../details/EscrowDetailDialog";
 
-type Props = { syncWithUrl?: boolean };
-
-export const EscrowsByRoleCards = ({ syncWithUrl = true }: Props) => {
+export const EscrowsByRoleCards = () => {
   const {
     walletAddress,
     data,
@@ -76,7 +70,7 @@ export const EscrowsByRoleCards = ({ syncWithUrl = true }: Props) => {
     setRole,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsByRole({ syncWithUrl });
+  } = useEscrowsByRole();
 
   const { setSelectedEscrow } = useEscrowContext();
 
@@ -568,5 +562,3 @@ export const EscrowsByRoleCards = ({ syncWithUrl = true }: Props) => {
     </>
   );
 };
-
-export default React.memo(EscrowsByRoleCards);
