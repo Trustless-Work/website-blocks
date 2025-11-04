@@ -29,7 +29,11 @@ import {
   formatTimestamp,
 } from "../../../helpers/format.helper";
 
-export const EscrowsBySignerCards = () => {
+export const EscrowsBySignerCards = ({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) => {
   const {
     walletAddress,
     data,
@@ -67,7 +71,7 @@ export const EscrowsBySignerCards = () => {
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner();
+  } = useEscrowsBySigner({ syncWithUrl });
 
   const { setSelectedEscrow } = useEscrowContext();
 

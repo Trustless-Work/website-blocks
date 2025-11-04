@@ -30,7 +30,11 @@ import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvide
 import { useEscrowsByRole } from "../useEscrowsByRole.shared";
 import { formatTimestamp } from "../../../helpers/format.helper";
 
-export const EscrowsByRoleTable = () => {
+export const EscrowsByRoleTable = ({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) => {
   const {
     walletAddress,
     data,
@@ -70,7 +74,7 @@ export const EscrowsByRoleTable = () => {
     setRole,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsByRole();
+  } = useEscrowsByRole({ syncWithUrl });
 
   const dialogStates = useEscrowDialogs();
   const { setSelectedEscrow } = useEscrowContext();

@@ -22,7 +22,8 @@ export type EscrowStatus =
   | "all";
 export type DateRange = DayPickerDateRange;
 
-export function useEscrowsByRole() {
+export function useEscrowsByRole(options?: { syncWithUrl?: boolean }) {
+  const syncUrl = options?.syncWithUrl ?? true;
   const { walletAddress } = useWalletContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -63,6 +64,7 @@ export function useEscrowsByRole() {
   const debouncedMaxAmount = useDebouncedValue(maxAmount, 400);
 
   React.useEffect(() => {
+    if (!syncUrl) return;
     if (!searchParams) return;
     const qp = new URLSearchParams(searchParams.toString());
     const qpPage = Number(qp.get("page") || 1);
@@ -150,6 +152,7 @@ export function useEscrowsByRole() {
   const lastQueryStringRef = React.useRef("");
 
   React.useEffect(() => {
+    if (!syncUrl) return;
     if (!pathname) return;
     const qp = new URLSearchParams();
     qp.set("page", String(debouncedSearchParams.page ?? 1));

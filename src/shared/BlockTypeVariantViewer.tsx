@@ -65,6 +65,7 @@ type Props = {
   hasExplicitVariants: boolean;
   variants: EscrowVariant[];
   setActiveVariant: (variant: EscrowVariant) => void;
+  syncWithUrl?: boolean;
 };
 
 export function BlockTypeVariantViewer({
@@ -74,6 +75,7 @@ export function BlockTypeVariantViewer({
   hasExplicitVariants,
   variants,
   setActiveVariant,
+  syncWithUrl = false,
 }: Props) {
   // Get related blocks based on category and tags
   const getRelatedBlocks = useMemo(() => {
@@ -264,16 +266,16 @@ export function BlockTypeVariantViewer({
       const SimplePreview: Record<string, React.ComponentType | undefined> = {
         "wallet-kit": () => <WalletButton />,
         "escrows-by-role-table": () => (
-          <EscrowsByRoleTable syncWithUrl={false} />
+          <EscrowsByRoleTable syncWithUrl={syncWithUrl} />
         ),
         "escrows-by-role-cards": () => (
-          <EscrowsByRoleCards syncWithUrl={false} />
+          <EscrowsByRoleCards syncWithUrl={syncWithUrl} />
         ),
         "escrows-by-signer-table": () => (
-          <EscrowsBySignerTable syncWithUrl={false} />
+          <EscrowsBySignerTable syncWithUrl={syncWithUrl} />
         ),
         "escrows-by-signer-cards": () => (
-          <EscrowsBySignerCards syncWithUrl={false} />
+          <EscrowsBySignerCards syncWithUrl={syncWithUrl} />
         ),
         "dashboard-dashboard-01": () => <Dashboard01 />,
       };

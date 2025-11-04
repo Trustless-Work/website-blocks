@@ -29,7 +29,11 @@ import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvide
 import { EscrowDetailDialog } from "../details/EscrowDetailDialog";
 import { formatTimestamp } from "../../../helpers/format.helper";
 
-export const EscrowsBySignerTable = () => {
+export const EscrowsBySignerTable = ({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) => {
   const {
     walletAddress,
     data,
@@ -67,7 +71,7 @@ export const EscrowsBySignerTable = () => {
     formattedRangeLabel,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsBySigner();
+  } = useEscrowsBySigner({ syncWithUrl });
 
   const dialogStates = useEscrowDialogs();
   const { setSelectedEscrow } = useEscrowContext();

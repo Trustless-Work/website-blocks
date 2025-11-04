@@ -30,7 +30,11 @@ import {
 } from "../../../helpers/format.helper";
 import { EscrowDetailDialog } from "../details/EscrowDetailDialog";
 
-export const EscrowsByRoleCards = () => {
+export const EscrowsByRoleCards = ({
+  syncWithUrl = true,
+}: {
+  syncWithUrl?: boolean;
+}) => {
   const {
     walletAddress,
     data,
@@ -70,7 +74,7 @@ export const EscrowsByRoleCards = () => {
     setRole,
     onClearFilters,
     handleSortingChange,
-  } = useEscrowsByRole();
+  } = useEscrowsByRole({ syncWithUrl });
 
   const { setSelectedEscrow } = useEscrowContext();
 
