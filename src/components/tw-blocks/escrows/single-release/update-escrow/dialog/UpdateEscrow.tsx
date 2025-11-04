@@ -271,7 +271,7 @@ export const UpdateEscrowDialog = () => {
                   <FormItem>
                     <FormLabel className="flex items-center justify-between">
                       <span className="flex items-center">
-                        Platform Address
+                        Platform
                         <span className="text-destructive ml-1">*</span>
                       </span>
                     </FormLabel>
@@ -315,7 +315,7 @@ export const UpdateEscrowDialog = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="platformFee"
@@ -370,29 +370,6 @@ export const UpdateEscrowDialog = () => {
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name="receiverMemo"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      Receiver Memo (opcional)
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Enter the escrow receiver Memo"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </div>
 
             <FormField
@@ -438,7 +415,7 @@ export const UpdateEscrowDialog = () => {
                     <Button
                       onClick={() => handleRemoveMilestone(index)}
                       className="p-2 bg-transparent text-destructive rounded-md border-none shadow-none hover:bg-transparent hover:shadow-none hover:text-destructive focus:ring-0 active:ring-0 self-start sm:self-center cursor-pointer"
-                      disabled={milestones.length === 1}
+                      type="button"
                     >
                       <Trash2 className="h-5 w-5" />
                     </Button>
@@ -447,7 +424,6 @@ export const UpdateEscrowDialog = () => {
                   {index === milestones.length - 1 && (
                     <div className="flex justify-end mt-4">
                       <Button
-                        disabled={isAnyMilestoneEmpty}
                         className="w-full md:w-1/4 cursor-pointer"
                         variant="outline"
                         onClick={handleAddMilestone}

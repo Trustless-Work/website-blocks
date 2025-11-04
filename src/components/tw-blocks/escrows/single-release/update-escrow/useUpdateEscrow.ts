@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateEscrowSchema } from "./schema";
 import { z } from "zod";
-import { SingleReleaseMilestone } from "@trustless-work/escrow/types";
 import { toast } from "sonner";
-import { useEscrowContext } from "@/components/tw-blocks/providers/EscrowProvider";
+import {
+  ErrorResponse,
+  handleError,
+} from "@/components/tw-blocks/handle-errors/handle";
 
 export function useUpdateEscrow() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -13,82 +15,34 @@ export function useUpdateEscrow() {
   const { getSingleReleaseFormSchema } = useUpdateEscrowSchema();
   const formSchema = getSingleReleaseFormSchema();
 
-  const { selectedEscrow } = useEscrowContext();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      engagementId: selectedEscrow?.engagementId || "",
-      title: selectedEscrow?.title || "",
-      description: selectedEscrow?.description || "",
-      platformFee: selectedEscrow?.platformFee as unknown as
-        | number
-        | string
-        | undefined,
-      amount: selectedEscrow?.amount as unknown as number | string | undefined,
-      receiverMemo: selectedEscrow?.receiverMemo
-        ? String(selectedEscrow.receiverMemo)
-        : "",
+      engagementId: "",
+      title: "",
+      description: "",
+      platformFee: undefined,
+      amount: undefined,
       trustline: {
-        address: selectedEscrow?.trustline?.address || "",
-        decimals: 10000000,
+        address: "",
       },
       roles: {
-        approver: selectedEscrow?.roles?.approver || "",
-        serviceProvider: selectedEscrow?.roles?.serviceProvider || "",
-        platformAddress: selectedEscrow?.roles?.platformAddress || "",
-        receiver: selectedEscrow?.roles?.receiver || "",
-        releaseSigner: selectedEscrow?.roles?.releaseSigner || "",
-        disputeResolver: selectedEscrow?.roles?.disputeResolver || "",
+        approver: "",
+        serviceProvider: "",
+        platformAddress: "",
+        receiver: "",
+        releaseSigner: "",
+        disputeResolver: "",
       },
-      milestones: (selectedEscrow?.milestones || []).map(
-        (m: SingleReleaseMilestone) => ({
-          description: m?.description || "",
-        })
-      ),
+      milestones: [{ description: "" }],
     },
     mode: "onChange",
   });
 
-  React.useEffect(() => {
-    if (!selectedEscrow) return;
-    form.reset({
-      engagementId: selectedEscrow?.engagementId || "",
-      title: selectedEscrow?.title || "",
-      description: selectedEscrow?.description || "",
-      platformFee:
-        (selectedEscrow?.platformFee as unknown as
-          | number
-          | string
-          | undefined) || "",
-      amount:
-        (selectedEscrow?.amount as unknown as number | string | undefined) ||
-        "",
-      receiverMemo: selectedEscrow?.receiverMemo
-        ? String(selectedEscrow.receiverMemo)
-        : "",
-      trustline: {
-        address: selectedEscrow?.trustline?.address || "",
-        decimals: 10000000,
-      },
-      roles: {
-        approver: selectedEscrow?.roles?.approver || "",
-        serviceProvider: selectedEscrow?.roles?.serviceProvider || "",
-        platformAddress: selectedEscrow?.roles?.platformAddress || "",
-        receiver: selectedEscrow?.roles?.receiver || "",
-        releaseSigner: selectedEscrow?.roles?.releaseSigner || "",
-        disputeResolver: selectedEscrow?.roles?.disputeResolver || "",
-      },
-      milestones: (selectedEscrow?.milestones || []).map(
-        (m: SingleReleaseMilestone) => ({
-          description: m?.description || "",
-        })
-      ),
-    });
-  }, [selectedEscrow, form]);
-
   const milestones = form.watch("milestones");
-  const isAnyMilestoneEmpty = milestones.some((m) => m.description === "");
+  const isAnyMilestoneEmpty = milestones.some((m, index) => {
+    return m.description === "";
+  });
 
   const handleAddMilestone = () => {
     const current = form.getValues("milestones");
@@ -133,6 +87,8 @@ export function useUpdateEscrow() {
       setIsSubmitting(true);
 
       toast.success("Escrow updated successfully");
+    } catch (error) {
+      toast.error(handleError(error as ErrorResponse).message);
     } finally {
       setIsSubmitting(false);
     }
