@@ -1,5 +1,5 @@
+import { isValidWallet } from "@/components/tw-blocks/wallet-kit/validators";
 import { z } from "zod";
-import { isValidWallet } from "../../../wallet-kit/validators";
 
 export const useInitializeEscrowSchema = () => {
   const getBaseSchema = () => {
@@ -8,7 +8,6 @@ export const useInitializeEscrowSchema = () => {
         address: z.string().min(1, {
           message: "Trustline address is required.",
         }),
-        decimals: z.number().default(10000000),
       }),
       roles: z.object({
         approver: z
@@ -105,16 +104,6 @@ export const useInitializeEscrowSchema = () => {
             message: "Platform fee can have a maximum of 2 decimal places.",
           }
         ),
-      receiverMemo: z
-        .string()
-        .optional()
-        .refine((val) => !val || val.length >= 1, {
-          message: "Receiver Memo must be at least 1.",
-        })
-        .refine((val) => !val || /^[1-9][0-9]*$/.test(val), {
-          message:
-            "Receiver Memo must be a whole number greater than 0 (no decimals).",
-        }),
     });
   };
 

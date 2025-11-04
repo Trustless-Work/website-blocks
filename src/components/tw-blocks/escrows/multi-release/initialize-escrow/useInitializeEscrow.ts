@@ -4,14 +4,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useInitializeEscrowSchema } from "./schema";
 import { z } from "zod";
 import { toast } from "sonner";
-import { trustlineOptions } from "@/components/tw-blocks/wallet-kit/trustlines";
 import { useWalletContext } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import {
+  ErrorResponse,
+  handleError,
+} from "@/components/tw-blocks/handle-errors/handle";
+import { trustlineOptions } from "@/components/tw-blocks/wallet-kit/trustlines";
 
 export function useInitializeEscrow() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const { walletAddress } = useWalletContext();
+
   const { getMultiReleaseFormSchema } = useInitializeEscrowSchema();
   const formSchema = getMultiReleaseFormSchema();
+
+  const { walletAddress } = useWalletContext();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -20,34 +26,34 @@ export function useInitializeEscrow() {
       title: "",
       description: "",
       platformFee: undefined,
-      receiverMemo: "",
       trustline: {
         address: "",
-        decimals: 10000000,
       },
       roles: {
         approver: "",
         serviceProvider: "",
         platformAddress: "",
-        receiver: "",
         releaseSigner: "",
         disputeResolver: "",
       },
-      milestones: [{ description: "", amount: "" }],
+      milestones: [{ receiver: "", description: "", amount: "" }],
     },
     mode: "onChange",
   });
 
   const milestones = form.watch("milestones");
   const isAnyMilestoneEmpty = milestones.some(
-    (milestone) => milestone.description === ""
+    (milestone) =>
+      milestone.description === "" ||
+      milestone.receiver === "" ||
+      milestone.amount === ""
   );
 
   const handleAddMilestone = () => {
     const currentMilestones = form.getValues("milestones");
     const updatedMilestones = [
       ...currentMilestones,
-      { description: "", amount: "" },
+      { receiver: "", description: "", amount: "" },
     ];
     form.setValue("milestones", updatedMilestones);
   };
@@ -66,23 +72,32 @@ export function useInitializeEscrow() {
       title: "Design Landing Page",
       description: "Landing for the new product of the company.",
       platformFee: 5,
-      receiverMemo: "123",
       trustline: {
         address: usdc?.value || "",
-        decimals: 10000000,
       },
       roles: {
         approver: walletAddress || "",
         serviceProvider: walletAddress || "",
         platformAddress: walletAddress || "",
-        receiver: walletAddress || "",
         releaseSigner: walletAddress || "",
         disputeResolver: walletAddress || "",
       },
       milestones: [
-        { description: "Design the wireframe", amount: 2 },
-        { description: "Develop the wireframe", amount: 2 },
-        { description: "Deploy the wireframe", amount: 2 },
+        {
+          receiver: walletAddress || "",
+          description: "Design the wireframe",
+          amount: 2,
+        },
+        {
+          receiver: walletAddress || "",
+          description: "Develop the wireframe",
+          amount: 2,
+        },
+        {
+          receiver: walletAddress || "",
+          description: "Deploy the wireframe",
+          amount: 2,
+        },
       ],
     };
 
@@ -93,7 +108,6 @@ export function useInitializeEscrow() {
 
     // Explicitly set the trustline field
     form.setValue("trustline.address", usdc?.value || "");
-    form.setValue("trustline.decimals", 10000000);
   };
 
   const handleSubmit = form.handleSubmit(async (payload) => {
@@ -101,6 +115,8 @@ export function useInitializeEscrow() {
       setIsSubmitting(true);
 
       toast.success("Escrow initialized successfully");
+    } catch (error) {
+      toast.error(handleError(error as ErrorResponse).message);
     } finally {
       setIsSubmitting(false);
       form.reset();
@@ -112,9 +128,9 @@ export function useInitializeEscrow() {
     isSubmitting,
     milestones,
     isAnyMilestoneEmpty,
+    fillTemplateForm,
     handleSubmit,
     handleAddMilestone,
     handleRemoveMilestone,
-    fillTemplateForm,
   };
 }

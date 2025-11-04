@@ -78,7 +78,7 @@ export const InitializeEscrowForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
-        <Card className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4">
+        <Card className="flex w-full max-w-3xl flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4">
           <Link
             className="flex-1"
             href="https://docs.trustlesswork.com/trustless-work/technology-overview/escrow-types"
@@ -301,7 +301,7 @@ export const InitializeEscrowForm = () => {
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
                   <span className="flex items-center">
-                    Platform Address
+                    Platform
                     <span className="text-destructive ml-1">*</span>
                   </span>
                 </FormLabel>
@@ -345,7 +345,7 @@ export const InitializeEscrowForm = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="platformFee"
@@ -394,29 +394,6 @@ export const InitializeEscrowForm = () => {
                       onChange={handleAmountChange}
                     />
                   </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="receiverMemo"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center">
-                  Receiver Memo (opcional)
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="Enter the escrow receiver Memo"
-                    {...field}
-                    onChange={(e) => {
-                      field.onChange(e);
-                    }}
-                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

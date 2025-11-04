@@ -5,6 +5,10 @@ import { useInitializeEscrowSchema } from "./schema";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useWalletContext } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import {
+  ErrorResponse,
+  handleError,
+} from "@/components/tw-blocks/handle-errors/handle";
 import { trustlineOptions } from "@/components/tw-blocks/wallet-kit/trustlines";
 
 export function useInitializeEscrow() {
@@ -23,10 +27,8 @@ export function useInitializeEscrow() {
       description: "",
       platformFee: undefined,
       amount: undefined,
-      receiverMemo: "",
       trustline: {
         address: "",
-        decimals: 10000000,
       },
       roles: {
         approver: "",
@@ -67,10 +69,8 @@ export function useInitializeEscrow() {
       description: "Landing for the new product of the company.",
       platformFee: 5,
       amount: 5,
-      receiverMemo: "123",
       trustline: {
         address: usdc?.value || "",
-        decimals: 10000000,
       },
       roles: {
         approver: walletAddress || "",
@@ -94,7 +94,6 @@ export function useInitializeEscrow() {
 
     // Explicitly set the trustline field
     form.setValue("trustline.address", usdc?.value || "");
-    form.setValue("trustline.decimals", 10000000);
   };
 
   const handleSubmit = form.handleSubmit(async (payload) => {
@@ -102,6 +101,8 @@ export function useInitializeEscrow() {
       setIsSubmitting(true);
 
       toast.success("Escrow initialized successfully");
+    } catch (error) {
+      toast.error(handleError(error as ErrorResponse).message);
     } finally {
       setIsSubmitting(false);
       form.reset();

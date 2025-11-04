@@ -29,6 +29,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 
 export const InitializeEscrowDialog = () => {
   const {
@@ -130,7 +131,7 @@ export const InitializeEscrowDialog = () => {
                 </Button>
               )}
             </Card>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="title"
@@ -174,7 +175,9 @@ export const InitializeEscrowDialog = () => {
                   </FormItem>
                 )}
               />
+            </div>
 
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="trustline.address"
@@ -206,6 +209,34 @@ export const InitializeEscrowDialog = () => {
                             ))}
                         </SelectContent>
                       </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="platformFee"
+                render={() => (
+                  <FormItem>
+                    <FormLabel className="flex items-center">
+                      Platform Fee
+                      <span className="text-destructive ml-1">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Percent
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                          size={18}
+                        />
+                        <Input
+                          placeholder="Enter platform fee"
+                          className="pl-10"
+                          value={form.watch("platformFee")?.toString() || ""}
+                          onChange={handlePlatformFeeChange}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -320,7 +351,7 @@ export const InitializeEscrowDialog = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <FormField
                 control={form.control}
                 name="roles.platformAddress"
@@ -328,7 +359,7 @@ export const InitializeEscrowDialog = () => {
                   <FormItem>
                     <FormLabel className="flex items-center justify-between">
                       <span className="flex items-center">
-                        Platform Address
+                        Platform
                         <span className="text-destructive ml-1">*</span>
                       </span>
                     </FormLabel>
@@ -336,83 +367,6 @@ export const InitializeEscrowDialog = () => {
                     <FormControl>
                       <Input
                         placeholder="Enter platform address"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="roles.receiver"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center justify-between">
-                      <span className="flex items-center">
-                        Receiver<span className="text-destructive ml-1">*</span>
-                      </span>
-                    </FormLabel>
-
-                    <FormControl>
-                      <Input
-                        placeholder="Enter receiver address"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="platformFee"
-                render={() => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      Platform Fee
-                      <span className="text-destructive ml-1">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Percent
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
-                          size={18}
-                        />
-                        <Input
-                          placeholder="Enter platform fee"
-                          className="pl-10"
-                          value={form.watch("platformFee")?.toString() || ""}
-                          onChange={handlePlatformFeeChange}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="receiverMemo"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      Receiver Memo (opcional)
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Enter the escrow receiver Memo"
                         {...field}
                         onChange={(e) => {
                           field.onChange(e);
@@ -453,19 +407,32 @@ export const InitializeEscrowDialog = () => {
               </FormLabel>
               {milestones.map((milestone, index) => (
                 <div key={index} className="space-y-4">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                    <Input
-                      placeholder="Milestone Description"
-                      value={milestone.description}
-                      className="w-full sm:w-3/5"
-                      onChange={(e) => {
-                        const updatedMilestones = [...milestones];
-                        updatedMilestones[index].description = e.target.value;
-                        form.setValue("milestones", updatedMilestones);
-                      }}
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    <div className="md:col-span-4">
+                      <Input
+                        placeholder="Enter receiver address"
+                        value={milestone.receiver}
+                        onChange={(e) => {
+                          const updatedMilestones = [...milestones];
+                          updatedMilestones[index].receiver = e.target.value;
+                          form.setValue("milestones", updatedMilestones);
+                        }}
+                      />
+                    </div>
 
-                    <div className="relative w-full sm:w-2/5">
+                    <div className="md:col-span-4">
+                      <Input
+                        placeholder="Milestone description"
+                        value={milestone.description}
+                        onChange={(e) => {
+                          const updatedMilestones = [...milestones];
+                          updatedMilestones[index].description = e.target.value;
+                          form.setValue("milestones", updatedMilestones);
+                        }}
+                      />
+                    </div>
+
+                    <div className="md:col-span-3 relative">
                       <DollarSign
                         className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
                         size={18}
@@ -478,20 +445,29 @@ export const InitializeEscrowDialog = () => {
                       />
                     </div>
 
-                    <Button
-                      onClick={() => handleRemoveMilestone(index)}
-                      className="p-2 bg-transparent text-red-500 rounded-md border-none shadow-none hover:bg-transparent hover:shadow-none hover:text-red-500 focus:ring-0 active:ring-0 self-start sm:self-center"
-                      disabled={milestones.length === 1}
-                    >
-                      <Trash2 className="h-5 w-5" />
-                    </Button>
+                    <div className="md:col-span-1 flex justify-end">
+                      <Button
+                        onClick={() => handleRemoveMilestone(index)}
+                        className="p-2 bg-transparent text-red-500 hover:text-red-600"
+                        disabled={milestones.length === 1}
+                        type="button"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </Button>
+                    </div>
                   </div>
 
+                  {/* Separator */}
+                  {index < milestones.length - 1 && (
+                    <Separator className="w-full" />
+                  )}
+
+                  {/* Add button */}
                   {index === milestones.length - 1 && (
                     <div className="flex justify-end mt-4">
                       <Button
                         disabled={isAnyMilestoneEmpty}
-                        className="w-full md:w-1/4"
+                        className="w-full md:w-fit md:min-w-40 cursor-pointer"
                         variant="outline"
                         onClick={handleAddMilestone}
                         type="button"
