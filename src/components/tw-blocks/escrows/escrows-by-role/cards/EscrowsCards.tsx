@@ -11,7 +11,11 @@ import type {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Goal,
   Wallet,
@@ -355,7 +359,9 @@ export const EscrowsByRoleCards = ({
                                     key={`milestone-${milestone.description}-${milestone.status}-${index}`}
                                     className="text-xs flex justify-between"
                                   >
-                                    {milestone.description}
+                                    <p className="truncate mr-4">
+                                      {milestone.description}
+                                    </p>
 
                                     {escrow.type === "multi-release" &&
                                       "amount" in milestone && (
