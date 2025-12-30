@@ -86,6 +86,7 @@ export const BlockPage = ({ block }: BlockPageProps) => {
         "approve-milestone",
         "change-milestone-status",
         "balance-progress",
+        "load-escrow",
       ].includes(action),
     [action]
   );

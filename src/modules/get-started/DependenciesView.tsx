@@ -333,6 +333,14 @@ npx trustless-work add helpers`}
                 >
                   Update Escrow
                 </Link>
+                ,{" "}
+                <Link
+                  className="text-primary-500 font-bold cursor-pointer mx-1"
+                  target="_blank"
+                  href="/blocks/escrows-load-escrow"
+                >
+                  Load Escrow
+                </Link>
                 ) require:
               </p>
               <ul className="list-disc pl-6 space-y-2">
