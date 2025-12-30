@@ -60,8 +60,10 @@ export const Home = () => {
   );
 
   // Get the latest new block for the badge
+  // Use filter and take the last one to ensure deterministic selection
   const blocks = blocksData as unknown as Block[];
-  const latestNewBlock = blocks.find((block) => block.newBlocks === true);
+  const newBlocks = blocks.filter((block) => block.newBlocks === true);
+
   return (
     <>
       <Image
@@ -85,11 +87,15 @@ export const Home = () => {
       {/* Hero Section */}
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-2 text-center">
-          <Badge variant="outline" className="mb-4">
-            {latestNewBlock
-              ? `New ${latestNewBlock.title} →`
-              : "New Components →"}
-          </Badge>
+          <p className="text-xs text-muted-foreground">New Blocks:</p>
+          <div className="flex gap-2 justify-center flex-wrap">
+            {newBlocks.slice(0, 5).map((block) => (
+              <Badge key={block.id} variant="outline" className="mb-4">
+                {block.title}
+              </Badge>
+            ))}
+          </div>
+
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
             Building Blocks for the Web
           </h1>
