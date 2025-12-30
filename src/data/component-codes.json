@@ -38,6 +38,18 @@
       "button": "import { FundEscrowButton } from '@/components/tw-blocks/escrows/single-multi-release/fund-escrow/button/FundEscrow';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <FundEscrowButton amount={10} />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
     }
   },
+  "load-escrow": {
+    "single-release": {
+      "form": "import { LoadEscrowForm } from '@/components/tw-blocks/escrows/load-escrow/form/LoadEscrowForm';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <LoadEscrowForm />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "dialog": "import { LoadEscrowDialog } from '@/components/tw-blocks/escrows/load-escrow/dialog/LoadEscrowDialog';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <LoadEscrowDialog />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "button": "import { LoadEscrowButton } from '@/components/tw-blocks/escrows/load-escrow/button/LoadEscrowButton';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <LoadEscrowButton contractId='CAZ6UQX7...' />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
+    },
+    "multi-release": {
+      "form": "import { LoadEscrowForm } from '@/components/tw-blocks/escrows/load-escrow/form/LoadEscrowForm';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <LoadEscrowForm />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "dialog": "import { LoadEscrowDialog } from '@/components/tw-blocks/escrows/load-escrow/dialog/LoadEscrowDialog';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <LoadEscrowDialog />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
+      "button": "import { LoadEscrowButton } from '@/components/tw-blocks/escrows/load-escrow/button/LoadEscrowButton';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <LoadEscrowButton contractId='CAZ6UQX7...' />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
+    }
+  },
   "change-milestone-status": {
     "single-release": {
       "form": "import { ChangeMilestoneStatusForm } from '@/components/tw-blocks/escrows/single-multi-release/change-milestone-status/form/ChangeMilestoneStatus';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <ChangeMilestoneStatusForm />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}",
@@ -92,7 +104,7 @@
       "button": "import { DisputeEscrowButton } from '@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <DisputeEscrowButton />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
     },
     "multi-release": {
-      "button": "import { DisputeEscrowButton } from '@/components/tw-blocks/escrows/multi-release/dispute-escrow/button/DisputeEscrow';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <DisputeEscrowButton />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
+      "button": "import { DisputeMilestoneButton } from '@/components/tw-blocks/escrows/multi-release/dispute-escrow/button/DisputeEscrow';\n\nexport default function Home() {\n  return (\n    <TrustlessWorkProvider>\n      <WalletProvider>\n        <EscrowProvider>\n\n          <DisputeMilestoneButton milestoneIndex={0} />\n\n        </EscrowProvider>\n      </WalletProvider>\n    </TrustlessWorkProvider>\n  );\n}"
     }
   },
   "balance-progress": {

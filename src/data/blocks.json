@@ -500,6 +500,57 @@
     ]
   },
   {
+    "id": "escrows-load-escrow",
+    "title": "Load Escrow",
+    "description": "Component to load an escrow using form, button and dialog variants.",
+    "category": "Escrows",
+    "escrowType": "single-release,multi-release",
+    "types": ["single-release", "multi-release"],
+    "variants": ["form", "button", "dialog"],
+    "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/trustless-work-sdk/usegetescrowfromindexerbycontractids",
+    "notes": [
+      "This form includes all the fields required by the load escrow payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always will use the same status, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action",
+      "The <LoadEscrowButton contractId='CAZ6UQX7...' /> requests the contractId.",
+      "When the escrow is loaded, the selectedEscrow state is updated with the escrow data. So, you can use the selectedEscrow state to show the escrow data in the UI or something else.",
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method."
+    ],
+    "installByVariant": {
+      "form": "npx trustless-work add escrows/load-escrow/form",
+      "button": "npx trustless-work add escrows/load-escrow/button",
+      "dialog": "npx trustless-work add escrows/load-escrow/dialog"
+    },
+    "image": [
+      "https://drive.google.com/file/d/1b2hKpNn560p75-9CXuOmhLihlZ_1d-2A/view?usp=sharing",
+      "https://drive.google.com/file/d/1S5IXLS8MPKayH9v2TovaraVsDhMTnZ_i/view?usp=sharing"
+    ],
+    "tags": ["Load", "Escrows", "Indexer"],
+    "newBlocks": true,
+    "requiredProviders": [
+      "<ReactQueryClientProvider />",
+      "<TrustlessWorkProvider />",
+      "<WalletProvider />",
+      "<EscrowProvider />"
+    ],
+    "requiredBlocks": [
+      {
+        "name": "wallet-kit",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "providers",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "handle-errors",
+        "url": "/get-started/dependencies"
+      },
+      {
+        "name": "tanstack",
+        "url": "/get-started/dependencies"
+      }
+    ]
+  },
+  {
     "id": "escrows-resolve-dispute",
     "title": "Resolve Dispute",
     "description": "Component to resolve disputes with form, button and dialog variants.",
@@ -593,7 +644,7 @@
       "https://drive.google.com/file/d/1cmV5xqKBB52kSZlnEporNw3EQCoVW4KY/view?usp=sharing"
     ],
     "tags": ["Withdraw", "Remaining", "Funds", "Escrows"],
-    "newBlocks": true,
+    "newBlocks": false,
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
@@ -827,7 +878,7 @@
       "https://drive.google.com/file/d/1Qa3LbQ90Z7ct_40Kq5B64jauhwbJipEy/view?usp=sharing"
     ],
     "tags": ["Balance", "Progress", "Escrows"],
-    "newBlocks": true,
+    "newBlocks": false,
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",

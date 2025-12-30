@@ -57,6 +57,9 @@ import { WithdrawRemainingFundsButton } from "@/components/tw-blocks/escrows/mul
 import { BalanceProgressBar } from "@/components/tw-blocks/escrows/indicators/balance-progress/bar/BalanceProgress";
 import { BalanceProgressDonut } from "@/components/tw-blocks/escrows/indicators/balance-progress/donut/BalanceProgress";
 import { Dashboard01 } from "@/components/tw-blocks/dashboard/dashboard-01/Dashboard";
+import { LoadEscrowForm } from "@/components/tw-blocks/escrows/load-escrow/form/LoadEscrowForm";
+import { LoadEscrowDialog } from "@/components/tw-blocks/escrows/load-escrow/dialog/LoadEscrowDialog";
+import { LoadEscrowButton } from "@/components/tw-blocks/escrows/load-escrow/button/LoadEscrowButton";
 
 type Props = {
   block: Block;
@@ -249,6 +252,18 @@ export function BlockTypeVariantViewer({
         "multi-release": {
           bar: () => <BalanceProgressBar />,
           donut: () => <BalanceProgressDonut />,
+        },
+      },
+      "load-escrow": {
+        "single-release": {
+          form: () => <LoadEscrowForm />,
+          dialog: () => <LoadEscrowDialog />,
+          button: () => <LoadEscrowButton />,
+        },
+        "multi-release": {
+          form: () => <LoadEscrowForm />,
+          dialog: () => <LoadEscrowDialog />,
+          button: () => <LoadEscrowButton />,
         },
       },
     };
