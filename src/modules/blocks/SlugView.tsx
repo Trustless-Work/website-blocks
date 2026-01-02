@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowLeft, BookOpen, Eye } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import type { Block, EscrowReleaseType, EscrowVariant } from "@/types/block";
 import { BlockTypeVariantViewer } from "@/shared/BlockTypeVariantViewer";
 import { CodeBlock } from "@/shared/CodeBlock";
@@ -45,10 +45,15 @@ export const BlockPage = ({ block }: BlockPageProps) => {
     return hasBoth && isEscrowUI;
   }, [availableTypes, block]);
 
-  const variants = useMemo((): EscrowVariant[] => {
+  const hasExplicitVariants = useMemo(() => {
+    const b = block as unknown as Block;
+    return Array.isArray(b.variants) && b.variants.length > 0;
+  }, [block]);
+
+  // Get all possible variants from the block JSON
+  const allVariants = useMemo((): EscrowVariant[] => {
     const b = block as unknown as Block;
     if (Array.isArray(b.variants) && b.variants.length > 0) {
-      // Trust the variants provided by the block JSON (supports indicators like bar/donut)
       return b.variants as unknown as EscrowVariant[];
     }
     const inferred: EscrowVariant[] = [];
@@ -59,10 +64,26 @@ export const BlockPage = ({ block }: BlockPageProps) => {
     return inferred.length > 0 ? inferred : (["form"] as EscrowVariant[]);
   }, [block]);
 
-  const hasExplicitVariants = useMemo(() => {
+  // Helper function to get available variants for a given type
+  const getVariantsForType = (
+    type: EscrowReleaseType,
+    allVariantsList: EscrowVariant[]
+  ): EscrowVariant[] => {
     const b = block as unknown as Block;
-    return Array.isArray(b.variants) && b.variants.length > 0;
-  }, [block]);
+    // If installByTypeAndVariant exists, filter variants by type
+    if (b.installByTypeAndVariant && type) {
+      const typeVariants = b.installByTypeAndVariant[type];
+      if (typeVariants && typeof typeVariants === "object") {
+        // Return only variants that exist for the given type
+        const availableVariants = Object.keys(typeVariants) as EscrowVariant[];
+        return availableVariants.filter((v) =>
+          allVariantsList.includes(v)
+        );
+      }
+    }
+    // Return all variants if no filtering needed
+    return allVariantsList;
+  };
 
   const [activeType, setActiveType] = useState<EscrowReleaseType>(
     () =>
@@ -70,9 +91,27 @@ export const BlockPage = ({ block }: BlockPageProps) => {
         ? "single-release"
         : availableTypes[0]) || "single-release"
   );
-  const [activeVariant, setActiveVariant] = useState<EscrowVariant>(
-    () => variants[0] || "form"
-  );
+
+  // Filter variants based on activeType and installByTypeAndVariant
+  const variants = useMemo((): EscrowVariant[] => {
+    return getVariantsForType(activeType, allVariants);
+  }, [block, activeType, allVariants]);
+
+  const [activeVariant, setActiveVariant] = useState<EscrowVariant>(() => {
+    const initialType =
+      (availableTypes.includes("single-release")
+        ? "single-release"
+        : availableTypes[0]) || "single-release";
+    const initialVariants = getVariantsForType(initialType, allVariants);
+    return initialVariants[0] || "form";
+  });
+
+  // Update activeVariant when activeType or variants change to ensure it's valid
+  useEffect(() => {
+    if (!variants.includes(activeVariant) && variants.length > 0) {
+      setActiveVariant(variants[0]);
+    }
+  }, [activeType, variants, activeVariant]);
 
   const action = useMemo(() => {
     // Normalize id to action key by removing known prefixes

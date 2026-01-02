@@ -561,9 +561,11 @@
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/useresolvedispute",
     "notes": [
       "This form includes all the fields required by the resolve dispute payload (body requested for the tw endpoint, see documentation above) type, but it is intended for testing purposes only. You can adapt it to your needs—for example, if you always will use the same approverAmount, you can simplify the form to request only the fields you actually need. Any fixed data can be set directly in the payload  before submitting the action",
-      "The <ResolveDisputeButton approverFunds={100} receiverFunds={100} /> requests the approverFunds and receiverFunds.",
+      "The single-release <ResolveDisputeButton distributions={[{ address: 'GAG...JDS', amount: 10 }]} /> requests the the distribution amounts. The multi-release <ResolveDisputeButton milestoneIndex={0} distributions={[{ address: 'GAG...JDS', amount: 10 }]} /> requests the milestone index and the distribution amounts.",
       "Make sure to select an escrow before extracting data with selectedEscrow from the escrowProvider context. If you don't call setSelectedEscrow, the endpoint will not work.",
-      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach."
+      "If you don't want to use the escrowProvider context, you'll need to provide the payload through an alternative method. Keep in mind that while part of the payload may come from the form, some fields—such as contractId—will not be requested in the form. These values need to be retrieved from an escrow, which is why using a context is the recommended approach.",
+      "The showSelectMilestone prop is optional and defaults to false. If you want to select a milestone, you can set it to true. Only available for multi-release escrows.",
+      "The milestoneIndex prop is optional and defaults to 0. If you want to select a milestone, you can set it to the milestone index. Only available for multi-release escrows."
     ],
     "installByTypeAndVariant": {
       "single-release": {
@@ -744,7 +746,7 @@
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
-    "variants": ["button"],
+    "variants": ["button", "form", "dialog"],
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usereleasefunds",
     "notes": [
       "The <ReleaseEscrowButton /> does not require any parameters.",
@@ -756,7 +758,9 @@
         "button": "npx trustless-work add escrows/single-release/release-escrow/button"
       },
       "multi-release": {
-        "button": "npx trustless-work add escrows/multi-release/release-milestone/button"
+        "button": "npx trustless-work add escrows/multi-release/release-milestone/button",
+        "form": "npx trustless-work add escrows/multi-release/release-milestone/form",
+        "dialog": "npx trustless-work add escrows/multi-release/release-milestone/dialog"
       }
     },
     "image": [
@@ -805,7 +809,7 @@
     "category": "Escrows",
     "escrowType": "single-release,multi-release",
     "types": ["single-release", "multi-release"],
-    "variants": ["button"],
+    "variants": ["button", "form", "dialog"],
     "docTypeUrl": "https://docs.trustlesswork.com/trustless-work/react-library-hooks/usestartdispute",
     "notes": [
       "The <DisputeEscrowButton /> does not require any parameters.",
@@ -817,7 +821,9 @@
         "button": "npx trustless-work add escrows/single-release/dispute-escrow/button"
       },
       "multi-release": {
-        "button": "npx trustless-work add escrows/multi-release/dispute-milestone/button"
+        "button": "npx trustless-work add escrows/multi-release/dispute-milestone/button",
+        "form": "npx trustless-work add escrows/multi-release/dispute-milestone/form",
+        "dialog": "npx trustless-work add escrows/multi-release/dispute-milestone/dialog"
       }
     },
     "image": [

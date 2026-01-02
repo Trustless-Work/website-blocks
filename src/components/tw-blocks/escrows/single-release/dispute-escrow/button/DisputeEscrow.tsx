@@ -21,7 +21,7 @@ export const DisputeEscrowButton = () => {
   return (
     <Button
       type="button"
-      disabled={isSubmitting || !selectedEscrow?.balance}
+      disabled={isSubmitting}
       onClick={handleClick}
       className="cursor-pointer w-full"
     >

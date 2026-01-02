@@ -50,7 +50,7 @@ import { FundEscrowForm } from "@/components/tw-blocks/escrows/single-multi-rele
 import { FundEscrowDialog } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/dialog/FundEscrow";
 import { FundEscrowButton } from "@/components/tw-blocks/escrows/single-multi-release/fund-escrow/button/FundEscrow";
 import { DisputeEscrowButton } from "@/components/tw-blocks/escrows/single-release/dispute-escrow/button/DisputeEscrow";
-import { DisputeMilestoneButton } from "@/components/tw-blocks/escrows/multi-release/dispute-milestone/button/DisputeEscrow";
+import { DisputeMilestoneButton } from "@/components/tw-blocks/escrows/multi-release/dispute-milestone/button/DisputeMilestone";
 import { WithdrawRemainingFundsForm } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/form/WithdrawRemainingFunds";
 import { WithdrawRemainingFundsDialog } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/dialog/WithdrawRemainingFunds";
 import { WithdrawRemainingFundsButton } from "@/components/tw-blocks/escrows/multi-release/withdraw-remaining-funds/button/WithdrawRemainingFunds";
@@ -60,6 +60,10 @@ import { Dashboard01 } from "@/components/tw-blocks/dashboard/dashboard-01/Dashb
 import { LoadEscrowForm } from "@/components/tw-blocks/escrows/load-escrow/form/LoadEscrowForm";
 import { LoadEscrowDialog } from "@/components/tw-blocks/escrows/load-escrow/dialog/LoadEscrowDialog";
 import { LoadEscrowButton } from "@/components/tw-blocks/escrows/load-escrow/button/LoadEscrowButton";
+import { DisputeMilestoneForm } from "@/components/tw-blocks/escrows/multi-release/dispute-milestone/form/DisputeMilestone";
+import { DisputeMilestoneDialog } from "@/components/tw-blocks/escrows/multi-release/dispute-milestone/dialog/DisputeMilestone";
+import { ReleaseMilestoneForm } from "@/components/tw-blocks/escrows/multi-release/release-milestone/form/ReleaseMilestone";
+import { ReleaseMilestoneDialog } from "@/components/tw-blocks/escrows/multi-release/release-milestone/dialog/ReleaseMilestone";
 
 type Props = {
   block: Block;
@@ -206,8 +210,18 @@ export function BlockTypeVariantViewer({
           button: () => <ResolveDisputeButton />,
         },
         "multi-release": {
-          form: () => <ResolveDisputeFormMultiRelease />,
-          dialog: () => <ResolveDisputeDialogMultiRelease />,
+          form: () => (
+            <ResolveDisputeFormMultiRelease
+              showSelectMilestone
+              milestoneIndex={0}
+            />
+          ),
+          dialog: () => (
+            <ResolveDisputeDialogMultiRelease
+              showSelectMilestone
+              milestoneIndex={0}
+            />
+          ),
           button: () => <ResolveDisputeButtonMultiRelease />,
         },
       },
@@ -234,6 +248,8 @@ export function BlockTypeVariantViewer({
         },
         "multi-release": {
           button: () => <ReleaseMilestoneButton />,
+          form: () => <ReleaseMilestoneForm />,
+          dialog: () => <ReleaseMilestoneDialog />,
         },
       },
       "dispute-escrow": {
@@ -242,6 +258,8 @@ export function BlockTypeVariantViewer({
         },
         "multi-release": {
           button: () => <DisputeMilestoneButton />,
+          form: () => <DisputeMilestoneForm />,
+          dialog: () => <DisputeMilestoneDialog />,
         },
       },
       "balance-progress": {
@@ -335,11 +353,12 @@ export function BlockTypeVariantViewer({
           title=""
           rightSlot={
             <div className="flex items-center gap-2">
-              {hasExplicitVariants && variants.length > 1 && (
+              {hasExplicitVariants && variants.length > 0 && (
                 <div className="flex items-center gap-2">
                   <Select
                     value={activeVariant}
                     onValueChange={(v) => setActiveVariant(v as EscrowVariant)}
+                    disabled={variants.length === 1}
                   >
                     <SelectTrigger className="w-[180px] cursor-pointer">
                       <SelectValue placeholder="Select variant" />
@@ -388,11 +407,12 @@ export function BlockTypeVariantViewer({
           title=""
           rightSlot={
             <div className="flex items-center gap-2">
-              {hasExplicitVariants && variants.length > 1 && (
+              {hasExplicitVariants && variants.length > 0 && (
                 <div className="flex items-center gap-2">
                   <Select
                     value={activeVariant}
                     onValueChange={(v) => setActiveVariant(v as EscrowVariant)}
+                    disabled={variants.length === 1}
                   >
                     <SelectTrigger className="w-[180px] cursor-pointer">
                       <SelectValue placeholder="Select variant" />

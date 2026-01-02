@@ -1,7 +1,11 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import {
+  ErrorResponse,
+  handleError,
+} from "@/components/tw-blocks/handle-errors/handle";
+import { Loader2 } from "lucide-react";
 
 export const ReleaseMilestoneButton = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -11,6 +15,8 @@ export const ReleaseMilestoneButton = () => {
       setIsSubmitting(true);
 
       toast.success("Milestone released successfully");
+    } catch (error) {
+      toast.error(handleError(error as ErrorResponse).message);
     } finally {
       setIsSubmitting(false);
     }

@@ -21,7 +21,7 @@ import { ChangeMilestoneStatusDialog } from "../../single-multi-release/change-m
 import { ApproveMilestoneButton } from "../../single-multi-release/approve-milestone/button/ApproveMilestone";
 import { formatCurrency } from "@/components/tw-blocks/helpers/format.helper";
 import { ReleaseMilestoneButton } from "../../multi-release/release-milestone/button/ReleaseMilestone";
-import { DisputeMilestoneButton } from "../../multi-release/dispute-milestone/button/DisputeEscrow";
+import { DisputeMilestoneButton } from "../../multi-release/dispute-milestone/button/DisputeMilestone";
 import { ResolveDisputeDialog } from "../../multi-release/resolve-dispute/dialog/ResolveDispute";
 
 interface MilestoneCardProps {
@@ -189,7 +189,10 @@ const MilestoneCardComponent = ({
         {"amount" in milestone && (
           <div className="flex items-center gap-2 py-2">
             <span className="text-2xl font-bold text-foreground">
-              {formatCurrency(milestone.amount, selectedEscrow.trustline?.name)}
+              {formatCurrency(
+                milestone.amount,
+                selectedEscrow.trustline?.symbol
+              )}
             </span>
           </div>
         )}
