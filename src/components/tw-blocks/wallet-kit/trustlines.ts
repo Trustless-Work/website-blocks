@@ -1,26 +1,26 @@
 export const trustlines = [
   // TESTNET
   {
-    name: "USDC",
+    symbol: "USDC",
     address: "CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWFEIE3USCIHMXQDAMA",
     decimals: 10000000,
     network: "testnet",
   },
   {
-    name: "EURC",
+    symbol: "EURC",
     address: "GB3Q6QDZYTHWT7E5PVS3W7FUT5GVAFC5KSZFFLPU25GO7VTC3NM2ZTVO",
     decimals: 10000000,
     network: "testnet",
   },
   // MAINNET
   {
-    name: "USDC",
+    symbol: "USDC",
     address: "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
     decimals: 10000000,
     network: "mainnet",
   },
   {
-    name: "EURC",
+    symbol: "EURC",
     address: "GB3Q6QDZYTHWT7E5PVS3W7FUT5GVAFC5KSZFFLPU25GO7VTC3NM2ZTVO",
     decimals: 10000000,
     network: "mainnet",
@@ -34,7 +34,7 @@ export const trustlineOptions = Array.from(
       .filter((trustline) => trustline.network === "testnet")
       .map((trustline) => [
         trustline.address,
-        { value: trustline.address, label: trustline.name },
+        { value: trustline.address, label: trustline.symbol },
       ])
   ).values()
 );

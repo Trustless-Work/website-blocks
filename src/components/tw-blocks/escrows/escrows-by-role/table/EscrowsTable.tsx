@@ -164,9 +164,9 @@ export const EscrowsByRoleTable = ({
         cell: ({ row }) => (
           <span
             className="max-w-[220px] truncate block"
-            title={`${row.original.trustline.name} (${row.original.trustline.address})`}
+            title={`${row.original.trustline.symbol} (${row.original.trustline.address})`}
           >
-            {row.original.trustline.name}
+            {row.original.trustline.symbol}
           </span>
         ),
       },
@@ -296,8 +296,8 @@ export const EscrowsByRoleTable = ({
                                 {sorted === "asc"
                                   ? "▲"
                                   : sorted === "desc"
-                                  ? "▼"
-                                  : ""}
+                                    ? "▼"
+                                    : ""}
                               </span>
                             )}
                           </div>
