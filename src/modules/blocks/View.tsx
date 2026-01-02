@@ -89,7 +89,7 @@ export const Blocks = () => {
     <>
       <Image
         src="/design/wall.svg"
-        alt="Home"
+        alt="Decorative wall background"
         width={1000}
         height={1000}
         className={`w-1/5 h-auto fixed -left-10 z-[-100] ${decorativeOpacityClass}`}
@@ -98,7 +98,7 @@ export const Blocks = () => {
 
       <Image
         src="/design/wall.svg"
-        alt="Home"
+        alt="Decorative wall background"
         width={1000}
         height={1000}
         className={`w-1/5 h-auto fixed -right-50 top-90 z-[-100] ${decorativeOpacityClass}`}

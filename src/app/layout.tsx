@@ -7,6 +7,7 @@ import { GlobalProviders } from "@/providers/GlobalProviders";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/shared/Footer";
 import { SiteHeader } from "@/shared/SiteHeader";
+import { StructuredData } from "@/components/StructuredData";
 
 const Exo2 = localFont({
   src: "./fonts/Exo2.ttf",
@@ -21,8 +22,68 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Trustless Work | Blocks",
-  description: "Trustless Work",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://blocks.trustlesswork.com"
+  ),
+  title: {
+    default: "Trustless Work Blocks | React Components for Blockchain Escrows",
+    template: "%s | Trustless Work Blocks",
+  },
+  description:
+    "Trustless Work Blocks brings clean, modern escrow components for blockchain — copy and paste into your React apps, fully compatible, open source, and free forever.",
+  keywords: [
+    "React components",
+    "blockchain escrow",
+    "Stellar escrow",
+    "React hooks",
+    "open source",
+    "web3 components",
+    "escrow system",
+    "dispute resolution",
+    "Trustless Work",
+  ],
+  authors: [{ name: "Trustless Work" }],
+  creator: "Trustless Work",
+  publisher: "Trustless Work",
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Trustless Work Blocks",
+    title: "Trustless Work Blocks | React Components for Blockchain Escrows",
+    description:
+      "Trustless Work Blocks brings clean, modern escrow components for blockchain — copy and paste into your React apps, fully compatible, open source, and free forever.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Trustless Work Blocks",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Trustless Work Blocks | React Components for Blockchain Escrows",
+    description:
+      "Trustless Work Blocks brings clean, modern escrow components for blockchain — copy and paste into your React apps, fully compatible, open source, and free forever.",
+    images: ["/og-image.png"],
+    creator: "@trustlesswork",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   themeColor: "#006BE4",
   appleWebApp: {
@@ -30,8 +91,8 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Trustless Work",
   },
-  formatDetection: {
-    telephone: false,
+  alternates: {
+    canonical: "/",
   },
 };
 
@@ -56,6 +117,9 @@ export default function RootLayout({
       <body
         className={cn(Exo2.variable, "antialiased", spaceGrotesk.className)}
       >
+        <StructuredData type="Organization" />
+        <StructuredData type="WebSite" />
+        <StructuredData type="SoftwareApplication" />
         <GlobalProviders>
           <SiteHeader />
           <main className="min-h-screen container mx-auto px-4">

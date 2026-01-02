@@ -1,12 +1,8 @@
-"use client";
-
-import { use, useEffect, useState } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BlockPage } from "@/modules/blocks/SlugView";
+import { BlockPageClient } from "./BlockPageClient";
 import blocksData from "@/data/blocks.json";
 import type { Block } from "@/types/block";
-import Image from "next/image";
-import { useTheme } from "next-themes";
 
 interface BlockPageProps {
   params: Promise<{
@@ -14,32 +10,49 @@ interface BlockPageProps {
   }>;
 }
 
-export default function BlocksPage({ params }: BlockPageProps) {
-  const { slug } = use(params);
+export async function generateMetadata({
+  params,
+}: BlockPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const block = (blocksData as unknown as Block[]).find((b) => b.id === slug);
+
+  if (!block) {
+    return {
+      title: "Block Not Found",
+    };
+  }
+
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://blocks.trustlesswork.com";
+  const blockUrl = `${baseUrl}/blocks/${slug}`;
+
+  return {
+    title: block.title,
+    description: block.description,
+    keywords: block.tags,
+    openGraph: {
+      title: `${block.title} | Trustless Work Blocks`,
+      description: block.description,
+      url: blockUrl,
+      type: "article",
+      tags: block.tags,
+    },
+    twitter: {
+      title: `${block.title} | Trustless Work Blocks`,
+      description: block.description,
+      card: "summary_large_image",
+    },
+    alternates: {
+      canonical: blockUrl,
+    },
+  };
+}
+
+export default async function BlocksPage({ params }: BlockPageProps) {
+  const { slug } = await params;
   const block = (blocksData as unknown as Block[]).find((b) => b.id === slug);
 
   if (!block) notFound();
 
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const decorativeOpacityClass = !mounted
-    ? "opacity-10"
-    : theme === "dark"
-      ? "opacity-10"
-      : "opacity-30";
-
-  return (
-    <>
-      <Image
-        src="/design/triangle-one-color.svg"
-        alt="Home"
-        width={1000}
-        height={1000}
-        className={`w-1/2 h-auto fixed -right-30 -top-12 z-[-1] ${decorativeOpacityClass}`}
-        quality={100}
-      />
-      <BlockPage block={block as unknown as Block} />
-    </>
-  );
+  return <BlockPageClient block={block as unknown as Block} />;
 }

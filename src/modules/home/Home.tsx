@@ -68,7 +68,7 @@ export const Home = () => {
     <>
       <Image
         src="/design/triangle-one-color.svg"
-        alt="Home"
+        alt="Decorative triangle background"
         width={1000}
         height={1000}
         className={`w-1/2 h-auto fixed -right-30 -top-12 z-[-1] ${decorativeOpacityClass}`}
@@ -77,7 +77,7 @@ export const Home = () => {
 
       <Image
         src="/design/wall-color.svg"
-        alt="Home"
+        alt="Decorative wall background"
         width={1000}
         height={1000}
         className={`w-1/3 h-auto fixed -left-10 z-[-100] ${decorativeOpacityClass}`}
