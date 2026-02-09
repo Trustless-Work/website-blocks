@@ -917,7 +917,7 @@
     ],
     "tags": ["Dashboard", "Escrows", "Signer"],
     "newBlocks": true,
-    "install": "npx trustless-work add escrows/dashboard/dashboard-01",
+    "install": "npx trustless-work add dashboard/dashboard-01",
     "requiredProviders": [
       "<ReactQueryClientProvider />",
       "<TrustlessWorkProvider />",
