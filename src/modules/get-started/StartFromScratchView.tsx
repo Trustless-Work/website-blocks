@@ -118,12 +118,25 @@ export const StartFromScratchView = () => {
             <CardContent>
               <ul className="list-disc pl-6 mt-2 space-y-1">
                 <li>
-                  Installs shadcn/ui components (with interactive prompts)
+                  Runs{" "}
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    shadcn init
+                  </code>{" "}
+                  (base configuration)
                 </li>
                 <li>
-                  Installs required dependencies: @tanstack/react-query,
-                  @trustless-work/escrow, axios, zod, react-hook-form,
-                  @creit.tech/stellar-wallets-kit, react-day-picker, etc.
+                  Installs the{" "}
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    sonner
+                  </code>{" "}
+                  shadcn component (toast notifications)
+                </li>
+                <li>
+                  Copies the{" "}
+                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                    helpers
+                  </code>{" "}
+                  block (base utilities)
                 </li>
                 <li>
                   Creates{" "}
@@ -131,12 +144,6 @@ export const StartFromScratchView = () => {
                     .twblocks.json
                   </code>{" "}
                   configuration file
-                </li>
-                <li>
-                  Optionally wires providers into your Next.js{" "}
-                  <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                    app/layout.tsx
-                  </code>
                 </li>
               </ul>
             </CardContent>
@@ -194,6 +201,15 @@ NEXT_PUBLIC_API_KEY=your_api_key_here`}
 
           <CodeBlock code="npx trustless-work add wallet-kit" />
 
+          <Card className="my-4 gap-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20">
+            <CardContent className="pt-4">
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                The CLI automatically installs the WalletProvider and the
+                required npm dependencies when you run this command.
+              </p>
+            </CardContent>
+          </Card>
+
           <h3
             id="wrap-app-wallet-provider"
             className="scroll-m-20 text-2xl font-semibold tracking-tight"
@@ -247,61 +263,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
-        <h2
-          id="add-helpers"
-          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
-        >
-          Add Helpers
-        </h2>
-        <div className="space-y-4 pt-4">
-          <p className="leading-7">Add helpers to your app:</p>
-
-          <CodeBlock code="npx trustless-work add helpers" />
-        </div>
-      </section>
-
-      <section>
-        <h2
-          id="add-tanstack-query"
-          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
-        >
-          Add Tanstack Query
-        </h2>
-        <div className="space-y-4 pt-4">
-          <p className="leading-7">Add Tanstack Query to your app:</p>
-
-          <CodeBlock code="npx trustless-work add tanstack" />
-        </div>
-      </section>
-
-      <section>
-        <h2
-          id="add-handle-errors"
-          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
-        >
-          Add Handle Errors
-        </h2>
-        <div className="space-y-4 pt-4">
-          <p className="leading-7">Add Handle Errors to your app:</p>
-
-          <CodeBlock code="npx trustless-work add handle-errors" />
-        </div>
-      </section>
-
-      <section>
-        <h2
-          id="add-providers"
-          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight"
-        >
-          Add Providers (If you skipped the init command)
-        </h2>
-        <div className="space-y-4 pt-4">
-          <p className="leading-7">Add Providers to your app:</p>
-
-          <CodeBlock code="npx trustless-work add providers" />
-        </div>
-      </section>
+      <Card className="my-4 gap-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+            <Info className="h-4 w-4" />
+            Automatic Peer Dependencies
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription className="text-blue-700 dark:text-blue-300">
+            <p>
+              When you add an escrow block, the CLI automatically installs the
+              required peer dependencies (helpers, handle-errors, wallet-kit,
+              tanstack, and the necessary providers). You no longer need to add
+              them separately.
+            </p>
+          </CardDescription>
+        </CardContent>
+      </Card>
 
       <section>
         <h2
@@ -393,7 +372,8 @@ export default function Home() {
         </div>
       )}
 
-      <FundEscrowDialog />
+      {/* FundEscrow */}
+      {/* <FundEscrowDialog /> */}
     </div>
   );`}
             language="json"
@@ -466,7 +446,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
 import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
-import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { WalletProvider } from "@/components/tw-blocks/providers/WalletProvider";
 import { EscrowProvider } from "@/components/tw-blocks/providers/EscrowProvider";
 import { EscrowDialogsProvider } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
 import { EscrowAmountProvider } from "@/components/tw-blocks/providers/EscrowAmountProvider";

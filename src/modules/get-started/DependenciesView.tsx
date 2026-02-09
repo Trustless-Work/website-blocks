@@ -59,6 +59,34 @@ export const DependenciesView = () => {
           their dependencies before using them.
         </p>
 
+        <Card className="my-4 gap-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+              <Info className="h-4 w-4" />
+              Automatic Dependency Resolution
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription className="text-blue-700 dark:text-blue-300">
+              <p>
+                Starting with the current version, the CLI automatically resolves
+                peer dependencies for each block. When you run{" "}
+                <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                  trustless-work add {"<block>"}
+                </code>
+                , the required peer blocks (providers, wallet-kit, tanstack,
+                handle-errors, helpers) and shadcn/ui components are installed
+                automatically. The manual steps listed below are for reference or
+                for users who used the{" "}
+                <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                  --no-install
+                </code>{" "}
+                flag.
+              </p>
+            </CardDescription>
+          </CardContent>
+        </Card>
+
         <Card className="my-4 gap-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -136,6 +164,19 @@ export const DependenciesView = () => {
           </ClickableTitle>
 
           <div className="space-y-8 pt-4">
+            <Card className="my-2 gap-2 border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20">
+              <CardContent className="pt-4">
+                <p className="text-sm text-amber-700 dark:text-amber-300">
+                  These dependencies are installed automatically when you add the
+                  block. You only need to run the manual commands if you used{" "}
+                  <code className="bg-amber-100 dark:bg-amber-900 px-1 py-0.5 rounded text-sm">
+                    --no-install
+                  </code>
+                  .
+                </p>
+              </CardContent>
+            </Card>
+
             <div className="space-y-3">
               <ClickableTitle
                 id="escrows-by-signer-and-role"
@@ -236,19 +277,13 @@ export const DependenciesView = () => {
 
               <div className="pt-2">
                 <CodeBlock
-                  code={`# Quick install examples
-npx trustless-work add wallet-kit
-npx trustless-work add escrows/single-release # If you need single-release escrows
-npx trustless-work add escrows/multi-release # If you need multi-release escrows
-npx trustless-work add escrows/single-multi-release # If you need fund, approve or change status
-npx trustless-work add tanstack
+                  code={`npx trustless-work add escrows/escrows-by-role/cards
+# All peer dependencies (wallet-kit, tanstack, providers, handle-errors, helpers) are installed automatically
 
-# If you skipped the init command, add these providers
-npx trustless-work add providers # All of them are required to these blocks
-
-# Optional utility modules
-npx trustless-work add handle-errors
-npx trustless-work add helpers`}
+# If you also need escrow actions:
+npx trustless-work add escrows/single-release   # For single-release escrows
+npx trustless-work add escrows/multi-release     # For multi-release escrows
+npx trustless-work add escrows/single-multi-release # For fund, approve or change status`}
                 />
               </div>
             </div>
@@ -373,16 +408,11 @@ npx trustless-work add helpers`}
 
               <div className="pt-2">
                 <CodeBlock
-                  code={`# Add essentials for single-release flows
-npx trustless-work add wallet-kit
-npx trustless-work add tanstack
+                  code={`npx trustless-work add escrows/single-release
+# All peer dependencies (wallet-kit, tanstack, providers, handle-errors, helpers) are installed automatically
 
-# If you skipped the init command, add these providers
-npx trustless-work add providers # Only need Wallet, TrustlessWork, Escrow and ReactQueryClient
-
-# Optional utility modules
-npx trustless-work add handle-errors
-npx trustless-work add helpers`}
+npx trustless-work add escrows/multi-release
+# Same automatic resolution for multi-release`}
                 />
               </div>
             </div>
@@ -426,14 +456,8 @@ npx trustless-work add helpers`}
 
               <div className="pt-2">
                 <CodeBlock
-                  code={`# Add essentials for indicators balance progress
-npx trustless-work add tanstack
-
-# If you skipped the init command, add these providers
-npx trustless-work add providers # Only need ReactQueryClient and TrustlessWork
-
-# Optional utility modules
-npx trustless-work add helpers`}
+                  code={`npx trustless-work add indicators/balance-progress
+# All peer dependencies (providers, tanstack, helpers) are installed automatically`}
                 />
               </div>
             </div>
@@ -477,14 +501,8 @@ npx trustless-work add helpers`}
 
               <div className="pt-2">
                 <CodeBlock
-                  code={`# Add essentials for dashboard
-npx trustless-work add tanstack
-
-# If you skipped the init command, add these providers
-npx trustless-work add providers # Only need ReactQueryClient, TrustlessWork and WalletProvider
-
-# Optional utility modules
-npx trustless-work add wallet-kit`}
+                  code={`npx trustless-work add dashboard/dashboard-01
+# All peer dependencies (providers, tanstack, wallet-kit) are installed automatically`}
                 />
               </div>
             </div>
@@ -515,7 +533,7 @@ npx trustless-work add wallet-kit`}
             <CodeBlock
               code={`import { ReactQueryClientProvider } from "@/components/tw-blocks/providers/ReactQueryClientProvider";
 import { TrustlessWorkProvider } from "@/components/tw-blocks/providers/TrustlessWork";
-import { WalletProvider } from "@/components/tw-blocks/wallet-kit/WalletProvider";
+import { WalletProvider } from "@/components/tw-blocks/providers/WalletProvider";
 import { EscrowProvider } from "@/components/tw-blocks/providers/EscrowProvider";
 import { EscrowDialogsProvider } from "@/components/tw-blocks/providers/EscrowDialogsProvider";
 import { EscrowAmountProvider } from "@/components/tw-blocks/providers/EscrowAmountProvider";

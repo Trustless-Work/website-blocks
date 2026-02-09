@@ -67,11 +67,68 @@ export const GetStarted = () => {
               </li>
               <li>
                 Providers for API config, wallet context, dialogs and amounts
+                — installed automatically as peer dependencies when you add
+                blocks that need them
               </li>
               <li>TanStack Query hooks for fetching and mutating escrows</li>
               <li>Wallet-kit helpers and error handling utilities</li>
             </ul>
           </div>
+        </section>
+
+        <section>
+          <Card className="my-4 gap-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+                <Info className="h-4 w-4" />
+                New CLI Workflow
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="space-y-3 text-blue-700 dark:text-blue-300">
+                <p>
+                  <strong>
+                    <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                      trustless-work init
+                    </code>
+                  </strong>{" "}
+                  now only configures the shadcn base, installs{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    sonner
+                  </code>
+                  , copies{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    helpers
+                  </code>
+                  , and creates{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    .twblocks.json
+                  </code>
+                  . It <strong>no longer</strong> installs all npm dependencies or
+                  all shadcn/ui components at once.
+                </p>
+                <p>
+                  <strong>
+                    <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                      trustless-work add {"<block>"}
+                    </code>
+                  </strong>{" "}
+                  now automatically installs only the npm dependencies, shadcn/ui
+                  components, and peer blocks (providers, wallet-kit, tanstack,
+                  handle-errors, helpers) that the specific block requires.
+                  Already-installed items are skipped.
+                </p>
+                <p>
+                  Use the{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    --no-install
+                  </code>{" "}
+                  flag to skip automatic dependency installation if you prefer to
+                  manage dependencies manually.
+                </p>
+              </CardDescription>
+            </CardContent>
+          </Card>
         </section>
 
         <section>

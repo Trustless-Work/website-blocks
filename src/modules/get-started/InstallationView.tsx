@@ -2,7 +2,7 @@ import { CodeBlock } from "@/shared/CodeBlock";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClickableTitle } from "@/components/ui/ClickableTitle";
 
@@ -65,12 +65,25 @@ export const InstallationView = () => {
               <CardContent>
                 <ul className="list-disc pl-6 mt-2 space-y-1">
                   <li>
-                    Installs shadcn/ui components (with interactive prompts)
+                    Runs{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      shadcn init
+                    </code>{" "}
+                    (base configuration)
                   </li>
                   <li>
-                    Installs required dependencies: @tanstack/react-query,
-                    @trustless-work/escrow, axios, zod, react-hook-form,
-                    @creit.tech/stellar-wallets-kit, react-day-picker, etc.
+                    Installs the{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      sonner
+                    </code>{" "}
+                    shadcn component (toast notifications)
+                  </li>
+                  <li>
+                    Copies the{" "}
+                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
+                      helpers
+                    </code>{" "}
+                    block (base utilities)
                   </li>
                   <li>
                     Creates{" "}
@@ -79,13 +92,40 @@ export const InstallationView = () => {
                     </code>{" "}
                     configuration file
                   </li>
-                  <li>
-                    Optionally wires providers into your Next.js{" "}
-                    <code className="bg-muted px-1 py-0.5 rounded text-sm">
-                      app/layout.tsx
-                    </code>
-                  </li>
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="my-4 gap-2 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+                  <Info className="h-4 w-4" />
+                  Automatic Peer Dependency Resolution
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  The{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    init
+                  </code>{" "}
+                  command no longer installs all npm dependencies or all shadcn
+                  components — that happens automatically per-block when you use{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    trustless-work add {"<block>"}
+                  </code>
+                  . When you run{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    trustless-work add wallet-kit
+                  </code>{" "}
+                  or{" "}
+                  <code className="bg-blue-100 dark:bg-blue-900 px-1 py-0.5 rounded text-sm">
+                    trustless-work add escrows/...
+                  </code>
+                  , the required providers, helpers, handle-errors, tanstack, and
+                  wallet-kit are automatically copied into your project. No need to
+                  install them separately.
+                </p>
               </CardContent>
             </Card>
           </div>
